@@ -1,1 +1,3 @@
-console.log("oi")
+import app from './app';
+
+app.listen(4000);
