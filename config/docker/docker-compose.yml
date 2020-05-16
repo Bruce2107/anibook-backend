@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db_test:
+    container_name: postgres_test
+    image: postgres:9.6
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=anibook_test
+      - POSTGRES_USER=anibook_test
+      - POSTGRES_PASSWORD=anibook_test
+      - MAX_CONNECTIONS=300
+    volumes:
+      - db-data-test:/var/lib/postgres/data
+      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  db_dev:
+    container_name: postgres_dev
+    image: postgres:9.6
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_DB=anibook_dev
+      - POSTGRES_USER=anibook_dev
+      - POSTGRES_PASSWORD=anibook_dev
+      - MAX_CONNECTIONS=300
+    volumes:
+      - db-data-dev:/var/lib/postgres/data
+      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes: 
+  db-data-test:
+  db-data-dev:
