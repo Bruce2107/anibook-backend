@@ -3,9 +3,22 @@ import { QueryResult } from 'pg';
 import { pool } from '../../database';
 import { Anime } from 'src/constants/types/AnimeType';
 
-const getAllAnimes = async (request: Request, response: Response) => {
-  const res: QueryResult<Anime> = await pool.query('SELECT dados FROM animes');
-  return response.status(200).json({ dada: res.rows, rows: res.rowCount });
+const getAllAnimes = async (
+  request: Request,
+  response: Response
+): Promise<Response<Array<Anime>>> => {
+  try {
+    const { limit } = request.query;
+    const result: QueryResult<Anime> = await pool.query(
+      'SELECT dados FROM animes LIMIT $1',
+      [limit]
+    );
+    return response
+      .status(200)
+      .json({ data: result.rows, rows: result.rowCount, message: 'success' });
+  } catch (error) {
+    return response.status(400).json({ error });
+  }
 };
 
 export default getAllAnimes;

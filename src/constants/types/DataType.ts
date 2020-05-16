@@ -17,3 +17,5 @@ export interface Link {
   url: string;
   name: string;
 }
+
+export type Card = Pick<Data, 'folder' | 'name' | 'photo_path'>
