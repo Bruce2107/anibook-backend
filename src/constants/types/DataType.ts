@@ -1,8 +1,8 @@
 export interface Data {
   folder: string;
   name: string;
-  photo_path: string;
-  images_paths: Array<string>;
+  photo: string;
+  images: Array<string>;
   synopsis: string;
   comment: string;
 }
@@ -18,4 +18,15 @@ export interface Link {
   name: string;
 }
 
-export type Card = Pick<Data, 'folder' | 'name' | 'photo_path'>
+export type Card = Pick<Data, 'folder' | 'name' | 'photo'>
+
+export type FileMulter = {
+  fieldname: string,
+  originalname: string,
+  encoding: string,
+  mimetype: string,
+  destination: string,
+  filename: string,
+  path: string,
+  size: number
+}

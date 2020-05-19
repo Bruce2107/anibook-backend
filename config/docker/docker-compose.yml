@@ -12,7 +12,8 @@ services:
       - MAX_CONNECTIONS=300
     volumes:
       - db-data-test:/var/lib/postgres/data
-      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ../database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
   db_dev:
     container_name: postgres_dev
     image: postgres:9.6
@@ -25,7 +26,8 @@ services:
       - MAX_CONNECTIONS=300
     volumes:
       - db-data-dev:/var/lib/postgres/data
-      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ../database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
 volumes: 
   db-data-test:
   db-data-dev:

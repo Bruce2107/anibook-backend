@@ -1,0 +1,1 @@
+insert into animes (dados) values ('{"folder":"mob2","name":"Mob 2","photo":"card.png","images":["0.png","1.png"],"sinopse":"um garoto que gosta de lutar","opniao":"mt bom","onde_ver":[{"idioma":"portugues","site":"goyabu"}],"info":{"autor":"one","status":"finalizado","qtd_eps":"131"},"musicas":[{"lingua":"portugues","link":"romantic ageru yo"}]}')

@@ -8,20 +8,18 @@ import deleteAnime from '../../controller/anime/DeleteAnime';
 import { upload } from '../../utils/upload';
 
 const routes = Router();
+const fileUpload = upload.fields([
+  { name: 'card', maxCount: 1 },
+  { name: 'images' },
+]);
 
 routes.get('/anime', getAll);
 routes.get('/anime/:name', getByName);
 routes.get('/anime/card/random', getRandomCard);
 routes.get('/anime/card/:name', getCard);
 
-routes.post('/anime', upload.fields([]), createAnime);
+routes.post('/anime', fileUpload, createAnime);
 
 routes.delete('/anime/:name', deleteAnime);
 
-
-
-
-routes.post('/test',upload.single('card'),(req,res)=>{
-  res.send(req.file)
-})
 export default routes;
