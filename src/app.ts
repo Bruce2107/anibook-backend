@@ -10,8 +10,8 @@ class App {
     this.routes();
   }
   private middlawares() {
+    this.express.use(express.urlencoded({ extended: true }));
     this.express.use(express.json());
-    this.express.use(express.urlencoded({ extended: false }));
     this.express.use(cors());
   }
   private routes() {
