@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "44579a30-3711-43b6-bb11-c9a2ef176a7e",
+		"name": "Anibook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Anime",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetAll",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "84313d81-dc37-4cf2-a4d6-566d4546f0ec",
+										"exec": [
+											"pm.test('Status should be 200', function (){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime?limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								},
+								"description": "This request should return a list with n elements.\r\nA limit can be specified"
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "22d1cd0e-7f29-46e1-afbc-fb4838cc0da4",
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"pm.test('Should hava a erro message',function(){\r",
+											"    pm.expect(pm.response.text()).to.include(\"não encontrado\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "abc"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8208106f-7184-4f8d-a192-c3ecd3b96cbe",
+										"exec": [
+											"pm.test('Status should be 200', function () {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "High Score Girl"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetRandomCards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/card/random?limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										"random"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								},
+								"description": "Return a list with cards.\r\nA limit can be specified"
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mob"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName-NotFound",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mob 2"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "CreateAnAnimeWithImages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"sinopse\": \"um garoto que gosta de lutar\",\n        \"opniao\": \"mt bom\",\n        \"onde_ver\": [\n            {\n                \"idioma\": \"portugues\",\n                \"site\": \"goyabu\"\n            }\n        ],\n        \"info\": {\n            \"autor\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"qtd_eps\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"lingua\": \"portugues\",\n                \"link\": \"romantic ageru yo\"\n            }\n        ]\n    }",
+											"type": "text"
+										},
+										{
+											"key": "card",
+											"type": "file",
+											"src": "oono.jpg"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime?folder=highscoregirl",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "highscoregirl"
+										}
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAnAnimeWithoutImages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\"folder\": \"teste\",\"name\": \"test\",\"photo\": \"card.png\",\"images\": [\"0.png\",\"1.png\"],\"sinopse\": \"um garoto que gosta de lutar\",\"opniao\": \"mt bom\",\"onde_ver\": [{\"idioma\": \"portugues\",\"site\": \"goyabu\"}],\"info\": {\"autor\": \"toriama\",\"status\": \"finalizado\",\"qtd_eps\": \"131\"},\"musicas\": [{\"lingua\": \"portugues\",\"link\": \"romantic ageru yo\"}]}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAnAnime-AlreadyExists",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "18b3319e-716c-4a74-9955-d87d6045f071",
+										"exec": [
+											"pm.test('Status 403',function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"folder\": \"dragonball\",\n        \"name\": \"Dragon Ball Z\",\n        \"photo\": \"card.png\",\n        \"images\": [\n            \"0.png\",\n            \"1.png\"\n        ],\n        \"sinopse\": \"um garoto que gosta de lutar\",\n        \"opniao\": \"mt bom\",\n        \"onde_ver\": [\n            {\n                \"idioma\": \"portugues\",\n                \"site\": \"goyabu\"\n            }\n        ],\n        \"info\": {\n            \"autor\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"qtd_eps\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"lingua\": \"portugues\",\n                \"link\": \"romantic ageru yo\"\n            }\n        ]\n    }",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "UpdatePhoto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "Hi_Score_Girl_vol_1_cover.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePhoto-MissingFile",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePhoto-NotFound",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "Hi_Score_Girl_vol_1_cover.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeleteAnime",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Dragon Ball Z"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "900a71a7-efac-4395-bc15-c145f1a63a9b",
+			"key": "url",
+			"value": "http://localhost:4000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

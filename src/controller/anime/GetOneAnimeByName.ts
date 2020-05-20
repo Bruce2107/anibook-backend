@@ -17,7 +17,7 @@ const GetOneByName = async (
       ? response
           .status(200)
           .json({ data: result.rows[0].dados, message: 'success' })
-      : response.status(404).json({ message: 'anime não encontrado' });
+      : response.status(404).json({ message: `${name} não encontrado` });
   } catch (error) {
     return response.status(400).json({ error });
   }
