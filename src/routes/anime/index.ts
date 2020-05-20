@@ -4,6 +4,7 @@ import getByName from '../../controller/anime/GetOneAnimeByName';
 import getCard from '../../controller/anime/GetCardInformationsByName';
 import getRandomCard from '../../controller/anime/GetRandomCardInformations';
 import createAnime from '../../controller/anime/CreateAnime';
+import updatePhoto from '../../controller/anime/UpdatePhoto';
 import deleteAnime from '../../controller/anime/DeleteAnime';
 import { upload } from '../../utils/upload';
 
@@ -19,6 +20,8 @@ routes.get('/anime/card/random', getRandomCard);
 routes.get('/anime/card/:name', getCard);
 
 routes.post('/anime', fileUpload, createAnime);
+
+routes.put('/anime/card/:name', upload.single('card'), updatePhoto);
 
 routes.delete('/anime/:name', deleteAnime);
 

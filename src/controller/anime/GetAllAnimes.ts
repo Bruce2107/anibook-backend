@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { QueryResult } from 'pg';
 import { pool } from '../../database';
-import { Anime } from 'src/constants/types/AnimeType';
+import { Anime, AnimeData } from 'src/constants/types/AnimeType';
 
 const getAllAnimes = async (
   request: Request,
@@ -9,7 +9,7 @@ const getAllAnimes = async (
 ): Promise<Response<Array<Anime>>> => {
   try {
     const { limit } = request.query;
-    const result: QueryResult<Anime> = await pool.query(
+    const result: QueryResult<AnimeData> = await pool.query(
       'SELECT dados FROM animes LIMIT $1',
       [limit]
     );

@@ -9,3 +9,7 @@ export interface Anime extends Data {
 export interface AnimeInfo extends Info {
   numberEpisodes: number;
 }
+
+export interface AnimeData{
+  dados: Anime
+}

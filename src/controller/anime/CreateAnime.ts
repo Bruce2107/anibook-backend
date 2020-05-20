@@ -15,6 +15,8 @@ const createAnime = async (
     };
 
     if (Object.keys(files).length) {
+      const { folder } = request.query;
+      dados.folder = folder as string;
       if (Object.keys(files).includes('card')) {
         const card: FileMulter = files['card'][0];
         dados.photo = card.originalname;
