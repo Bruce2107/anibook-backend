@@ -60,10 +60,6 @@
 										"exec": [
 											"pm.test('Status should be 404', function () {\r",
 											"    pm.response.to.have.status(404)\r",
-											"})\r",
-											"\r",
-											"pm.test('Should hava a erro message',function(){\r",
-											"    pm.expect(pm.response.text()).to.include(\"não encontrado\")\r",
 											"})"
 										],
 										"type": "text/javascript"
@@ -177,7 +173,7 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "Mob"
+											"value": "High Score Girl"
 										}
 									]
 								},
@@ -228,7 +224,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"High Score Girl\",\n        \"sinopse\": \"um garoto que gosta de lutar\",\n        \"opniao\": \"mt bom\",\n        \"onde_ver\": [\n            {\n                \"idioma\": \"portugues\",\n                \"site\": \"goyabu\"\n            }\n        ],\n        \"info\": {\n            \"autor\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"qtd_eps\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"lingua\": \"portugues\",\n                \"link\": \"romantic ageru yo\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"Naruto\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -275,7 +271,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\"folder\": \"teste\",\"name\": \"test\",\"photo\": \"card.png\",\"images\": [\"0.png\",\"1.png\"],\"sinopse\": \"um garoto que gosta de lutar\",\"opniao\": \"mt bom\",\"onde_ver\": [{\"idioma\": \"portugues\",\"site\": \"goyabu\"}],\"info\": {\"autor\": \"toriama\",\"status\": \"finalizado\",\"qtd_eps\": \"131\"},\"musicas\": [{\"lingua\": \"portugues\",\"link\": \"romantic ageru yo\"}]}",
+											"value": "{\n        \"name\": \"Teste\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										}
 									]
@@ -300,8 +296,8 @@
 									"script": {
 										"id": "18b3319e-716c-4a74-9955-d87d6045f071",
 										"exec": [
-											"pm.test('Status 403',function(){\r",
-											"    pm.response.to.have.status(403)\r",
+											"pm.test('Status 409', function () {\r",
+											"    pm.response.to.have.status(409)\r",
 											"})"
 										],
 										"type": "text/javascript"
@@ -316,7 +312,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"folder\": \"dragonball\",\n        \"name\": \"Dragon Ball Z\",\n        \"photo\": \"card.png\",\n        \"images\": [\n            \"0.png\",\n            \"1.png\"\n        ],\n        \"sinopse\": \"um garoto que gosta de lutar\",\n        \"opniao\": \"mt bom\",\n        \"onde_ver\": [\n            {\n                \"idioma\": \"portugues\",\n                \"site\": \"goyabu\"\n            }\n        ],\n        \"info\": {\n            \"autor\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"qtd_eps\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"lingua\": \"portugues\",\n                \"link\": \"romantic ageru yo\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										}
 									],
@@ -343,12 +339,27 @@
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "PUT",
+					"name": "PATCH",
 					"item": [
 						{
 							"name": "UpdatePhoto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b547681d-4d3e-40b6-857b-1a957fee4b8a",
+										"exec": [
+											"pm.test('Status should be 204', function () {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
-								"method": "PUT",
+								"method": "PATCH",
 								"header": [],
 								"body": {
 									"mode": "formdata",
@@ -379,7 +390,7 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "Teste"
+											"value": "nome teste2"
 										}
 									]
 								},
@@ -389,8 +400,23 @@
 						},
 						{
 							"name": "UpdatePhoto-MissingFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7bcd148e-06fb-44a5-9621-a2bf6f28e107",
+										"exec": [
+											"pm.test('Status should be 422', function () {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
-								"method": "PUT",
+								"method": "PATCH",
 								"header": [],
 								"body": {
 									"mode": "formdata",
@@ -425,8 +451,23 @@
 						},
 						{
 							"name": "UpdatePhoto-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "31c954f4-135b-4f44-b967-056d6285421b",
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
-								"method": "PUT",
+								"method": "PATCH",
 								"header": [],
 								"body": {
 									"mode": "formdata",
@@ -464,6 +505,122 @@
 								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
 							},
 							"response": []
+						},
+						{
+							"name": "UpdateAnyFieldThatAreNotFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "49808304-9627-4478-b846-17171dbad520",
+										"exec": [
+											"pm.test('Status should be 204', function () {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 123\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png",
+												"oono.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "84065fee-444a-454a-b123-43cf95a8f3bc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "85bb37b9-3169-48c3-97bb-506fd9426839",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -506,7 +663,7 @@
 	],
 	"variable": [
 		{
-			"id": "900a71a7-efac-4395-bc15-c145f1a63a9b",
+			"id": "e1ca4477-327e-491b-9425-164186c01603",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"

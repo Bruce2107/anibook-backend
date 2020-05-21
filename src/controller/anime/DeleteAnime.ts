@@ -13,15 +13,12 @@ const deleteAnime = async (
       [name]
     );
     if (exists.rowCount) {
-      const result: QueryResult = await pool.query(
-        `DELETE FROM animes WHERE dados ->> 'name' = $1`,
-        [name]
-      );
-      return response
-        .status(200)
-        .json({ rows: result.rowCount, message: 'deleted' });
+      await pool.query(`DELETE FROM animes WHERE dados ->> 'name' = $1`, [
+        name,
+      ]);
+      return response.sendStatus(204);
     } else {
-      return response.status(404).json({ message: `${name} não encontrado` });
+      return response.sendStatus(404);
     }
   } catch (error) {
     return response.status(400).json({ error });

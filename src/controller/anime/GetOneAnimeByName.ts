@@ -14,10 +14,8 @@ const GetOneByName = async (
       [name]
     );
     return result.rowCount
-      ? response
-          .status(200)
-          .json({ data: result.rows[0].dados, message: 'success' })
-      : response.status(404).json({ message: `${name} não encontrado` });
+      ? response.status(200).json({ data: result.rows[0].dados })
+      : response.sendStatus(404);
   } catch (error) {
     return response.status(400).json({ error });
   }

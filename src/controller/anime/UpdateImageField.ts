@@ -3,17 +3,19 @@ import { pool } from '../../database';
 import { AnimeData } from '../../constants/types/AnimeType';
 import { QueryResult } from 'pg';
 
-const updatePhoto = async (
+const updateImageField = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
   try {
     const { name } = request.params;
     const { folder } = request.query;
-    const file = request.file;
-    if (!file) {
+    const files = request.files as Express.Multer.File[];
+
+    if (!files) {
       return response.sendStatus(422);
     }
+
     const anime: QueryResult<AnimeData> = await pool.query(
       `SELECT dados FROM animes WHERE dados ->> 'name' = $1`,
       [name]
@@ -22,8 +24,8 @@ const updatePhoto = async (
       return response.sendStatus(404);
     }
     anime.rows[0].dados.folder = folder as string;
-    anime.rows[0].dados.photo = file.originalname;
-
+    anime.rows[0].dados.images = files.map((files) => files.originalname);
+    
     await pool.query(
       `UPDATE animes SET dados = $1 WHERE dados ->> 'name' = $2`,
       [anime.rows[0].dados, name]
@@ -34,4 +36,4 @@ const updatePhoto = async (
   }
 };
 
-export default updatePhoto;
+export default updateImageField;

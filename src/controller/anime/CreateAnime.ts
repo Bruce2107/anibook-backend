@@ -32,17 +32,10 @@ const createAnime = async (
       [dados.name]
     );
     if (!exists.rowCount) {
-      const result: QueryResult = await pool.query(
-        'INSERT INTO animes (dados) VALUES ($1)',
-        [dados]
-      );
-      return response
-        .status(201)
-        .json({ rows: result.rowCount, message: 'created' });
+      await pool.query('INSERT INTO animes (dados) VALUES ($1)', [dados]);
+      return response.sendStatus(201);
     } else {
-      return response
-        .status(403)
-        .json({ message: `${dados.name} já está registrado` });
+      return response.sendStatus(409);
     }
   } catch (error) {
     return response.status(400).json({ error });

@@ -19,9 +19,8 @@ const GetRandomCardInformations = async (
       ? response.status(200).json({
           data: result.rows,
           rows: result.rowCount,
-          message: 'success',
         })
-      : response.status(404).json({ message: 'nenhum anime encontrado' });
+      : response.sendStatus(404);
   } catch (error) {
     return response.status(400).json({ error });
   }
