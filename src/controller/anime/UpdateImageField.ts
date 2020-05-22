@@ -24,7 +24,12 @@ const updateImageField = async (
       return response.sendStatus(404);
     }
     anime.rows[0].dados.folder = folder as string;
-    anime.rows[0].dados.images = files.map((files) => files.originalname);
+
+    files.forEach((file) => {
+      if(!(anime.rows[0].dados.images.indexOf(file.originalname) >= 0)){
+        anime.rows[0].dados.images.push(file.originalname)
+      }
+    })
     
     await pool.query(
       `UPDATE animes SET dados = $1 WHERE dados ->> 'name' = $2`,

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { pool } from '../../database';
 import { AnimeData } from '../../constants/types/AnimeType';
 import { QueryResult } from 'pg';
+import search from '../../utils/SearchObjectInArray';
 
 const updateAnyFieldThatAreNotAFile = async (
   request: Request,
@@ -37,15 +38,16 @@ const updateAnyFieldThatAreNotAFile = async (
     if (dados.info.status) newData.info.status = dados.info.status;
     if (dados.info.numberEpisodes)
       newData.info.numberEpisodes = dados.info.numberEpisodes;
+
     if (dados.musics)
       dados.musics.forEach((music) => {
-        newData.musics.push(music);
+        if (!search(music.url, newData.musics)) newData.musics.push(music);
       });
     if (dados.whereWatch)
       dados.whereWatch.forEach((site) => {
-        newData.whereWatch.push(site);
+        if (!search(site.url, newData.whereWatch))
+          newData.whereWatch.push(site);
       });
-
     await pool.query(
       `UPDATE animes SET dados = $1 WHERE dados ->> 'name' = $2`,
       [newData, name]
