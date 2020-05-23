@@ -8,13 +8,9 @@ import updatePhoto from '../../controller/anime/UpdatePhoto';
 import updateAnyFieldThatAreNotAFile from '../../controller/anime/UpdateAnyFieldThatAreNotAFile';
 import updateImageField from '../../controller/anime/UpdateImageField';
 import deleteAnime from '../../controller/anime/DeleteAnime';
-import { upload } from '../../utils/upload';
+import { upload, fileUpload } from '../../utils/upload';
 
 const routes = Router();
-const fileUpload = upload.fields([
-  { name: 'card', maxCount: 1 },
-  { name: 'images' },
-]);
 
 routes.get('/anime', getAll);
 routes.get('/anime/:name', getByName);

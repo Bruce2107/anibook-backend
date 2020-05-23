@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import animeRoutes from './routes/anime';
+import imageRoutes from './routes/image';
 
 class App {
   public express: express.Application;
@@ -16,6 +17,7 @@ class App {
   }
   private routes() {
     this.express.use(animeRoutes);
+    this.express.use(imageRoutes);
   }
 }
 

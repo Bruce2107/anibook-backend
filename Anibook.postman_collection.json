@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "44579a30-3711-43b6-bb11-c9a2ef176a7e",
 		"name": "Anibook",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -224,7 +225,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"Naruto\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"Naruto2\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -528,7 +529,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 123\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 123\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste2\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -659,11 +660,84 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetImage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/:folder/:anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										":folder",
+										":anime"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "highscoregirl"
+										},
+										{
+											"key": "anime",
+											"value": "oono.jpg"
+										}
+									]
+								},
+								"description": "Get an image"
+							},
+							"response": []
+						},
+						{
+							"name": "GetImage-NotFound",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/:folder/:anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										":folder",
+										":anime"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "hi"
+										},
+										{
+											"key": "anime",
+											"value": "foto.webp"
+										}
+									]
+								},
+								"description": "Get an image"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"variable": [
 		{
-			"id": "e1ca4477-327e-491b-9425-164186c01603",
+			"id": "56b903c5-6b4a-467d-9050-283ea6c316b1",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"
