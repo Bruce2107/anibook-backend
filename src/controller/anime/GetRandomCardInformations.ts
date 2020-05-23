@@ -12,7 +12,7 @@ const GetRandomCardInformations = async (
     const result: QueryResult<Array<
       Card
     >> = await pool.query(
-      `SELECT dados ->> 'folder' as folder, dados ->> 'photo' as image, dados ->> 'name' as name FROM animes ORDER BY random() LIMIT $1`,
+      `SELECT dados ->> 'folder' as folder, dados ->> 'photo' as photo, dados ->> 'name' as name FROM animes ORDER BY random() LIMIT $1`,
       [limit]
     );
     return result.rowCount

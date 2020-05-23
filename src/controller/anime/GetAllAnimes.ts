@@ -10,7 +10,7 @@ const getAllAnimes = async (
   try {
     const { limit } = request.query;
     const result: QueryResult<AnimeData> = await pool.query(
-      'SELECT dados FROM animes LIMIT $1',
+      'SELECT dados FROM animes ORDER BY random () LIMIT $1',
       [limit]
     );
     return response

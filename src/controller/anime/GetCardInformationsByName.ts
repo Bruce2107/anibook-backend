@@ -10,7 +10,7 @@ const getCardInformtionsByName = async (
   try {
     const { name } = request.params;
     const result: QueryResult<Card> = await pool.query(
-      `SELECT dados ->> 'folder' as folder, dados ->> 'photo' as image, dados ->> 'name' as name FROM animes WHERE dados ->> 'name' = $1`,
+      `SELECT dados ->> 'folder' as folder, dados ->> 'photo' as photo, dados ->> 'name' as name FROM animes WHERE dados ->> 'name' = $1`,
       [name]
     );
     return result.rowCount
