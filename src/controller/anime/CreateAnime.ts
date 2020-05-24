@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { pool } from '../../database';
 import { Anime } from '../../constants/types/AnimeType';
-import { FileMulter } from '../../constants/types/DataType';
+import { FileMulter } from '../../constants/types/ImageType';
 import { QueryResult } from 'pg';
 import saveImages from '../../utils/SaveImageOnDatabase';
 

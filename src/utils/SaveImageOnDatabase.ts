@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
-import { FileMulter } from '../constants/types/DataType';
-import { TypeImage } from '../constants/types/ImageType';
+import { TypeImage, FileMulter } from '../constants/types/ImageType';
 import { mongoConnection } from '../database';
 const saveImages = async (
   folder: string,
