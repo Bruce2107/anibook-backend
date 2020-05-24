@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "44579a30-3711-43b6-bb11-c9a2ef176a7e",
 		"name": "Anibook",
-		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"description": "# Dados\n```js\n\"dados\": {\n  \"name\": \"nome\",\n  \"synopsis\": \"sinopse\",\n  \"comment\": \"comentario\",\n  \"photo\": \"nome do arquivo de capa\",\n  \"fodler\": \"nome da pasta com as imagens\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberEpesodes\": 12, //apenas animes\n    \"chapters\": 12, //apenas mangas\n    \"volumers\": 1 //apenas mangas\n  },\n  \"images\": [\n    \"nome do arquivo\",\n    \"nome do arquivo\"\n  ],\n  \"whereWatch\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"whereRead\": [ //apenas mangas\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"musics\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ]\n}\n```",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -225,7 +225,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"Naruto2\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"NarutoS\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -730,14 +730,81 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "InsertImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png",
+												"oono.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/image?folder=highscoregirl",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "highscoregirl"
+										}
+									]
+								},
+								"description": "If the param folder are null, the image are a background"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dcf514c8-3e54-4e49-8ec3-14c232a5ddda",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f30a9a70-87fa-4d09-8395-c3042fd38627",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "56b903c5-6b4a-467d-9050-283ea6c316b1",
+			"id": "547c471a-6358-46e3-9f5f-8f3910478481",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"
