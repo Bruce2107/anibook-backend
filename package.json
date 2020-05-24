@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && nodemon dist/index.js",
+    "start": "nodemon dist/index.js",
     "start:dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\""
   },
   "dependencies": {
