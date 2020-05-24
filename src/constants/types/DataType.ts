@@ -19,14 +19,3 @@ export interface Link {
 }
 
 export type Card = Pick<Data, 'folder' | 'name' | 'photo'>
-
-export type FileMulter = {
-  fieldname: string,
-  originalname: string,
-  encoding: string,
-  mimetype: string,
-  destination: string,
-  filename: string,
-  path: string,
-  size: number
-}
