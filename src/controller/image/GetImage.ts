@@ -1,16 +1,19 @@
 import { Request, Response } from 'express';
-import path from 'path';
-import { existsSync } from 'fs';
+import { mongoConnection } from '../../database';
+import { TypeImage } from '../../constants/types/ImageType';
 
-const getImage = (request: Request, response: Response) => {
+const getImage = async (request: Request, response: Response) => {
   try {
     const { folder, name } = request.params;
-    const options = {
-      root: path.join('./src', 'uploads', folder),
-    };
-    return existsSync(`${options.root}/${name}`)
-      ? response.sendFile(name, options)
-      : response.sendStatus(404);
+    const connection = await mongoConnection('anibook');
+    const result = await connection
+      .collection<TypeImage>('images')
+      .findOne({ folder, name });
+    if(result){
+      response.contentType(result.contentType)
+      return response.send(result.image.buffer)
+    }
+    return response.sendStatus(404)
   } catch (error) {
     return response.status(400).json({ error });
   }

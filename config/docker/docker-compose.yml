@@ -28,6 +28,18 @@ services:
       - db-data-dev:/var/lib/postgres/data
       - ../database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
       - ../database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    environment: 
+      - MONGO_INITDB_DATABASE=anibook
+      - MONGO_INITDB_ROOT_USERNAME=anibook
+      - MONGO_INITDB_ROOT_PASSWORD=anibook
 volumes: 
   db-data-test:
   db-data-dev:
+  mongo_data:

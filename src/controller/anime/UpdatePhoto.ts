@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { pool } from '../../database';
 import { AnimeData } from '../../constants/types/AnimeType';
 import { QueryResult } from 'pg';
+import saveImages from '../../utils/SaveImageOnDatabase';
 
 const updatePhoto = async (
   request: Request,
@@ -23,6 +24,8 @@ const updatePhoto = async (
     }
     anime.rows[0].dados.folder = folder as string;
     anime.rows[0].dados.photo = file.originalname;
+
+    await saveImages(folder as string, file, undefined);
 
     await pool.query(
       `UPDATE animes SET dados = $1 WHERE dados ->> 'name' = $2`,

@@ -3,6 +3,7 @@ import { pool } from '../../database';
 import { Anime } from '../../constants/types/AnimeType';
 import { FileMulter } from '../../constants/types/DataType';
 import { QueryResult } from 'pg';
+import saveImages from '../../utils/SaveImageOnDatabase';
 
 const createAnime = async (
   request: Request,
@@ -20,10 +21,12 @@ const createAnime = async (
       if (Object.keys(files).includes('card')) {
         const card: FileMulter = files['card'][0];
         dados.photo = card.originalname;
+        await saveImages(folder as string, card, undefined)
       }
       if (Object.keys(files).includes('images')) {
         const images: FileMulter[] = files['images'];
         dados.images = images.map((image) => image.originalname);
+        await saveImages(folder as string, undefined, images)
       }
     }
 

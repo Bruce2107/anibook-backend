@@ -1,40 +1,44 @@
 import { readFileSync } from 'fs';
-import { pool } from '../database';
 import { FileMulter } from '../constants/types/DataType';
-
-interface FinalImage {
-  contentType: string;
-  image: string;
-}
+import { TypeImage } from '../constants/types/ImageType';
+import { mongoConnection } from '../database';
 const saveImages = async (
   folder: string,
   file?: FileMulter,
   files?: FileMulter[]
 ) => {
-  const images: FinalImage[] = [];
+  const connection = await mongoConnection('anibook');
   if (file) {
-    const image = readFileSync(file.path);
-    const encode_image = image.toString('base64');
-    const finalImage: FinalImage = {
+    const image: TypeImage = {
       contentType: file.mimetype,
-      image: encode_image,
+      folder,
+      image: Buffer.from(readFileSync(file.path).toString('base64'), 'base64'),
+      name: file.originalname,
     };
-    images.push(finalImage);
+    const result = await connection
+      .collection<TypeImage>('images')
+      .insertOne(image);
+    if (!result.insertedCount) return false;
   }
   if (files) {
-    files.forEach((file) => {
+    const images: Array<TypeImage> = [];
+    files.forEach(async (file) => {
       images.push({
+        folder,
+        name: file.originalname,
         contentType: file.mimetype,
-        image: readFileSync(file.path).toString('base64'),
+        image: Buffer.from(
+          readFileSync(file.path).toString('base64'),
+          'base64'
+        ),
       });
     });
+    const result = await connection
+      .collection<TypeImage>('images')
+      .insertMany(images);
+    if (!result.insertedCount) return false;
   }
-  let query = 'INSERT INTO images (folder,contenttype,image) VALUES ';
-  images.forEach((image) =>
-    query = query.concat(`(${folder},${image.contentType},${image.image})`)
-  );
-  // return [query, images]
-  await pool.query(query);
+  return true;
 };
 
 export default saveImages;
