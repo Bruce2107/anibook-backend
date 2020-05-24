@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Eduardo Henrique",
   "license": "MIT",
+  "engines": {
+    "node": "12.6.x"
+  },
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/index.ts",
