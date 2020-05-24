@@ -13,12 +13,14 @@ export const pool = new Pool({
 });
 
 export const mongoConnection = async (database: string) => {
-  const user = process.env.DB_USER_MONGO as string | 'anibook';
-  const pass = process.env.DB_PASS_MONGO as string | 'anibook';
-  const host = process.env.DB_HOST_MONGO as string | 'localhost';
-  const port = Number(process.env.DB_PORT_MONGO) | 27017;
+  // const user = process.env.DB_USER_MONGO as string | 'anibook';
+  // const pass = process.env.DB_PASS_MONGO as string | 'anibook';
+  // const host = process.env.DB_HOST_MONGO as string | 'localhost';
+  // const type = process.env.DB_TYPE_MONGO as string | 'mongodb'
+  // const port = Number(process.env.DB_PORT_MONGO) | 27017;
 
-  const url = `mongodb://${user}:${pass}@${host}:${port}`;
+  // const url = `${type}://${user}:${pass}@${host}:${port}`;
+  const url = process.env.DB_URL_MONGO as string;
   const mongoClient = mongo.MongoClient;
   return mongoClient
     .connect(url, { useUnifiedTopology: true })
