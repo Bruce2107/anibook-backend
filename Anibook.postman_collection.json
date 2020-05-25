@@ -218,6 +218,16 @@
 						{
 							"name": "CreateAnAnimeWithImages",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -225,7 +235,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"NarutoS\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"NarutoShi\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -265,6 +275,16 @@
 						{
 							"name": "CreateAnAnimeWithoutImages",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -299,6 +319,62 @@
 										"exec": [
 											"pm.test('Status 409', function () {\r",
 											"    pm.response.to.have.status(409)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAnAnime-Unauthorized",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0da836ff-e276-4854-8d5b-992078da8da0",
+										"exec": [
+											"pm.test('Status 401', function () {\r",
+											"    pm.response.to.have.status(401)\r",
 											"})"
 										],
 										"type": "text/javascript"
@@ -360,6 +436,16 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -417,6 +503,16 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -468,6 +564,16 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -525,6 +631,16 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -558,6 +674,65 @@
 						{
 							"name": "UpdateImage",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png",
+												"oono.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -632,6 +807,74 @@
 					"item": [
 						{
 							"name": "DeleteAnime",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Dragon Ball Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAnime-NotFound",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Dragon Ball Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAnime-Unauthorized",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -778,6 +1021,63 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"a@a.bc\",\n\t\"nickname\": \"ab\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/token/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/token/:nickname",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token",
+								":nickname"
+							],
+							"variable": [
+								{
+									"key": "nickname",
+									"value": "ab"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -804,7 +1104,7 @@
 	],
 	"variable": [
 		{
-			"id": "547c471a-6358-46e3-9f5f-8f3910478481",
+			"id": "f34c4f24-6da4-4ae0-a2f7-10379766c9ff",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"
