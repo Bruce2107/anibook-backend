@@ -14,7 +14,7 @@ const insertImages = async (request: Request, response: Response) => {
       ? response.sendStatus(201)
       : response.sendStatus(400);
   } catch (error) {
-    return response.status(400).json(error);
+    return response.status(400).send({error: error.stack});
   }
 };
 

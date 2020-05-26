@@ -17,7 +17,7 @@ const getCardInformtionsByName = async (
       ? response.status(200).json({ data: result.rows[0] })
       : response.sendStatus(404);
   } catch (error) {
-    return response.status(400).json({ error });
+    return response.status(400).send({ error: error.stack });
   }
 };
 

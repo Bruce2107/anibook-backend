@@ -21,7 +21,7 @@ const deleteAnime = async (
       return response.sendStatus(404);
     }
   } catch (error) {
-    return response.status(400).json({ error });
+    return response.status(400).send({ error: error.stack });
   }
 };
 
