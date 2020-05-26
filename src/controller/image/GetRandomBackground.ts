@@ -11,7 +11,7 @@ const getRandomBackground = async (request: Request, response: Response) => {
       .collection<TypeImage>('images')
       .aggregate([{ $match: { folder: 'background' } }, { $sample: { size } }])
       .toArray();
-    if(!randomRow)
+    if(!randomRow[0])
       return response.sendStatus(404)
     response.contentType(randomRow[0].contentType);
     return response.send(randomRow[0].image.buffer);
