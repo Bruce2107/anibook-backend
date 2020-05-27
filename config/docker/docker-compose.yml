@@ -2,7 +2,7 @@ version: '3'
 services:
   db_test:
     container_name: postgres_test
-    image: postgres:9.6
+    image: postgres:12
     ports:
       - "5433:5432"
     environment:
@@ -16,7 +16,7 @@ services:
       - ../database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
   db_dev:
     container_name: postgres_dev
-    image: postgres:9.6
+    image: postgres:12
     ports:
       - "5434:5432"
     environment:

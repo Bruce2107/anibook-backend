@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { mongoConnection } from '../../database';
 import { TypeImage } from '../../constants/types/ImageType';
 
-const getRandomBackground = async (request: Request, response: Response) => {
+const getRandomBackground = async (request: Request, response: Response<ArrayBuffer | SharedArrayBuffer | Object>) => {
   try {
     const { limit } = request.query;
     const size = Number(limit) || 1;

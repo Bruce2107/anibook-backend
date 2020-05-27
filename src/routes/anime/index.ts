@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { authenticate } from 'passport';
 import getAll from '../../controller/anime/GetAllAnimes';
 import getByName from '../../controller/anime/GetOneAnimeByName';
 import getCard from '../../controller/anime/GetCardInformationsByName';
@@ -10,6 +9,8 @@ import updateAnyFieldThatAreNotAFile from '../../controller/anime/UpdateAnyField
 import updateImageField from '../../controller/anime/UpdateImageField';
 import deleteAnime from '../../controller/anime/DeleteAnime';
 import { upload, fileUpload } from '../../utils/upload';
+import authenticate from '../../middleware/authenticate';
+
 const routes = Router();
 
 routes.get('/anime', getAll);
@@ -17,32 +18,20 @@ routes.get('/anime/:name', getByName);
 routes.get('/anime/card/random', getRandomCard);
 routes.get('/anime/card/:name', getCard);
 
-routes.post(
-  '/anime',
-  [fileUpload, authenticate('jwt', { session: false })],
-  createAnime
-);
+routes.post('/anime', [fileUpload, authenticate], createAnime);
 
 routes.patch(
   '/anime/card/:name',
-  [upload.single('card'), authenticate('jwt', { session: false })],
+  [upload.single('card'), authenticate],
   updatePhoto
 );
 routes.patch(
   '/anime/image/:name',
-  [upload.array('images'), authenticate('jwt', { session: false })],
+  [upload.array('images'), authenticate],
   updateImageField
 );
-routes.patch(
-  '/anime/:name',
-  authenticate('jwt', { session: false }),
-  updateAnyFieldThatAreNotAFile
-);
+routes.patch('/anime/:name', authenticate, updateAnyFieldThatAreNotAFile);
 
-routes.delete(
-  '/anime/:name',
-  authenticate('jwt', { session: false }),
-  deleteAnime
-);
+routes.delete('/anime/:name', authenticate, deleteAnime);
 
 export default routes;
