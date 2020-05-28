@@ -4,6 +4,7 @@ import passport from 'passport';
 import passportMiddleware from './middleware/passport';
 import animeRoutes from './routes/anime';
 import imageRoutes from './routes/image';
+import mangaRoutes from './routes/manga';
 import tokenRoutes from './routes/token';
 
 class App {
@@ -23,6 +24,7 @@ class App {
   private routes() {
     this.express.use(animeRoutes);
     this.express.use(imageRoutes);
+    this.express.use(mangaRoutes);
     this.express.use(tokenRoutes);
   }
 }

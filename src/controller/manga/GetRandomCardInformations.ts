@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import { Anime } from 'src/constants/types/AnimeType';
-import getAll from '../utils/GetAllAnimesOrManga';
 
-const getAllAnimes = async (
+import { Card } from '../../constants/types/DataType';
+import getRandomCard from '../utils/GetRandomAnimeOrMangaCard';
+
+const GetRandomCardInformations = async (
   request: Request,
   response: Response
-): Promise<Response<Array<Anime>>> => {
+): Promise<Response<Array<Card>>> => {
   try {
     const { limit } = request.query;
-    const result = await getAll(limit as string, 'animes');
-
+    const result = await getRandomCard(limit as string, 'mangas');
     return response
       .status(result.status)
       .json({ data: result.data, rows: result.rows });
@@ -18,4 +18,4 @@ const getAllAnimes = async (
   }
 };
 
-export default getAllAnimes;
+export default GetRandomCardInformations;

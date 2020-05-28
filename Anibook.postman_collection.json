@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "44579a30-3711-43b6-bb11-c9a2ef176a7e",
 		"name": "Anibook",
-		"description": "# Dados\n```js\n\"dados\": {\n  \"name\": \"nome\",\n  \"synopsis\": \"sinopse\",\n  \"comment\": \"comentario\",\n  \"photo\": \"nome do arquivo de capa\",\n  \"fodler\": \"nome da pasta com as imagens\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberEpesodes\": 12, //apenas animes\n    \"chapters\": 12, //apenas mangas\n    \"volumers\": 1 //apenas mangas\n  },\n  \"images\": [\n    \"nome do arquivo\",\n    \"nome do arquivo\"\n  ],\n  \"whereWatch\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"whereRead\": [ //apenas mangas\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"musics\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ]\n}\n```",
+		"description": "# Dados\n```js\n\"dados\": {\n  \"name\": \"nome\",\n  \"synopsis\": \"sinopse\",\n  \"comment\": \"comentario\",\n  \"photo\": \"nome do arquivo de capa\",\n  \"fodler\": \"nome da pasta com as imagens\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberEpisodes\": 12, //apenas animes\n    \"numberChapters\": 12, //apenas mangas\n    \"numberVolumes\": 1 //apenas mangas\n  },\n  \"images\": [\n    \"nome do arquivo\",\n    \"nome do arquivo\"\n  ],\n  \"whereWatch\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"whereRead\": [ //apenas mangas\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"musics\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ]\n}\n```",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -52,45 +52,6 @@
 							"response": []
 						},
 						{
-							"name": "GetByName-NotFound",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "22d1cd0e-7f29-46e1-afbc-fb4838cc0da4",
-										"exec": [
-											"pm.test('Status should be 404', function () {\r",
-											"    pm.response.to.have.status(404)\r",
-											"})"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/anime/:name",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"anime",
-										":name"
-									],
-									"variable": [
-										{
-											"key": "name",
-											"value": "abc"
-										}
-									]
-								},
-								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
-							},
-							"response": []
-						},
-						{
 							"name": "GetByName",
 							"event": [
 								{
@@ -122,7 +83,46 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "High Score Girl"
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "22d1cd0e-7f29-46e1-afbc-fb4838cc0da4",
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/anime/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "abc"
 										}
 									]
 								},
@@ -223,7 +223,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -280,7 +280,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -331,7 +331,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -441,7 +441,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -454,7 +454,7 @@
 										{
 											"key": "card",
 											"type": "file",
-											"src": "Hi_Score_Girl_vol_1_cover.png"
+											"src": "haruo.png"
 										}
 									]
 								},
@@ -477,7 +477,7 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "nome teste2"
+											"value": "Naruto"
 										}
 									]
 								},
@@ -508,7 +508,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -569,7 +569,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -636,7 +636,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -679,7 +679,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -719,7 +719,7 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "nome teste2"
+											"value": "nome teste"
 										}
 									]
 								},
@@ -813,7 +813,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -847,7 +847,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA0NDMwODF9.Ut-9iUw79nHrC-dYziPRuOSGC_PM65LUEcfUoLNXp4w",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
 											"type": "string"
 										}
 									]
@@ -941,6 +941,25 @@
 							"response": []
 						},
 						{
+							"name": "GetBackgroundImage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/background",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										"background"
+									]
+								},
+								"description": "Get an image"
+							},
+							"response": []
+						},
+						{
 							"name": "GetImage-NotFound",
 							"request": {
 								"method": "GET",
@@ -1018,6 +1037,42 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeteleImage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/:folder/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										":folder",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "background"
+										},
+										{
+											"key": "name",
+											"value": "KuririnSuspicious.webp"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1078,6 +1133,863 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Manga",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga?limit=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "High Score Girl"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName-NotFound",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "High Score Girl1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8b833fc9-2804-40a5-b08e-e35fac6f5bc8",
+										"exec": [
+											"pm.test('Status 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetRandomCards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/card/random?limit=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										"card",
+										"random"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "CreateAMangaWithImages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"Naruto\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										},
+										{
+											"key": "card",
+											"type": "file",
+											"src": "oono.jpg"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"hiscoregirl.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga?folder=naruto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "naruto"
+										}
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAMangaWithoutImages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"NarutoS\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga"
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAManga-AlreadyExists",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "72217339-194c-4e10-aff3-2a172928a065",
+										"exec": [
+											"pm.test('Status 409', function () {\r",
+											"    pm.response.to.have.status(409)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"NarutoS\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga"
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAManga-Unauthorized",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a3dc880e-0895-4448-adc6-a6d6b5905d0a",
+										"exec": [
+											"pm.test('Status 401', function () {\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"NarutoS\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga"
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "PATCH ",
+					"item": [
+						{
+							"name": "UpdatePhoto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c9c13a40-0350-4b0c-b3e7-41218366f622",
+										"exec": [
+											"pm.test('Status should be 204', function () {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "hiscoregirl.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga/card/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										"card",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePhoto-MissingFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "adc9176a-b04b-45ea-b5f1-68a55fc1c5ea",
+										"exec": [
+											"pm.test('Status should be 422', function () {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"card",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePhoto-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "80b8a40f-7ab6-464d-b450-f576f12085d1",
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "hiscoregirl.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga/card/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										"card",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateAnyFieldThatAreNotFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "58e728b0-e9fb-4439-98ff-b396dc7a3512",
+										"exec": [
+											"pm.test('Status should be 204', function () {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"Naruto\",\n        \"synopsis\": \"sinopse teste 1\",\n        \"comment\": \"comentario teste 1\",\n        \"folder\": \"pasta teste1 \",\n        \"info\": {\n            \"author\": \"autor test 1e\",\n            \"status\": \"finalizado 1\",\n            \"numberChapters\": 12,\n            \"numberVolumes\": 12\n        },\n        \"whereRead\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/manga/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": "HSGirlThumb-696x392.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/manga/image/:name?folder=naruto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "naruto"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png",
+												"oono.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/anime/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"anime",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "da5a6d06-48b6-48dd-aba8-db9fe136fdee",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "970ead38-13df-415f-8e9d-67372ef72e13",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeleteManga",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteManga-NotFound",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteManga-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/manga/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"manga",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -1104,7 +2016,7 @@
 	],
 	"variable": [
 		{
-			"id": "f34c4f24-6da4-4ae0-a2f7-10379766c9ff",
+			"id": "8afdcbc6-bb09-43dd-a625-1e147f8c492f",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"

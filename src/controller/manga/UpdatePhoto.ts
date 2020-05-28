@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
-import update from '../utils/UpdateImageFieldAnimeOrManga';
+import update from '../utils/UpdatePhotoAnimeOrManga';
 
-const updateImageField = async (
+const updatePhoto = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
   try {
     const { name } = request.params;
     const { folder } = request.query;
-    const files = request.files as Express.Multer.File[];
-
-    const status = await update(name, folder as string, files, 'animes');
+    const file = request.file;
+    
+    const status = await update(name, folder as string, file, 'mangas');
     return response.sendStatus(status);
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
 };
 
-export default updateImageField;
+export default updatePhoto;
