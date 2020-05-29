@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  mongodb:
+    container_name: mongo_anibook
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=anibook
+      - MONGO_INITDB_ROOT_USERNAME=anibook
+      - MONGO_INITDB_ROOT_PASSWORD=anibook
+    ports:
+      - '27017:27017'
+  postgresdb:
+    container_name: postgres_anibook
+    image: postgres:12
+    environment:
+      - POSTGRES_DB=anibook
+      - POSTGRES_USER=anibook
+      - POSTGRES_PASSWORD=anibook
+      - MAX_CONNECTIONS=300
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./config/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./config/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+  node:
+    build:
+      dockerfile: ./config/docker/Dockerfile
+      context: .
+    image: anibook/node
+    container_name: anibook_node
+    ports:
+      - '4000:4000'
+    environment:
+      DB_USER_POSTGRES: anibook
+      DB_PASS_POSTGRES: anibook
+      DB_HOST_POSTGRES: postgres_anibook
+      DB_NAME_POSTGRES: anibook
+      DB_PORT_POSTGRES: 5432
+      DB_URL_MONGO: mongodb://anibook:anibook@mongo_anibook:27017
+    depends_on:
+      - 'mongodb'
+      - 'postgresdb'
