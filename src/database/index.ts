@@ -1,6 +1,6 @@
-import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import mongo from 'mongodb';
+import { Pool } from 'pg';
 
 dotenv.config();
 

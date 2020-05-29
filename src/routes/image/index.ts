@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { upload } from '../../utils/upload';
+import { upload } from '../../middleware/upload';
+import deleteImage from '../../controller/image/DeleteImage';
 import getImage from '../../controller/image/GetImage';
 import getRandomBackground from '../../controller/image/GetRandomBackground';
 import insertImages from '../../controller/image/InsertImages';
-import deleteImage from '../../controller/image/DeleteImage';
 
 const routes = Router();
 

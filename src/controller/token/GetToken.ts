@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
+import createToken from '../../utils/CreateToken';
 import { mongoConnection } from '../../database';
 import { User } from '../../constants/types/TokenType';
-import createToken from '../../utils/CreateToken';
 
 const getToken = async (
   request: Request,

@@ -6,6 +6,7 @@ const getRandomBackground = async (request: Request, response: Response<ArrayBuf
   try {
     const { limit } = request.query;
     const size = Number(limit) || 1;
+    
     const connection = await mongoConnection('anibook');
     const randomRow = await connection
       .collection<TypeImage>('images')

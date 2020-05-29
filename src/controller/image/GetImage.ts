@@ -5,6 +5,7 @@ import { TypeImage } from '../../constants/types/ImageType';
 const getImage = async (request: Request, response: Response) => {
   try {
     const { folder, name } = request.params;
+    
     const connection = await mongoConnection('anibook');
     const result = await connection
       .collection<TypeImage>('images')

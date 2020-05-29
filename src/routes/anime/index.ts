@@ -1,15 +1,15 @@
 import { Router } from 'express';
+import authenticate from '../../middleware/authenticate';
+import { fileUpload, upload } from '../../middleware/upload';
+import createAnime from '../../controller/anime/CreateAnime';
+import deleteAnime from '../../controller/anime/DeleteAnime';
 import getAll from '../../controller/anime/GetAllAnimes';
 import getByName from '../../controller/anime/GetOneAnimeByName';
 import getCard from '../../controller/anime/GetCardInformationsByName';
 import getRandomCard from '../../controller/anime/GetRandomCardInformations';
-import createAnime from '../../controller/anime/CreateAnime';
-import updatePhoto from '../../controller/anime/UpdatePhoto';
 import updateAnyFieldThatAreNotAFile from '../../controller/anime/UpdateAnyFieldThatAreNotAFile';
 import updateImageField from '../../controller/anime/UpdateImageField';
-import deleteAnime from '../../controller/anime/DeleteAnime';
-import { upload, fileUpload } from '../../utils/upload';
-import authenticate from '../../middleware/authenticate';
+import updatePhoto from '../../controller/anime/UpdatePhoto';
 
 const routes = Router();
 

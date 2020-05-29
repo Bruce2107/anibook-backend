@@ -21,7 +21,7 @@ const updateAnyFieldThatAreNotAFile = async (
   }
   const newData = exists.rows[0].dados;
   if (dados.name) {
-    const exist = await pool.query(
+    const exist: QueryResult<Number> = await pool.query(
       `SELECT id FROM ${table} WHERE dados ->> 'name' = $1`,
       [dados.name]
     );

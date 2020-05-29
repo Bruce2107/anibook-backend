@@ -1,5 +1,5 @@
-import { Data, Info, Link } from './DataType';
 import { Anime } from './AnimeType';
+import { Data, Info, Link } from './DataType';
 
 export interface Manga extends Data {
   info: MangaInfo;

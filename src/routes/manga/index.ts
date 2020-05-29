@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { fileUpload, upload } from '../../utils/upload';
 import authenticate from '../../middleware/authenticate';
+import { fileUpload, upload } from '../../middleware/upload';
 import createManga from '../../controller/manga/CreateManga';
 import deleteManga from '../../controller/manga/DeleteAnime';
 import getAllMangas from '../../controller/manga/GetAllMangas';

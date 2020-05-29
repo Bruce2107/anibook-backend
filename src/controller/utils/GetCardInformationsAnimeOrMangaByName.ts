@@ -1,6 +1,6 @@
+import { QueryResult } from 'pg';
 import { Card } from '../../constants/types/DataType';
 import { pool } from '../../database';
-import { QueryResult } from 'pg';
 
 const getCardInformationsByName = async (
   name: string,

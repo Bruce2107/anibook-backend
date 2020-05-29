@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-
 import { Card } from '../../constants/types/DataType';
 import getRandomCard from '../utils/GetRandomAnimeOrMangaCard';
 
@@ -9,6 +8,7 @@ const GetRandomCardInformations = async (
 ): Promise<Response<Array<Card>>> => {
   try {
     const { limit } = request.query;
+
     const result = await getRandomCard(limit as string, 'mangas');
     return response
       .status(result.status)

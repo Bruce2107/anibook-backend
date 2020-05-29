@@ -1,10 +1,11 @@
 import { readFileSync } from 'fs';
-import { TypeImage, FileMulter } from '../constants/types/ImageType';
 import { mongoConnection } from '../database';
+import { TypeImage } from '../constants/types/ImageType';
+
 const saveImages = async (
   folder: string,
-  file?: FileMulter,
-  files?: FileMulter[]
+  file?: Express.Multer.File,
+  files?: Express.Multer.File[]
 ) => {
   const connection = await mongoConnection('anibook');
   if (file) {

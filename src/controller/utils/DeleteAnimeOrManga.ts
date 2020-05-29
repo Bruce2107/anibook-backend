@@ -1,8 +1,10 @@
 import { QueryResult } from 'pg';
+import { Anime } from '../../constants/types/AnimeType';
+import { Manga } from '../../constants/types/MangaType';
 import { pool } from '../../database';
 
 const _delete = async (name: string, table: string) => {
-  const exists: QueryResult = await pool.query(
+  const exists: QueryResult<Anime | Manga> = await pool.query(
     `SELECT id FROM ${table} WHERE dados ->> 'name' = $1`,
     [name]
   );

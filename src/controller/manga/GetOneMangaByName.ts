@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
-import { MangaData } from 'src/constants/types/MangaType';
+import { Manga } from '../../constants/types/MangaType';
 import getByName from '../utils/GetOneAnimeOrMangaByName';
 
 const GetOneByName = async (
   request: Request,
   response: Response
-): Promise<Response<MangaData>> => {
+): Promise<Response<Manga>> => {
   try {
     const { name } = request.params;
+
     const result = await getByName(name, 'mangas');
     return response.status(result.status).json({ data: result.data?.dados });
   } catch (error) {

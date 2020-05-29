@@ -1,8 +1,7 @@
 import { QueryResult } from 'pg';
-import { pool } from '../../database';
 import { Anime } from '../../constants/types/AnimeType';
 import { Manga } from '../../constants/types/MangaType';
-import { FileMulter } from '../../constants/types/ImageType';
+import { pool } from '../../database';
 import saveImages from '../../utils/SaveImageOnDatabase';
 
 const create = async (
@@ -15,12 +14,12 @@ const create = async (
     if (!folder) return 422;
     dados.folder = folder;
     if (Object.keys(files).includes('card')) {
-      const card: FileMulter = files['card'][0];
+      const card: Express.Multer.File = files['card'][0];
       dados.photo = card.originalname;
       await saveImages(folder as string, card, undefined);
     }
     if (Object.keys(files).includes('images')) {
-      const images: FileMulter[] = files['images'];
+      const images: Express.Multer.File[] = files['images'];
       dados.images = images.map((image) => image.originalname);
       await saveImages(folder as string, undefined, images);
     }

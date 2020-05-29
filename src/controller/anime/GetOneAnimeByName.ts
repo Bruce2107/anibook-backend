@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { AnimeData } from 'src/constants/types/AnimeType';
+import { Anime } from '../../constants/types/AnimeType';
 import getByName from '../utils/GetOneAnimeOrMangaByName';
 
 const GetOneByName = async (
   request: Request,
   response: Response
-): Promise<Response<AnimeData>> => {
+): Promise<Response<Anime>> => {
   try {
     const { name } = request.params;
     const result = await getByName(name, 'animes');

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Anime } from 'src/constants/types/AnimeType';
+import { Anime } from '../../constants/types/AnimeType';
 import getAll from '../utils/GetAllAnimesOrManga';
 
 const getAllAnimes = async (

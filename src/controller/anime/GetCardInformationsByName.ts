@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
+import { Card } from '../../constants/types/DataType';
 import getCardInfo from '../utils/GetCardInformationsAnimeOrMangaByName';
-import { Card } from 'src/constants/types/DataType';
 
 const getCardInformtionsByName = async (
   request: Request,

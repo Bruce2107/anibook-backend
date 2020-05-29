@@ -5,7 +5,7 @@ import update from '../utils/UpdateAnyFieldThatAreNotAFileAnimeOrManga';
 const updateAnyFieldThatAreNotAFile = async (
   request: Request,
   response: Response
-) => {
+): Promise<Response> => {
   try {
     const { dados }: AnimeData = request.body;
     const { name } = request.params;

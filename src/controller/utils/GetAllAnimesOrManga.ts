@@ -10,6 +10,7 @@ const getAll = async (limit: string, table: string) => {
     `SELECT dados FROM ${table} ORDER BY random () LIMIT $1`,
     [limit]
   );
+  
   return {
     status: 200,
     data: result.rows,

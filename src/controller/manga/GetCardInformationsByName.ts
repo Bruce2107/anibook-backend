@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import getCardInfo from '../utils/GetCardInformationsAnimeOrMangaByName';
 import { Card } from '../../constants/types/DataType';
+import getCardInfo from '../utils/GetCardInformationsAnimeOrMangaByName';
 
 const getCardInformtionsByName = async (
   request: Request,
@@ -8,6 +8,7 @@ const getCardInformtionsByName = async (
 ): Promise<Response<Card>> => {
   try {
     const { name } = request.params;
+    
     const result = await getCardInfo(name, 'mangas');
     return response.status(result.status).json({ data: result.data });
   } catch (error) {
