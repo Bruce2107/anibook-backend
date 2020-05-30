@@ -33,12 +33,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime?limit=2",
+									"raw": "{{url}}/animes?limit=2",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime"
+										"animes"
 									],
 									"query": [
 										{
@@ -72,18 +72,18 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/:name",
+									"raw": "{{url}}/animes/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										":name"
 									],
 									"variable": [
 										{
 											"key": "name",
-											"value": "Teste"
+											"value": "Teste2"
 										}
 									]
 								},
@@ -111,12 +111,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/:name",
+									"raw": "{{url}}/animes/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										":name"
 									],
 									"variable": [
@@ -136,12 +136,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/card/random?limit=2",
+									"raw": "{{url}}/animes/card/random?limit=2",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										"card",
 										"random"
 									],
@@ -162,19 +162,19 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/card/:name",
+									"raw": "{{url}}/animes/card/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										"card",
 										":name"
 									],
 									"variable": [
 										{
 											"key": "name",
-											"value": "High Score Girl"
+											"value": "Teste"
 										}
 									]
 								},
@@ -188,12 +188,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/card/:name",
+									"raw": "{{url}}/animes/card/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										"card",
 										":name"
 									],
@@ -235,7 +235,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"NarutoShi\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"Teste2\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -254,12 +254,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/anime?folder=highscoregirl",
+									"raw": "{{url}}/animes?folder=highscoregirl",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime"
+										"animes"
 									],
 									"query": [
 										{
@@ -298,12 +298,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/anime",
+									"raw": "{{url}}/animes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime"
+										"animes"
 									]
 								}
 							},
@@ -354,12 +354,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/anime",
+									"raw": "{{url}}/animes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime"
+										"animes"
 									]
 								}
 							},
@@ -400,12 +400,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/anime",
+									"raw": "{{url}}/animes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime"
+										"animes"
 									]
 								}
 							},
@@ -419,12 +419,12 @@
 					"name": "PATCH",
 					"item": [
 						{
-							"name": "UpdatePhoto",
+							"name": "UpdateAnyFieldThatAreNotFile",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
-										"id": "b547681d-4d3e-40b6-857b-1a957fee4b8a",
+										"id": "49808304-9627-4478-b846-17171dbad520",
 										"exec": [
 											"pm.test('Status should be 204', function () {\r",
 											"    pm.response.to.have.status(204)\r",
@@ -449,44 +449,35 @@
 								"method": "PATCH",
 								"header": [],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "card",
-											"type": "file",
-											"src": "haruo.png"
+									"mode": "raw",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste12\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 1233\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste2\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
-									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"raw": "{{url}}/animes/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
-										"card",
+										"animes",
 										":name"
-									],
-									"query": [
-										{
-											"key": "folder",
-											"value": "teste"
-										}
 									],
 									"variable": [
 										{
 											"key": "name",
-											"value": "Naruto"
+											"value": "nome teste12"
 										}
 									]
-								},
-								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "UpdatePhoto-MissingFile",
+							"name": "UpdateImage-MissingFile",
 							"event": [
 								{
 									"listen": "test",
@@ -520,13 +511,13 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"raw": "{{url}}/animes/image/:name?folder=teste",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
-										"card",
+										"animes",
+										"image",
 										":name"
 									],
 									"query": [
@@ -547,7 +538,7 @@
 							"response": []
 						},
 						{
-							"name": "UpdatePhoto-NotFound",
+							"name": "UpdateImage-NotFound",
 							"event": [
 								{
 									"listen": "test",
@@ -583,17 +574,22 @@
 											"key": "card",
 											"type": "file",
 											"src": "Hi_Score_Girl_vol_1_cover.png"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": "haruo.png"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{url}}/anime/card/:name?folder=teste",
+									"raw": "{{url}}/animes/image/:name?folder=teste",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
-										"card",
+										"animes",
+										"image",
 										":name"
 									],
 									"query": [
@@ -605,69 +601,11 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "Teste2"
+											"value": "Teste21"
 										}
 									]
 								},
 								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
-							},
-							"response": []
-						},
-						{
-							"name": "UpdateAnyFieldThatAreNotFile",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "49808304-9627-4478-b846-17171dbad520",
-										"exec": [
-											"pm.test('Status should be 204', function () {\r",
-											"    pm.response.to.have.status(204)\r",
-											"})\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 123\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste2\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/anime/:name",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"anime",
-										":name"
-									],
-									"variable": [
-										{
-											"key": "name",
-											"value": "nome teste"
-										}
-									]
-								}
 							},
 							"response": []
 						},
@@ -694,19 +632,26 @@
 											"type": "file",
 											"src": [
 												"haruo.png",
-												"Hi_Score_Girl_vol_1_cover.png",
+												"hiscoregirl.jpg",
+												"HSGirlThumb-696x392.jpg",
+												"maxresdefault.jpg",
 												"oono.jpg"
 											]
+										},
+										{
+											"key": "card",
+											"type": "file",
+											"src": "oono.jpg"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{url}}/anime/image/:name?folder=teste",
+									"raw": "{{url}}/animes/image/:name?folder=teste",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										"image",
 										":name"
 									],
@@ -719,7 +664,7 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "nome teste"
+											"value": "nome teste12"
 										}
 									]
 								},
@@ -750,12 +695,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/anime/image/:name?folder=teste",
+									"raw": "{{url}}/animes/image/:name?folder=teste",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										"image",
 										":name"
 									],
@@ -821,18 +766,18 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/:name",
+									"raw": "{{url}}/animes/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										":name"
 									],
 									"variable": [
 										{
 											"key": "name",
-											"value": "Dragon Ball Z"
+											"value": "Teste2"
 										}
 									]
 								}
@@ -855,12 +800,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/:name",
+									"raw": "{{url}}/animes/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										":name"
 									],
 									"variable": [
@@ -879,12 +824,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/anime/:name",
+									"raw": "{{url}}/animes/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"animes",
 										":name"
 									],
 									"variable": [
@@ -1146,12 +1091,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga?limit=1",
+									"raw": "{{url}}/mangas?limit=1",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga"
+										"mangas"
 									],
 									"query": [
 										{
@@ -1169,12 +1114,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/:name",
+									"raw": "{{url}}/mangas/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										":name"
 									],
 									"variable": [
@@ -1193,12 +1138,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/:name",
+									"raw": "{{url}}/mangas/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										":name"
 									],
 									"variable": [
@@ -1217,12 +1162,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/card/:name",
+									"raw": "{{url}}/mangas/card/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										"card",
 										":name"
 									],
@@ -1256,12 +1201,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/card/:name",
+									"raw": "{{url}}/mangas/card/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										"card",
 										":name"
 									],
@@ -1281,12 +1226,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/card/random?limit=1",
+									"raw": "{{url}}/mangas/card/random?limit=1",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										"card",
 										"random"
 									],
@@ -1346,12 +1291,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/manga?folder=naruto",
+									"raw": "{{url}}/mangas?folder=naruto",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga"
+										"mangas"
 									],
 									"query": [
 										{
@@ -1390,12 +1335,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/manga",
+									"raw": "{{url}}/mangas",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga"
+										"mangas"
 									]
 								},
 								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
@@ -1442,12 +1387,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/manga",
+									"raw": "{{url}}/mangas",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga"
+										"mangas"
 									]
 								},
 								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
@@ -1487,12 +1432,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/manga",
+									"raw": "{{url}}/mangas",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga"
+										"mangas"
 									]
 								},
 								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
@@ -1506,201 +1451,6 @@
 				{
 					"name": "PATCH ",
 					"item": [
-						{
-							"name": "UpdatePhoto",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "c9c13a40-0350-4b0c-b3e7-41218366f622",
-										"exec": [
-											"pm.test('Status should be 204', function () {\r",
-											"    pm.response.to.have.status(204)\r",
-											"})\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "card",
-											"type": "file",
-											"src": "hiscoregirl.jpg"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/manga/card/:name?folder=teste",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"manga",
-										"card",
-										":name"
-									],
-									"query": [
-										{
-											"key": "folder",
-											"value": "teste"
-										}
-									],
-									"variable": [
-										{
-											"key": "name",
-											"value": "Naruto"
-										}
-									]
-								},
-								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
-							},
-							"response": []
-						},
-						{
-							"name": "UpdatePhoto-MissingFile",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "adc9176a-b04b-45ea-b5f1-68a55fc1c5ea",
-										"exec": [
-											"pm.test('Status should be 422', function () {\r",
-											"    pm.response.to.have.status(422)\r",
-											"})\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": []
-								},
-								"url": {
-									"raw": "{{url}}/anime/card/:name?folder=teste",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"anime",
-										"card",
-										":name"
-									],
-									"query": [
-										{
-											"key": "folder",
-											"value": "teste"
-										}
-									],
-									"variable": [
-										{
-											"key": "name",
-											"value": "Naruto"
-										}
-									]
-								},
-								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
-							},
-							"response": []
-						},
-						{
-							"name": "UpdatePhoto-NotFound",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "80b8a40f-7ab6-464d-b450-f576f12085d1",
-										"exec": [
-											"pm.test('Status should be 404', function () {\r",
-											"    pm.response.to.have.status(404)\r",
-											"})\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "card",
-											"type": "file",
-											"src": "hiscoregirl.jpg"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/manga/card/:name?folder=teste",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"manga",
-										"card",
-										":name"
-									],
-									"query": [
-										{
-											"key": "folder",
-											"value": "teste"
-										}
-									],
-									"variable": [
-										{
-											"key": "name",
-											"value": "Teste2"
-										}
-									]
-								},
-								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
-							},
-							"response": []
-						},
 						{
 							"name": "UpdateAnyFieldThatAreNotFile",
 							"event": [
@@ -1741,12 +1491,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/manga/:name",
+									"raw": "{{url}}/mangas/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										":name"
 									],
 									"variable": [
@@ -1756,6 +1506,140 @@
 										}
 									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-MissingFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "adc9176a-b04b-45ea-b5f1-68a55fc1c5ea",
+										"exec": [
+											"pm.test('Status should be 422', function () {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/mangas/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "80b8a40f-7ab6-464d-b450-f576f12085d1",
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "hiscoregirl.jpg"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
 							},
 							"response": []
 						},
@@ -1785,12 +1669,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/manga/image/:name?folder=naruto",
+									"raw": "{{url}}/mangas/image/:name?folder=naruto",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										"image",
 										":name"
 									],
@@ -1834,12 +1718,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/anime/image/:name?folder=teste",
+									"raw": "{{url}}/mangas/image/:name?folder=teste",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"anime",
+										"mangas",
 										"image",
 										":name"
 									],
@@ -1905,12 +1789,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/:name",
+									"raw": "{{url}}/mangas/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										":name"
 									],
 									"variable": [
@@ -1939,12 +1823,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/:name",
+									"raw": "{{url}}/mangas/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										":name"
 									],
 									"variable": [
@@ -1966,12 +1850,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/manga/:name",
+									"raw": "{{url}}/mangas/:name",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"manga",
+										"mangas",
 										":name"
 									],
 									"variable": [
@@ -2016,7 +1900,7 @@
 	],
 	"variable": [
 		{
-			"id": "8afdcbc6-bb09-43dd-a625-1e147f8c492f",
+			"id": "b17abcd8-6e2c-4a07-a660-5302f5b84aef",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"

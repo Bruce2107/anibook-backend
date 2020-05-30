@@ -8,8 +8,9 @@ const GetRandomCardInformations = async (
 ): Promise<Response<Array<Card>>> => {
   try {
     const { limit } = request.query;
+    const table = request.path.split('/')[1];
 
-    const result = await getRandomCard<Card>(limit as string, 'mangas');
+    const result = await getRandomCard<Card>(limit as string, table);
     return response
       .status(result.status)
       .json({ data: result.data, rows: result.rows });

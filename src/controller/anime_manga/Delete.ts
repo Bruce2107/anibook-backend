@@ -1,19 +1,19 @@
 import { Request, Response } from 'express';
 import _delete from '../utils/DeleteAnimeOrManga';
 
-const deleteManga = async (
+const deleteAnime = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
   try {
     const { name } = request.params;
+    const table = request.path.split('/')[1];
 
-    const status = await _delete(name, 'mangas');
-
+    const status = await _delete(name, table);
     return response.sendStatus(status);
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
 };
 
-export default deleteManga;
+export default deleteAnime;

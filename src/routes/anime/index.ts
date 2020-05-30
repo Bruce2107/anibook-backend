@@ -1,31 +1,31 @@
 import { Router } from 'express';
 import authenticate from '../../middleware/authenticate';
 import { fileUpload } from '../../middleware/upload';
-import createAnime from '../../controller/anime/CreateAnime';
-import deleteAnime from '../../controller/anime/DeleteAnime';
-import getAll from '../../controller/anime/GetAllAnimes';
-import getByName from '../../controller/anime/GetOneAnimeByName';
-import getCard from '../../controller/anime/GetCardInformationsByName';
-import getRandomCard from '../../controller/anime/GetRandomCardInformations';
-import updateAnyFieldThatAreNotAFile from '../../controller/anime/UpdateAnyFieldThatAreNotAFile';
-import updateImageField from '../../controller/anime/UpdateImageField';
+import create from '../../controller/anime_manga/Create';
+import _delete from '../../controller/anime_manga/Delete';
+import getAll from '../../controller/anime_manga/GetAll';
+import getByName from '../../controller/anime_manga/GetOneByName';
+import getCard from '../../controller/anime_manga/GetCardByName';
+import getRandomCard from '../../controller/anime_manga/GetRandomCard';
+import updateAnyFieldThatAreNotAFile from '../../controller/anime_manga/UpdateAnyFieldThatAreNotAFile';
+import updateImageField from '../../controller/anime_manga/UpdateImageField';
 
 const routes = Router();
 
-routes.get('/anime', getAll);
-routes.get('/anime/:name', getByName);
-routes.get('/anime/card/random', getRandomCard);
-routes.get('/anime/card/:name', getCard);
+routes.get('/animes', getAll);
+routes.get('/animes/:name', getByName);
+routes.get('/animes/card/random', getRandomCard);
+routes.get('/animes/card/:name', getCard);
 
-routes.post('/anime', [fileUpload, authenticate], createAnime);
+routes.post('/animes', [fileUpload, authenticate], create);
 
 routes.patch(
-  '/anime/image/:name',
+  '/animes/image/:name',
   [fileUpload, authenticate],
   updateImageField
 );
-routes.patch('/anime/:name', authenticate, updateAnyFieldThatAreNotAFile);
+routes.patch('/animes/:name', authenticate, updateAnyFieldThatAreNotAFile);
 
-routes.delete('/anime/:name', authenticate, deleteAnime);
+routes.delete('/animes/:name', authenticate, _delete);
 
 export default routes;

@@ -1,31 +1,31 @@
 import { Router } from 'express';
 import authenticate from '../../middleware/authenticate';
 import { fileUpload } from '../../middleware/upload';
-import createManga from '../../controller/manga/CreateManga';
-import deleteManga from '../../controller/manga/DeleteAnime';
-import getAllMangas from '../../controller/manga/GetAllMangas';
-import getByName from '../../controller/manga/GetOneMangaByName';
-import getCard from '../../controller/manga/GetCardInformationsByName';
-import getRandomCard from '../../controller/manga/GetRandomCardInformations';
-import updateAnyFieldThatAreNotAFile from '../../controller/manga/UpdateAnyFieldThatAreNotAFile';
-import updateImageField from '../../controller/manga/UpdateImageField';
+import create from '../../controller/anime_manga/Create';
+import _delete from '../../controller/anime_manga/Delete';
+import getAll from '../../controller/anime_manga/GetAll';
+import getByName from '../../controller/anime_manga/GetOneByName';
+import getCard from '../../controller/anime_manga/GetCardByName';
+import getRandomCard from '../../controller/anime_manga/GetRandomCard';
+import updateAnyFieldThatAreNotAFile from '../../controller/anime_manga/UpdateAnyFieldThatAreNotAFile';
+import updateImageField from '../../controller/anime_manga/UpdateImageField';
 
 const routes = Router();
 
-routes.get('/manga', getAllMangas);
-routes.get('/manga/:name', getByName);
-routes.get('/manga/card/random', getRandomCard);
-routes.get('/manga/card/:name', getCard);
+routes.get('/mangas', getAll);
+routes.get('/mangas/:name', getByName);
+routes.get('/mangas/card/random', getRandomCard);
+routes.get('/mangas/card/:name', getCard);
 
-routes.post('/manga', [fileUpload, authenticate], createManga);
+routes.post('/mangas', [fileUpload, authenticate], create);
 
 routes.patch(
-  '/manga/image/:name',
+  '/mangas/image/:name',
   [fileUpload, authenticate],
   updateImageField
 );
-routes.patch('/manga/:name', authenticate, updateAnyFieldThatAreNotAFile);
+routes.patch('/mangas/:name', authenticate, updateAnyFieldThatAreNotAFile);
 
-routes.delete('/manga/:name', authenticate, deleteManga);
+routes.delete('/mangas/:name', authenticate, _delete);
 
 export default routes;

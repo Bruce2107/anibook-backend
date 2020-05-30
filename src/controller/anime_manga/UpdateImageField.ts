@@ -11,7 +11,10 @@ const updateImageField = async (
     const files = request.files as {
       [fieldname: string]: Express.Multer.File[];
     };
-    const status = await update(name, folder as string, files, 'mangas');
+    const table = request.path.split('/')[1];
+
+
+    const status = await update(name, folder as string, files, table);
     return response.sendStatus(status);
   } catch (error) {
     return response.status(400).send({ error: error.stack });

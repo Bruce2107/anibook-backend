@@ -1,28 +1,27 @@
 import { Request, Response } from 'express';
-import { Manga } from '../../constants/types/MangaType';
+import { Anime } from '../../constants/types/AnimeType';
 import create from '../utils/CreateAnimeOrManga';
 
-const createManga = async (
+const createAnime = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
   try {
-    const dados: Manga = JSON.parse(request.body.dados);
+    const dados: Anime = JSON.parse(request.body.dados);
     const files = request.files as {
       [fieldname: string]: Express.Multer.File[];
     };
-
+    const table = request.path.split('/')[1];
     const status = await create(
       request.query.folder as string,
       dados,
       files,
-      'mangas'
+      table
     );
-
     return response.sendStatus(status);
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
 };
 
-export default createManga;
+export default createAnime;
