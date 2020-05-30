@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Card } from '../../constants/types/DataType';
+import { Card } from '../../constants/types/CardType';
 import getRandomCard from '../utils/GetRandomAnimeOrMangaCard';
 
 const GetRandomCardInformations = async (

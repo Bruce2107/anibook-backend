@@ -1,4 +1,5 @@
-import { GetResponse, CardFields } from '../../constants/types/DataType';
+import { GetResponse } from '../../constants/types/DataType';
+import { CardFields } from '../../constants/types/CardType';
 import { getOne } from './database/Methods';
 
 async function getCardInformationsByName<T>(

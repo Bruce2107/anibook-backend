@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import authenticate from '../../middleware/authenticate';
-import { fileUpload, upload } from '../../middleware/upload';
+import { fileUpload } from '../../middleware/upload';
 import createAnime from '../../controller/anime/CreateAnime';
 import deleteAnime from '../../controller/anime/DeleteAnime';
 import getAll from '../../controller/anime/GetAllAnimes';
@@ -9,7 +9,6 @@ import getCard from '../../controller/anime/GetCardInformationsByName';
 import getRandomCard from '../../controller/anime/GetRandomCardInformations';
 import updateAnyFieldThatAreNotAFile from '../../controller/anime/UpdateAnyFieldThatAreNotAFile';
 import updateImageField from '../../controller/anime/UpdateImageField';
-import updatePhoto from '../../controller/anime/UpdatePhoto';
 
 const routes = Router();
 
@@ -20,11 +19,6 @@ routes.get('/anime/card/:name', getCard);
 
 routes.post('/anime', [fileUpload, authenticate], createAnime);
 
-routes.patch(
-  '/anime/card/:name',
-  [upload.single('card'), authenticate],
-  updatePhoto
-);
 routes.patch(
   '/anime/image/:name',
   [fileUpload, authenticate],
