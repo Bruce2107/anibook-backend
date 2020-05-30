@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
 import createToken from '../../utils/CreateToken';
 import { mongoConnection } from '../../database';
-import { User } from '../../constants/types/TokenType';
+import { User } from '../../constants/Token';
 
-const createUser = async (request: Request, response: Response): Promise<Response> => {
+const createUser = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
   try {
     const { email, nickname } = request.body as User;
 
@@ -11,7 +14,9 @@ const createUser = async (request: Request, response: Response): Promise<Respons
 
     const connection = await mongoConnection('anibook');
 
-    const dbemail = await connection.collection<User>('users').findOne({ email });
+    const dbemail = await connection
+      .collection<User>('users')
+      .findOne({ email });
     const dbnickname = await connection
       .collection<User>('users')
       .findOne({ nickname });

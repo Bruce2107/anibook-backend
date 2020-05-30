@@ -1,6 +1,6 @@
 import { alreadyExists, getOne, update } from './database/Methods';
-import updatePhotoOrImageField from '../..//utils/UpdatePhotoOrImageField';
-import { Data } from '../../constants/types/DataType';
+import { Data } from '../../constants/Data';
+import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
 
 async function updateImageField<T extends Data>(
   name: string,

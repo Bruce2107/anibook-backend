@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import { Anime, AnimeData } from '../../constants/types/AnimeType';
+import { Dados } from '../../constants/Data';
 import getAll from '../utils/GetAllAnimesOrManga';
 
-const getAllAnimes = async (
+async function getAllAnimes<T>(
   request: Request,
   response: Response
-): Promise<Response<Array<Anime>>> => {
+): Promise<Response<Array<T>>> {
   try {
     const { limit } = request.query;
     const table = request.path.split('/')[1];
 
-    const result = await getAll<AnimeData>(limit as string, table);
+    const result = await getAll<Dados<T>>(limit as string, table);
 
     return response
       .status(result.status)
@@ -18,6 +18,6 @@ const getAllAnimes = async (
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
-};
+}
 
 export default getAllAnimes;

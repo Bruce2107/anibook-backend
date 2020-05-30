@@ -1,5 +1,5 @@
-import { Anime } from './AnimeType';
-import { Data, Info, Link } from './DataType';
+import { Anime } from './Anime';
+import { Data, Info, Link } from './Data';
 
 export interface Manga extends Data {
   info: MangaInfo;
@@ -11,9 +11,9 @@ export interface MangaInfo extends Info {
   numberVolumes: number;
 }
 
-export interface MangaData {
+export type MangaData = {
   dados: Manga;
-}
+};
 
 export function isManga(object: Anime | Manga): object is Manga {
   return 'whereRead' in object;

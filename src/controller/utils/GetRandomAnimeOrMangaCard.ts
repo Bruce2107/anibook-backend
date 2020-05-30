@@ -1,5 +1,5 @@
-import { GetResponse } from '../../constants/types/DataType';
-import { CardFields } from '../../constants/types/CardType';
+import { GetResponse } from '../../constants/Data';
+import { CardFields } from '../../constants/Card';
 import { getRandom } from './database/Methods';
 
 async function getRandomCard<T>(

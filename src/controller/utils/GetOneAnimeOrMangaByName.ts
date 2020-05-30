@@ -1,5 +1,5 @@
 import { getOne } from './database/Methods';
-import { GetResponse } from '../../constants/types/DataType';
+import { GetResponse } from '../../constants/Data';
 
 async function getByName<T>(
   name: string,

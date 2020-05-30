@@ -1,5 +1,5 @@
-import { Anime, isAnime } from '../../constants/types/AnimeType';
-import { Manga, isManga } from '../../constants/types/MangaType';
+import { Anime, isAnime } from '../../constants//Anime';
+import { Manga, isManga } from '../../constants//Manga';
 import search from '../../utils/SearchObjectInArray';
 import { alreadyExists, getOne, update } from './database/Methods';
 

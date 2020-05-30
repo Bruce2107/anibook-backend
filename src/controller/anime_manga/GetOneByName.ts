@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
-import { Anime, AnimeData } from '../../constants/types/AnimeType';
+import { Dados } from '../../constants/Data';
 import getByName from '../utils/GetOneAnimeOrMangaByName';
 
-const GetOneByName = async (
+async function GetOneByName<T>(
   request: Request,
   response: Response
-): Promise<Response<Anime>> => {
+): Promise<Response<T>> {
   try {
     const { name } = request.params;
     const table = request.path.split('/')[1];
 
-    const result = await getByName<AnimeData>(name, table);
+    const result = await getByName<Dados<T>>(name, table);
     return response.status(result.status).json({ data: result.data?.dados });
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
-};
+}
 
 export default GetOneByName;

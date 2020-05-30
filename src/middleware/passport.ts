@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { mongoConnection } from '../database';
-import { User } from '../constants/types/TokenType';
+import { User } from '../constants/Token';
 
 dotenv.config();
 

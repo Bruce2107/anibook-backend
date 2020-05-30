@@ -23,3 +23,7 @@ export type GetResponse<T> = {
   data?: T;
   rows?: number;
 };
+
+export type Dados<T> = {
+  dados: T;
+};

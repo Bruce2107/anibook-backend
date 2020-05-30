@@ -1,4 +1,4 @@
-import { Data } from '../constants/types/DataType';
+import { Data } from '../constants/Data';
 import saveImages from './SaveImageOnDatabase';
 
 async function updatePhotoOrImageField<T extends Data>(

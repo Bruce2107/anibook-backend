@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { mongoConnection } from '../../database';
-import { TypeImage } from '../../constants/types/ImageType';
+import { TypeImage } from '../../constants/Image';
 
 const deleteImage = async (
   request: Request,
@@ -8,7 +8,7 @@ const deleteImage = async (
 ): Promise<Response> => {
   try {
     const { folder, name } = request.params;
-    
+
     const connection = await mongoConnection('anibook');
     const result = await connection
       .collection<TypeImage>('images')

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { Card } from '../../constants/types/CardType';
+import { Card } from '../../constants/Card';
 import getCardInfo from '../utils/GetCardInformationsAnimeOrMangaByName';
 
-const getCardInformtionsByName = async (
+async function getCardInformtionsByName(
   request: Request,
   response: Response
-): Promise<Response<Card>> => {
+): Promise<Response<Card>> {
   try {
     const { name } = request.params;
     const table = request.path.split('/')[1];
@@ -15,6 +15,6 @@ const getCardInformtionsByName = async (
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
-};
+}
 
 export default getCardInformtionsByName;

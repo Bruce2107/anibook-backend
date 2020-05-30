@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import createToken from '../../utils/CreateToken';
 import { mongoConnection } from '../../database';
-import { User } from '../../constants/types/TokenType';
+import { User } from '../../constants/Token';
 
 const getToken = async (
   request: Request,
@@ -15,7 +15,7 @@ const getToken = async (
     const user = await connection
       .collection<User>('users')
       .findOne({ nickname });
-      
+
     if (!user) return response.sendStatus(404);
 
     const token = createToken({ email: user.email, nickname });

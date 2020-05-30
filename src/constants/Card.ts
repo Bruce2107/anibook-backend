@@ -1,4 +1,4 @@
-import { Data } from "./DataType";
+import { Data } from "./Data";
 
 export type Card = Pick<Data, 'folder' | 'name' | 'photo'>;
 

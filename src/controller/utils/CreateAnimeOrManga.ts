@@ -1,4 +1,4 @@
-import { Data } from '../../constants/types/DataType';
+import { Data } from '../../constants/Data';
 import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
 import { alreadyExists, insert } from './database/Methods';
 

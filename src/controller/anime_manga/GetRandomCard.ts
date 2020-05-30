@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { Card } from '../../constants/types/CardType';
+import { Card } from '../../constants/Card';
 import getRandomCard from '../utils/GetRandomAnimeOrMangaCard';
 
-const GetRandomCardInformations = async (
+async function GetRandomCardInformations(
   request: Request,
   response: Response
-): Promise<Response<Array<Card>>> => {
+): Promise<Response<Array<Card>>> {
   try {
     const { limit } = request.query;
     const table = request.path.split('/')[1];
@@ -17,6 +17,6 @@ const GetRandomCardInformations = async (
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
-};
+}
 
 export default GetRandomCardInformations;

@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { Anime } from '../../constants/types/AnimeType';
 import create from '../utils/CreateAnimeOrManga';
+import { Data } from '../../constants/Data';
 
-const createAnime = async (
+async function createAnime<T extends Data>(
   request: Request,
   response: Response
-): Promise<Response> => {
+): Promise<Response> {
   try {
-    const dados: Anime = JSON.parse(request.body.dados);
+    const dados: T = JSON.parse(request.body.dados);
     const files = request.files as {
       [fieldname: string]: Express.Multer.File[];
     };
@@ -22,6 +22,6 @@ const createAnime = async (
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
-};
+}
 
 export default createAnime;
