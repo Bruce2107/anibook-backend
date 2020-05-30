@@ -1,32 +1,21 @@
-import { QueryResult } from 'pg';
-import { AnimeData, Anime, isAnime } from '../../constants/types/AnimeType';
-import { MangaData, Manga, isManga } from '../../constants/types/MangaType';
-import { pool } from '../../database';
+import { Anime, isAnime } from '../../constants/types/AnimeType';
+import { Manga, isManga } from '../../constants/types/MangaType';
 import search from '../../utils/SearchObjectInArray';
+import { alreadyExists, getOne, update } from './database/Methods';
 
-const updateAnyFieldThatAreNotAFile = async (
+async function updateAnyFieldThatAreNotAFile<T extends Anime | Manga>(
   name: string,
-  dados: Anime | Manga,
+  dados: T,
   table: string
-) => {
-  const exists: QueryResult<
-    AnimeData | MangaData
-  > = await pool.query(
-    `SELECT dados FROM ${table} WHERE dados ->> 'name' = $1`,
-    [name]
-  );
+): Promise<404 | 409 | 400 | 204> {
+  if (!(await alreadyExists(table, name))) return 404;
+  const newData = (await getOne<{ dados: T }>(table, name, ['dados'])).rows[0]
+    .dados;
 
-  if (!exists.rowCount) {
-    return 404;
-  }
-  const newData = exists.rows[0].dados;
   if (dados.name) {
-    const exist: QueryResult<Number> = await pool.query(
-      `SELECT id FROM ${table} WHERE dados ->> 'name' = $1`,
-      [dados.name]
-    );
     //já existe outro registro com esse mesmo nome
-    if (dados.name !== name && exist.rowCount) return 409;
+    if (dados.name !== name && (await alreadyExists(table, dados.name)))
+      return 409;
     newData.name = dados.name;
   }
   if (dados.synopsis) newData.synopsis = dados.synopsis;
@@ -34,6 +23,7 @@ const updateAnyFieldThatAreNotAFile = async (
   if (dados.folder) newData.folder = dados.folder;
   if (dados.info.author) newData.info.author = dados.info.author;
   if (dados.info.status) newData.info.status = dados.info.status;
+
   //alterções para anime
   if (isAnime(newData) && isAnime(dados)) {
     if (dados.info.numberEpisodes)
@@ -49,6 +39,7 @@ const updateAnyFieldThatAreNotAFile = async (
           newData.whereWatch.push(site);
       });
   }
+
   //alterções para mangá
   if (isManga(newData) && isManga(dados)) {
     if (dados.info.numberChapters)
@@ -61,11 +52,7 @@ const updateAnyFieldThatAreNotAFile = async (
       });
   }
 
-  await pool.query(
-    `UPDATE ${table} SET dados = $1 WHERE dados ->> 'name' = $2`,
-    [newData, name]
-  );
-  return 204;
-};
+  return (await update<T>(table, name, newData)) ? 204 : 400;
+}
 
 export default updateAnyFieldThatAreNotAFile;

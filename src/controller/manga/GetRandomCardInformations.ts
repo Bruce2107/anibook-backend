@@ -9,7 +9,7 @@ const GetRandomCardInformations = async (
   try {
     const { limit } = request.query;
 
-    const result = await getRandomCard(limit as string, 'mangas');
+    const result = await getRandomCard<Card>(limit as string, 'mangas');
     return response
       .status(result.status)
       .json({ data: result.data, rows: result.rows });

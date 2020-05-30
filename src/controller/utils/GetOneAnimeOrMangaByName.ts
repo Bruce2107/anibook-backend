@@ -1,21 +1,13 @@
-import { QueryResult } from 'pg';
-import { AnimeData } from '../../constants/types/AnimeType';
-import { MangaData } from '../../constants/types/MangaType';
-import { pool } from '../../database';
+import { getOne } from './database/Methods';
+import { GetResponse } from '../../constants/types/DataType';
 
-const getByName = async (
+async function getByName<T>(
   name: string,
   table: string
-): Promise<{ status: number; data?: AnimeData | MangaData }> => {
-  const result: QueryResult<
-    AnimeData | MangaData
-  > = await pool.query(
-    `SELECT dados FROM ${table} WHERE dados ->> 'name' = $1`,
-    [name]
-  );
+): Promise<GetResponse<T>> {
+  const result = await getOne<T>(table, name, ['dados']);
   return result.rowCount
     ? { status: 200, data: result.rows[0] }
     : { status: 404 };
-};
-
+}
 export default getByName;

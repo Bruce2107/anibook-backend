@@ -1,39 +1,21 @@
-import { QueryResult } from 'pg';
-import { Anime } from '../../constants/types/AnimeType';
-import { Manga } from '../../constants/types/MangaType';
-import { pool } from '../../database';
-import saveImages from '../../utils/SaveImageOnDatabase';
+import { Data } from '../../constants/types/DataType';
+import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
+import { alreadyExists, insert } from './database/Methods';
 
-const create = async (
+async function create<T extends Data>(
   folder: string,
-  dados: Anime | Manga,
+  dados: T,
   files: { [fieldname: string]: Express.Multer.File[] },
   table: string
-) => {
+): Promise<422 | 409 | 400 | 201> {
   if (Object.keys(files).length) {
     if (!folder) return 422;
-    dados.folder = folder;
-    if (Object.keys(files).includes('card')) {
-      const card: Express.Multer.File = files['card'][0];
-      dados.photo = card.originalname;
-      await saveImages(folder as string, card, undefined);
-    }
-    if (Object.keys(files).includes('images')) {
-      const images: Express.Multer.File[] = files['images'];
-      dados.images = images.map((image) => image.originalname);
-      await saveImages(folder as string, undefined, images);
-    }
+    dados = await updatePhotoOrImageField<T>(files, folder, dados);
   }
 
-  const exists: QueryResult<typeof dados> = await pool.query(
-    `SELECT id FROM ${table} WHERE dados ->> 'name' = $1`,
-    [dados.name]
-  );
+  if (await alreadyExists(table, dados.name)) return 409;
 
-  if (exists.rowCount) return 409;
-
-  await pool.query(`INSERT INTO ${table} (dados) VALUES ($1)`, [dados]);
-  return 201;
-};
+  return (await insert(table, ['dados'], dados)) ? 201 : 400;
+}
 
 export default create;

@@ -27,7 +27,7 @@ routes.patch(
 );
 routes.patch(
   '/anime/image/:name',
-  [upload.array('images'), authenticate],
+  [fileUpload, authenticate],
   updateImageField
 );
 routes.patch('/anime/:name', authenticate, updateAnyFieldThatAreNotAFile);

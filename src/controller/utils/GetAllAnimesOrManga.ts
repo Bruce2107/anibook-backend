@@ -1,21 +1,17 @@
-import { QueryResult } from 'pg';
-import { AnimeData } from 'src/constants/types/AnimeType';
-import { MangaData } from 'src/constants/types/MangaType';
-import { pool } from '../../database';
+import { getRandom } from './database/Methods';
+import { GetResponse } from '../../constants/types/DataType';
 
-const getAll = async (limit: string, table: string) => {
-  const result: QueryResult<
-    AnimeData | MangaData
-  > = await pool.query(
-    `SELECT dados FROM ${table} ORDER BY random () LIMIT $1`,
-    [limit]
-  );
-  
+async function getAll<T>(
+  limit: string,
+  table: string
+): Promise<GetResponse<T[]>> {
+  const result = await getRandom<T>(table, limit, ['dados']);
+
   return {
     status: 200,
     data: result.rows,
     rows: result.rowCount,
   };
-};
+}
 
 export default getAll;

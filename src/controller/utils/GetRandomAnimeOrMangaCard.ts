@@ -1,19 +1,16 @@
-import { QueryResult } from 'pg';
-import { Card } from '../../constants/types/DataType';
-import { pool } from '../../database';
+import { GetResponse, CardFields } from '../../constants/types/DataType';
+import { getRandom } from './database/Methods';
 
-const getRandomCard = async (limit: string, table: string) => {
-  const result: QueryResult<Array<
-    Card
-  >> = await pool.query(
-    `SELECT dados ->> 'folder' as folder, dados ->> 'photo' as photo, dados ->> 'name' as name FROM ${table} ORDER BY random() LIMIT $1`,
-    [limit]
-  );
+async function getRandomCard<T>(
+  limit: string,
+  table: string
+): Promise<GetResponse<T[]>> {
+  const result = await getRandom<T>(table, limit, CardFields);
   return {
     status: 200,
     data: result.rows,
     rows: result.rowCount,
   };
-};
+}
 
 export default getRandomCard;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Anime } from '../../constants/types/AnimeType';
+import { Anime, AnimeData } from '../../constants/types/AnimeType';
 import getAll from '../utils/GetAllAnimesOrManga';
 
 const getAllAnimes = async (
@@ -8,7 +8,7 @@ const getAllAnimes = async (
 ): Promise<Response<Array<Anime>>> => {
   try {
     const { limit } = request.query;
-    const result = await getAll(limit as string, 'animes');
+    const result = await getAll<AnimeData>(limit as string, 'animes');
 
     return response
       .status(result.status)

@@ -1,42 +1,22 @@
-import { QueryResult } from 'pg';
-import { AnimeData } from '../../constants/types/AnimeType';
-import { MangaData } from '../../constants/types/MangaType';
-import { pool } from '../../database';
-import saveImages from '../../utils/SaveImageOnDatabase';
+import { alreadyExists, getOne, update } from './database/Methods';
+import updatePhotoOrImageField from '../..//utils/UpdatePhotoOrImageField';
+import { Data } from '../../constants/types/DataType';
 
-const updateImageField = async (
+async function updateImageField<T extends Data>(
   name: string,
   folder: string,
-  files: Express.Multer.File[],
+  files: { [fieldname: string]: Express.Multer.File[] },
   table: string
-) => {
+): Promise<422 | 404 | 400 | 204> {
   if (!files || !folder) return 422;
 
-  const exists: QueryResult<
-    AnimeData | MangaData
-  > = await pool.query(
-    `SELECT dados FROM ${table} WHERE dados ->> 'name' = $1`,
-    [name]
-  );
-  if (!exists.rowCount) {
-    return 404;
-  }
+  if (!(await alreadyExists(table, name))) return 404;
+  const data = (await getOne<{ dados: T }>(table, name, ['dados'])).rows[0]
+    .dados;
 
-  exists.rows[0].dados.folder = folder as string;
-  if (!exists.rows[0].dados.images) exists.rows[0].dados.images = [];
-  files.forEach((file) => {
-    if (!(exists.rows[0].dados.images.indexOf(file.originalname) >= 0)) {
-      exists.rows[0].dados.images.push(file.originalname);
-    }
-  });
+  const newData = await updatePhotoOrImageField<T>(files, folder, data);
 
-  await saveImages(folder as string, undefined, files);
-
-  await pool.query(
-    `UPDATE ${table} SET dados = $1 WHERE dados ->> 'name' = $2`,
-    [exists.rows[0].dados, name]
-  );
-  return 204;
-};
+  return (await update<T>(table, name, newData)) ? 204 : 400;
+}
 
 export default updateImageField;

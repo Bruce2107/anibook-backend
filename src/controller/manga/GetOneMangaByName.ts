@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Manga } from '../../constants/types/MangaType';
+import { Manga, MangaData } from '../../constants/types/MangaType';
 import getByName from '../utils/GetOneAnimeOrMangaByName';
 
 const GetOneByName = async (
@@ -9,7 +9,7 @@ const GetOneByName = async (
   try {
     const { name } = request.params;
 
-    const result = await getByName(name, 'mangas');
+    const result = await getByName<MangaData>(name, 'mangas');
     return response.status(result.status).json({ data: result.data?.dados });
   } catch (error) {
     return response.status(400).send({ error: error.stack });

@@ -9,7 +9,7 @@ const getCardInformtionsByName = async (
   try {
     const { name } = request.params;
     
-    const result = await getCardInfo(name, 'mangas');
+    const result = await getCardInfo<Card>(name, 'mangas');
     return response.status(result.status).json({ data: result.data });
   } catch (error) {
     return response.status(400).send({ error: error.stack });

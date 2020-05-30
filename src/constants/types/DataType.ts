@@ -18,4 +18,16 @@ export interface Link {
   name: string;
 }
 
-export type Card = Pick<Data, 'folder' | 'name' | 'photo'>
+export type Card = Pick<Data, 'folder' | 'name' | 'photo'>;
+
+export type GetResponse<T> = {
+  status: number;
+  data?: T;
+  rows?: number;
+};
+
+export const CardFields = [
+  `dados ->> 'folder' as folder`,
+  `dados ->> 'photo' as photo`,
+  `dados ->> 'name' as name`,
+];

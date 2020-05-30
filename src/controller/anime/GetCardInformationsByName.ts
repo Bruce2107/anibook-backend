@@ -8,7 +8,7 @@ const getCardInformtionsByName = async (
 ): Promise<Response<Card>> => {
   try {
     const { name } = request.params;
-    const result = await getCardInfo(name, 'animes');
+    const result = await getCardInfo<Card>(name, 'animes');
     return response.status(result.status).json({ data: result.data });
   } catch (error) {
     return response.status(400).send({ error: error.stack });
