@@ -1,6 +1,6 @@
-import { readFileSync } from 'fs';
 import { mongoConnection } from '../database';
 import { TypeImage } from '../constants/Image';
+import createImage from './CreateImage';
 
 const saveImages = async (
   folder: string,
@@ -9,12 +9,7 @@ const saveImages = async (
 ) => {
   const connection = await mongoConnection('anibook');
   if (file) {
-    const image: TypeImage = {
-      contentType: file.mimetype,
-      folder,
-      image: Buffer.from(readFileSync(file.path).toString('base64'), 'base64'),
-      name: file.originalname,
-    };
+    const image = createImage(folder, file);
     const result = await connection
       .collection<TypeImage>('images')
       .insertOne(image);
@@ -23,15 +18,7 @@ const saveImages = async (
   if (files) {
     const images: Array<TypeImage> = [];
     files.forEach(async (file) => {
-      images.push({
-        folder,
-        name: file.originalname,
-        contentType: file.mimetype,
-        image: Buffer.from(
-          readFileSync(file.path).toString('base64'),
-          'base64'
-        ),
-      });
+      images.push(createImage(folder, file));
     });
     const result = await connection
       .collection<TypeImage>('images')

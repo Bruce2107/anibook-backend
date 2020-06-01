@@ -9,7 +9,7 @@ export const pool = new Pool({
   host: (process.env.DB_HOST_POSTGRES as string) || 'localhost',
   password: (process.env.DB_PASS_POSTGRES as string) || 'anibook',
   database: (process.env.DB_NAME_POSTGRES as string) || 'anibook',
-  port: Number(process.env.DB_PORT_POSTGRES) | 5432,
+  port: Number(process.env.DB_PORT_POSTGRES) || 5432,
 });
 
 export const mongoConnection = async (database: string) => {
