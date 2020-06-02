@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
+import { Data } from 'anibook';
 import create from '../utils/CreateAnimeOrManga';
-import { Data } from '../../constants/Data';
 
 async function createAnime<T extends Data>(
   request: Request,

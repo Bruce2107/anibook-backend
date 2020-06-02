@@ -1,5 +1,5 @@
+import { GetResponse } from 'anibook';
 import { getRandom } from './database/Methods';
-import { GetResponse } from '../../constants/Data';
 
 async function getAll<T>(
   limit: string,

@@ -1,4 +1,4 @@
-import { GetResponse } from '../../constants/Data';
+import { GetResponse } from 'anibook';
 import { CardFields } from '../../constants/Card';
 import { getRandom } from './database/Methods';
 

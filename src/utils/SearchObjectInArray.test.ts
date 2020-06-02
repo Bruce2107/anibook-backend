@@ -1,4 +1,4 @@
-import { Link } from '../constants/Data';
+import { Link } from 'anibook';
 import searchObjectInArray from './SearchObjectInArray';
 
 describe('Search In Array', () => {

@@ -1,4 +1,4 @@
-import { Data } from '../../constants/Data';
+import { Data } from 'anibook';
 import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
 import { alreadyExists, insert } from './database/Methods';
 

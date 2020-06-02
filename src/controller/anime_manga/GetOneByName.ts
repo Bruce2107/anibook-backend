@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Dados } from '../../constants/Data';
+import { Dados } from 'anibook';
 import getByName from '../utils/GetOneAnimeOrMangaByName';
 
 async function GetOneByName<T>(

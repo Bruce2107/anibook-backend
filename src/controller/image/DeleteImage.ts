@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
+import { TypeImage } from 'anibook';
 import { mongoConnection } from '../../database';
-import { TypeImage } from '../../constants/Image';
 
 const deleteImage = async (
   request: Request,

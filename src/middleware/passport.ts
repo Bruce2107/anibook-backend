@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
+import { User } from 'anibook';
 import { mongoConnection } from '../database';
-import { User } from '../constants/Token';
 
 dotenv.config();
 

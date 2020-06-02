@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Card } from '../../constants/Card';
+import { Card } from 'anibook';
 import getRandomCard from '../utils/GetRandomAnimeOrMangaCard';
 
 async function GetRandomCardInformations(

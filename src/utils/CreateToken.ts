@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import { User } from '../constants/Token';
+import { User } from 'anibook';
 
 dotenv.config();
 

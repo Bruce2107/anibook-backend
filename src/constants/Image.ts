@@ -1,6 +1,13 @@
-export type TypeImage = {
-  folder: string;
-  name: string;
-  contentType: string;
-  image: Buffer;
-};
+export const imageFormats = [
+  'jpeg',
+  'jpg',
+  'jp2',
+  'tiff',
+  'tif',
+  'bmp',
+  'png',
+  'ppm',
+  'pgm',
+  'pbm',
+  'pnn',
+];

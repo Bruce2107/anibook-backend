@@ -23,8 +23,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "esModuleInterop": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "typeRoots": ["./src/@types","node_modules/@types"]
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules","./src/@types"],
   "include": ["./src/**/*.ts"]
 }

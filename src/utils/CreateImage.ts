@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { TypeImage } from '../constants/Image';
+import { TypeImage } from 'anibook';
 
 const createImage = (folder: string, file: Express.Multer.File): TypeImage => ({
   contentType: file.mimetype,

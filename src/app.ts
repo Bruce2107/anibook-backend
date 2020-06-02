@@ -6,6 +6,7 @@ import animeRoutes from './routes/anime';
 import imageRoutes from './routes/image';
 import mangaRoutes from './routes/manga';
 import tokenRoutes from './routes/token';
+import defaultRoutes from './routes/defualt';
 
 class App {
   public express: express.Application;
@@ -26,6 +27,7 @@ class App {
     this.express.use(imageRoutes);
     this.express.use(mangaRoutes);
     this.express.use(tokenRoutes);
+    this.express.use(defaultRoutes);
   }
 }
 

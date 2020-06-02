@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
+import { Dados, Anime, Manga } from 'anibook';
 import update from '../utils/UpdateAnyFieldThatAreNotAFileAnimeOrManga';
-import { Dados } from '../../constants/Data';
-import { Manga } from '../../constants/Manga';
-import { Anime } from '../../constants/Anime';
 
 async function updateAnyFieldThatAreNotAFile<T extends Anime | Manga>(
   request: Request,

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
+import { User } from 'anibook';
 import createToken from '../../utils/CreateToken';
 import { mongoConnection } from '../../database';
-import { User } from '../../constants/Token';
 
 const getToken = async (
   request: Request,

@@ -5430,6 +5430,11 @@ webidl-conversions@^6.0.0:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
 
+webp-converter@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/webp-converter/-/webp-converter-2.2.3.tgz#ffee88b2f23b0b6d14ecb1ec34bd8b6e529171f1"
+  integrity sha512-ROjdJNNJlqYX5cDQ0XO7ae9AD9asmYAR2nX2Y7ix1SA/hsWbdEAoL61ApqOPvoGZHldHq+yOhmRYlrTNBBcAMA==
+
 whatwg-encoding@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/whatwg-encoding/-/whatwg-encoding-1.0.5.tgz#5abacf777c32166a51d085d6b4f3e7d27113ddb0"

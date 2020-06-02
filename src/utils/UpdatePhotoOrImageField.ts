@@ -1,4 +1,4 @@
-import { Data } from '../constants/Data';
+import { Data } from 'anibook';
 import saveImages from './SaveImageOnDatabase';
 
 async function updatePhotoOrImageField<T extends Data>(
