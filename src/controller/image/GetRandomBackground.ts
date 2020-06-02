@@ -3,12 +3,11 @@ import { mongoConnection } from '../../database';
 import { TypeImage } from '../../constants/Image';
 
 const getRandomBackground = async (
-  request: Request,
+  _: Request,
   response: Response<ArrayBuffer | SharedArrayBuffer | Object>
 ) => {
   try {
-    const { limit } = request.query;
-    const size = Number(limit) || 1;
+    const size = 1;
 
     const connection = await mongoConnection('anibook');
     const randomRow = await connection
