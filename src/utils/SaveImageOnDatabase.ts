@@ -1,6 +1,5 @@
-import { TypeImage } from 'anibook';
+import { TypeImage, createImageObject as createImage } from 'anibook';
 import { mongoConnection } from '../database';
-import createImage from './CreateImage';
 
 const saveImages = async (
   folder: string,

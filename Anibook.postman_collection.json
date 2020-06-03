@@ -450,7 +450,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste12\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 1233\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste2\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste12\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 1233\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste21\",\n                \"name\": \"teste2\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1900,7 +1900,7 @@
 	],
 	"variable": [
 		{
-			"id": "b17abcd8-6e2c-4a07-a660-5302f5b84aef",
+			"id": "bba79d9e-67fc-4e2d-83d2-78a3e6f94e6f",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"

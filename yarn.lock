@@ -846,12 +846,17 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-anibook@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/anibook/-/anibook-1.1.0.tgz#fa06e47ecf254f58d97b3b240b7107a8c563c80e"
-  integrity sha512-3xX5VXokSpKo/WGCGKHZxiINdDH0BAVzvYaxMJqS14O+GPKwoHP85AcYrcWK8xIAkxqKPtr3NWDsvenaTUefBg==
+anibook@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/anibook/-/anibook-1.2.1.tgz#1922f789cb5f5e493bcf7d1271be6275e9b487da"
+  integrity sha512-3NduVXSu5dKiDs9bmUzurZvWHWyR8Mg/lW6apb73QZCBRAB+cGCaslZm9TIhiF+l0Arc4a5k4nSWbPxJrvJQyQ==
   dependencies:
+    "@types/jest" "^25.2.3"
+    "@types/multer" "^1.4.3"
     "@types/node" "*"
+    fs "^0.0.1-security"
+    jest "26.0.1"
+    multer "^1.4.2"
 
 ansi-align@^3.0.0:
   version "3.0.0"
@@ -2258,6 +2263,11 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+  integrity sha1-invTcYa23d84E/I4WLV+yq9eQdQ=
+
 fsevents@^2.1.2, fsevents@~2.1.2:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.1.3.tgz#fb738703ae8d2f9fe900c33836ddebee8b97f23e"
@@ -3218,7 +3228,7 @@ jest-worker@^26.0.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jest@^26.0.1:
+jest@26.0.1, jest@^26.0.1:
   version "26.0.1"
   resolved "https://registry.yarnpkg.com/jest/-/jest-26.0.1.tgz#5c51a2e58dff7525b65f169721767173bf832694"
   integrity sha512-29Q54kn5Bm7ZGKIuH2JRmnKl85YRigp0o0asTc6Sb6l2ch1DCXIeZTLLFy9ultJvhkTqbswF5DEx4+RlkmCxWg==
