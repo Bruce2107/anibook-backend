@@ -846,6 +846,13 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+anibook@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/anibook/-/anibook-1.1.0.tgz#fa06e47ecf254f58d97b3b240b7107a8c563c80e"
+  integrity sha512-3xX5VXokSpKo/WGCGKHZxiINdDH0BAVzvYaxMJqS14O+GPKwoHP85AcYrcWK8xIAkxqKPtr3NWDsvenaTUefBg==
+  dependencies:
+    "@types/node" "*"
+
 ansi-align@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-3.0.0.tgz#b536b371cf687caaef236c18d3e21fe3797467cb"
