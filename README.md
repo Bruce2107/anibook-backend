@@ -61,3 +61,6 @@ db.createCollection("users")
 #### _Dúvidas_
 
 Para qualquer dúvida entre em contato via [Twitter](https://twitter.com/Bruce2107).
+
+# License
+[MIT](https://github.com/Bruce2107/anibook-backend/blob/development/LICENSE)
