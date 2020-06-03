@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   },
 });
 
-export const upload = multer({ storage });
+const upload = multer({ storage });
 
 export const fileUpload = upload.fields([
   { name: 'card', maxCount: 1 },

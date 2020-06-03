@@ -2,7 +2,6 @@
 
 declare module 'webp-converter' {
   import webp from 'webp-converter';
-
   /**
    *
    * @param oldPath The path of file to be converted

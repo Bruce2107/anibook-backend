@@ -1,4 +1,4 @@
-/// <reference types="node" />
+/// <reference types="typescript" />
 
 declare module 'anibook' {
   // Gerenal

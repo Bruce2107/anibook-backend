@@ -6,9 +6,9 @@
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
-    "declaration": false,
+    "declaration": true,
 
-    "composite": false,
+    "composite": true,
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -23,9 +23,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "esModuleInterop": true,
-    "rootDir": "src",
-    "typeRoots": ["./src/@types","node_modules/@types"]
+    "rootDir": "src"
   },
-  "exclude": ["node_modules","./src/@types"],
+  "exclude": ["node_modules"],
   "include": ["./src/**/*.ts"]
 }
