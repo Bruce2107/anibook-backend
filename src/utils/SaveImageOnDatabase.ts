@@ -1,12 +1,7 @@
-import { TypeImage, createImageObject as createImage } from 'anibook';
+import { TypeImage } from 'anibook';
 import { mongoConnection } from '../database';
-import { x2Webp } from './ConverteImage';
+import MakeAConvertedImage from './MakeACovertedImage';
 
-function sleep(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
 const saveImages = async (
   folder: string,
   file?: Express.Multer.File,
@@ -14,14 +9,7 @@ const saveImages = async (
 ) => {
   const connection = await mongoConnection('anibook');
   if (file) {
-    await x2Webp(file);
-    await sleep(100);
-    const image = createImage(
-      `${file.mimetype.split('/')[0]}/webp`,
-      folder,
-      `${file.originalname.split('.')[0]}.webp`,
-      `${file.path.split('.')[0]}.webp`
-    );
+    const image = await MakeAConvertedImage(folder, file);
     const result = await connection
       .collection<TypeImage>('images')
       .insertOne(image);
@@ -30,16 +18,8 @@ const saveImages = async (
   if (files) {
     const images: Array<TypeImage> = [];
     for await (let file of files) {
-      await x2Webp(file);
-      await sleep(100);
-      images.push(
-        createImage(
-          `${file.mimetype.split('/')[0]}/webp`,
-          folder,
-          `${file.originalname.split('.')[0]}.webp`,
-          `${file.path.split('.')[0]}.webp`
-        )
-      );
+      const image = await MakeAConvertedImage(folder, file);
+      images.push(image);
     }
     const result = await connection
       .collection<TypeImage>('images')
