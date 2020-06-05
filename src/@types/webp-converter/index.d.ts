@@ -7,7 +7,7 @@ declare module 'webp-converter' {
    * @param oldPath The path of file to be converted
    * @param newPath The path of new file with .webp extension
    * @param options Options for conversion
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function cwebp(
     oldPath: string,
@@ -21,7 +21,7 @@ declare module 'webp-converter' {
    * @param oldPath The path of file to be converted (.webp)
    * @param newPath The path of file with another extension
    * @param options Options for conversion
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function dwebp(
     oldPath: string,
@@ -35,7 +35,7 @@ declare module 'webp-converter' {
    * @param oldPath The path of file to be converted (.gif)
    * @param newPath The path of file with .webp extension
    * @param options Options for conversion
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function gif2webp(
     oldPath: string,
@@ -50,7 +50,7 @@ declare module 'webp-converter' {
    * @param newPath The path of file with another extension
    * @param profilePath The path of options
    * @param options For ICC: icc, For XMP metadata: xmp, For EXIF metadata: exif
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function webpmux_add(
     oldPath: string,
@@ -65,7 +65,7 @@ declare module 'webp-converter' {
    * @param oldPath The path of file to be converted (.webp)
    * @param newPath The path of file with (.icc | .xmp | .exif) extension
    * @param options For ICC: icc, For XMP metadata: xmp, For EXIF metadata: exif
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function webpmux_extract(
     oldPath: string,
@@ -79,7 +79,7 @@ declare module 'webp-converter' {
    * @param oldPath The path of file to be converted (.webp)
    * @param newPath The path of file with (.webp) extension
    * @param options For ICC: icc, For XMP metadata: xmp, For EXIF metadata: exif
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function webpmux_strip(
     oldPath: string,
@@ -98,7 +98,7 @@ declare module 'webp-converter' {
    * @param newPath The path of animation
    * @param loop Loop the frames n number of times. 0 indicates the frames should loop forever. Valid range is 0 to 65535 [Default: 0 (infinite)].
    * @param bgcolor Background color of the canvas. Where: A, R, G and B are integers in the range 0 to 255 specifying the Alpha, Red, Green and Blue component values respectively [Default: 255,255,255,255].
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function webpmux_animate(
     FrameOptions: Array<string>,
@@ -113,7 +113,7 @@ declare module 'webp-converter' {
    * @param oldPath The path of file to be converted (.webp)
    * @param newPath The path of file with (.webp) extension
    * @param frame Number of the frame
-   * @param func Function that will return 100 for success or 100 for fails
+   * @param func Function that will return 100 for success or 101 for fails
    */
   export function webpmux_getframe(
     oldPath: string,
