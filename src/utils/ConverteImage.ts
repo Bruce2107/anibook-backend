@@ -11,5 +11,6 @@ export async function x2Webp(file: Express.Multer.File) {
     ) {});
     fileStatus = 100;
   }
+
   return fileStatus;
 }
