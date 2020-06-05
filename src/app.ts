@@ -7,6 +7,7 @@ import imageRoutes from './routes/image';
 import mangaRoutes from './routes/manga';
 import tokenRoutes from './routes/token';
 import defaultRoutes from './routes/defualt';
+import mixedRoutes from './routes/mixed';
 
 class App {
   public express: express.Application;
@@ -20,7 +21,7 @@ class App {
     this.express.use(express.json());
     this.express.use(cors());
     this.express.use(passport.initialize());
-    passport.use(passportMiddleware)
+    passport.use(passportMiddleware);
   }
   private routes() {
     this.express.use(animeRoutes);
@@ -28,6 +29,7 @@ class App {
     this.express.use(mangaRoutes);
     this.express.use(tokenRoutes);
     this.express.use(defaultRoutes);
+    this.express.use(mixedRoutes);
   }
 }
 

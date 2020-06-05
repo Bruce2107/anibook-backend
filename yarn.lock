@@ -846,10 +846,10 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-anibook@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/anibook/-/anibook-1.2.1.tgz#1922f789cb5f5e493bcf7d1271be6275e9b487da"
-  integrity sha512-3NduVXSu5dKiDs9bmUzurZvWHWyR8Mg/lW6apb73QZCBRAB+cGCaslZm9TIhiF+l0Arc4a5k4nSWbPxJrvJQyQ==
+anibook@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/anibook/-/anibook-1.3.0.tgz#5e58c3c9d5f24768f594d96c7dbaf2db0176c5c8"
+  integrity sha512-zFxUhoy3/4I8DMCAmCHzslP1q02S+O2WC1TUG9cTOfkAyzmkLcB+mOfBOJEDJ4c4NSjQ3XPpWMY5B+lge0H1gg==
   dependencies:
     "@types/jest" "^25.2.3"
     "@types/multer" "^1.4.3"
