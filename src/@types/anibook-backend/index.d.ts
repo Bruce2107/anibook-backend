@@ -13,3 +13,8 @@ export interface IImage {
   getBackground(request: Request, response: Response): Promise<Response>;
   getImage(request: Request, response: Response): Promise<Response>;
 }
+
+export interface IToken {
+  createUser(request: Request, response: Response): Promise<Response>;
+  getToken(request: Request, response: Response): Promise<Response>;
+}

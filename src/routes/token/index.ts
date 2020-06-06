@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import createUser from '../../controller/token/CreateUser';
-import getToken from '../../controller/token/GetToken';
+import Token from '../../controller/token';
 
 const routes = Router();
 
-routes.get('/token/:nickname',getToken);
+routes.get('/token/:nickname', Token.getToken);
 
-routes.post('/token/user', createUser);
+routes.post('/token/user', Token.createUser);
 
 export default routes;
