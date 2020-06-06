@@ -1,16 +1,18 @@
 import { Request, Response } from 'express';
 import { Dados } from 'anibook';
-import getAll from '../utils/GetAllAnimesOrManga';
+import getRandomAnimeOrManga from '../utils/GetAllAnimesOrManga';
 
-async function getAllAnimes<T>(
+async function getAll<T>(
   request: Request,
   response: Response
 ): Promise<Response<Array<T>>> {
   try {
     const { limit } = request.query;
+    
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
-    const result = await getAll<Dados<T>>(limit as string, table);
+    const result = await getRandomAnimeOrManga<Dados<T>>(limit as string, table);
 
     return response
       .status(result.status)
@@ -20,4 +22,4 @@ async function getAllAnimes<T>(
   }
 }
 
-export default getAllAnimes;
+export default getAll;

@@ -11,6 +11,8 @@ async function updateImageField(
     const files = request.files as {
       [fieldname: string]: Express.Multer.File[];
     };
+
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
     const status = await update(name, folder as string, files, table);

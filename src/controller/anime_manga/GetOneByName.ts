@@ -8,6 +8,8 @@ async function GetOneByName<T>(
 ): Promise<Response<T>> {
   try {
     const { name } = request.params;
+
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
     const result = await getByName<Dados<T>>(name, table);

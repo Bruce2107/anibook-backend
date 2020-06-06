@@ -8,6 +8,8 @@ async function getCardInformtionsByName(
 ): Promise<Response<Card>> {
   try {
     const { name } = request.params;
+    
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
     const result = await getCardInfo<Card>(name, table);

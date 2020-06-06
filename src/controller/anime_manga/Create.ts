@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { Data } from 'anibook';
-import create from '../utils/CreateAnimeOrManga';
+import createAnimeOrManga from '../utils/CreateAnimeOrManga';
 
-async function createAnime<T extends Data>(
+async function create<T extends Data>(
   request: Request,
   response: Response
 ): Promise<Response> {
@@ -11,8 +11,9 @@ async function createAnime<T extends Data>(
     const files = request.files as {
       [fieldname: string]: Express.Multer.File[];
     };
+    // Get the database table from path request
     const table = request.path.split('/')[1];
-    const status = await create(
+    const status = await createAnimeOrManga(
       request.query.folder as string,
       dados,
       files,
@@ -24,4 +25,4 @@ async function createAnime<T extends Data>(
   }
 }
 
-export default createAnime;
+export default create;

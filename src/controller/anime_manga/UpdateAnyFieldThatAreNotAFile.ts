@@ -9,6 +9,8 @@ async function updateAnyFieldThatAreNotAFile<T extends Anime | Manga>(
   try {
     const { dados }: Dados<T> = request.body;
     const { name } = request.params;
+
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
     const status = await update(name, dados, table);

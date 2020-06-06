@@ -235,7 +235,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"Teste2\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"Teste2121\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -254,7 +254,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/animes?folder=highscoregirl",
+									"raw": "{{url}}/animes?folder=highscoregirl1",
 									"host": [
 										"{{url}}"
 									],
@@ -264,7 +264,7 @@
 									"query": [
 										{
 											"key": "folder",
-											"value": "highscoregirl"
+											"value": "highscoregirl1"
 										}
 									]
 								},
@@ -631,17 +631,15 @@
 											"key": "images",
 											"type": "file",
 											"src": [
-												"haruo.png",
 												"hiscoregirl.jpg",
 												"HSGirlThumb-696x392.jpg",
-												"maxresdefault.jpg",
-												"oono.jpg"
+												"maxresdefault.jpg"
 											]
 										},
 										{
 											"key": "card",
 											"type": "file",
-											"src": "oono.jpg"
+											"src": "haruo.png"
 										}
 									]
 								},
@@ -1874,6 +1872,61 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Mixed",
+			"item": [
+				{
+					"name": "GetCards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/mixed/card/random?limit=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mixed",
+								"card",
+								"random"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRandom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/mixed/random?limit=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mixed",
+								"random"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -1900,7 +1953,7 @@
 	],
 	"variable": [
 		{
-			"id": "bba79d9e-67fc-4e2d-83d2-78a3e6f94e6f",
+			"id": "51419c4e-548e-4d30-9f9d-8ab78a9641ac",
 			"key": "url",
 			"value": "http://localhost:4000",
 			"type": "string"

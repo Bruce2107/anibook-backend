@@ -8,6 +8,8 @@ async function GetRandomCardInformations(
 ): Promise<Response<Array<Card>>> {
   try {
     const { limit } = request.query;
+
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
     const result = await getRandomCard<Card>(limit as string, table);

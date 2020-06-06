@@ -3,7 +3,7 @@ import authenticate from '../../middleware/authenticate';
 import { fileUpload } from '../../middleware/upload';
 import create from '../../controller/anime_manga/Create';
 import _delete from '../../controller/anime_manga/Delete';
-import getAll from '../../controller/anime_manga/GetAll';
+import getRandom from '../../controller/anime_manga/GetRandom';
 import getByName from '../../controller/anime_manga/GetOneByName';
 import getCard from '../../controller/anime_manga/GetCardByName';
 import getRandomCard from '../../controller/anime_manga/GetRandomCard';
@@ -12,7 +12,7 @@ import updateImageField from '../../controller/anime_manga/UpdateImageField';
 
 const routes = Router();
 
-routes.get('/animes', getAll);
+routes.get('/animes', getRandom);
 routes.get('/animes/:name', getByName);
 routes.get('/animes/card/random', getRandomCard);
 routes.get('/animes/card/:name', getCard);

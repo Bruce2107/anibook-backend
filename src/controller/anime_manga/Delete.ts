@@ -1,19 +1,21 @@
 import { Request, Response } from 'express';
-import _delete from '../utils/DeleteAnimeOrManga';
+import deleteAnimeOrManga from '../utils/DeleteAnimeOrManga';
 
-async function deleteAnime(
+async function _delete(
   request: Request,
   response: Response
 ): Promise<Response> {
   try {
     const { name } = request.params;
+
+    // Get the database table from path request
     const table = request.path.split('/')[1];
 
-    const status = await _delete(name, table);
+    const status = await deleteAnimeOrManga(name, table);
     return response.sendStatus(status);
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }
 }
 
-export default deleteAnime;
+export default _delete;
