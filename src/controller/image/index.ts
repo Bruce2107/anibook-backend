@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Iimage from './Image';
+import { IImage } from '../../@types/anibook-backend';
 import saveImage from '../../utils/SaveImageOnDatabase';
 import {
   _delete,
@@ -7,7 +7,7 @@ import {
   getBackground as getBackgroundDatabase,
 } from '../../database/image';
 
-class _Image implements Iimage {
+class _Image implements IImage {
   async createImage(request: Request, response: Response): Promise<Response> {
     try {
       const queryFolder = request.query.folder as string;
