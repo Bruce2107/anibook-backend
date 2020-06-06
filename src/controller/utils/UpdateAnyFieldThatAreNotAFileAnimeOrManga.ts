@@ -5,7 +5,7 @@ import {
   isManga,
   searchObjectInArray as search,
 } from 'anibook';
-import { alreadyExists, getOne, update } from './database/Methods';
+import { alreadyExists, getOne, update } from '../../database/anime_manga';
 
 async function updateAnyFieldThatAreNotAFile<T extends Anime | Manga>(
   name: string,

@@ -1,5 +1,5 @@
 import { QueryResult } from 'pg';
-import { pool } from '../../../database';
+import { pool } from '../';
 
 export async function alreadyExists(
   table: string,

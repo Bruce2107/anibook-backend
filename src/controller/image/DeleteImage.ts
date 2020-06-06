@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { TypeImage } from 'anibook';
-import { mongoConnection } from '../../database';
+import { _delete } from '../../database/image';
 
 const deleteImage = async (
   request: Request,
@@ -9,12 +8,9 @@ const deleteImage = async (
   try {
     const { folder, name } = request.params;
 
-    const connection = await mongoConnection('anibook');
-    const result = await connection
-      .collection<TypeImage>('images')
-      .findOneAndDelete({ folder, name });
-
-    return result.value ? response.sendStatus(204) : response.sendStatus(404);
+    return (await _delete(folder, name))
+      ? response.sendStatus(204)
+      : response.sendStatus(404);
   } catch (error) {
     return response.status(400).send({ error: error.stack });
   }

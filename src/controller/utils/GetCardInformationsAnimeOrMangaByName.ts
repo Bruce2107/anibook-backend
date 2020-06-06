@@ -1,6 +1,6 @@
 import { GetResponse } from 'anibook';
 import { CardFields } from '../../constants/Card';
-import { getOne } from './database/Methods';
+import { getOne } from '../../database/anime_manga';
 
 async function getCardInformationsByName<T>(
   name: string,

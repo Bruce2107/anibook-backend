@@ -1,6 +1,6 @@
 import { GetResponse } from 'anibook';
 import { CardFields } from '../../constants/Card';
-import { getRandom } from './database/Methods';
+import { getRandom } from '../../database/anime_manga';
 
 async function getRandomCard<T>(
   limit: string,

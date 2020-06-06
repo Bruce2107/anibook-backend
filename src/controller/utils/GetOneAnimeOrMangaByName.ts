@@ -1,5 +1,5 @@
 import { GetResponse } from 'anibook';
-import { getOne } from './database/Methods';
+import { getOne } from '../../database/anime_manga';
 
 async function getByName<T>(
   name: string,

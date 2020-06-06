@@ -1,6 +1,6 @@
 import { Data } from 'anibook';
 import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
-import { alreadyExists, insert } from './database/Methods';
+import { alreadyExists, insert } from '../../database/anime_manga';
 
 async function create<T extends Data>(
   folder: string,

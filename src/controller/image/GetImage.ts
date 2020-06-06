@@ -1,18 +1,14 @@
 import { Request, Response } from 'express';
-import { TypeImage } from 'anibook';
-import { mongoConnection } from '../../database';
+import { get } from '../../database/image';
 
 const getImage = async (request: Request, response: Response) => {
   try {
     const { folder, name } = request.params;
 
-    const connection = await mongoConnection('anibook');
-    const result = await connection
-      .collection<TypeImage>('images')
-      .findOne({ folder, name });
-    if (result) {
-      response.contentType(result.contentType);
-      return response.send(result.image.buffer);
+    const result = await get(folder, name);
+    if (result.rowCount) {
+      response.contentType(result.rows[0].contentType);
+      return response.send(result.rows[0].image);
     }
     return response.sendStatus(404);
   } catch (error) {
