@@ -6,7 +6,6 @@ import animeRoutes from './routes/anime';
 import imageRoutes from './routes/image';
 import mangaRoutes from './routes/manga';
 import tokenRoutes from './routes/token';
-import defaultRoutes from './routes/defualt';
 import mixedRoutes from './routes/mixed';
 
 class App {
@@ -28,7 +27,6 @@ class App {
     this.express.use(imageRoutes);
     this.express.use(mangaRoutes);
     this.express.use(tokenRoutes);
-    this.express.use(defaultRoutes);
     this.express.use(mixedRoutes);
   }
 }
