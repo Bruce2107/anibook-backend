@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { User } from 'anibook';
 import createToken from '../../utils/CreateToken';
-import { mongoConnection } from '../../database';
+import { alreadyExists, insert } from '../../database/token';
 
 const createUser = async (
   request: Request,
@@ -12,18 +12,9 @@ const createUser = async (
 
     if (!email || !nickname) return response.sendStatus(422);
 
-    const connection = await mongoConnection('anibook');
+    if (await alreadyExists(email, nickname)) return response.sendStatus(409);
 
-    const dbemail = await connection
-      .collection<User>('users')
-      .findOne({ email });
-    const dbnickname = await connection
-      .collection<User>('users')
-      .findOne({ nickname });
-
-    if (dbemail || dbnickname) return response.sendStatus(409);
-
-    await connection.collection('users').insertOne({ email, nickname });
+    await insert(email, nickname);
 
     const token = createToken({ email, nickname });
 

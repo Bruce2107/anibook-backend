@@ -8,7 +8,6 @@
 
 - Yarn
 - Postgres > 9.5
-- Mongo
 
 Para desenvolvimento:
 
@@ -41,26 +40,20 @@ CREATE TABLE IF NOT EXISTS mangas (ID serial NOT NULL PRIMARY KEY, dados json NO
 
 ```
 
-- Mongo
+### **_Link público_**
 
-```sh
-use anibook
-db.createCollection("images")
-db.createCollection("users")
-```
-### ***Link público***
 - [anibook-backend](https://anibook-backend.herokuapp.com/)
 
 ### **Notas**
 
-* No projeto já existe um arquivo docker-compose, ele não cria as collection do mongo, mas copia todo o projeto para o container.
+- No projeto já existe um arquivo docker-compose.
 
-* No arquivo [Anibook.postman_collection.json](https://github.com/Bruce2107/anibook-backend/blob/development/Anibook.postman_collection.json) existem todas as rotas e como podem ser usadas, além de possuir em sua descrição um exemplo completo dos dados para o Postgres
-
+- No arquivo [Anibook.postman_collection.json](https://github.com/Bruce2107/anibook-backend/blob/development/Anibook.postman_collection.json) existem todas as rotas e como podem ser usadas, além de possuir em sua descrição um exemplo completo dos dados do tipo `anime` e `manga`
 
 #### _Dúvidas_
 
 Para qualquer dúvida entre em contato via [Twitter](https://twitter.com/Bruce2107).
 
 # License
+
 [MIT](https://github.com/Bruce2107/anibook-backend/blob/development/LICENSE)
