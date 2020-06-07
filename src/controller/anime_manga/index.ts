@@ -20,8 +20,9 @@ class Anime_Manga implements IAnime_Manga {
       const files = request.files as {
         [fieldname: string]: Express.Multer.File[];
       };
-      // Get the database table from path request
+
       const table = request.path.split('/')[1];
+
       const status = await createAnimeOrManga(
         request.query.folder as string,
         dados,
@@ -38,7 +39,6 @@ class Anime_Manga implements IAnime_Manga {
     try {
       const { name } = request.params;
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const status = await deleteAnimeOrManga(name, table);
@@ -55,7 +55,6 @@ class Anime_Manga implements IAnime_Manga {
     try {
       const { name } = request.params;
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const result = await getCardInfo<Card>(name, table);
@@ -72,7 +71,6 @@ class Anime_Manga implements IAnime_Manga {
     try {
       const { name } = request.params;
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const result = await getByName<Dados<T>>(name, table);
@@ -89,7 +87,6 @@ class Anime_Manga implements IAnime_Manga {
     try {
       const { limit } = request.query;
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const result = await getRandomAnimeOrManga<Dados<T>>(
@@ -112,7 +109,6 @@ class Anime_Manga implements IAnime_Manga {
     try {
       const { limit } = request.query;
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const result = await getRandomCard<Card>(limit as string, table);
@@ -132,7 +128,6 @@ class Anime_Manga implements IAnime_Manga {
       const { dados }: Dados<T> = request.body;
       const { name } = request.params;
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const status = await updateAnyField(name, dados, table);
@@ -153,7 +148,6 @@ class Anime_Manga implements IAnime_Manga {
         [fieldname: string]: Express.Multer.File[];
       };
 
-      // Get the database table from path request
       const table = request.path.split('/')[1];
 
       const status = await updateImages(name, folder as string, files, table);

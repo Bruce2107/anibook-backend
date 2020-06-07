@@ -1,6 +1,6 @@
 {
   "name": "anibook-backend",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Backend para a aplicação Anibook",
   "main": "index.js",
   "author": {
