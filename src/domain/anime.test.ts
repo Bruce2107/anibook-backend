@@ -19,7 +19,7 @@ describe('Anime', () => {
     expect(a.folder).toBeUndefined();
     expect(a.photo).toBe('photo.webp');
   });
-  
+
   test('should create a complete anime', () => {
     const object: IAnime = {
       comment: 'comment',
@@ -39,8 +39,8 @@ describe('Anime', () => {
       ],
     };
     const a = new Anime(object);
-    expect(a.name).toBe('anime');
-    expect(a.images).toContain('image.webp');
+    expect(a.name).toBe('name');
+    expect(a.images).toContain('images');
     expect(a.whereWatch).toBeDefined();
     expect(a.info.numberEpisodes).toBe(123);
   });
