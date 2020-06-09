@@ -1,6 +1,6 @@
 import { Link, AnimeInfo, Anime as IAnime } from 'anibook';
 
-export default class Anime {
+export default class Anime implements IAnime {
   folder?: string;
   name: string;
   photo: string;
@@ -10,7 +10,7 @@ export default class Anime {
   info: AnimeInfo;
   whereWatch?: Array<Link>;
   musics?: Array<Link>;
-  
+
   constructor({
     comment,
     name,
