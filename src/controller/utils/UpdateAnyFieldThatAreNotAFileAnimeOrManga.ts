@@ -35,7 +35,7 @@ async function updateAnyFieldThatAreNotAFile<T extends Anime | Manga>(
 
     if (dados.musics)
       dados.musics.forEach((music) => {
-        if (!search(music.url, newData.musics)) newData.musics.push(music);
+        if (newData.musics && !search(music.url, newData.musics)) newData.musics.push(music);
       });
     if (dados.whereWatch)
       dados.whereWatch.forEach((site) => {

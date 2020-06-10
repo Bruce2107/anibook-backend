@@ -19,7 +19,7 @@ async function updatePhotoOrImageField<T extends Data>(
 
     if (!data.images) data.images = [];
     images.forEach((file) => {
-      if (!(data.images.indexOf(file.originalname) >= 0)) {
+      if (data.images && !(data.images.indexOf(file.originalname) >= 0)) {
         data.images.push(file.originalname);
       }
     });

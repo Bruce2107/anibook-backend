@@ -1,8 +1,7 @@
-import { Anime as IAnime } from 'anibook';
 import Anime from '../domain/anime';
 
 export default class CreateAnime {
-  createAnime(object: IAnime): Anime {
+  createAnime(object: any): Anime {
     return new Anime(object);
   }
 }
