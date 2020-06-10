@@ -14,6 +14,7 @@ describe('Anime', () => {
         numberChapters: 12,
         numberVolumes: 1,
       },
+      whereRead: [{ language: 'asd', name: 'sad', url: 'sad' }],
     };
     const a = new Manga(object);
     expect(a.name).toBe('anime');

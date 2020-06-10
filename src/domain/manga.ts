@@ -8,7 +8,7 @@ export default class Manga implements IManga {
   name: string;
   photo: string;
   synopsis: string;
-  whereRead?: Array<Link>;
+  whereRead: Array<Link>;
 
   constructor({
     comment,
