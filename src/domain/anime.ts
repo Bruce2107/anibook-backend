@@ -1,5 +1,16 @@
 import { Link, AnimeInfo, Anime as IAnime } from 'anibook';
 
+/**
+ * @property `string` folder
+ * @property `string` name
+ * @property `string` photo
+ * @property `Array` images
+ * @property `string` synopsis
+ * @property `string` comment
+ * @property `AnimeInfo` info
+ * @property `Array` whereWatch
+ * @property `Array` musics
+ */
 export default class Anime implements IAnime {
   folder?: string;
   name: string;

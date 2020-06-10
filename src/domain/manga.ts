@@ -1,5 +1,15 @@
 import { Manga as IManga, MangaInfo, Link } from 'anibook';
 
+/**
+ * @property `string` comment
+ * @property `string` folder
+ * @property `Array` images
+ * @property `MangaInfo` info
+ * @property `string` name
+ * @property `string` photo
+ * @property `string` synopsis
+ * @property `Array` whereRead
+ */
 export default class Manga implements IManga {
   comment: string;
   folder?: string;

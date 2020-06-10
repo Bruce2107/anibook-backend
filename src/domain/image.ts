@@ -1,5 +1,11 @@
 import { TypeImage } from 'anibook';
 
+/**
+ * @property `string` contentType
+ * @property `string` folder
+ * @property `Buffer` image
+ * @property `string` name
+ */
 export default class Image implements TypeImage {
   contentType: string;
   folder: string;
