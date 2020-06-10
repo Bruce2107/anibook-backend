@@ -8,7 +8,7 @@ export default class Anime implements IAnime {
   synopsis: string;
   comment: string;
   info: AnimeInfo;
-  whereWatch?: Array<Link>;
+  whereWatch: Array<Link>;
   musics?: Array<Link>;
 
   constructor({
@@ -16,10 +16,10 @@ export default class Anime implements IAnime {
     name,
     photo,
     synopsis,
+    whereWatch,
     info,
     folder,
     images,
-    whereWatch,
     musics,
   }: IAnime) {
     this.comment = comment;

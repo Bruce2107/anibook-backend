@@ -39,3 +39,46 @@ export interface IAnime_Manga {
   ): Promise<Response>;
   updateImageFields(request: Request, response: Response): Promise<Response>;
 }
+
+export interface AnimeMangaRepository {
+  /**
+   *
+   * @param string `type` Type of data
+   * @param string `name` Name to find
+   */
+  alreadyExists(type: string, name: string): Promise<boolean>;
+  /**
+   *
+   * @param string `type` Type of data
+   * @param Array `fields` Fields of the object
+   * @param T `data` An object with the data
+   */
+  insert<T>(type: string, fields: string[], data: T): Promise<boolean>;
+  /**
+   *
+   * @param string `type` Type of data
+   * @param string `name` Name of data to be deleted
+   */
+  _delete(type: string, name: string): Promise<boolean>;
+  /**
+   *
+   * @param string `type` Type of data
+   * @param number `limit` Limit of results
+   * @param Array `fields` Fields of results
+   */
+  getRandom<T>(type: string, limit: number, fields: string[]): Promise;
+  /**
+   *
+   * @param string `type` Type of data
+   * @param string `name` Name to find
+   * @param Array `fields` Fields of results
+   */
+  getOne<T>(type: string, name: string, fields: string[]): Promise;
+  /**
+   *
+   * @param string `type` Type of data
+   * @param string `name` Name to find
+   * @param T `newData` New values
+   */
+  update<T>(type: string, name: string, newData: T): Promise;
+}

@@ -13,6 +13,7 @@ describe('Anime', () => {
         numberEpisodes: 123,
         status: 'status',
       },
+      whereWatch: [{language: 'sda',name: 'name',url: 'url'}]
     };
     const a = new Anime(object);
     expect(a.name).toBe('anime');
