@@ -1,8 +1,8 @@
 import pgp from 'pg-promise';
 import { QueryResult } from 'pg';
-import ImageRepository from '../../../usecase/port/ImageRepository';
 import { pool, promisePool } from '../../../database';
 import Image from '../../../domain/image';
+import ImageRepository from '../../../usecase/port/ImageRepository';
 
 export default class DatabaseImage implements ImageRepository {
 

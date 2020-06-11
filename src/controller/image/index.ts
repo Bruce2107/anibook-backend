@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import ImageControllerRepository from '../../usecase/port/ImageControllerRepository';
 import saveImage from '../../utils/SaveImageOnDatabase';
+import ImageControllerRepository from '../../usecase/port/ImageControllerRepository';
 import ImageAdapter from '../../adapter/image/repository/DatabaseImage';
 
 export default class ImageController implements ImageControllerRepository {

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import Mixed from '../../controller/mixed';
+import MixedController from '../../controller/mixed';
 
 const routes = Router();
-
-routes.get('/mixed/card/random', Mixed.getRandomCard);
-routes.get('/mixed/random', Mixed.getRandom);
+const MC = new MixedController();
+routes.get('/mixed/card/random', MC.getRandomCard);
+routes.get('/mixed/random', MC.getRandom);
 
 export default routes;

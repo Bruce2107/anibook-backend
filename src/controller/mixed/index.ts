@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
-import { Data, mergeArray, limits as getLimit, Card } from 'anibook';
-import { IMixed } from '../../@types/anibook-backend';
-import getRandomData from '../utils/GetAllAnimesOrManga';
-import getRandomCard from '../utils/GetRandomAnimeOrMangaCard';
-class Mixed implements IMixed {
-  async getRandom<T extends Data>(
-    request: Request,
-    response: Response
-  ): Promise<Response> {
+import { mergeArray, limits as getLimit } from 'anibook';
+import Card from '../../domain/card';
+import MixedUtils from '../utils/AnimeManga';
+import MixedControllerRepository from '../../usecase/port/MixedControllerRepository';
+
+export default class MixedController implements MixedControllerRepository {
+  async getRandom(request: Request, response: Response): Promise<Response> {
+    const animeUtils = new MixedUtils('animes');
+    const mangaUtils = new MixedUtils('mangas');
     try {
       const { limit } = request.query;
 
       const { limitAnime, limitManga } = getLimit(Number(limit as string));
 
-      const resultAnime = await getRandomData<T>(String(limitAnime), 'animes');
-      const resultManga = await getRandomData<T>(String(limitManga), 'mangas');
+      const resultAnime = await animeUtils.getRandom(String(limitAnime));
+      const resultManga = await mangaUtils.getRandom(String(limitManga));
       const resultMerged = mergeArray(
         resultAnime.data as [],
         resultManga.data as []
@@ -27,21 +27,17 @@ class Mixed implements IMixed {
       return response.status(400).send({ error: error.stack });
     }
   }
-  
+
   async getRandomCard(request: Request, response: Response): Promise<Response> {
+    const animeUtils = new MixedUtils('animes');
+    const mangaUtils = new MixedUtils('mangas');
     try {
       const { limit } = request.query;
 
       const { limitAnime, limitManga } = getLimit(Number(limit as string));
 
-      const resultAnime = await getRandomCard<Card>(
-        String(limitAnime),
-        'animes'
-      );
-      const resultManga = await getRandomCard<Card>(
-        String(limitManga),
-        'mangas'
-      );
+      const resultAnime = await animeUtils.getRandomCards(String(limitAnime));
+      const resultManga = await mangaUtils.getRandomCards(String(limitManga));
       const resultMerged = mergeArray(
         resultAnime.data as Card[],
         resultManga.data as Card[]
@@ -55,5 +51,3 @@ class Mixed implements IMixed {
     }
   }
 }
-
-export default new Mixed();
