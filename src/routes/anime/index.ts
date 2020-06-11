@@ -6,8 +6,8 @@ import AnimeController from '../../controller/anime';
 const routes = Router();
 const AC = new AnimeController();
 
-routes.get('/animes', AC.getRandomAnimes);
-routes.get('/animes/:name', AC.getAnimeByName);
+routes.get('/animes', AC.getRandom);
+routes.get('/animes/:name', AC.getByName);
 routes.get('/animes/card/random', AC.getRandomCards);
 routes.get('/animes/card/:name', AC.getCardByName);
 

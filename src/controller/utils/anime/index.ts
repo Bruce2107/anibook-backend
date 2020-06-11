@@ -3,9 +3,9 @@ import AnimeAdapter from '../../../adapter/anime/repository/DatabaseAnime';
 import Anime from '../../../domain/anime';
 import updatePhotoOrImageField from '../../../utils/UpdatePhotoOrImageField';
 import { CardFields } from '../../../constants/Card';
-import AnimeUtilsRepository from '../../../usecase/port/AnimeUtilsRepository';
+import AnimeUtilsRepository from '../../../usecase/port/AnimeMangaUtilsRepository';
 
-export default class AnimeUtils implements AnimeUtilsRepository {
+export default class AnimeUtils implements AnimeUtilsRepository<Anime> {
   adapter: AnimeAdapter;
   constructor() {
     this.adapter = new AnimeAdapter();
@@ -35,12 +35,12 @@ export default class AnimeUtils implements AnimeUtilsRepository {
     return card ? { status: 200, data: card } : { status: 404 };
   }
 
-  async getAnime(name: string): Promise<GetResponse<Anime>> {
+  async getOne(name: string): Promise<GetResponse<Anime>> {
     const anime = await this.adapter.getOne('animes', name, ['dados']);
     return anime ? { status: 200, data: anime } : { status: 404 };
   }
 
-  async getRandomAnimes(limit: number): Promise<GetResponse<Array<Anime>>> {
+  async getRandom(limit: string): Promise<GetResponse<Array<Anime>>> {
     const animes = await this.adapter.getRandom('animes', limit, ['dados']);
     return {
       status: 200,
@@ -49,7 +49,7 @@ export default class AnimeUtils implements AnimeUtilsRepository {
     };
   }
 
-  async getRandomCards(limit: number): Promise<GetResponse<Array<Anime>>> {
+  async getRandomCards(limit: string): Promise<GetResponse<Array<Anime>>> {
     const animes = await this.adapter.getRandom('animes', limit, CardFields);
     return {
       status: 200,

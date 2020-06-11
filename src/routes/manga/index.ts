@@ -1,28 +1,25 @@
 import { Router } from 'express';
 import authenticate from '../../middleware/authenticate';
 import { fileUpload } from '../../middleware/upload';
-import Manga from '../../controller/anime_manga';
+import MangaController from '../../controller/manga';
 
 const routes = Router();
+const MC = new MangaController();
 
-routes.get('/mangas', Manga.getRandom);
-routes.get('/mangas/:name', Manga.getOneByName);
-routes.get('/mangas/card/random', Manga.getRandomCard);
-routes.get('/mangas/card/:name', Manga.getCardByName);
+routes.get('/mangas', MC.getRandom);
+routes.get('/mangas/:name', MC.getByName);
+routes.get('/mangas/card/random', MC.getRandomCards);
+routes.get('/mangas/card/:name', MC.getCardByName);
 
-routes.post('/mangas', [fileUpload, authenticate], Manga.create);
+routes.post('/mangas', [fileUpload, authenticate], MC.create);
 
 routes.patch(
   '/mangas/image/:name',
   [fileUpload, authenticate],
-  Manga.updateImageFields
+  MC.updateImageField
 );
-routes.patch(
-  '/mangas/:name',
-  authenticate,
-  Manga.updateAnyFieldThatAreNotAFile
-);
+routes.patch('/mangas/:name', authenticate, MC.updateAnyFieldThatAreNotAFile);
 
-routes.delete('/mangas/:name', authenticate, Manga._delete);
+routes.delete('/mangas/:name', authenticate, MC._delete);
 
 export default routes;

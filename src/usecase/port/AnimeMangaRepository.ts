@@ -21,12 +21,12 @@ export default interface AnimeMangaRepository<T> {
   /**
    *
    * @param string `type` Type of data
-   * @param number `limit` Limit of results
+   * @param string `limit` Limit of results
    * @param Array `fields` Fields of results
    */
   getRandom(
     type: string,
-    limit: number,
+    limit: string,
     fields: string[]
   ): Promise<Array<T>>;
   /**

@@ -1,9 +1,9 @@
-import AnimeRepository from '../../../usecase/port/AnimeMangaRepository';
-import Anime from '../../../domain/anime';
+import MangaRepository from '../../../usecase/port/AnimeMangaRepository';
+import Manga from '../../../domain/manga';
 import { QueryResult } from 'pg';
 import { pool } from '../../../database';
 
-export default class DatabaseAnimeRepository implements AnimeRepository<Anime> {
+export default class DatabaseMangaRepository implements MangaRepository<Manga> {
   async _delete(type: string, name: string): Promise<boolean> {
     const deleted: QueryResult = await pool.query(
       `DELETE FROM ${type} WHERE dados ->> 'name' = $1`,
@@ -24,7 +24,7 @@ export default class DatabaseAnimeRepository implements AnimeRepository<Anime> {
     type: string,
     name: string,
     fields: string[]
-  ): Promise<Anime | null> {
+  ): Promise<Manga | null> {
     const fieldsString: string = fields.join();
     const result = await pool.query(
       `SELECT ${fieldsString} FROM ${type} WHERE dados ->> 'name' = $1`,
@@ -37,16 +37,16 @@ export default class DatabaseAnimeRepository implements AnimeRepository<Anime> {
     type: string,
     limit: string,
     fields: string[]
-  ): Promise<Anime[]> {
+  ): Promise<Manga[]> {
     const fieldsString: string = fields.join();
-    const result: QueryResult<Anime> = await pool.query(
+    const result: QueryResult<Manga> = await pool.query(
       `SELECT ${fieldsString} FROM ${type} ORDER BY random () LIMIT $1`,
       [limit]
     );
     return result.rows;
   }
 
-  async insert(type: string, fields: string[], data: Anime): Promise<boolean> {
+  async insert(type: string, fields: string[], data: Manga): Promise<boolean> {
     const fieldsString: string = fields.join();
     const inserted: QueryResult = await pool.query(
       `INSERT INTO ${type} (${fieldsString}) VALUES ($1)`,
@@ -56,7 +56,7 @@ export default class DatabaseAnimeRepository implements AnimeRepository<Anime> {
     return !!inserted.rowCount;
   }
 
-  async update(type: string, name: string, newData: Anime): Promise<boolean> {
+  async update(type: string, name: string, newData: Manga): Promise<boolean> {
     const result = await pool.query(
       `UPDATE ${type} SET dados = $1 WHERE dados ->> 'name' = $2`,
       [newData, name]

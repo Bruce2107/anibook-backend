@@ -75,11 +75,11 @@ describe('InMemoryManga', () => {
     expect(result).toBeFalsy();
   });
   test('should return 2 mangas', async () => {
-    const result = await inMemoryManga.getRandom('', 2, []);
+    const result = await inMemoryManga.getRandom('', '2', []);
     expect(result.length).toBe(2);
   });
   test('should return a empty array when limit is 0', async () => {
-    const result = await inMemoryManga.getRandom('', 0, []);
+    const result = await inMemoryManga.getRandom('', '0', []);
     expect(result.length).toBe(0);
   });
   test('should insert a new manga', async () => {

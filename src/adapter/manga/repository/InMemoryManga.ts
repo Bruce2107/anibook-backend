@@ -29,20 +29,21 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
   }
   async getRandom(
     _: string,
-    limit: number,
+    limit: string,
     __: string[]
   ): Promise<Array<Manga>> {
     const mangas: Manga[] = [];
     const numbers: Array<number> = [];
+    const Nlimit = Number(limit)
     let i = 0;
-    while (i < limit) {
-      const number = Math.floor(Math.random() * limit);
+    while (i < Nlimit) {
+      const number = Math.floor(Math.random() * Nlimit);
       if (!numbers.includes(number)) {
         numbers.push(number);
         mangas.push(this.mangas[number]);
         i++;
       }
-      if (i === limit) break;
+      if (i === Nlimit) break;
     }
     return mangas;
   }

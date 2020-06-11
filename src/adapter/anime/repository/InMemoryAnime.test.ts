@@ -72,11 +72,11 @@ describe('InMemoryAnime', () => {
     expect(result).toBeFalsy();
   });
   test('should return 2 animes', async () => {
-    const result = await inMemoryAnime.getRandom('', 2, []);
+    const result = await inMemoryAnime.getRandom('', '2', []);
     expect(result.length).toBe(2);
   });
   test('should return a empty array when limit is 0', async () => {
-    const result = await inMemoryAnime.getRandom('', 0, []);
+    const result = await inMemoryAnime.getRandom('', '0', []);
     expect(result.length).toBe(0);
   });
   test('should insert a new anime', async () => {

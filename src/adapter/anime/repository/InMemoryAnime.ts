@@ -29,20 +29,21 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
   }
   async getRandom(
     _: string,
-    limit: number,
+    limit: string,
     __: string[]
   ): Promise<Array<Anime>> {
     const animes: Anime[] = [];
     const numbers: Array<number> = [];
+    const Nlimit = Number(limit)
     let i = 0;
-    while (i < limit) {
-      const number = Math.floor(Math.random() * limit);
+    while (i < Nlimit) {
+      const number = Math.floor(Math.random() * Nlimit);
       if (!numbers.includes(number)) {
         numbers.push(number);
         animes.push(this.animes[number]);
         i++;
       }
-      if (i === limit) break;
+      if (i === Nlimit) break;
     }
     return animes;
   }

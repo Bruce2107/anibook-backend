@@ -1,19 +1,20 @@
 import { Request, Response } from 'express';
-import AnimeUtils from '../utils/anime';
-import CreateAnime from '../../usecase/createAnime';
-import AnimeControllerRepository from 'src/usecase/port/AnimeMangaControllerRepository';
+import MangaUtils from '../utils/AnimeManga';
+import CreateManga from '../../usecase/createManga';
+import MangaControllerRepository from 'src/usecase/port/AnimeMangaControllerRepository';
+import Manga from '../../domain/manga';
 
-export default class AnimeController implements AnimeControllerRepository {
+export default class AnimeController implements MangaControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
-    const animeUtils: AnimeUtils = new AnimeUtils();
-    const createAnime: CreateAnime = new CreateAnime();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const createManga = new CreateManga().createManga;
     try {
-      const dados = createAnime.createAnime(JSON.parse(request.body.dados));
+      const dados = createManga(JSON.parse(request.body.dados));
       const files = request.files as {
         [fieldname: string]: Express.Multer.File[];
       };
       const folder = request.query.folder as string;
-      const status = await animeUtils.create(folder, dados, files);
+      const status = await mangaUtils.create(folder, dados, files);
       return response.sendStatus(status);
     } catch (error) {
       return response.status(400).send({ error: error.stack });
@@ -21,11 +22,11 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async _delete(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
     try {
       const { name } = request.params;
 
-      const status = await animeUtils._delete(name);
+      const status = await mangaUtils._delete(name);
       return response.sendStatus(status);
     } catch (error) {
       return response.status(400).send({ error: error.stack });
@@ -33,11 +34,11 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getCardByName(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
     try {
       const { name } = request.params;
 
-      const result = await animeUtils.getCard(name);
+      const result = await mangaUtils.getCard(name);
       return response.status(result.status).json({ data: result.data });
     } catch (error) {
       return response.status(400).send({ error: error.stack });
@@ -45,11 +46,11 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getByName(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
     try {
       const { name } = request.params;
 
-      const result = await animeUtils.getOne(name);
+      const result = await mangaUtils.getOne(name);
       return response.status(result.status).json({ data: result.data });
     } catch (error) {
       return response.status(400).send({ error: error.stack });
@@ -57,11 +58,11 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getRandom(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
     try {
       const { limit } = request.query;
 
-      const result = await animeUtils.getRandom(limit as string);
+      const result = await mangaUtils.getRandom(limit as string);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -74,11 +75,11 @@ export default class AnimeController implements AnimeControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const animeUtils = new AnimeUtils();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
     try {
       const { limit } = request.query;
 
-      const result = await animeUtils.getRandomCards(limit as string);
+      const result = await mangaUtils.getRandomCards(limit as string);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -91,13 +92,13 @@ export default class AnimeController implements AnimeControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const animeUtils: AnimeUtils = new AnimeUtils();
-    const createAnime: CreateAnime = new CreateAnime();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const createManga = new CreateManga().createManga;
     try {
-      const dados = createAnime.createAnime(request.body.dados);
+      const dados = createManga(request.body.dados);
       const { name } = request.params;
 
-      const status = await animeUtils.updateAnyFieldsThatAreNotAFile(
+      const status = await mangaUtils.updateAnyFieldsThatAreNotAFile(
         name,
         dados
       );
@@ -111,7 +112,7 @@ export default class AnimeController implements AnimeControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const animeUtils = new AnimeUtils();
+    const mangaUtils = new MangaUtils<Manga>('mangas');
     try {
       const { name } = request.params;
       const { folder } = request.query;
@@ -119,7 +120,7 @@ export default class AnimeController implements AnimeControllerRepository {
         [fieldname: string]: Express.Multer.File[];
       };
 
-      const status = await animeUtils.updateImageFields(
+      const status = await mangaUtils.updateImageFields(
         name,
         folder as string,
         files
