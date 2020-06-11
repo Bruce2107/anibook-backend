@@ -1,14 +1,10 @@
 import { Request, Response } from 'express';
-import { IImage } from '../../@types/anibook-backend';
+import ImageControllerRepository from '../../usecase/port/ImageControllerRepository';
 import saveImage from '../../utils/SaveImageOnDatabase';
-import {
-  _delete,
-  get,
-  getBackground as getBackgroundDatabase,
-} from '../../database/image';
+import ImageAdapter from '../../adapter/image/repository/DatabaseImage';
 
-class _Image implements IImage {
-  async createImage(request: Request, response: Response): Promise<Response> {
+export default class ImageController implements ImageControllerRepository {
+  async insertImage(request: Request, response: Response): Promise<Response> {
     try {
       const queryFolder = request.query.folder as string;
       const files = request.files as {
@@ -28,10 +24,11 @@ class _Image implements IImage {
   }
 
   async deleteImage(request: Request, response: Response): Promise<Response> {
+    const imageAdapter = new ImageAdapter();
     try {
       const { folder, name } = request.params;
 
-      return (await _delete(folder, name))
+      return (await imageAdapter._delete(folder, name))
         ? response.sendStatus(204)
         : response.sendStatus(404);
     } catch (error) {
@@ -40,24 +37,26 @@ class _Image implements IImage {
   }
 
   async getBackground(_: Request, response: Response): Promise<Response> {
+    const imageAdapter = new ImageAdapter();
     try {
-      const randomRow = await getBackgroundDatabase();
-      if (!randomRow.rowCount) return response.sendStatus(404);
-      response.contentType(randomRow.rows[0].contentType);
-      return response.send(randomRow.rows[0].image);
+      const randomRow = await imageAdapter.getBackground();
+      if (!randomRow) return response.sendStatus(404);
+      response.contentType(randomRow.contentType);
+      return response.send(randomRow.image);
     } catch (error) {
       return response.status(400).send({ error: error.stack });
     }
   }
 
   async getImage(request: Request, response: Response): Promise<Response> {
+    const imageAdapter = new ImageAdapter();
     try {
       const { folder, name } = request.params;
 
-      const result = await get(folder, name);
-      if (result.rowCount) {
-        response.contentType(result.rows[0].contentType);
-        return response.send(result.rows[0].image);
+      const result = await imageAdapter.getOne(folder, name);
+      if (result) {
+        response.contentType(result.contentType);
+        return response.send(result.image);
       }
       return response.sendStatus(404);
     } catch (error) {
@@ -65,5 +64,3 @@ class _Image implements IImage {
     }
   }
 }
-
-export default new _Image();

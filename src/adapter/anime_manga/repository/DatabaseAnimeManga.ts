@@ -9,7 +9,7 @@ export default class DatabaseAnimeMangaRepository<T>
       `DELETE FROM ${type} WHERE dados ->> 'name' = $1`,
       [name]
     );
-    return !!deleted;
+    return !!deleted.rowCount;
   }
 
   async alreadyExists(type: string, name: string): Promise<boolean> {

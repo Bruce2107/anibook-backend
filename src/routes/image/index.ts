@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { fileUpload } from '../../middleware/upload';
-import _Image from '../../controller/image';
+import ImageController from '../../controller/image/index';
+
 const routes = Router();
+const IC = new ImageController();
 
-routes.get('/image/:folder/:name', _Image.getImage);
-routes.get('/image/background', _Image.getBackground);
+routes.get('/image/:folder/:name',IC.getImage);
+routes.get('/image/background', IC.getBackground);
 
-routes.post('/image', fileUpload, _Image.createImage);
+routes.post('/image', fileUpload, IC.insertImage);
 
-routes.delete('/image/:folder/:name', _Image.deleteImage);
+routes.delete('/image/:folder/:name', IC.deleteImage);
 export default routes;
