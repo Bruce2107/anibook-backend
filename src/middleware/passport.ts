@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { User } from 'anibook';
-import { get } from '../database/token';
+import TokenAdapter from '../adapter/token/repository/DatabaseToken';
 
 dotenv.config();
 
 const token = process.env.TOKEN || 'anibook';
-
+const tokenAdapter = new TokenAdapter();
 const options: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: token,
@@ -14,7 +14,7 @@ const options: StrategyOptions = {
 
 export default new Strategy(options, async (paylaod: User, done) => {
   try {
-    const user = await get(paylaod.nickname);
+    const user = await tokenAdapter.getOne(paylaod.nickname);
     if (user) return done(null, user);
     return done(null, false);
   } catch (error) {

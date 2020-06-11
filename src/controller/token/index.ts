@@ -1,19 +1,20 @@
 import { Request, Response } from 'express';
-import { IToken } from '../../@types/anibook-backend';
 import { User } from 'anibook';
-import { alreadyExists, insert, get } from '../../database/token';
 import createToken from '../../utils/CreateToken';
+import TokenControllerRepository from '../../usecase/port/TokenControllerRepository';
+import TokenAdapter from '../../adapter/token/repository/DatabaseToken';
 
-class Token implements IToken {
+export default class TokenController implements TokenControllerRepository {
   async createUser(request: Request, response: Response): Promise<Response> {
+    const tokenAdapter = new TokenAdapter();
     try {
       const { email, nickname } = request.body as User;
 
       if (!email || !nickname) return response.sendStatus(422);
 
-      if (await alreadyExists(email, nickname)) return response.sendStatus(409);
+      if (await tokenAdapter.alreadyExists(email, nickname)) return response.sendStatus(409);
 
-      await insert(email, nickname);
+      await tokenAdapter.insertOne(email, nickname);
 
       const token = createToken({ email, nickname });
 
@@ -22,18 +23,19 @@ class Token implements IToken {
       return response.status(400).json(error);
     }
   }
-  
+
   async getToken(request: Request, response: Response): Promise<Response> {
+    const tokenAdapter = new TokenAdapter();
     try {
       const { nickname } = request.params;
 
-      const user = await get(nickname);
+      const user = await tokenAdapter.getOne(nickname);
 
-      if (!user.rowCount) return response.sendStatus(404);
+      if (!user) return response.sendStatus(404);
 
       const token = createToken({
-        email: user.rows[0].email,
-        nickname: user.rows[0].nickname,
+        email: user.email,
+        nickname: user.nickname,
       });
 
       return response.status(200).send({ token });
@@ -42,5 +44,3 @@ class Token implements IToken {
     }
   }
 }
-
-export default new Token();
