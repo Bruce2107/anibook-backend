@@ -37,7 +37,7 @@ declare module 'webp-converter' {
    * @param options Options for conversion
    * @param func Function that will return 100 for success or 101 for fails
    */
-  export function gif2webp(
+  export function gwebp(
     oldPath: string,
     newPath: string,
     options: string,

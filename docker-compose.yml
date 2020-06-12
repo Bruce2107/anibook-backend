@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-  mongodb:
-    container_name: mongo_anibook
-    image: mongo
-    environment:
-      - MONGO_INITDB_DATABASE=anibook
-      - MONGO_INITDB_ROOT_USERNAME=anibook
-      - MONGO_INITDB_ROOT_PASSWORD=anibook
-    ports:
-      - '27017:27017'
   postgresdb:
     container_name: postgres_anibook
     image: postgres:12
@@ -37,7 +28,6 @@ services:
       DB_HOST_POSTGRES: postgres_anibook
       DB_NAME_POSTGRES: anibook
       DB_PORT_POSTGRES: 5432
-      DB_URL_MONGO: mongodb://anibook:anibook@mongo_anibook:27017
+      TOKEN: anibook
     depends_on:
-      - 'mongodb'
       - 'postgresdb'
