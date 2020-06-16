@@ -88,6 +88,37 @@ export default class AnimeController implements MangaControllerRepository {
     }
   }
 
+  async getSort(request: Request, response: Response): Promise<Response> {
+    const mangaUtils = new MangaUtils('mangas');
+    try {
+      const { limit, order } = request.query;
+
+      const result = await mangaUtils.getSort(
+        limit as string,
+        order as string
+      );
+      return response
+        .status(result.status)
+        .json({ data: result.data, rows: result.rows });
+    } catch (error) {
+      return response.status(400).send({ error: error.stack });
+    }
+  }
+
+  async getSortCard(request: Request, response: Response): Promise<Response> {
+    const mangaUtils = new MangaUtils('mangas');
+    try {
+      const { limit, order } = request.query;
+
+      const result = await mangaUtils.getSortCard(limit as string, order as string);
+      return response
+        .status(result.status)
+        .json({ data: result.data, rows: result.rows });
+    } catch (error) {
+      return response.status(400).send({ error: error.stack });
+    }
+  }
+
   async updateAnyFieldThatAreNotAFile(
     request: Request,
     response: Response

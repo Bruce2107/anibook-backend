@@ -7,8 +7,10 @@ const routes = Router();
 const MC = new MangaController();
 
 routes.get('/mangas', MC.getRandom);
+routes.get('/mangas/sort', MC.getSort);
 routes.get('/mangas/:name', MC.getByName);
 routes.get('/mangas/card/random', MC.getRandomCards);
+routes.get('/mangas/card/sort', MC.getSortCard);
 routes.get('/mangas/card/:name', MC.getCardByName);
 
 routes.post('/mangas', [fileUpload, authenticate], MC.create);

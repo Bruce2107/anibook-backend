@@ -19,7 +19,15 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
     for (let anime of this.animes) if (anime.name === name) return true;
     return false;
   }
-
+  async getAllSorted(
+    _: string,
+    __: string,
+    ___: string,
+    ____: string[]
+  ): Promise<Array<Anime>> {
+    const animes: Anime[] = [];
+    return animes;
+  }
   async getOne(_: string, name: string, __: string[]): Promise<Anime | null> {
     const anime = this.animes.filter((anime) => anime.name === name);
     if (anime.length > 0) {
@@ -34,7 +42,7 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
   ): Promise<Array<Anime>> {
     const animes: Anime[] = [];
     const numbers: Array<number> = [];
-    const Nlimit = Number(limit)
+    const Nlimit = Number(limit);
     let i = 0;
     while (i < Nlimit) {
       const number = Math.floor(Math.random() * Nlimit);

@@ -61,6 +61,40 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     };
   }
 
+  async getSort(
+    limit: string,
+    sortField: string
+  ): Promise<GetResponse<Array<T>>> {
+    const result = await this.adapter.getAllSorted(
+      this.type,
+      limit,
+      sortField,
+      ['dados']
+    );
+    return {
+      status: 200,
+      data: result,
+      rows: result.length,
+    };
+  }
+
+  async getSortCard(
+    limit: string,
+    sortField: string
+  ): Promise<GetResponse<Array<T>>> {
+    const result = await this.adapter.getAllSorted(
+      this.type,
+      limit,
+      sortField,
+      CardFields
+    );
+    return {
+      status: 200,
+      data: result,
+      rows: result.length,
+    };
+  }
+
   async updateAnyFieldsThatAreNotAFile(
     name: string,
     data: T

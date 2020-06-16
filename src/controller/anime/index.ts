@@ -87,6 +87,37 @@ export default class AnimeController implements AnimeControllerRepository {
     }
   }
 
+  async getSort(request: Request, response: Response): Promise<Response> {
+    const animeUtils = new AnimeUtils('animes');
+    try {
+      const { limit, order } = request.query;
+
+      const result = await animeUtils.getSort(
+        limit as string,
+        order as string
+      );
+      return response
+        .status(result.status)
+        .json({ data: result.data, rows: result.rows });
+    } catch (error) {
+      return response.status(400).send({ error: error.stack });
+    }
+  }
+
+  async getSortCard(request: Request, response: Response): Promise<Response> {
+    const animeUtils = new AnimeUtils('animes');
+    try {
+      const { limit, order } = request.query;
+
+      const result = await animeUtils.getSortCard(limit as string, order as string);
+      return response
+        .status(result.status)
+        .json({ data: result.data, rows: result.rows });
+    } catch (error) {
+      return response.status(400).send({ error: error.stack });
+    }
+  }
+  
   async updateAnyFieldThatAreNotAFile(
     request: Request,
     response: Response

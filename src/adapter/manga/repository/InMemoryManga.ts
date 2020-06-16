@@ -27,6 +27,15 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     }
     return null;
   }
+  async getAllSorted(
+    _: string,
+    __: string,
+    ___: string,
+    ____: string[]
+  ): Promise<Array<Manga>> {
+    const mangas: Manga[] = [];
+    return mangas;
+  }
   async getRandom(
     _: string,
     limit: string,
