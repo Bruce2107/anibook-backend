@@ -9,7 +9,7 @@ describe('InMemoryAnime', () => {
     animes = [];
     animes.push(
       {
-        name: 'anime1',
+        name: 'anime2',
         photo: 'photo.webp',
         synopsis: 'text',
         comment: 'text',
@@ -21,7 +21,7 @@ describe('InMemoryAnime', () => {
         whereWatch: [{ language: 'sda', name: 'name', url: 'url' }],
       },
       {
-        name: 'anime2',
+        name: 'anime1',
         photo: 'photo.webp',
         synopsis: 'text',
         comment: 'text',
@@ -159,5 +159,16 @@ describe('InMemoryAnime', () => {
     };
     const result = await inMemoryAnime.update('', 'anime2w', newAnime);
     expect(result).toBeFalsy();
+  });
+  test('should return a sorted array', async () => {
+    const result = await inMemoryAnime.getAllSorted('', '', '', ['']);
+
+    expect(result[0].name).toBe('anime1');
+  });
+  test('should return a slice sorted array', async () => {
+    const result = await inMemoryAnime.getAllSorted('', '2', '', ['']);
+
+    expect(result[0].name).toBe('anime1');
+    expect(result.length).toBe(2);
   });
 });

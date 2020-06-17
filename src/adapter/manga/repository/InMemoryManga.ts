@@ -1,5 +1,6 @@
 import MangaRepository from '../../../usecase/port/AnimeMangaRepository';
 import Manga from '../../../domain/manga';
+import SortArray from '../../../utils/SortArray';
 
 export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
   mangas: Manga[] = [];
@@ -29,11 +30,16 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
   }
   async getAllSorted(
     _: string,
-    __: string,
+    limit: string,
     ___: string,
     ____: string[]
   ): Promise<Array<Manga>> {
-    const mangas: Manga[] = [];
+    let mangas: Manga[] = this.mangas.sort(SortArray);
+
+    if (Number(limit) && Number(limit) > 0) {
+      mangas = this.mangas.slice(0, Number(limit));
+    }
+
     return mangas;
   }
   async getRandom(

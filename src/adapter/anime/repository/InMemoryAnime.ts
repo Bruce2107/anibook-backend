@@ -1,5 +1,6 @@
 import AnimeRepository from '../../../usecase/port/AnimeMangaRepository';
 import Anime from '../../../domain/anime';
+import SortArray from '../../../utils/SortArray';
 
 export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
   animes: Anime[] = [];
@@ -21,11 +22,16 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
   }
   async getAllSorted(
     _: string,
-    __: string,
+    limit: string,
     ___: string,
     ____: string[]
   ): Promise<Array<Anime>> {
-    const animes: Anime[] = [];
+    let animes: Anime[] = this.animes.sort(SortArray);
+
+    if (Number(limit) && Number(limit) > 0) {
+      animes = this.animes.slice(0, Number(limit));
+    }
+
     return animes;
   }
   async getOne(_: string, name: string, __: string[]): Promise<Anime | null> {
