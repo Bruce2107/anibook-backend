@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import authenticate from '../../middleware/authenticate';
-import { fileUpload } from '../../middleware/upload';
-import AnimeController from '../../controller/anime';
+import authenticate from '@middleware/authenticate';
+import { fileUpload } from '@middleware/upload';
+import AnimeController from '@controller/anime';
 
 const routes = Router();
 const AC = new AnimeController();

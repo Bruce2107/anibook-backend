@@ -1,5 +1,5 @@
-import MangaRepository from '../../../usecase/port/AnimeMangaRepository';
-import Manga from '../../../domain/manga';
+import MangaRepository from '@usecase/port/AnimeMangaRepository';
+import Manga from '@domain/manga';
 import SortArray from '../../../utils/SortArray';
 
 export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
@@ -49,7 +49,7 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
   ): Promise<Array<Manga>> {
     const mangas: Manga[] = [];
     const numbers: Array<number> = [];
-    const Nlimit = Number(limit)
+    const Nlimit = Number(limit);
     let i = 0;
     while (i < Nlimit) {
       const number = Math.floor(Math.random() * Nlimit);

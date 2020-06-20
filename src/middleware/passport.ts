@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { User } from 'anibook';
-import TokenAdapter from '../adapter/token/repository/DatabaseToken';
+import TokenAdapter from '@adapter/token/repository/DatabaseToken';
 
 dotenv.config();
 

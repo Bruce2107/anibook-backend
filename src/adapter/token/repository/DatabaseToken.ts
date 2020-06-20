@@ -1,7 +1,7 @@
 import { User } from 'anibook';
 import { QueryResult } from 'pg';
 import { pool } from '../../../database';
-import TokenRepository from '../../../usecase/port/TokenRepository';
+import TokenRepository from '@usecase/port/TokenRepository';
 
 export default class DatabaseToken implements TokenRepository {
   async alreadyExists(email: string, nickname: string): Promise<boolean> {

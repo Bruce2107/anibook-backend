@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import AnimeUtils from '../utils/AnimeManga';
-import CreateAnime from '../../usecase/createAnime';
-import AnimeControllerRepository from '../../usecase/port/AnimeMangaControllerRepository';
+import AnimeUtils from '@utils/AnimeManga';
+import CreateAnime from '@usecase/createAnime';
+import AnimeControllerRepository from '@usecase/port/AnimeMangaControllerRepository';
 
 export default class AnimeController implements AnimeControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
@@ -92,10 +92,7 @@ export default class AnimeController implements AnimeControllerRepository {
     try {
       const { limit, order } = request.query;
 
-      const result = await animeUtils.getSort(
-        limit as string,
-        order as string
-      );
+      const result = await animeUtils.getSort(limit as string, order as string);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -109,7 +106,10 @@ export default class AnimeController implements AnimeControllerRepository {
     try {
       const { limit, order } = request.query;
 
-      const result = await animeUtils.getSortCard(limit as string, order as string);
+      const result = await animeUtils.getSortCard(
+        limit as string,
+        order as string
+      );
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -117,7 +117,7 @@ export default class AnimeController implements AnimeControllerRepository {
       return response.status(400).send({ error: error.stack });
     }
   }
-  
+
   async updateAnyFieldThatAreNotAFile(
     request: Request,
     response: Response

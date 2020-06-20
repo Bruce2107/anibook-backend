@@ -1,5 +1,5 @@
-import AnimeRepository from '../../../usecase/port/AnimeMangaRepository';
-import Anime from '../../../domain/anime';
+import AnimeRepository from '@usecase/port/AnimeMangaRepository';
+import Anime from '@domain/anime';
 import SortArray from '../../../utils/SortArray';
 
 export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {

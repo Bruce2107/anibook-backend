@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import saveImage from '../../utils/SaveImageOnDatabase';
-import ImageControllerRepository from '../../usecase/port/ImageControllerRepository';
-import ImageAdapter from '../../adapter/image/repository/DatabaseImage';
+import saveImage from '@utils/SaveImageOnDatabase';
+import ImageControllerRepository from '@usecase/port/ImageControllerRepository';
+import ImageAdapter from '@adapter/image/repository/DatabaseImage';
 
 export default class ImageController implements ImageControllerRepository {
   async insertImage(request: Request, response: Response): Promise<Response> {

@@ -1,10 +1,10 @@
-import AnimeMangaUtilsRepository from '../../usecase/port/AnimeMangaUtilsRepository';
-import AnimeMangaAdapter from '../../adapter/anime_manga/repository/DatabaseAnimeManga';
-import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
-import Anime from '../../domain/anime';
-import Manga from '../../domain/manga';
 import { GetResponse, isAnime, searchObjectInArray, isManga } from 'anibook';
-import { CardFields } from '../../constants/Card';
+import AnimeMangaUtilsRepository from '@usecase/port/AnimeMangaUtilsRepository';
+import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
+import updatePhotoOrImageField from '@utils/UpdatePhotoOrImageField';
+import Anime from '@domain/anime';
+import Manga from '@domain/manga';
+import { CardFields } from '@constants/Card';
 
 export default class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {

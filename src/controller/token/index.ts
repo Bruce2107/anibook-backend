@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { User } from 'anibook';
-import createToken from '../../utils/CreateToken';
-import TokenControllerRepository from '../../usecase/port/TokenControllerRepository';
-import TokenAdapter from '../../adapter/token/repository/DatabaseToken';
+import createToken from '@utils/CreateToken';
+import TokenControllerRepository from '@usecase/port/TokenControllerRepository';
+import TokenAdapter from '@adapter/token/repository/DatabaseToken';
 
 export default class TokenController implements TokenControllerRepository {
   async createUser(request: Request, response: Response): Promise<Response> {
@@ -12,7 +12,8 @@ export default class TokenController implements TokenControllerRepository {
 
       if (!email || !nickname) return response.sendStatus(422);
 
-      if (await tokenAdapter.alreadyExists(email, nickname)) return response.sendStatus(409);
+      if (await tokenAdapter.alreadyExists(email, nickname))
+        return response.sendStatus(409);
 
       await tokenAdapter.insertOne(email, nickname);
 

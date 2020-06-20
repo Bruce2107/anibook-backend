@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import MangaUtils from '../utils/AnimeManga';
-import CreateManga from '../../usecase/createManga';
-import MangaControllerRepository from 'src/usecase/port/AnimeMangaControllerRepository';
-import Manga from '../../domain/manga';
+import MangaUtils from '@utils/AnimeManga';
+import CreateManga from '@usecase/createManga';
+import MangaControllerRepository from '@usecase/port/AnimeMangaControllerRepository';
+import Manga from '@domain/manga';
 
 export default class AnimeController implements MangaControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
@@ -93,10 +93,7 @@ export default class AnimeController implements MangaControllerRepository {
     try {
       const { limit, order } = request.query;
 
-      const result = await mangaUtils.getSort(
-        limit as string,
-        order as string
-      );
+      const result = await mangaUtils.getSort(limit as string, order as string);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -110,7 +107,10 @@ export default class AnimeController implements MangaControllerRepository {
     try {
       const { limit, order } = request.query;
 
-      const result = await mangaUtils.getSortCard(limit as string, order as string);
+      const result = await mangaUtils.getSortCard(
+        limit as string,
+        order as string
+      );
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });

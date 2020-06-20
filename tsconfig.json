@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "target": "es2017",
+    "module": "commonJS",
+    "lib": [
+      "es6"
+    ],
     "sourceMap": true,
     "outDir": "./dist",
-    "moduleResolution": "node",
     "declaration": true,
-
     "composite": true,
     "removeComments": true,
     "noImplicitAny": true,
@@ -23,8 +23,39 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "esModuleInterop": true,
-    "rootDir": "src"
+    "rootDir": "./src",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@adapter/*": [
+        "./src/adapter/*"
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
+      "@controller/*": [
+        "./src/controller/*"
+      ],
+      "@usecase/*": [
+        "./src/usecase/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*",
+        "./src/controller/utils/*"
+      ],
+      "@domain/*": [
+        "./src/domain/*"
+      ],
+      "@middleware/*": [
+        "./src/middleware/*"
+      ]
+    }
   },
-  "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts"]
+  "include": [
+    "./src/**/*.ts"
+  ]
 }
