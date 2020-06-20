@@ -5,3 +5,5 @@ src/uploads/**/*
 .env
 *.tsbuildinfo
 coverage/
+src/utils/image_test/*
+!src/utils/image_test/.gitkeep
