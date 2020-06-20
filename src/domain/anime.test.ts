@@ -13,12 +13,12 @@ describe('Anime', () => {
         numberEpisodes: 123,
         status: 'status',
       },
-      whereWatch: [{language: 'sda',name: 'name',url: 'url'}]
+      whereWatch: [{ language: 'sda', name: 'name', url: 'url' }],
     };
-    const a = new Anime(object);
-    expect(a.name).toBe('anime');
-    expect(a.folder).toBeUndefined();
-    expect(a.photo).toBe('photo.webp');
+    const anime = new Anime(object);
+    expect(anime.name).toBe('anime');
+    expect(anime.folder).toBeUndefined();
+    expect(anime.photo).toBe('photo.webp');
   });
 
   test('should create a complete anime', () => {
@@ -39,10 +39,10 @@ describe('Anime', () => {
         { language: 'language', name: 'name', url: 'https://url.com' },
       ],
     };
-    const a = new Anime(object);
-    expect(a.name).toBe('name');
-    expect(a.images).toContain('images');
-    expect(a.whereWatch).toBeDefined();
-    expect(a.info.numberEpisodes).toBe(123);
+    const anime = new Anime(object);
+    expect(anime.name).toBe('name');
+    expect(anime.images).toContain('images');
+    expect(anime.whereWatch).toBeDefined();
+    expect(anime.info.numberEpisodes).toBe(123);
   });
 });

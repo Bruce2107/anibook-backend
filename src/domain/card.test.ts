@@ -8,9 +8,9 @@ describe('Card', () => {
       photo: 'photo',
       folder: 'folder',
     };
-    const c = new Card(object);
-    expect(c.folder).toBe('folder');
-    expect(c.photo).toBe('photo');
-    expect(c.name).toBe('name');
+    const card = new Card(object);
+    expect(card.folder).toBe('folder');
+    expect(card.photo).toBe('photo');
+    expect(card.name).toBe('name');
   });
 });

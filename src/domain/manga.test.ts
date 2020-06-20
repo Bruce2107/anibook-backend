@@ -16,10 +16,10 @@ describe('Anime', () => {
       },
       whereRead: [{ language: 'asd', name: 'sad', url: 'sad' }],
     };
-    const a = new Manga(object);
-    expect(a.name).toBe('anime');
-    expect(a.folder).toBeUndefined();
-    expect(a.photo).toBe('photo.webp');
+    const manga = new Manga(object);
+    expect(manga.name).toBe('anime');
+    expect(manga.folder).toBeUndefined();
+    expect(manga.photo).toBe('photo.webp');
   });
 
   test('should create a complete manga', () => {
@@ -40,10 +40,10 @@ describe('Anime', () => {
         { language: 'language', name: 'name', url: 'https://url.com' },
       ],
     };
-    const a = new Manga(object);
-    expect(a.name).toBe('name');
-    expect(a.images).toContain('images');
-    expect(a.whereRead).toBeDefined();
-    expect(a.info.numberChapters).toBe(12);
+    const manga = new Manga(object);
+    expect(manga.name).toBe('name');
+    expect(manga.images).toContain('images');
+    expect(manga.whereRead).toBeDefined();
+    expect(manga.info.numberChapters).toBe(12);
   });
 });

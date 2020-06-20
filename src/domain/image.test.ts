@@ -8,13 +8,15 @@ describe('Image', () => {
       folder: 'background',
       name: 'ToshinoKyokoTomato.webp',
       image: Buffer.from(
-        fs.readFileSync('src/domain/ToshinoKyokoTomato.webp').toString('base64'),
+        fs
+          .readFileSync('src/domain/ToshinoKyokoTomato.webp')
+          .toString('base64'),
         'base64'
       ),
     };
-    const i = new Image(object);
+    const image = new Image(object);
 
-    expect(i.contentType).toBe('image/webp');
-    expect(i.image).toBeDefined();
+    expect(image.contentType).toBe('image/webp');
+    expect(image.image).toBeDefined();
   });
 });
