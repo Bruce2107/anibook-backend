@@ -33,6 +33,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -45,6 +46,7 @@
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.3",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/module-alias": "^2.0.0",
     "@types/multer": "^1.4.3",
     "@types/node": "^13.13.5",
     "@types/passport": "^1.0.3",
@@ -63,5 +65,14 @@
     "ts-node-dev": "^1.0.0-pre.49",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3"
+  },
+  "_moduleAliases": {
+    "@adapter": "dist/adapter",
+    "@constants": "dist/constants",
+    "@controller": "dist/controller",
+    "@domain": "dist/domain",
+    "@middleware": "dist/middleware",
+    "@usecase": "dist/usecase",
+    "@utils": "dist/utils"
   }
 }
