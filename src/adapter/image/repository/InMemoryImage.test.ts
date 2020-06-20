@@ -70,6 +70,13 @@ describe('InMemoryImage', () => {
     );
     expect(result).toBeTruthy();
   });
+  test('should not delete an image', async () => {
+    const result = await inMemoryImage._delete(
+      'yuruyuri12',
+      'ToshinoKyokoTomato.webp'
+    );
+    expect(result).toBeFalsy();
+  });
   test('should get an background image', async () => {
     const result = await inMemoryImage.getBackground();
     expect(result.contentType).toBe('image/webpy');
@@ -162,5 +169,10 @@ describe('InMemoryImage', () => {
     };
     const result = await inMemoryImage.insertOne(image);
     expect(result).toBe(false);
+  });
+  test('should not insert when images array are empty', async () => {
+    const images: Image[] = [];
+    const result = await inMemoryImage.insertMany(images);
+    expect(result[0]).toBe(false);
   });
 });
