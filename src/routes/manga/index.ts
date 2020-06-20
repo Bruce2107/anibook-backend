@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import authenticate from '@middleware/authenticate';
 import { fileUpload } from '@middleware/upload';
-import MangaController from '@controller/manga';
+import MangaController from '@usecase/Manga';
 
 const routes = Router();
 const MC = new MangaController();

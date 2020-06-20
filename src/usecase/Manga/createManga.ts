@@ -1,4 +1,4 @@
-import Manga from '../domain/manga';
+import Manga from '@domain/manga';
 
 export default class CreateManga {
   createManga(object: any): Manga {

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { fileUpload } from '@middleware/upload';
-import ImageController from '@controller/image/index';
+import ImageController from '@usecase/Image';
 
 const routes = Router();
 const IC = new ImageController();

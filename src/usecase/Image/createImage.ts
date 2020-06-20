@@ -1,4 +1,4 @@
-import Image from '../domain/image';
+import Image from '@domain/image';
 
 export default class CreateImage {
   createImage(object: any): Image {

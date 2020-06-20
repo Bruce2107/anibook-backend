@@ -1,6 +1,6 @@
 import MangaRepository from '@usecase/port/AnimeMangaRepository';
 import Manga from '@domain/manga';
-import SortArray from '../../../utils/SortArray';
+import SortArray from '@utils/SortArray';
 
 export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
   mangas: Manga[] = [];

@@ -1,6 +1,6 @@
 import { isAnime } from 'anibook';
 import InMemoryAnime from './InMemoryAnime';
-import Anime from '@domain/anime';
+import Anime from '../../../domain/anime';
 
 describe('InMemoryAnime', () => {
   let animes: Anime[] = [];
