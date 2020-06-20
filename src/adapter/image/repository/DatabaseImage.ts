@@ -1,11 +1,10 @@
 import pgp from 'pg-promise';
 import { QueryResult } from 'pg';
 import { pool, promisePool } from '../../../database';
-import Image from '../../../domain/image';
-import ImageRepository from '../../../usecase/port/ImageRepository';
+import Image from '@domain/image';
+import ImageRepository from '@usecase/port/ImageRepository';
 
 export default class DatabaseImage implements ImageRepository {
-
   async _delete(folder: string, name: string): Promise<boolean> {
     const deleted: QueryResult = await pool.query(
       `DELETE FROM images WHERE name = $1 AND folder = $2`,

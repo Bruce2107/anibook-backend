@@ -168,4 +168,15 @@ describe('InMemoryManga', () => {
     const result = await inMemoryManga.update('', 'manga2w', newManga);
     expect(result).toBeFalsy();
   });
+  test('should return a sorted array', async () => {
+    const result = await inMemoryManga.getAllSorted('', '', '', ['']);
+
+    expect(result[0].name).toBe('manga1');
+  });
+  test('should return a slice sorted array', async () => {
+    const result = await inMemoryManga.getAllSorted('', '2', '', ['']);
+
+    expect(result[0].name).toBe('manga1');
+    expect(result.length).toBe(2);
+  });
 });

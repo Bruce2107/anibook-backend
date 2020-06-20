@@ -1,5 +1,5 @@
-import ImageRepository from '../../../usecase/port/ImageRepository';
-import Image from '../../../domain/image';
+import ImageRepository from '@usecase/port/ImageRepository';
+import Image from '@domain/image';
 
 export default class InMemoryImageRepository implements ImageRepository {
   images: Image[] = [];

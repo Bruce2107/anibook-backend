@@ -1,6 +1,6 @@
 import { QueryResult } from 'pg';
 import { pool } from '../../../database';
-import AnimeMangaRepository from '../../../usecase/port/AnimeMangaRepository';
+import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
 
 export default class DatabaseAnimeMangaRepository<T>
   implements AnimeMangaRepository<T> {
@@ -19,6 +19,19 @@ export default class DatabaseAnimeMangaRepository<T>
     );
     return !!exists.rowCount;
   }
+  async getAllSorted(
+    type: string,
+    limit: string,
+    sortField: string,
+    fields: string[]
+  ): Promise<Array<T>> {
+    const fieldsString: string = fields.join();
+    const result = await pool.query(
+      `SELECT ${fieldsString} FROM ${type} ORDER BY dados ->> '${sortField}' LIMIT $1`,
+      [limit]
+    );
+    return result.rows;
+  }
 
   async getOne(
     type: string,
@@ -33,11 +46,7 @@ export default class DatabaseAnimeMangaRepository<T>
     return result.rows[0] ? result.rows[0].dados || result.rows[0] : null;
   }
 
-  async getRandom(
-    type: string,
-    limit: string,
-    fields: string[]
-  ): Promise<T[]> {
+  async getRandom(type: string, limit: string, fields: string[]): Promise<T[]> {
     const fieldsString: string = fields.join();
     const result: QueryResult<T> = await pool.query(
       `SELECT ${fieldsString} FROM ${type} ORDER BY random () LIMIT $1`,

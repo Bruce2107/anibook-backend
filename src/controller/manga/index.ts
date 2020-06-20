@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import MangaUtils from '../utils/AnimeManga';
-import CreateManga from '../../usecase/createManga';
-import MangaControllerRepository from 'src/usecase/port/AnimeMangaControllerRepository';
-import Manga from '../../domain/manga';
+import MangaUtils from '@utils/AnimeManga';
+import CreateManga from '@usecase/createManga';
+import MangaControllerRepository from '@usecase/port/AnimeMangaControllerRepository';
+import Manga from '@domain/manga';
 
 export default class AnimeController implements MangaControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
@@ -80,6 +80,37 @@ export default class AnimeController implements MangaControllerRepository {
       const { limit } = request.query;
 
       const result = await mangaUtils.getRandomCards(limit as string);
+      return response
+        .status(result.status)
+        .json({ data: result.data, rows: result.rows });
+    } catch (error) {
+      return response.status(400).send({ error: error.stack });
+    }
+  }
+
+  async getSort(request: Request, response: Response): Promise<Response> {
+    const mangaUtils = new MangaUtils('mangas');
+    try {
+      const { limit, order } = request.query;
+
+      const result = await mangaUtils.getSort(limit as string, order as string);
+      return response
+        .status(result.status)
+        .json({ data: result.data, rows: result.rows });
+    } catch (error) {
+      return response.status(400).send({ error: error.stack });
+    }
+  }
+
+  async getSortCard(request: Request, response: Response): Promise<Response> {
+    const mangaUtils = new MangaUtils('mangas');
+    try {
+      const { limit, order } = request.query;
+
+      const result = await mangaUtils.getSortCard(
+        limit as string,
+        order as string
+      );
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });

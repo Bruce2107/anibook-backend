@@ -19,27 +19,32 @@ export default interface AnimeMangaRepository<T> {
    */
   _delete(type: string, name: string): Promise<boolean>;
   /**
+   * 
+   * @param string `type` Type of data 
+   * @param string `limit` Limit of results 
+   * @param string `sortField` Field to sort 
+   * @param Array `fields` Fields of results
+   */
+  getAllSorted(
+    type: string,
+    limit: string,
+    sortField: string,
+    fields: string[]
+  ): Promise<Array<T>>;
+  /**
    *
    * @param string `type` Type of data
    * @param string `limit` Limit of results
    * @param Array `fields` Fields of results
    */
-  getRandom(
-    type: string,
-    limit: string,
-    fields: string[]
-  ): Promise<Array<T>>;
+  getRandom(type: string, limit: string, fields: string[]): Promise<Array<T>>;
   /**
    *
    * @param string `type` Type of data
    * @param string `name` Name to find
    * @param Array `fields` Fields of results
    */
-  getOne(
-    type: string,
-    name: string,
-    fields: string[]
-  ): Promise<T | null>;
+  getOne(type: string, name: string, fields: string[]): Promise<T | null>;
   /**
    *
    * @param string `type` Type of data

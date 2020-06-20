@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { mergeArray, limits as getLimit } from 'anibook';
-import Card from '../../domain/card';
-import MixedUtils from '../utils/AnimeManga';
-import MixedControllerRepository from '../../usecase/port/MixedControllerRepository';
+import Card from '@domain/card';
+import MixedUtils from '@utils/AnimeManga';
+import MixedControllerRepository from '@usecase/port/MixedControllerRepository';
 
 export default class MixedController implements MixedControllerRepository {
   async getRandom(request: Request, response: Response): Promise<Response> {

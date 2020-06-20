@@ -1,10 +1,10 @@
-import AnimeMangaUtilsRepository from '../../usecase/port/AnimeMangaUtilsRepository';
-import AnimeMangaAdapter from '../../adapter/anime_manga/repository/DatabaseAnimeManga';
-import updatePhotoOrImageField from '../../utils/UpdatePhotoOrImageField';
-import Anime from '../../domain/anime';
-import Manga from '../../domain/manga';
 import { GetResponse, isAnime, searchObjectInArray, isManga } from 'anibook';
-import { CardFields } from '../../constants/Card';
+import AnimeMangaUtilsRepository from '@usecase/port/AnimeMangaUtilsRepository';
+import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
+import updatePhotoOrImageField from '@utils/UpdatePhotoOrImageField';
+import Anime from '@domain/anime';
+import Manga from '@domain/manga';
+import { CardFields } from '@constants/Card';
 
 export default class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
@@ -54,6 +54,40 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
 
   async getRandomCards(limit: string): Promise<GetResponse<Array<T>>> {
     const result = await this.adapter.getRandom(this.type, limit, CardFields);
+    return {
+      status: 200,
+      data: result,
+      rows: result.length,
+    };
+  }
+
+  async getSort(
+    limit: string,
+    sortField: string
+  ): Promise<GetResponse<Array<T>>> {
+    const result = await this.adapter.getAllSorted(
+      this.type,
+      limit,
+      sortField,
+      ['dados']
+    );
+    return {
+      status: 200,
+      data: result,
+      rows: result.length,
+    };
+  }
+
+  async getSortCard(
+    limit: string,
+    sortField: string
+  ): Promise<GetResponse<Array<T>>> {
+    const result = await this.adapter.getAllSorted(
+      this.type,
+      limit,
+      sortField,
+      CardFields
+    );
     return {
       status: 200,
       data: result,

@@ -11,6 +11,8 @@ export default interface AnimeMangaUtilsRepository<T> {
   getOne(name: string): Promise<GetResponse<T>>;
   getRandom(limit: string): Promise<GetResponse<Array<T>>>;
   getRandomCards(limit: string): Promise<GetResponse<Array<T>>>;
+  getSort(limit: string, sortField: string): Promise<GetResponse<Array<T>>>;
+  getSortCard(limit: string, sortField: string): Promise<GetResponse<Array<T>>>;
   updateAnyFieldsThatAreNotAFile(name: string, data: T): Promise<number>;
   updateImageFields(
     name: string,
