@@ -1,13 +1,15 @@
 import AnimeMangaUtils from './AnimeManga';
-import { Anime, Manga } from 'anibook';
+import { Anime, Manga, TypeImage } from 'anibook';
 import InMemoryAnime from '../adapter/anime/repository/InMemoryAnime';
 import InMemoryManga from '../adapter/manga/repository/InMemoryManga';
+import InMemoryImage from '../adapter/image/repository/InMemoryImage';
 import { readFileSync, unlinkSync } from 'fs';
 import { Readable } from 'stream';
 
 describe('Anime Utils', () => {
   let animeUtils: AnimeMangaUtils<Anime>;
   let animes: Anime[];
+  let images: TypeImage[];
   beforeEach(() => {
     animes = [];
     animes.push(
@@ -48,9 +50,47 @@ describe('Anime Utils', () => {
         whereWatch: [{ language: 'sda', name: 'name', url: 'url' }],
       }
     );
+
+    images = [];
+    images.push(
+      {
+        contentType: 'image/webpy',
+        folder: 'background',
+        image: Buffer.from(
+          readFileSync(
+            'src/adapter/image/repository/ToshinoKyokoTomato.webp'
+          ).toString('base64'),
+          'base64'
+        ),
+        name: 'ToshinoKyokoTomato.webp',
+      },
+      {
+        contentType: 'image/webpi',
+        folder: 'yuruyuri',
+        image: Buffer.from(
+          readFileSync(
+            'src/adapter/image/repository/ToshinoKyokoTomato.webp'
+          ).toString('base64'),
+          'base64'
+        ),
+        name: 'ToshinoKyokoTomato.webp',
+      },
+      {
+        contentType: 'image/webp',
+        folder: 'yuruyuri2',
+        image: Buffer.from(
+          readFileSync(
+            'src/adapter/image/repository/ToshinoKyokoTomato.webp'
+          ).toString('base64'),
+          'base64'
+        ),
+        name: 'ToshinoKyokoTomato.webp',
+      }
+    );
     animeUtils = new AnimeMangaUtils<Anime>(
       'animes',
-      new InMemoryAnime(animes)
+      new InMemoryAnime(animes),
+      new InMemoryImage(images)
     );
   });
 
@@ -444,6 +484,7 @@ describe('Anime Utils', () => {
 describe('Manga Utils', () => {
   let mangaUtils: AnimeMangaUtils<Manga>;
   let mangas: Manga[];
+  let images: TypeImage[];
   beforeEach(() => {
     mangas = [];
     mangas.push(
@@ -487,9 +528,46 @@ describe('Manga Utils', () => {
         whereRead: [{ language: 'sda', name: 'name', url: 'url' }],
       }
     );
+    images = [];
+    images.push(
+      {
+        contentType: 'image/webpy',
+        folder: 'background',
+        image: Buffer.from(
+          readFileSync(
+            'src/adapter/image/repository/ToshinoKyokoTomato.webp'
+          ).toString('base64'),
+          'base64'
+        ),
+        name: 'ToshinoKyokoTomato.webp',
+      },
+      {
+        contentType: 'image/webpi',
+        folder: 'yuruyuri',
+        image: Buffer.from(
+          readFileSync(
+            'src/adapter/image/repository/ToshinoKyokoTomato.webp'
+          ).toString('base64'),
+          'base64'
+        ),
+        name: 'ToshinoKyokoTomato.webp',
+      },
+      {
+        contentType: 'image/webp',
+        folder: 'yuruyuri2',
+        image: Buffer.from(
+          readFileSync(
+            'src/adapter/image/repository/ToshinoKyokoTomato.webp'
+          ).toString('base64'),
+          'base64'
+        ),
+        name: 'ToshinoKyokoTomato.webp',
+      }
+    );
     mangaUtils = new AnimeMangaUtils<Manga>(
       'mangas',
-      new InMemoryManga(mangas)
+      new InMemoryManga(mangas),
+      new InMemoryImage(images)
     );
   });
 

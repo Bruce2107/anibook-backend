@@ -1,18 +1,21 @@
 import { Data } from 'anibook';
-import saveImages from './SaveImageOnDatabase';
+// import saveImages from './SaveImageOnDatabase';
+import saveImages from './SaveImage';
+import ImageRepository from '@usecase/port/ImageRepository';
 
 async function updatePhotoOrImageField<T extends Data>(
   files: {
     [fieldname: string]: Express.Multer.File[];
   },
   folder: string,
-  data: T
+  data: T,
+  adapter: ImageRepository
 ) {
   data.folder = folder;
   if (Object.keys(files).includes('card')) {
     const card: Express.Multer.File = files['card'][0];
     data.photo = card.originalname;
-    await saveImages(folder, card, undefined);
+    await saveImages(folder, adapter, card, undefined);
   }
   if (Object.keys(files).includes('images')) {
     const images: Express.Multer.File[] = files['images'];
@@ -23,7 +26,7 @@ async function updatePhotoOrImageField<T extends Data>(
         data.images.push(file.originalname);
       }
     });
-    await saveImages(folder, undefined, images);
+    await saveImages(folder, adapter, undefined, images);
   }
   return data;
 }

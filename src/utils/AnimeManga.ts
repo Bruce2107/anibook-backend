@@ -5,14 +5,21 @@ import Anime from '@domain/anime';
 import Manga from '@domain/manga';
 import { CardFields } from '@constants/Card';
 import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
+import ImageRepository from '@usecase/port/ImageRepository';
 
 export default class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
   adapter: AnimeMangaRepository<T>;
   type: string;
-  constructor(type: string, adapter: AnimeMangaRepository<T>) {
+  imageAdapter: ImageRepository;
+  constructor(
+    type: string,
+    adapter: AnimeMangaRepository<T>,
+    imageAdapter: ImageRepository
+  ) {
     this.adapter = adapter;
     this.type = type;
+    this.imageAdapter = imageAdapter;
   }
   async _delete(name: string): Promise<404 | 400 | 204> {
     if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
@@ -26,7 +33,12 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
   ): Promise<422 | 409 | 400 | 201> {
     if (Object.keys(files).length) {
       if (!folder) return 422;
-      dados = await updatePhotoOrImageField(files, folder, dados);
+      dados = await updatePhotoOrImageField(
+        files,
+        folder,
+        dados,
+        this.imageAdapter
+      );
     }
     if (await this.adapter.alreadyExists(this.type, dados.name)) return 409;
 
@@ -158,7 +170,12 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
     const data = (await this.adapter.getOne(this.type, name, ['dados'])) as T;
 
-    const newData = await updatePhotoOrImageField(files, folder, data);
+    const newData = await updatePhotoOrImageField(
+      files,
+      folder,
+      data,
+      this.imageAdapter
+    );
 
     return (await this.adapter.update(this.type, name, newData)) ? 204 : 400;
   }

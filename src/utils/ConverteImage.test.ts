@@ -2,6 +2,7 @@ import { readFileSync, unlinkSync } from 'fs';
 import { Readable } from 'stream';
 import { x2Webp } from './ConverteImage';
 import sleep from './Sleep';
+
 describe('Convert Image', () => {
   let image: Express.Multer.File;
   let gif: Express.Multer.File;
@@ -45,14 +46,14 @@ describe('Convert Image', () => {
 
   it('should convert a jpg image to webp', async () => {
     await x2Webp(image);
-    await sleep(200);
+    await sleep(500);
     const file = readFileSync(`${image.path.split('.')[0]}.webp`);
     expect(file).toBeDefined();
   });
 
   it('should convert a gif to webp', async () => {
     await x2Webp(gif);
-    await sleep(500);
+    await sleep(800);
     const file = readFileSync(`${gif.path.split('.')[0]}.webp`);
     expect(file).toBeDefined();
   });
