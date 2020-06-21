@@ -2,11 +2,12 @@ import { Request, Response } from 'express';
 import MangaUtils from '@utils/AnimeManga';
 import CreateManga from './createManga';
 import MangaControllerRepository from '@usecase/port/AnimeMangaControllerRepository';
+import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
 import Manga from '@domain/manga';
 
 export default class AnimeController implements MangaControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     const createManga = new CreateManga().createManga;
     try {
       const dados = createManga(JSON.parse(request.body.dados));
@@ -22,7 +23,7 @@ export default class AnimeController implements MangaControllerRepository {
   }
 
   async _delete(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { name } = request.params;
 
@@ -34,7 +35,7 @@ export default class AnimeController implements MangaControllerRepository {
   }
 
   async getCardByName(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { name } = request.params;
 
@@ -46,7 +47,7 @@ export default class AnimeController implements MangaControllerRepository {
   }
 
   async getByName(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { name } = request.params;
 
@@ -58,7 +59,7 @@ export default class AnimeController implements MangaControllerRepository {
   }
 
   async getRandom(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { limit } = request.query;
 
@@ -75,7 +76,7 @@ export default class AnimeController implements MangaControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { limit } = request.query;
 
@@ -89,7 +90,7 @@ export default class AnimeController implements MangaControllerRepository {
   }
 
   async getSort(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { limit, order } = request.query;
 
@@ -103,7 +104,7 @@ export default class AnimeController implements MangaControllerRepository {
   }
 
   async getSortCard(request: Request, response: Response): Promise<Response> {
-    const mangaUtils = new MangaUtils('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { limit, order } = request.query;
 
@@ -123,7 +124,7 @@ export default class AnimeController implements MangaControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     const createManga = new CreateManga().createManga;
     try {
       const dados = createManga(request.body.dados);
@@ -143,7 +144,7 @@ export default class AnimeController implements MangaControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const mangaUtils = new MangaUtils<Manga>('mangas');
+    const mangaUtils = new MangaUtils<Manga>('mangas', new AnimeMangaAdapter());
     try {
       const { name } = request.params;
       const { folder } = request.query;

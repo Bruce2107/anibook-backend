@@ -47,6 +47,9 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     limit: string,
     __: string[]
   ): Promise<Array<Manga>> {
+    if (!limit) {
+      return this.mangas;
+    }
     const mangas: Manga[] = [];
     const numbers: Array<number> = [];
     const Nlimit = Number(limit);

@@ -46,6 +46,9 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
     limit: string,
     __: string[]
   ): Promise<Array<Anime>> {
+    if (!limit) {
+      return this.animes;
+    }
     const animes: Anime[] = [];
     const numbers: Array<number> = [];
     const Nlimit = Number(limit);

@@ -52,7 +52,7 @@ describe('Convert Image', () => {
 
   it('should convert a gif to webp', async () => {
     await x2Webp(gif);
-    await sleep(300);
+    await sleep(500);
     const file = readFileSync(`${gif.path.split('.')[0]}.webp`);
     expect(file).toBeDefined();
   });

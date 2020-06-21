@@ -1,17 +1,17 @@
 import { GetResponse, isAnime, searchObjectInArray, isManga } from 'anibook';
 import AnimeMangaUtilsRepository from '@usecase/port/AnimeMangaUtilsRepository';
-import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
 import updatePhotoOrImageField from '@utils/UpdatePhotoOrImageField';
 import Anime from '@domain/anime';
 import Manga from '@domain/manga';
 import { CardFields } from '@constants/Card';
+import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
 
 export default class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
-  adapter: AnimeMangaAdapter<T>;
+  adapter: AnimeMangaRepository<T>;
   type: string;
-  constructor(type: string) {
-    this.adapter = new AnimeMangaAdapter<T>();
+  constructor(type: string, adapter: AnimeMangaRepository<T>) {
+    this.adapter = adapter;
     this.type = type;
   }
   async _delete(name: string): Promise<404 | 400 | 204> {
