@@ -115,6 +115,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     const newData = (await this.adapter.getOne(this.type, name, [
       'dados',
     ])) as T;
+    /* istanbul ignore else */
     if (data.name) {
       //já existe outro registro com esse mesmo nome
       if (
@@ -124,36 +125,49 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
         return 409;
       newData.name = data.name;
     }
+    /* istanbul ignore else */
     if (data.synopsis) newData.synopsis = data.synopsis;
+    /* istanbul ignore else */
     if (data.comment) newData.comment = data.comment;
+    /* istanbul ignore else */
     if (data.folder) newData.folder = data.folder;
+    /* istanbul ignore else */
     if (data.info.author) newData.info.author = data.info.author;
+    /* istanbul ignore else */
     if (data.info.status) newData.info.status = data.info.status;
 
     //alterções para anime
     if (isAnime(newData) && isAnime(data)) {
+      /* istanbul ignore else */
       if (data.info.numberEpisodes)
         newData.info.numberEpisodes = data.info.numberEpisodes;
-
+      /* istanbul ignore else */
       if (data.musics)
         data.musics.forEach((music) => {
+          /* istanbul ignore else */
           if (newData.musics && !searchObjectInArray(music.url, newData.musics))
             newData.musics.push(music);
         });
+      /* istanbul ignore else */
       if (data.whereWatch)
         data.whereWatch.forEach((site) => {
+          /* istanbul ignore else */
           if (!searchObjectInArray(site.url, newData.whereWatch))
             newData.whereWatch.push(site);
         });
     }
     //alterções para mangá
     if (isManga(newData) && isManga(data)) {
+      /* istanbul ignore else */
       if (data.info.numberChapters)
         newData.info.numberChapters = data.info.numberChapters;
+      /* istanbul ignore else */
       if (data.info.numberVolumes)
         newData.info.numberVolumes = data.info.numberVolumes;
+      /* istanbul ignore else */
       if (data.whereRead)
         data.whereRead.forEach((site) => {
+          /* istanbul ignore else */
           if (!searchObjectInArray(site.url, newData.whereRead))
             newData.whereRead.push(site);
         });

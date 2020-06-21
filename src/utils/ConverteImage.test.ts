@@ -9,31 +9,33 @@ describe('Convert Image', () => {
   beforeAll(() => {
     image = {
       buffer: Buffer.from(
-        readFileSync('src/utils/image_test/oono.jpg').toString('base64'),
+        readFileSync('src/utils/image_test/haruo.png').toString('base64'),
         'base64'
       ),
       destination: '',
       encoding: '',
       fieldname: '',
-      filename: 'oono.jpg',
+      filename: 'haruo.png',
       mimetype: 'image/jpg',
-      originalname: 'oono.jpg',
-      path: 'src/utils/image_test/oono.jpg',
+      originalname: 'haruo.png',
+      path: 'src/utils/image_test/haruo.png',
       size: 122,
       stream: new Readable(),
     };
     gif = {
       buffer: Buffer.from(
-        readFileSync('src/utils/image_test/KarenKujou.gif').toString('base64'),
+        readFileSync('src/utils/image_test/KarenKujouCopy.gif').toString(
+          'base64'
+        ),
         'base64'
       ),
       destination: '',
       encoding: '',
       fieldname: '',
-      filename: 'KarenKujou.gif',
+      filename: 'KarenKujouCopy.gif',
       mimetype: 'image/gif',
-      originalname: 'KarenKujou.gif',
-      path: 'src/utils/image_test/KarenKujou.gif',
+      originalname: 'KarenKujouCopy.gif',
+      path: 'src/utils/image_test/KarenKujouCopy.gif',
       size: 122,
       stream: new Readable(),
     };

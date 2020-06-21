@@ -1,5 +1,5 @@
 import ImageRepository from '@usecase/port/ImageRepository';
-import MakeAConvertedImage from './MakeACovertedImage';
+import MakeAConvertedImage from './MakeAConvertedImage';
 import { TypeImage } from 'anibook';
 
 export default async function saveImage(
@@ -10,8 +10,7 @@ export default async function saveImage(
 ) {
   if (file) {
     const image = await MakeAConvertedImage(folder, file);
-    if (!(await adapter.alreadyExists(folder, image.name)))
-      if (!(await adapter.insertOne(image))) return false;
+    if (!(await adapter.insertOne(image))) return false;
   }
   if (files) {
     const images: Array<TypeImage> = [];

@@ -3,7 +3,7 @@ import { Anime, Manga, TypeImage } from 'anibook';
 import InMemoryAnime from '../adapter/anime/repository/InMemoryAnime';
 import InMemoryManga from '../adapter/manga/repository/InMemoryManga';
 import InMemoryImage from '../adapter/image/repository/InMemoryImage';
-import { readFileSync, unlinkSync } from 'fs';
+import { readFileSync } from 'fs';
 import { Readable } from 'stream';
 
 describe('Anime Utils', () => {
@@ -24,6 +24,7 @@ describe('Anime Utils', () => {
           status: 'status',
         },
         whereWatch: [{ language: 'sda', name: 'name', url: 'url' }],
+        musics: [{ language: 'edited', name: 'name', url: 'music' }],
       },
       {
         name: 'anime1',
@@ -173,9 +174,7 @@ describe('Anime Utils', () => {
           stream: new Readable(),
         };
       });
-      afterAll(() => {
-        unlinkSync(`${image.path.split('.')[0]}.webp`);
-      });
+
       test('should get 201 when anime object is inserted with images', async () => {
         const anime: Anime = {
           name: 'anime',
@@ -376,7 +375,7 @@ describe('Anime Utils', () => {
         if (newAnime.data) {
           expect(newAnime.data.whereWatch.length).toBe(2);
           if (newAnime.data.musics) {
-            expect(newAnime.data.musics.length).toBe(1);
+            expect(newAnime.data.musics.length).toBe(2);
           }
         }
       });
@@ -445,12 +444,11 @@ describe('Anime Utils', () => {
           stream: new Readable(),
         };
       });
-      afterAll(() => {
-        unlinkSync(`${image.path.split('.')[0]}.webp`);
-      });
+
       test('should get 204 when anime image photo is updated', async () => {
         const result = await animeUtils.updateImageFields('anime2', 'test', {
           card: [image],
+          images: [image, image],
         } as { [fieldname: string]: Express.Multer.File[] });
 
         expect(result).toBe(204);
@@ -652,9 +650,7 @@ describe('Manga Utils', () => {
           stream: new Readable(),
         };
       });
-      afterAll(() => {
-        unlinkSync(`${image.path.split('.')[0]}.webp`);
-      });
+
       test('should get 201 when manga object is inserted', async () => {
         const manga: Manga = {
           name: 'manga',
@@ -920,9 +916,7 @@ describe('Manga Utils', () => {
           stream: new Readable(),
         };
       });
-      afterAll(() => {
-        unlinkSync(`${image.path.split('.')[0]}.webp`);
-      });
+
       test('should get 204 when manga photo is updated', async () => {
         const result = await mangaUtils.updateImageFields('manga2', 'test', {
           card: [image],

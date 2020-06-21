@@ -12,6 +12,7 @@ async function updatePhotoOrImageField<T extends Data>(
   adapter: ImageRepository
 ) {
   data.folder = folder;
+  /* istanbul ignore else */
   if (Object.keys(files).includes('card')) {
     const card: Express.Multer.File = files['card'][0];
     data.photo = card.originalname;
@@ -19,7 +20,7 @@ async function updatePhotoOrImageField<T extends Data>(
   }
   if (Object.keys(files).includes('images')) {
     const images: Express.Multer.File[] = files['images'];
-
+    /* istanbul ignore else */
     if (!data.images) data.images = [];
     images.forEach((file) => {
       if (data.images && !(data.images.indexOf(file.originalname) >= 0)) {

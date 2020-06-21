@@ -56,6 +56,7 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     let i = 0;
     while (i < Nlimit) {
       const number = Math.floor(Math.random() * Nlimit);
+      /* istanbul ignore else */
       if (!numbers.includes(number)) {
         numbers.push(number);
         mangas.push(this.mangas[number]);
