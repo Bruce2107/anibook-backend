@@ -3,11 +3,23 @@ import { mergeArray, limits as getLimit } from 'anibook';
 import Card from '@domain/card';
 import MixedUtils from '@utils/AnimeManga';
 import MixedControllerRepository from '@usecase/port/MixedControllerRepository';
+import ImageAdapter from '@adapter/image/repository/DatabaseImage';
+import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
+import Anime from '@domain/anime';
+import Manga from '@domain/manga';
 
 export default class MixedController implements MixedControllerRepository {
   async getRandom(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new MixedUtils('animes');
-    const mangaUtils = new MixedUtils('mangas');
+    const animeUtils = new MixedUtils(
+      'animes',
+      new AnimeMangaAdapter<Anime>(),
+      new ImageAdapter()
+    );
+    const mangaUtils = new MixedUtils(
+      'mangas',
+      new AnimeMangaAdapter<Manga>(),
+      new ImageAdapter()
+    );
     try {
       const { limit } = request.query;
 
@@ -29,8 +41,16 @@ export default class MixedController implements MixedControllerRepository {
   }
 
   async getRandomCard(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new MixedUtils('animes');
-    const mangaUtils = new MixedUtils('mangas');
+    const animeUtils = new MixedUtils(
+      'animes',
+      new AnimeMangaAdapter<Anime>(),
+      new ImageAdapter()
+    );
+    const mangaUtils = new MixedUtils(
+      'mangas',
+      new AnimeMangaAdapter<Manga>(),
+      new ImageAdapter()
+    );
     try {
       const { limit } = request.query;
 
