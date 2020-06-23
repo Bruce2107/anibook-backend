@@ -21,16 +21,17 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     this.type = type;
     this.imageAdapter = imageAdapter;
   }
-  async _delete(name: string): Promise<404 | 400 | 204> {
+  async _delete(name: string): Promise<404 | 204> {
     if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
-    return (await this.adapter._delete(this.type, name)) ? 204 : 400;
+    await this.adapter._delete(this.type, name);
+    return 204;
   }
 
   async create(
     folder: string,
     dados: T,
     files: { [fieldname: string]: Express.Multer.File[] }
-  ): Promise<422 | 409 | 400 | 201> {
+  ): Promise<422 | 409 | 201> {
     if (Object.keys(files).length) {
       if (!folder) return 422;
       dados = await updatePhotoOrImageField(
@@ -41,8 +42,8 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
       );
     }
     if (await this.adapter.alreadyExists(this.type, dados.name)) return 409;
-
-    return (await this.adapter.insert(this.type, ['dados'], dados)) ? 201 : 400;
+    await this.adapter.insert(this.type, ['dados'], dados);
+    return 201;
   }
 
   async getCard(name: string): Promise<GetResponse<T>> {
@@ -110,7 +111,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
   async updateAnyFieldsThatAreNotAFile(
     name: string,
     data: T
-  ): Promise<404 | 409 | 400 | 204> {
+  ): Promise<404 | 409 | 204> {
     if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
     const newData = (await this.adapter.getOne(this.type, name, [
       'dados',
@@ -172,14 +173,15 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
             newData.whereRead.push(site);
         });
     }
-    return (await this.adapter.update(this.type, name, newData)) ? 204 : 400;
+    await this.adapter.update(this.type, name, newData);
+    return 204;
   }
 
   async updateImageFields(
     name: string,
     folder: string,
     files: { [fieldname: string]: Express.Multer.File[] }
-  ): Promise<422 | 404 | 400 | 204> {
+  ): Promise<422 | 404 | 204> {
     if (!files || !folder) return 422;
     if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
     const data = (await this.adapter.getOne(this.type, name, ['dados'])) as T;
@@ -190,7 +192,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
       data,
       this.imageAdapter
     );
-
-    return (await this.adapter.update(this.type, name, newData)) ? 204 : 400;
+    await this.adapter.update(this.type, name, newData);
+    return 204;
   }
 }
