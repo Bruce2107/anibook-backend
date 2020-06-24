@@ -2,8 +2,9 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { User } from 'anibook';
 
-dotenv.config();
-
+dotenv.config({
+  path: process.env.NODE_ENV === 'qa' ? '.env.qa' : '.env',
+});
 const token = process.env.TOKEN || 'anibook';
 
 const createToken = (user: User) => {

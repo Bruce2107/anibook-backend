@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgresdb:
+    container_name: postgres_anibook_qa
+    image: postgres:12
+    environment:
+      - POSTGRES_DB=anibook_qa
+      - POSTGRES_USER=anibook_qa
+      - POSTGRES_PASSWORD=anibook_qa
+      - MAX_CONNECTIONS=300
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./config/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./config/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+  node:
+    build:
+      dockerfile: ./config/docker/Dockerfile
+      context: .
+    image: anibook/node
+    container_name: anibook_node
+    ports:
+      - '4000:4000'
+    environment:
+      DB_USER_POSTGRES: anibook_qa
+      DB_PASS_POSTGRES: anibook_qa
+      DB_HOST_POSTGRES: postgres_anibook_qa
+      DB_NAME_POSTGRES: anibook_qa
+      DB_PORT_POSTGRES: 5432
+      TOKEN: anibook_qa
+    depends_on:
+      - 'postgresdb'

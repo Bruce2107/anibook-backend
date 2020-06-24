@@ -3,7 +3,9 @@ import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { User } from 'anibook';
 import TokenAdapter from '@adapter/token/repository/DatabaseToken';
 
-dotenv.config();
+dotenv.config({
+  path: process.env.NODE_ENV === 'qa' ? '.env.qa' : '.env',
+});
 
 const token = process.env.TOKEN || 'anibook';
 const tokenAdapter = new TokenAdapter();
