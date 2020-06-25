@@ -26,7 +26,10 @@ class App {
   }
   private env() {
     dotenv.config({
-      path: process.env.NODE_ENV === 'qa' ? '.env.qa' : '.env',
+      path:
+        process.env.NODE_ENV === 'qa' || process.env.NODE_ENV === 'test'
+          ? '.env.qa'
+          : '.env',
     });
   }
   private routes() {

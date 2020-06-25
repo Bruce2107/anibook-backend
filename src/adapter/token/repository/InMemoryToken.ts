@@ -28,4 +28,12 @@ export default class InMemoryTokenReposiory implements TokenRepository {
       return false;
     }
   }
+  async _delete(value: string): Promise<boolean> {
+    for (let user of this.users)
+      if (user.email === value || user.nickname === value) {
+        this.users.splice(this.users.indexOf(user), 1);
+        return true;
+      }
+    return false;
+  }
 }
