@@ -1,10 +1,5 @@
-import dotenv from 'dotenv';
 import { Pool } from 'pg';
 import pgPromise from 'pg-promise';
-
-dotenv.config({
-  path: process.env.NODE_ENV === 'qa' ? '.env.qa' : '.env',
-});
 
 export const pool = new Pool({
   user: (process.env.DB_USER_POSTGRES as string) || 'eduhenriquezup',

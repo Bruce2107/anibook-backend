@@ -1,5 +1,4 @@
 import { Data } from 'anibook';
-// import saveImages from './SaveImageOnDatabase';
 import saveImages from './SaveImage';
 import ImageRepository from '@usecase/port/ImageRepository';
 
