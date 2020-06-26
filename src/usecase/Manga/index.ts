@@ -9,8 +9,7 @@ import ImageAdapater from '@adapter/image/repository/DatabaseImage';
 export default class AnimeController implements MangaControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     const createManga = new CreateManga().createManga;
@@ -29,8 +28,7 @@ export default class AnimeController implements MangaControllerRepository {
 
   async _delete(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -45,8 +43,7 @@ export default class AnimeController implements MangaControllerRepository {
 
   async getCardByName(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -61,8 +58,7 @@ export default class AnimeController implements MangaControllerRepository {
 
   async getByName(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -77,8 +73,7 @@ export default class AnimeController implements MangaControllerRepository {
 
   async getRandom(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -98,8 +93,7 @@ export default class AnimeController implements MangaControllerRepository {
     response: Response
   ): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -116,8 +110,7 @@ export default class AnimeController implements MangaControllerRepository {
 
   async getSort(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -134,8 +127,7 @@ export default class AnimeController implements MangaControllerRepository {
 
   async getSortCard(request: Request, response: Response): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {
@@ -158,8 +150,7 @@ export default class AnimeController implements MangaControllerRepository {
     response: Response
   ): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     const createManga = new CreateManga().createManga;
@@ -182,8 +173,7 @@ export default class AnimeController implements MangaControllerRepository {
     response: Response
   ): Promise<Response> {
     const mangaUtils = new MangaUtils<Manga>(
-      'mangas',
-      new AnimeMangaAdapter(),
+      new AnimeMangaAdapter('mangas'),
       new ImageAdapater()
     );
     try {

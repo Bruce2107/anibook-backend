@@ -2,12 +2,13 @@ import { Pool } from 'pg';
 import pgPromise from 'pg-promise';
 import { config } from 'dotenv';
 
-/* istanbul ignore else */
-if (process.env.NODE_ENV === 'test') {
-  config({
-    path: '.env.qa',
-  });
-}
+config({
+  path:
+    process.env.NODE_ENV === 'qa' || process.env.NODE_ENV === 'test'
+      ? '.env.qa'
+      : '.env',
+});
+
 export const pool = new Pool({
   user: process.env.DB_USER_POSTGRES as string,
   host: process.env.DB_HOST_POSTGRES as string,

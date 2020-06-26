@@ -8,20 +8,20 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     this.mangas = mangas;
   }
 
-  async _delete(_: string, name: string): Promise<boolean> {
-    if (await this.alreadyExists(_, name)) {
+  async _delete(name: string): Promise<boolean> {
+    if (await this.alreadyExists(name)) {
       this.mangas = this.mangas.filter((manga) => manga.name !== name);
       return true;
     }
     return false;
   }
 
-  async alreadyExists(_: string, name: string): Promise<boolean> {
+  async alreadyExists(name: string): Promise<boolean> {
     for (let manga of this.mangas) if (manga.name === name) return true;
     return false;
   }
 
-  async getOne(_: string, name: string, __: string[]): Promise<Manga | null> {
+  async getOne(name: string, __: string[]): Promise<Manga | null> {
     const manga = this.mangas.filter((manga) => manga.name === name);
     if (manga.length > 0) {
       return manga[0];
@@ -29,7 +29,6 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     return null;
   }
   async getAllSorted(
-    _: string,
     limit: string,
     ___: string,
     ____: string[]
@@ -42,11 +41,7 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
 
     return mangas;
   }
-  async getRandom(
-    _: string,
-    limit: string,
-    __: string[]
-  ): Promise<Array<Manga>> {
+  async getRandom(limit: string, __: string[]): Promise<Array<Manga>> {
     if (!limit) {
       return this.mangas;
     }
@@ -67,15 +62,15 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     return mangas;
   }
 
-  async insert(_: string, __: string[], data: Manga): Promise<boolean> {
-    if (await this.alreadyExists(_, data.name)) return false;
+  async insert(__: string[], data: Manga): Promise<boolean> {
+    if (await this.alreadyExists(data.name)) return false;
     this.mangas.push(data);
     return true;
   }
-  async update(_: string, name: string, newData: Manga): Promise<boolean> {
+  async update(name: string, newData: Manga): Promise<boolean> {
     if (
-      !(await this.alreadyExists(_, name)) ||
-      ((await this.alreadyExists(_, newData.name)) && newData.name !== name)
+      !(await this.alreadyExists(name)) ||
+      ((await this.alreadyExists(newData.name)) && newData.name !== name)
     )
       return false;
     let index = 0;

@@ -10,20 +10,14 @@ import ImageRepository from '@usecase/port/ImageRepository';
 export default class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
   adapter: AnimeMangaRepository<T>;
-  type: string;
   imageAdapter: ImageRepository;
-  constructor(
-    type: string,
-    adapter: AnimeMangaRepository<T>,
-    imageAdapter: ImageRepository
-  ) {
+  constructor(adapter: AnimeMangaRepository<T>, imageAdapter: ImageRepository) {
     this.adapter = adapter;
-    this.type = type;
     this.imageAdapter = imageAdapter;
   }
   async _delete(name: string): Promise<404 | 204> {
-    if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
-    await this.adapter._delete(this.type, name);
+    if (!(await this.adapter.alreadyExists(name))) return 404;
+    await this.adapter._delete(name);
     return 204;
   }
 
@@ -41,23 +35,23 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
         this.imageAdapter
       );
     }
-    if (await this.adapter.alreadyExists(this.type, dados.name)) return 409;
-    await this.adapter.insert(this.type, ['dados'], dados);
+    if (await this.adapter.alreadyExists(dados.name)) return 409;
+    await this.adapter.insert(['dados'], dados);
     return 201;
   }
 
   async getCard(name: string): Promise<GetResponse<T>> {
-    const card = await this.adapter.getOne(this.type, name, CardFields);
+    const card = await this.adapter.getOne(name, CardFields);
     return card ? { status: 200, data: card } : { status: 404 };
   }
 
   async getOne(name: string): Promise<GetResponse<T>> {
-    const reuslt = await this.adapter.getOne(this.type, name, ['dados']);
+    const reuslt = await this.adapter.getOne(name, ['dados']);
     return reuslt ? { status: 200, data: reuslt } : { status: 404 };
   }
 
   async getRandom(limit: string): Promise<GetResponse<Array<T>>> {
-    const result = await this.adapter.getRandom(this.type, limit, ['dados']);
+    const result = await this.adapter.getRandom(limit, ['dados']);
     return {
       status: 200,
       data: result,
@@ -66,7 +60,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
   }
 
   async getRandomCards(limit: string): Promise<GetResponse<Array<T>>> {
-    const result = await this.adapter.getRandom(this.type, limit, CardFields);
+    const result = await this.adapter.getRandom(limit, CardFields);
     return {
       status: 200,
       data: result,
@@ -78,12 +72,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     limit: string,
     sortField: string
   ): Promise<GetResponse<Array<T>>> {
-    const result = await this.adapter.getAllSorted(
-      this.type,
-      limit,
-      sortField,
-      ['dados']
-    );
+    const result = await this.adapter.getAllSorted(limit, sortField, ['dados']);
     return {
       status: 200,
       data: result,
@@ -96,7 +85,6 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     sortField: string
   ): Promise<GetResponse<Array<T>>> {
     const result = await this.adapter.getAllSorted(
-      this.type,
       limit,
       sortField,
       CardFields
@@ -112,17 +100,12 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     name: string,
     data: T
   ): Promise<404 | 409 | 204> {
-    if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
-    const newData = (await this.adapter.getOne(this.type, name, [
-      'dados',
-    ])) as T;
+    if (!(await this.adapter.alreadyExists(name))) return 404;
+    const newData = (await this.adapter.getOne(name, ['dados'])) as T;
     /* istanbul ignore else */
     if (data.name) {
       //já existe outro registro com esse mesmo nome
-      if (
-        data.name !== name &&
-        (await this.adapter.alreadyExists(this.type, data.name))
-      )
+      if (data.name !== name && (await this.adapter.alreadyExists(data.name)))
         return 409;
       newData.name = data.name;
     }
@@ -173,7 +156,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
             newData.whereRead.push(site);
         });
     }
-    await this.adapter.update(this.type, name, newData);
+    await this.adapter.update(name, newData);
     return 204;
   }
 
@@ -183,8 +166,8 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     files: { [fieldname: string]: Express.Multer.File[] }
   ): Promise<422 | 404 | 204> {
     if (!files || !folder) return 422;
-    if (!(await this.adapter.alreadyExists(this.type, name))) return 404;
-    const data = (await this.adapter.getOne(this.type, name, ['dados'])) as T;
+    if (!(await this.adapter.alreadyExists(name))) return 404;
+    const data = (await this.adapter.getOne(name, ['dados'])) as T;
 
     const newData = await updatePhotoOrImageField(
       files,
@@ -192,7 +175,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
       data,
       this.imageAdapter
     );
-    await this.adapter.update(this.type, name, newData);
+    await this.adapter.update(name, newData);
     return 204;
   }
 }

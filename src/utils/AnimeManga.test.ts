@@ -89,7 +89,6 @@ describe('Anime Utils', () => {
       }
     );
     animeUtils = new AnimeMangaUtils<Anime>(
-      'animes',
       new InMemoryAnime(animes),
       new InMemoryImage(images)
     );
@@ -563,7 +562,6 @@ describe('Manga Utils', () => {
       }
     );
     mangaUtils = new AnimeMangaUtils<Manga>(
-      'mangas',
       new InMemoryManga(mangas),
       new InMemoryImage(images)
     );
