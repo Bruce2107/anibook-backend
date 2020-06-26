@@ -7,7 +7,7 @@ dotenv.config({
   path: process.env.NODE_ENV === 'qa' ? '.env.qa' : '.env',
 });
 
-const token = process.env.TOKEN || 'anibook';
+const token = process.env.TOKEN;
 const tokenAdapter = new TokenAdapter();
 const options: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

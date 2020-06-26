@@ -2,17 +2,18 @@ import { Pool } from 'pg';
 import pgPromise from 'pg-promise';
 import { config } from 'dotenv';
 
+/* istanbul ignore else */
 if (process.env.NODE_ENV === 'test') {
   config({
     path: '.env.qa',
   });
 }
 export const pool = new Pool({
-  user: (process.env.DB_USER_POSTGRES as string) || 'eduhenriquezup',
-  host: (process.env.DB_HOST_POSTGRES as string) || 'localhost',
-  password: (process.env.DB_PASS_POSTGRES as string) || 'anibook',
-  database: (process.env.DB_NAME_POSTGRES as string) || 'anibook',
-  port: Number(process.env.DB_PORT_POSTGRES) || 5432,
+  user: process.env.DB_USER_POSTGRES as string,
+  host: process.env.DB_HOST_POSTGRES as string,
+  password: process.env.DB_PASS_POSTGRES as string,
+  database: process.env.DB_NAME_POSTGRES as string,
+  port: Number(process.env.DB_PORT_POSTGRES),
 });
 
 export const promisePool = async () => {
