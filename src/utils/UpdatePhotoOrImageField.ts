@@ -14,7 +14,7 @@ async function updatePhotoOrImageField<T extends Data>(
   /* istanbul ignore else */
   if (Object.keys(files).includes('card')) {
     const card: Express.Multer.File = files['card'][0];
-    data.photo = card.originalname;
+    data.photo = `${card.originalname.split('.')[0]}.webp`;
     await saveImages(folder, adapter, card, undefined);
   }
   if (Object.keys(files).includes('images')) {
@@ -23,7 +23,7 @@ async function updatePhotoOrImageField<T extends Data>(
     if (!data.images) data.images = [];
     images.forEach((file) => {
       if (data.images && !(data.images.indexOf(file.originalname) >= 0)) {
-        data.images.push(file.originalname);
+        data.images.push(`${file.originalname.split('.')[0]}.webp`);
       }
     });
     await saveImages(folder, adapter, undefined, images);
