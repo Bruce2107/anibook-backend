@@ -114,9 +114,10 @@ export default class AnimeController implements MangaControllerRepository {
       new ImageAdapater()
     );
     try {
-      const { limit, order } = request.query;
+      const { limit } = request.query;
+      const { order } = request.params;
 
-      const result = await mangaUtils.getSort(limit as string, order as string);
+      const result = await mangaUtils.getSort(limit as string, order);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -131,7 +132,8 @@ export default class AnimeController implements MangaControllerRepository {
       new ImageAdapater()
     );
     try {
-      const { limit, order } = request.query;
+      const { limit } = request.query;
+      const { order } = request.params;
 
       const result = await mangaUtils.getSortCard(
         limit as string,
