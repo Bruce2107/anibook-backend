@@ -2,6 +2,7 @@ import { Pool } from 'pg';
 import pgPromise from 'pg-promise';
 import { config } from 'dotenv';
 
+/* istanbul ignore next */
 config({
   path:
     process.env.NODE_ENV === 'qa' || process.env.NODE_ENV === 'test'

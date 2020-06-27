@@ -22,6 +22,7 @@ async function updatePhotoOrImageField<T extends Data>(
     /* istanbul ignore else */
     if (!data.images) data.images = [];
     images.forEach((file) => {
+      /* istanbul ignore else */
       if (data.images && !(data.images.indexOf(file.originalname) >= 0)) {
         data.images.push(`${file.originalname.split('.')[0]}.webp`);
       }
