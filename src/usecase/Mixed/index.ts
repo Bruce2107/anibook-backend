@@ -11,13 +11,11 @@ import Manga from '@domain/manga';
 export default class MixedController implements MixedControllerRepository {
   async getRandom(request: Request, response: Response): Promise<Response> {
     const animeUtils = new MixedUtils(
-      'animes',
-      new AnimeMangaAdapter<Anime>(),
+      new AnimeMangaAdapter<Anime>('animes'),
       new ImageAdapter()
     );
     const mangaUtils = new MixedUtils(
-      'mangas',
-      new AnimeMangaAdapter<Manga>(),
+      new AnimeMangaAdapter<Manga>('mangas'),
       new ImageAdapter()
     );
     try {
@@ -42,13 +40,11 @@ export default class MixedController implements MixedControllerRepository {
 
   async getRandomCard(request: Request, response: Response): Promise<Response> {
     const animeUtils = new MixedUtils(
-      'animes',
-      new AnimeMangaAdapter<Anime>(),
+      new AnimeMangaAdapter<Anime>('animes'),
       new ImageAdapter()
     );
     const mangaUtils = new MixedUtils(
-      'mangas',
-      new AnimeMangaAdapter<Manga>(),
+      new AnimeMangaAdapter<Manga>('mangas'),
       new ImageAdapter()
     );
     try {
