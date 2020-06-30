@@ -61,11 +61,13 @@ export default class DatabaseImage implements ImageRepository {
   }
 
   async insertOne(image: Image): Promise<boolean> {
-    const inserted: QueryResult = await pool.query(
-      `INSERT INTO images (name,folder,"contentType",image) VALUES ($1,$2,$3,$4)`,
-      [image.name, image.folder, image.contentType, image.image]
-    );
-
-    return !!inserted.rowCount;
+    if (!(await this.alreadyExists(image.folder, image.name))) {
+      const inserted: QueryResult = await pool.query(
+        `INSERT INTO images (name,folder,"contentType",image) VALUES ($1,$2,$3,$4)`,
+        [image.name, image.folder, image.contentType, image.image]
+      );
+      return !!inserted.rowCount;
+    }
+    return false;
   }
 }

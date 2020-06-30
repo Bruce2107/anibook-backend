@@ -1,11 +1,17 @@
 import { Request, Response } from 'express';
 import AnimeUtils from '@utils/AnimeManga';
+import Anime from '@domain/anime';
 import CreateAnime from './createAnime';
 import AnimeControllerRepository from '@usecase/port/AnimeMangaControllerRepository';
+import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
+import ImageAdapater from '@adapter/image/repository/DatabaseImage';
 
 export default class AnimeController implements AnimeControllerRepository {
   async create(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     const createAnime = new CreateAnime().createAnime;
     try {
       const dados = createAnime(JSON.parse(request.body.dados));
@@ -21,7 +27,10 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async _delete(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
       const { name } = request.params;
 
@@ -33,7 +42,10 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getCardByName(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
       const { name } = request.params;
 
@@ -45,7 +57,10 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getByName(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
       const { name } = request.params;
 
@@ -57,7 +72,10 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getRandom(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
       const { limit } = request.query;
 
@@ -74,7 +92,10 @@ export default class AnimeController implements AnimeControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
       const { limit } = request.query;
 
@@ -88,11 +109,14 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getSort(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
-      const { limit, order } = request.query;
-
-      const result = await animeUtils.getSort(limit as string, order as string);
+      const { limit } = request.query;
+      const { order } = request.params;
+      const result = await animeUtils.getSort(limit as string, order);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -102,14 +126,15 @@ export default class AnimeController implements AnimeControllerRepository {
   }
 
   async getSortCard(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
-      const { limit, order } = request.query;
+      const { limit } = request.query;
+      const { order } = request.params;
 
-      const result = await animeUtils.getSortCard(
-        limit as string,
-        order as string
-      );
+      const result = await animeUtils.getSortCard(limit as string, order);
       return response
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
@@ -122,7 +147,10 @@ export default class AnimeController implements AnimeControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     const createAnime = new CreateAnime().createAnime;
     try {
       const dados = createAnime(request.body.dados);
@@ -142,7 +170,10 @@ export default class AnimeController implements AnimeControllerRepository {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const animeUtils = new AnimeUtils('animes');
+    const animeUtils = new AnimeUtils<Anime>(
+      new AnimeMangaAdapter('animes'),
+      new ImageAdapater()
+    );
     try {
       const { name } = request.params;
       const { folder } = request.query;

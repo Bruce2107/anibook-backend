@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import saveImage from '@utils/SaveImageOnDatabase';
+import saveImage from '@utils/SaveImage';
 import ImageControllerRepository from '@usecase/port/ImageControllerRepository';
 import ImageAdapter from '@adapter/image/repository/DatabaseImage';
 
@@ -15,7 +15,12 @@ export default class ImageController implements ImageControllerRepository {
 
       const folder = queryFolder ? queryFolder : 'background';
 
-      return (await saveImage(folder, undefined, files['images']))
+      return (await saveImage(
+        folder,
+        new ImageAdapter(),
+        undefined,
+        files['images']
+      ))
         ? response.sendStatus(201)
         : response.sendStatus(400);
     } catch (error) {

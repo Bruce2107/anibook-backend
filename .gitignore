@@ -4,5 +4,6 @@ src/uploads/**/*
 !src/uploads/.gitkeep
 .env
 *.tsbuildinfo
-coverage/
+coverage
+.vscode
 src/utils/image_test/*.webp

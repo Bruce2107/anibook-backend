@@ -58,4 +58,14 @@ describe('InMemoryToken', () => {
     const result = await inMemoryToken.insertOne('test1@test.test', 'test');
     expect(result).toBe(false);
   });
+
+  test('should delete an user', async () => {
+    const result = await inMemoryToken._delete('test1');
+    expect(users.length).toBe(2);
+    expect(result).toBe(true);
+  });
+  test('should not delete an user', async () => {
+    const result = await inMemoryToken._delete('test');
+    expect(result).toBe(false);
+  });
 });

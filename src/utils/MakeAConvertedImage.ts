@@ -7,7 +7,7 @@ async function MakeAConvertedImage(
   file: Express.Multer.File
 ): Promise<TypeImage> {
   await x2Webp(file);
-  await sleep(200);
+  await sleep(500);
   return createImageObject(
     `${file.mimetype.split('/')[0]}/webp`,
     folder,

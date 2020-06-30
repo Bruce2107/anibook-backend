@@ -1,8 +1,5 @@
-import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { User } from 'anibook';
-
-dotenv.config();
 
 const token = process.env.TOKEN || 'anibook';
 

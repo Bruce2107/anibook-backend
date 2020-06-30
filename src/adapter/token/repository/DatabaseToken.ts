@@ -21,10 +21,21 @@ export default class DatabaseToken implements TokenRepository {
   }
 
   async insertOne(email: string, nickname: string): Promise<boolean> {
-    const inserted = await pool.query(
-      `INSERT INTO users (email,nickname) VALUES ($1,$2)`,
-      [email, nickname]
+    if (!(await this.alreadyExists(email, nickname))) {
+      const inserted = await pool.query(
+        `INSERT INTO users (email,nickname) VALUES ($1,$2)`,
+        [email, nickname]
+      );
+      return !!inserted.rowCount;
+    }
+    return false;
+  }
+
+  async _delete(value: string): Promise<boolean> {
+    const deleted = await pool.query(
+      'DELETE FROM users WHERE nickname = $1 OR email = $1',
+      [value]
     );
-    return !!inserted.rowCount;
+    return !!deleted.rowCount;
   }
 }

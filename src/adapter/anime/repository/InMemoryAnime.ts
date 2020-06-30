@@ -8,20 +8,19 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
     this.animes = animes;
   }
 
-  async _delete(_: string, name: string): Promise<boolean> {
-    if (await this.alreadyExists(_, name)) {
+  async _delete(name: string): Promise<boolean> {
+    if (await this.alreadyExists(name)) {
       this.animes = this.animes.filter((anime) => anime.name !== name);
       return true;
     }
     return false;
   }
 
-  async alreadyExists(_: string, name: string): Promise<boolean> {
+  async alreadyExists(name: string): Promise<boolean> {
     for (let anime of this.animes) if (anime.name === name) return true;
     return false;
   }
   async getAllSorted(
-    _: string,
     limit: string,
     ___: string,
     ____: string[]
@@ -34,24 +33,24 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
 
     return animes;
   }
-  async getOne(_: string, name: string, __: string[]): Promise<Anime | null> {
+  async getOne(name: string, __: string[]): Promise<Anime | null> {
     const anime = this.animes.filter((anime) => anime.name === name);
     if (anime.length > 0) {
       return anime[0];
     }
     return null;
   }
-  async getRandom(
-    _: string,
-    limit: string,
-    __: string[]
-  ): Promise<Array<Anime>> {
+  async getRandom(limit: string, __: string[]): Promise<Array<Anime>> {
+    if (!limit) {
+      return this.animes;
+    }
     const animes: Anime[] = [];
     const numbers: Array<number> = [];
     const Nlimit = Number(limit);
     let i = 0;
     while (i < Nlimit) {
       const number = Math.floor(Math.random() * Nlimit);
+      /* istanbul ignore else */
       if (!numbers.includes(number)) {
         numbers.push(number);
         animes.push(this.animes[number]);
@@ -62,15 +61,15 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
     return animes;
   }
 
-  async insert(_: string, __: string[], data: Anime): Promise<boolean> {
-    if (await this.alreadyExists(_, data.name)) return false;
+  async insert(__: string[], data: Anime): Promise<boolean> {
+    if (await this.alreadyExists(data.name)) return false;
     this.animes.push(data);
     return true;
   }
-  async update(_: string, name: string, newData: Anime): Promise<boolean> {
+  async update(name: string, newData: Anime): Promise<boolean> {
     if (
-      !(await this.alreadyExists(_, name)) ||
-      ((await this.alreadyExists(_, newData.name)) && newData.name !== name)
+      !(await this.alreadyExists(name)) ||
+      ((await this.alreadyExists(newData.name)) && newData.name !== name)
     )
       return false;
     let index = 0;

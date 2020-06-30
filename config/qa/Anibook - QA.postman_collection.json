@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "44579a30-3711-43b6-bb11-c9a2ef176a7e",
-		"name": "Anibook",
+		"_postman_id": "ee6e4da3-4fe8-4698-80dd-3b83324c68f4",
+		"name": "Anibook - QA",
 		"description": "# Dados\n```js\n\"dados\": {\n  \"name\": \"nome\",\n  \"synopsis\": \"sinopse\",\n  \"comment\": \"comentario\",\n  \"photo\": \"nome do arquivo de capa\",\n  \"fodler\": \"nome da pasta com as imagens\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberEpisodes\": 12, //apenas animes\n    \"numberChapters\": 12, //apenas mangas\n    \"numberVolumes\": 1 //apenas mangas\n  },\n  \"images\": [\n    \"nome do arquivo\",\n    \"nome do arquivo\"\n  ],\n  \"whereWatch\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"whereRead\": [ //apenas mangas\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"musics\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ]\n}\n```",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "84313d81-dc37-4cf2-a4d6-566d4546f0ec",
+										"id": "7b81c28a-012f-436c-b58e-be2641d266b2",
 										"exec": [
 											"pm.test('Status should be 200', function (){\r",
 											"    pm.response.to.have.status(200)\r",
@@ -57,7 +57,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "8208106f-7184-4f8d-a192-c3ecd3b96cbe",
+										"id": "8c75bae4-b330-4a56-8b38-c5f4b63d8b34",
 										"exec": [
 											"pm.test('Status should be 200', function () {\r",
 											"    pm.response.to.have.status(200)\r",
@@ -97,7 +97,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "22d1cd0e-7f29-46e1-afbc-fb4838cc0da4",
+										"id": "bc3d8b60-cbba-45be-b685-d75999ca6b26",
 										"exec": [
 											"pm.test('Status should be 404', function () {\r",
 											"    pm.response.to.have.status(404)\r",
@@ -277,16 +277,6 @@
 						{
 							"name": "CreateAnAnimeWithImages",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -294,7 +284,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"Teste'2\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										},
 										{
@@ -306,8 +296,8 @@
 											"key": "images",
 											"type": "file",
 											"src": [
-												"haruo.png",
-												"Hi_Score_Girl_vol_1_cover.png"
+												"HSGirlThumb-696x392.jpg",
+												"maxresdefault.jpg"
 											]
 										}
 									],
@@ -316,7 +306,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/animes?folder=teste",
+									"raw": "{{url}}/animes?folder=highscoregirl",
 									"host": [
 										"{{url}}"
 									],
@@ -326,7 +316,7 @@
 									"query": [
 										{
 											"key": "folder",
-											"value": "teste"
+											"value": "highscoregirl"
 										}
 									]
 								},
@@ -337,16 +327,6 @@
 						{
 							"name": "CreateAnAnimeWithoutImages",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -354,7 +334,7 @@
 									"formdata": [
 										{
 											"key": "dados",
-											"value": "{\n        \"name\": \"Teste1211\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"value": "{\n        \"name\": \"Teste\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
 											"type": "text"
 										}
 									],
@@ -380,7 +360,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "18b3319e-716c-4a74-9955-d87d6045f071",
+										"id": "456d0bf8-7b3d-4ea5-92f4-286acf18c754",
 										"exec": [
 											"pm.test('Status 409', function () {\r",
 											"    pm.response.to.have.status(409)\r",
@@ -391,16 +371,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -436,7 +406,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "0da836ff-e276-4854-8d5b-992078da8da0",
+										"id": "2ca60652-04a4-482e-b1d6-9375bedc803e",
 										"exec": [
 											"pm.test('Status 401', function () {\r",
 											"    pm.response.to.have.status(401)\r",
@@ -447,6 +417,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -489,7 +462,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "49808304-9627-4478-b846-17171dbad520",
+										"id": "7d71aba1-76c6-4121-9867-7ce601533427",
 										"exec": [
 											"pm.test('Status should be 204', function () {\r",
 											"    pm.response.to.have.status(204)\r",
@@ -501,16 +474,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -547,7 +510,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "7bcd148e-06fb-44a5-9621-a2bf6f28e107",
+										"id": "a8c93cdd-7a1e-4389-8b26-095e802af59c",
 										"exec": [
 											"pm.test('Status should be 422', function () {\r",
 											"    pm.response.to.have.status(422)\r",
@@ -559,16 +522,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -608,7 +561,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "31c954f4-135b-4f44-b967-056d6285421b",
+										"id": "2613887b-d10e-4f8e-b409-637969080940",
 										"exec": [
 											"pm.test('Status should be 404', function () {\r",
 											"    pm.response.to.have.status(404)\r",
@@ -620,16 +573,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -677,16 +620,6 @@
 						{
 							"name": "UpdateImage",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -785,7 +718,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "84065fee-444a-454a-b123-43cf95a8f3bc",
+								"id": "5b45d597-9946-4c52-a43d-f7bf70dd923b",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -795,7 +728,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "85bb37b9-3169-48c3-97bb-506fd9426839",
+								"id": "e6e9e3a9-e080-4e23-8522-4dad26db8cac",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -812,16 +745,6 @@
 						{
 							"name": "DeleteAnime",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -846,16 +769,6 @@
 						{
 							"name": "DeleteAnime-NotFound",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -880,6 +793,9 @@
 						{
 							"name": "DeleteAnime-Unauthorized",
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -1205,7 +1121,7 @@
 							"variable": [
 								{
 									"key": "nickname",
-									"value": "ab"
+									"value": "qa"
 								}
 							]
 						}
@@ -1323,7 +1239,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "8b833fc9-2804-40a5-b08e-e35fac6f5bc8",
+										"id": "5aec6a57-5b4a-4c68-a00b-b07bf59d6d73",
 										"exec": [
 											"pm.test('Status 404', function () {\r",
 											"    pm.response.to.have.status(404)\r",
@@ -1448,16 +1364,6 @@
 						{
 							"name": "CreateAMangaWithImages",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1508,16 +1414,6 @@
 						{
 							"name": "CreateAMangaWithoutImages",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1552,7 +1448,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "72217339-194c-4e10-aff3-2a172928a065",
+										"id": "b330e943-778f-4821-8d27-dd29960e73b9",
 										"exec": [
 											"pm.test('Status 409', function () {\r",
 											"    pm.response.to.have.status(409)\r",
@@ -1563,16 +1459,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1604,7 +1490,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "a3dc880e-0895-4448-adc6-a6d6b5905d0a",
+										"id": "4eac2bb0-b490-4428-8cd6-1c36758cb45f",
 										"exec": [
 											"pm.test('Status 401', function () {\r",
 											"    pm.response.to.have.status(401)\r",
@@ -1656,7 +1542,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "58e728b0-e9fb-4439-98ff-b396dc7a3512",
+										"id": "f37722f3-45f0-4e03-b8e8-c4eedf8a65f4",
 										"exec": [
 											"pm.test('Status should be 204', function () {\r",
 											"    pm.response.to.have.status(204)\r",
@@ -1668,16 +1554,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -1714,7 +1590,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "adc9176a-b04b-45ea-b5f1-68a55fc1c5ea",
+										"id": "ff402394-2603-49e5-9fba-7b8b10bba1bb",
 										"exec": [
 											"pm.test('Status should be 422', function () {\r",
 											"    pm.response.to.have.status(422)\r",
@@ -1726,16 +1602,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -1775,7 +1641,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "80b8a40f-7ab6-464d-b450-f576f12085d1",
+										"id": "b07808ae-8aec-40a8-81c2-614c3bbe4c8d",
 										"exec": [
 											"pm.test('Status should be 404', function () {\r",
 											"    pm.response.to.have.status(404)\r",
@@ -1787,16 +1653,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -1834,7 +1690,7 @@
 									"variable": [
 										{
 											"key": "name",
-											"value": "Naruto2"
+											"value": "NotFound"
 										}
 									]
 								},
@@ -1845,16 +1701,6 @@
 						{
 							"name": "UpdateImage",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -1948,7 +1794,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "da5a6d06-48b6-48dd-aba8-db9fe136fdee",
+								"id": "8c4ba5b1-7137-4256-ac47-2673e36e102f",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1958,7 +1804,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "970ead38-13df-415f-8e9d-67372ef72e13",
+								"id": "f1da6a81-c0c0-4e87-be50-a0e5fd2370c2",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1975,16 +1821,6 @@
 						{
 							"name": "DeleteManga",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -2009,16 +1845,6 @@
 						{
 							"name": "DeleteManga-NotFound",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6ImFiIiwiZW1haWwiOiJhQGEuYmMiLCJpYXQiOjE1OTA2MjAwOTV9.uHKXBsS6hjg9tmwJNlwoExjAuRWmjnFkdZ7ob1UY384",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -2130,11 +1956,21 @@
 			"protocolProfileBehavior": {}
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6InFhIiwiZW1haWwiOiJxYSIsImlhdCI6MTU5MzAwNjAzNX0.xvJZwr-ze367CB-ef-nmaXvYgiGHA-Qxgvc1l7Nf-U0",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "dcf514c8-3e54-4e49-8ec3-14c232a5ddda",
+				"id": "5fc2a308-98e7-47d1-b939-5dd36ebb76d9",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2144,7 +1980,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "f30a9a70-87fa-4d09-8395-c3042fd38627",
+				"id": "0ae910be-f5c1-44a7-b88c-a9914d4b5be9",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2154,7 +1990,7 @@
 	],
 	"variable": [
 		{
-			"id": "e9779111-7cf1-4fb2-89f5-a05f1a019494",
+			"id": "2261ff23-0beb-49f0-955d-976dd39af321",
 			"key": "url",
 			"value": "http://localhost:4000"
 		}

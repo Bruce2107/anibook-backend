@@ -7,10 +7,10 @@ const routes = Router();
 const AC = new AnimeController();
 
 routes.get('/animes', AC.getRandom);
-routes.get('/animes/sort', AC.getSort);
+routes.get('/animes/sort/:order', AC.getSort);
 routes.get('/animes/:name', AC.getByName);
 routes.get('/animes/card/random', AC.getRandomCards);
-routes.get('/animes/card/sort', AC.getSortCard);
+routes.get('/animes/card/sort/:order', AC.getSortCard);
 routes.get('/animes/card/:name', AC.getCardByName);
 
 routes.post('/animes', [fileUpload, authenticate], AC.create);

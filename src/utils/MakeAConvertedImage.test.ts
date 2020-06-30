@@ -1,22 +1,22 @@
 import { readFileSync, unlinkSync } from 'fs';
 import { Readable } from 'stream';
-import MakeAConvertedImage from './MakeACovertedImage';
+import MakeAConvertedImage from './MakeAConvertedImage';
 
 describe('Make a converted image', () => {
   let image: Express.Multer.File;
   beforeAll(() => {
     image = {
       buffer: Buffer.from(
-        readFileSync('src/utils/image_test/oono.jpg').toString('base64'),
+        readFileSync('src/utils/image_test/haruo.png').toString('base64'),
         'base64'
       ),
       destination: '',
       encoding: '',
       fieldname: '',
-      filename: 'oono.jpg',
+      filename: 'haruo.png',
       mimetype: 'image/jpg',
-      originalname: 'oono.jpg',
-      path: 'src/utils/image_test/oono.jpg',
+      originalname: 'haruo.png',
+      path: 'src/utils/image_test/haruo.png',
       size: 122,
       stream: new Readable(),
     };
@@ -30,6 +30,6 @@ describe('Make a converted image', () => {
     const result = await MakeAConvertedImage('folder', image);
 
     expect(result.folder).toBe('folder');
-    expect(result.name).toBe('oono.webp');
+    expect(result.name).toBe('haruo.webp');
   });
 });
