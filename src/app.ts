@@ -8,6 +8,7 @@ import imageRoutes from './routes/image';
 import mangaRoutes from './routes/manga';
 import tokenRoutes from './routes/token';
 import mixedRoutes from './routes/mixed';
+import defaultRoute from './routes/default';
 
 class App {
   public express: express.Application;
@@ -38,6 +39,7 @@ class App {
     this.express.use(mangaRoutes);
     this.express.use(tokenRoutes);
     this.express.use(mixedRoutes);
+    this.express.use(defaultRoute);
   }
 }
 

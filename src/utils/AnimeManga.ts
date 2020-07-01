@@ -35,6 +35,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
         this.imageAdapter
       );
     }
+    dados.name = dados.name.trim();
     if (await this.adapter.alreadyExists(dados.name)) return 409;
     await this.adapter.insert(['dados'], dados);
     return 201;

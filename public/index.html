@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anibook API</title>
+  <style>
+    body,
+    html,
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #444444;
+      color: #c0c0c0;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+
+    ul {
+      list-style: none;
+      margin: 15px;
+    }
+
+    a,
+    a:visited {
+      color: deeppink;
+    }
+
+    h2 {
+      color: #00d2d3
+    }
+
+    .example {
+      margin: 15px;
+    }
+
+    h3 {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <h2>Animes</h2>
+      <ul>
+        <li><a href="/animes">/animes</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> limit</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna uma lista com todos os animes em ordem aleatória</li>
+          </ul>
+        </li>
+        <li><a href="#">/animes</a>
+          <ul>
+            <li><b>Tipo:</b> POST</li>
+            <li><b>Params:</b></li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> cria um anime, <a href="#create-anime">exemplo</a></li>
+          </ul>
+        </li>
+        <li><a href="/animes/Mob">/animes/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna todos os dados de um anime</li>
+          </ul>
+        </li>
+        <li><a href="#">/animes/:name</a>
+          <ul>
+            <li><b>Tipo:</b> DELETE</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> remove um anime</li>
+          </ul>
+        </li>
+        <li><a href="#">/animes/:name</a>
+          <ul>
+            <li><b>Tipo:</b> PATCH</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> atualiza um anime</li>
+          </ul>
+        </li>
+        <li><a href="/animes/sort/name">/animes/sort/:order</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> order</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna todos os animes ordenados pelo parâmetro especificado</li>
+          </ul>
+        </li>
+        <li><a href="/animes/card">/animes/card</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> limit</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna uma lista com todos os animes em ordem aleatória contendo as infos de card apenas
+            </li>
+          </ul>
+        </li>
+        <li><a href="/animes/card/Mob">/animes/card/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna os dados de um anime na forma de card</li>
+          </ul>
+        </li>
+        <li><a href="/animes/card/sort/name">/animes/card/sort/:order</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> order</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna todos os animes ordenados pelo parâmetro especificado contendo as infos de card
+              apenas</li>
+          </ul>
+        </li>
+        <li><a href="#">/animes/image/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> atualiza as imagens de um anime</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h2>Images</h2>
+      <ul>
+        <li><a href="#">/image</a>
+          <ul>
+            <li><b>Tipo:</b> POST</li>
+            <li><b>Params:</b> folder</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> insere n imagens</li>
+          </ul>
+        </li>
+        <li><a href="/image/background">/image/background</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> </li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna um imagem classificada como background</li>
+          </ul>
+        </li>
+        <li><a href="/image/highscoregirl/oono.webp">/image/:folder/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> folder, name</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna a imagem escolhida</li>
+          </ul>
+        </li>
+        <li><a href="#">/image/:folder/:name</a>
+          <ul>
+            <li><b>Tipo:</b> DELETE</li>
+            <li><b>Params:</b> folder, name</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> remove uma imagem</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h2>Mangas</h2>
+      <ul>
+        <li><a href="/mangas">/mangas</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> limit</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna uma lista com todos os mangas em ordem aleatória</li>
+          </ul>
+        </li>
+        <li><a href="#">/mangas</a>
+          <ul>
+            <li><b>Tipo:</b> POST</li>
+            <li><b>Params:</b></li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> cria um manga, <a href="#create-manga">exemplo</a></li>
+          </ul>
+        </li>
+        <li><a href="/mangas/Mob">/mangas/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna todos os dados de um manga</li>
+          </ul>
+        </li>
+        <li><a href="#">/mangas/:name</a>
+          <ul>
+            <li><b>Tipo:</b> DELETE</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> remove um manga</li>
+          </ul>
+        </li>
+        <li><a href="#">/mangas/:name</a>
+          <ul>
+            <li><b>Tipo:</b> PATCH</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> atualiza um manga</li>
+          </ul>
+        </li>
+        <li><a href="/mangas/sort/name">/mangas/sort/:order</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> order</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna todos os mangas ordenados pelo parâmetro especificado</li>
+          </ul>
+        </li>
+        <li><a href="/mangas/card">/mangas/card</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> limit</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna uma lista com todos os mangas em ordem aleatória contendo as infos de card apenas
+            </li>
+          </ul>
+        </li>
+        <li><a href="/mangas/card/Mob">/mangas/card/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna os dados de um manga na forma de card</li>
+          </ul>
+        </li>
+        <li><a href="/mangas/card/sort/name">/mangas/card/sort/:order</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> order</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna todos os mangas ordenados pelo parâmetro especificado contendo as infos de card
+              apenas</li>
+          </ul>
+        </li>
+        <li><a href="#">/mangas/image/:name</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> name</li>
+            <li><b>Auth:</b> <code>true</code></li>
+            <li><b>Desc:</b> atualiza as imagens de um manga</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h2>Mixed</h2>
+      <ul>
+        <li><a href="/mixed/card/random">/animes/card/random</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> limit</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna uma lista com animes e mangas em ordem aleatória com as infos de card</li>
+          </ul>
+        </li>
+        <li><a href="/mixed/random">/animes/random</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> limit</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna uma lista com animes e mangas em ordem aleatória</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h2>Token</h2>
+      <ul>
+        <li><a href="/token/anibook">/token/:nickname</a>
+          <ul>
+            <li><b>Tipo:</b> GET</li>
+            <li><b>Params:</b> nickname</li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> retorna o token de um user</li>
+          </ul>
+        </li>
+        <li><a href="#">/token/user</a>
+          <ul>
+            <li><b>Tipo:</b> POST</li>
+            <li><b>Params:</b> </li>
+            <li><b>Auth:</b> <code>false</code></li>
+            <li><b>Desc:</b> cria um user</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="example">
+    <h3 id="create-anime">Criar Anime:</h3>
+    <pre>
+      <code>
+        {
+          "name": "Dragon Ball",
+          "synopsis": "Bulma is a girl in search of the mystical dragonballs that when brought together grant any wish. In her search she bumps into the owner of one of these balls, a strange boy named Goku. The two then set off together, Bulma in search of the dragonballs and Goku on a quest to become stronger.",
+          "comment": "Dragon Ball foi um daqueles animes que eu sabia que precisa assistir, mas não queria. Por sorte um amigo meu me recomendou, o que me deu âmino para vê-lo. Dragon Ball Classico se tornou um dos meus animes prefiridos, e isso se da por me passar uma sensação boa. O anime se enquadrado perfeitamente no meu gosto visual, já que AMO o estilo dos anos 80/90 das animações japonesas. A dublagem é essencial para que tenha a experiência completa. Além disso a história que começa despretenciosa prende a atenção conforme Goku vai crescendo.",
+          "whereWatch": [
+            {
+              "language": "português",
+              "url": "https://www.dragonballlimit-f.com.br/p/episodios-dragon-ball-classico-para.html",
+              "name": "Dragon Ball Limit-F"
+            },
+            {
+              "language": "português",
+              "url": "https://stnlfansub.wordpress.com/2018/05/11/dragon-ball/",
+              "name": "STNL Fansub"
+            }
+          ],
+          "info": {
+            "author": "Akira Toriyama",
+            "status": "finalizado",
+            "numberEpisodes": 153
+          },
+          "musics": [
+            {
+              "language": "português",
+              "url": "https://music.youtube.com/watch?v=Wyq47u8qzVo",
+              "name": "Romantic Ageru Yo"
+            },
+            {
+              "language": "espanhol",
+              "url": "https://music.youtube.com/watch?v=5klVYr1k4Zg",
+              "name": "Romantic Ageru Yo"
+            },
+            {
+              "language": "japonês",
+              "url": "https://music.youtube.com/watch?v=YW1Tj23UwfE",
+              "name": "Romantic Ageru Yo"
+            },
+            {
+              "language": "instrumental",
+              "url": "https://music.youtube.com/watch?v=6cYX61xG5PA",
+              "name": "Sexy Girl Bulma"
+            },
+            {
+              "language": "português",
+              "url": "https://music.youtube.com/watch?v=6Y7j10O_lCs",
+              "name": "Fantástica Aventura"
+            }
+          ],
+          "folder": "dragonball",
+          "photo": "dragon-ball-completo-saga-z-classic-kai-gt-filmes-d-nq-np-87_zcc3.1200.jpg",
+          "images": [
+            "769a816b667af6abab98fba01bfd9dca.jpg",
+            "c86d137c8dee7fdb4d462dd8f50cb449.jpg",
+            "fba0a04afebefd8259978ab4d6568d5c.jpg"
+          ]
+        }
+      </code>
+    </pre>
+    <h4>Notas:</h4>
+    Os animes podem ser criadas sem algumas infos, como por exemplo: <i>folder</i>, <i>images</i> e <i>photo</i>
+  </div>
+  <div class="example">
+    <h3 id="create-manga">Criar Manga:</h3>
+    <pre>
+      <code>
+        {
+          "name":"Ijiranaide, Nagatoro-san",
+          "synopsis":"A kouhai gosta de provocar o senpai",
+          "info": {
+            "author":"774",
+            "status":"lancando",
+            "numberChapters":0,
+            "numberVolumes":0
+          },
+          "whereRead": [
+            {
+              "language":"ingles",
+              "name":"mangadex",
+              "url":"https://mangadex.org/title/22631/ijiranaide-nagatoro-san"
+            }
+          ]
+        }
+      </code>
+    </pre>
+    <h4>Notas:</h4>
+    Os mangas podem ser criadas sem algumas infos, como por exemplo: <i>folder</i>, <i>images</i> e <i>photo</i>
+
+  </div>
+  <div class="example">
+    <h4>Params:</h4>
+    <ul>
+      <li><p><b>limit:</b> query param</p></li>
+      <li><p><b>name:</b> path param</p></li>
+      <li><p><b>order:</b> path param</p></li>
+      <li><p><b>folder:</b> path or query param</p></li>
+      <li><p><b>nickname:</b> path param</p></li>
+    </ul>
+  </div>
+</body>
+
+</html>
