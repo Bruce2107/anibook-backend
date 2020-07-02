@@ -8,6 +8,15 @@ import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeMang
 import Anime from '@domain/anime';
 import Manga from '@domain/manga';
 
+type MyType = { type: string };
+interface MyAnime extends Anime, MyType {}
+
+interface MyManga extends Manga, MyType {}
+
+interface MyCard extends Card, MyType {}
+
+type Mixed = MyAnime | MyManga;
+
 export default class MixedController implements MixedControllerRepository {
   async getRandom(request: Request, response: Response): Promise<Response> {
     const animeUtils = new MixedUtils(
@@ -25,10 +34,15 @@ export default class MixedController implements MixedControllerRepository {
 
       const resultAnime = await animeUtils.getRandom(String(limitAnime));
       const resultManga = await mangaUtils.getRandom(String(limitManga));
-      const resultMerged = mergeArray(
-        resultAnime.data as [],
-        resultManga.data as []
-      );
+      let animes: MyAnime[] = [];
+      let mangas: MyManga[] = [];
+      if (resultAnime.data) {
+        animes = resultAnime.data.map((anime) => ({ ...anime, type: 'anime' }));
+      }
+      if (resultManga.data) {
+        mangas = resultManga.data.map((anime) => ({ ...anime, type: 'manga' }));
+      }
+      const resultMerged = mergeArray(animes as Mixed[], mangas as Mixed[]);
 
       return response
         .status(200)
@@ -54,10 +68,15 @@ export default class MixedController implements MixedControllerRepository {
 
       const resultAnime = await animeUtils.getRandomCards(String(limitAnime));
       const resultManga = await mangaUtils.getRandomCards(String(limitManga));
-      const resultMerged = mergeArray(
-        resultAnime.data as Card[],
-        resultManga.data as Card[]
-      );
+      let animes: MyAnime[] = [];
+      let mangas: MyManga[] = [];
+      if (resultAnime.data) {
+        animes = resultAnime.data.map((anime) => ({ ...anime, type: 'anime' }));
+      }
+      if (resultManga.data) {
+        mangas = resultManga.data.map((anime) => ({ ...anime, type: 'manga' }));
+      }
+      const resultMerged = mergeArray(animes as MyCard[], mangas as MyCard[]);
 
       return response
         .status(200)
