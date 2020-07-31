@@ -47,8 +47,8 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
   }
 
   async getOne(name: string): Promise<GetResponse<T>> {
-    const reuslt = await this.adapter.getOne(name, ['dados']);
-    return reuslt ? { status: 200, data: reuslt } : { status: 404 };
+    const result = await this.adapter.getOne(name, ['dados']);
+    return result ? { status: 200, data: result } : { status: 404 };
   }
 
   async getRandom(limit: string): Promise<GetResponse<Array<T>>> {
@@ -105,7 +105,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     const newData = (await this.adapter.getOne(name, ['dados'])) as T;
     /* istanbul ignore else */
     if (data.name) {
-      //já existe outro registro com esse mesmo nome
+      // já existe outro registro com esse mesmo nome
       if (data.name !== name && (await this.adapter.alreadyExists(data.name)))
         return 409;
       newData.name = data.name;
@@ -121,7 +121,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     /* istanbul ignore else */
     if (data.info.status) newData.info.status = data.info.status;
 
-    //alterções para anime
+    // alterações para anime
     if (isAnime(newData) && isAnime(data)) {
       /* istanbul ignore else */
       if (data.info.numberEpisodes)
@@ -141,7 +141,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
             newData.whereWatch.push(site);
         });
     }
-    //alterções para mangá
+    // alterações para mangá
     if (isManga(newData) && isManga(data)) {
       /* istanbul ignore else */
       if (data.info.numberChapters)

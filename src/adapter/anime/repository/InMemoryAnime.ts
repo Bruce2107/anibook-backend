@@ -2,7 +2,7 @@ import AnimeRepository from '@usecase/port/AnimeMangaRepository';
 import Anime from '@domain/anime';
 import SortArray from '@utils/SortArray';
 
-export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
+export default class InMemoryAnimeRepository implements AnimeRepository<Anime> {
   animes: Anime[] = [];
   constructor(animes: Anime[]) {
     this.animes = animes;
@@ -46,17 +46,17 @@ export default class InMemoryAnimeReposiory implements AnimeRepository<Anime> {
     }
     const animes: Anime[] = [];
     const numbers: Array<number> = [];
-    const Nlimit = Number(limit);
+    const NumberLimit = Number(limit);
     let i = 0;
-    while (i < Nlimit) {
-      const number = Math.floor(Math.random() * Nlimit);
+    while (i < NumberLimit) {
+      const number = Math.floor(Math.random() * NumberLimit);
       /* istanbul ignore else */
       if (!numbers.includes(number)) {
         numbers.push(number);
         animes.push(this.animes[number]);
         i++;
       }
-      if (i === Nlimit) break;
+      if (i === NumberLimit) break;
     }
     return animes;
   }

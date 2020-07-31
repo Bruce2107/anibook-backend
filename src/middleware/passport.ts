@@ -14,9 +14,9 @@ const options: StrategyOptions = {
   secretOrKey: token,
 };
 
-export default new Strategy(options, async (paylaod: User, done) => {
+export default new Strategy(options, async (payload: User, done) => {
   try {
-    const user = await tokenAdapter.getOne(paylaod.nickname);
+    const user = await tokenAdapter.getOne(payload.nickname);
     if (user) return done(null, user);
     return done(null, false);
   } catch (error) {

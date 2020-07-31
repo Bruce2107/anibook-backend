@@ -54,7 +54,7 @@ describe('InMemoryManga', () => {
     const result = await inMemoryManga._delete('manga2');
     expect(result).toBeTruthy();
   });
-  test('shound not delete an manga', async () => {
+  test('should not delete an manga', async () => {
     const result = await inMemoryManga._delete('manga0');
     expect(result).toBeFalsy();
   });

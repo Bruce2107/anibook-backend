@@ -51,7 +51,7 @@ describe('InMemoryAnime', () => {
     const result = await inMemoryAnime._delete('anime2');
     expect(result).toBeTruthy();
   });
-  test('shound not delete an anime', async () => {
+  test('should not delete an anime', async () => {
     const result = await inMemoryAnime._delete('anime0');
     expect(result).toBeFalsy();
   });

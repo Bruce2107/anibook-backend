@@ -8,14 +8,14 @@ describe('Database Image', () => {
   });
 
   describe('Already exists', () => {
-    it('should retrun true when image already exists', async () => {
+    it('should return true when image already exists', async () => {
       const result = await databaseImage.alreadyExists(
         'background',
         'Aqua.webp'
       );
       expect(result).toBe(true);
     });
-    it('should retrun false when image not found', async () => {
+    it('should return false when image not found', async () => {
       const result = await databaseImage.alreadyExists(
         'background',
         'NotFound.webp'

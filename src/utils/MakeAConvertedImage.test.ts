@@ -26,7 +26,7 @@ describe('Make a converted image', () => {
     unlinkSync(`${image.path.split('.')[0]}.webp`);
   });
 
-  it('should return a object with wepb extension', async () => {
+  it('should return a object with webp extension', async () => {
     const result = await MakeAConvertedImage('folder', image);
 
     expect(result.folder).toBe('folder');
