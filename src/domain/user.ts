@@ -4,7 +4,7 @@ import { User as IUser } from 'anibook';
  * @property `string` email
  * @property `string` nickname
  */
-export default class User implements IUser {
+export class User implements IUser {
   email: string;
   nickname: string;
 

@@ -1,10 +1,10 @@
-import AnimeMangaUtils from './AnimeManga';
 import { Anime, Manga, TypeImage } from 'anibook';
-import InMemoryAnime from '../adapter/anime/repository/InMemoryAnime';
-import InMemoryManga from '../adapter/manga/repository/InMemoryManga';
-import InMemoryImage from '../adapter/image/repository/InMemoryImage';
 import { readFileSync } from 'fs';
 import { Readable } from 'stream';
+import { AnimeMangaUtils } from './AnimeManga';
+import { InMemoryAnimeRepository } from '../adapter/anime/repository/InMemoryAnime';
+import { InMemoryMangaRepository } from '../adapter/manga/repository/InMemoryManga';
+import { InMemoryImageRepository } from '../adapter/image/repository/InMemoryImage';
 
 describe('Anime Utils', () => {
   let animeUtils: AnimeMangaUtils<Anime>;
@@ -89,8 +89,8 @@ describe('Anime Utils', () => {
       }
     );
     animeUtils = new AnimeMangaUtils<Anime>(
-      new InMemoryAnime(animes),
-      new InMemoryImage(images)
+      new InMemoryAnimeRepository(animes),
+      new InMemoryImageRepository(images)
     );
   });
 
@@ -562,8 +562,8 @@ describe('Manga Utils', () => {
       }
     );
     mangaUtils = new AnimeMangaUtils<Manga>(
-      new InMemoryManga(mangas),
-      new InMemoryImage(images)
+      new InMemoryMangaRepository(mangas),
+      new InMemoryImageRepository(images)
     );
   });
 

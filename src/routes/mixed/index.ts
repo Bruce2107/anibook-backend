@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import MixedController from '@usecase/Mixed';
+import { MixedController } from '@usecase/Mixed';
 
 const routes = Router();
 const MC = new MixedController();

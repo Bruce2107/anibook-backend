@@ -1,4 +1,4 @@
-import DatabaseToken from './DatabaseToken';
+import { DatabaseToken } from './DatabaseToken';
 
 describe('Database Token', () => {
   let databaseToken: DatabaseToken;

@@ -1,6 +1,6 @@
 import { GetResponse } from 'anibook';
 
-export default interface AnimeMangaUtilsRepository<T> {
+export interface AnimeMangaUtilsRepository<T> {
   /**
    *
    * @param string folder

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-export default interface AnimeMangaControllerRepository {
+export interface AnimeMangaControllerRepository {
   create(request: Request, response: Response): Promise<Response>;
   _delete(request: Request, response: Response): Promise<Response>;
   getCardByName(request: Request, response: Response): Promise<Response>;

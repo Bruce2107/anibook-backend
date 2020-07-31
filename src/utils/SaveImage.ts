@@ -1,8 +1,8 @@
-import ImageRepository from '@usecase/port/ImageRepository';
-import MakeAConvertedImage from './MakeAConvertedImage';
+import { ImageRepository } from '@usecase/port/ImageRepository';
+import { MakeAConvertedImage } from './MakeAConvertedImage';
 import { TypeImage } from 'anibook';
 
-export default async function saveImage(
+export async function saveImage(
   folder: string,
   adapter: ImageRepository,
   file?: Express.Multer.File,

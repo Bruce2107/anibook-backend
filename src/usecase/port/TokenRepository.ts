@@ -1,6 +1,6 @@
 import { User } from 'anibook';
 
-export default interface TokenRepository {
+export interface TokenRepository {
   /**
    *
    * @param string `email` user email

@@ -1,4 +1,4 @@
-export default interface AnimeMangaRepository<T> {
+export interface AnimeMangaRepository<T> {
   /**
    *
    * @param string `name` Name to find

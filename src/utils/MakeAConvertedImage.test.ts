@@ -1,6 +1,6 @@
 import { readFileSync, unlinkSync } from 'fs';
 import { Readable } from 'stream';
-import MakeAConvertedImage from './MakeAConvertedImage';
+import { MakeAConvertedImage } from './MakeAConvertedImage';
 
 describe('Make a converted image', () => {
   let image: Express.Multer.File;

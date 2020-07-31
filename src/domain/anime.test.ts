@@ -1,4 +1,4 @@
-import Anime from './anime';
+import { Anime } from './anime';
 import { Anime as IAnime } from 'anibook';
 
 describe('Anime', () => {

@@ -1,6 +1,6 @@
-import Manga from '@domain/manga';
+import { Manga } from '@domain/manga';
 
-export default class CreateManga {
+export class CreateManga {
   createManga(object: any): Manga {
     return new Manga(object);
   }

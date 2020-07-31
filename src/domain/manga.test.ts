@@ -1,5 +1,5 @@
-import Manga from './manga';
 import { Manga as IManga } from 'anibook';
+import { Manga } from './manga';
 
 describe('Anime', () => {
   test('should create an incomplete manga', () => {

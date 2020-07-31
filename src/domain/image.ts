@@ -6,7 +6,7 @@ import { TypeImage } from 'anibook';
  * @property `Buffer` image
  * @property `string` name
  */
-export default class Image implements TypeImage {
+export class Image implements TypeImage {
   contentType: string;
   folder: string;
   image: Buffer;

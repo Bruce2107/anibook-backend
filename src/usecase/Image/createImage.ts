@@ -1,6 +1,6 @@
-import Image from '@domain/image';
+import { Image } from '@domain/image';
 
-export default class CreateImage {
+export class CreateImage {
   createImage(object: any): Image {
     return new Image(object);
   }

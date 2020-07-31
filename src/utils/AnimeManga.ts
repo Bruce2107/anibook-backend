@@ -1,13 +1,13 @@
 import { GetResponse, isAnime, searchObjectInArray, isManga } from 'anibook';
-import AnimeMangaUtilsRepository from '@usecase/port/AnimeMangaUtilsRepository';
-import updatePhotoOrImageField from '@utils/UpdatePhotoOrImageField';
-import Anime from '@domain/anime';
-import Manga from '@domain/manga';
+import { AnimeMangaUtilsRepository } from '@usecase/port/AnimeMangaUtilsRepository';
+import { updatePhotoOrImageField } from '@utils/UpdatePhotoOrImageField';
+import { Anime } from '@domain/anime';
+import { Manga } from '@domain/manga';
 import { CardFields } from '@constants/Card';
-import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
-import ImageRepository from '@usecase/port/ImageRepository';
+import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
+import { ImageRepository } from '@usecase/port/ImageRepository';
 
-export default class AnimeMangaUtils<T extends Anime | Manga>
+export class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
   adapter: AnimeMangaRepository<T>;
   imageAdapter: ImageRepository;

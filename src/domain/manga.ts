@@ -10,7 +10,7 @@ import { Manga as IManga, MangaInfo, Link } from 'anibook';
  * @property `string` synopsis
  * @property `Array` whereRead
  */
-export default class Manga implements IManga {
+export class Manga implements IManga {
   comment: string;
   folder?: string;
   images?: Array<string>;
@@ -40,3 +40,5 @@ export default class Manga implements IManga {
     this.whereRead = whereRead;
   }
 }
+
+export default Manga;

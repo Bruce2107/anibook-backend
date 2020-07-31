@@ -1,8 +1,8 @@
-import TokenRepository from '@usecase/port/TokenRepository';
+import { TokenRepository } from '@usecase/port/TokenRepository';
 import { User } from 'anibook';
-import CreateUser from '@usecase/Token/createUser';
+import { CreateUser } from '@usecase/Token/createUser';
 
-export default class InMemoryTokenRepository implements TokenRepository {
+export class InMemoryTokenRepository implements TokenRepository {
   users: User[] = [];
   constructor(users: User[]) {
     this.users = users;

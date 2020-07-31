@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { User } from 'anibook';
-import createToken from '@utils/CreateToken';
-import TokenControllerRepository from '@usecase/port/TokenControllerRepository';
-import TokenAdapter from '@adapter/token/repository/DatabaseToken';
+import { createToken } from '@utils/CreateToken';
+import { TokenControllerRepository } from '@usecase/port/TokenControllerRepository';
+import { DatabaseToken } from '@adapter/token/repository/DatabaseToken';
 
-export default class TokenController implements TokenControllerRepository {
+export class TokenController implements TokenControllerRepository {
   async createUser(request: Request, response: Response): Promise<Response> {
-    const tokenAdapter = new TokenAdapter();
+    const tokenAdapter = new DatabaseToken();
     try {
       const { email, nickname } = request.body as User;
 
@@ -26,7 +26,7 @@ export default class TokenController implements TokenControllerRepository {
   }
 
   async getToken(request: Request, response: Response): Promise<Response> {
-    const tokenAdapter = new TokenAdapter();
+    const tokenAdapter = new DatabaseToken();
     try {
       const { nickname } = request.params;
 

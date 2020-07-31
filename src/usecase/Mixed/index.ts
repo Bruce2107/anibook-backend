@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { mergeArray, limits as getLimit } from 'anibook';
-import Card from '@domain/card';
-import MixedUtils from '@utils/AnimeManga';
-import MixedControllerRepository from '@usecase/port/MixedControllerRepository';
-import ImageAdapter from '@adapter/image/repository/DatabaseImage';
-import AnimeMangaAdapter from '@adapter/anime_manga/repository/DatabaseAnimeManga';
-import Anime from '@domain/anime';
-import Manga from '@domain/manga';
+import { Card } from '@domain/card';
+import { AnimeMangaUtils } from '@utils/AnimeManga';
+import { MixedControllerRepository } from '@usecase/port/MixedControllerRepository';
+import { DatabaseImage } from '@adapter/image/repository/DatabaseImage';
+import { DatabaseAnimeMangaRepository } from '@adapter/anime_manga/repository/DatabaseAnimeManga';
+import { Anime } from '@domain/anime';
+import { Manga } from '@domain/manga';
 
 type MyType = { type: string };
 interface MyAnime extends Anime, MyType {}
@@ -17,15 +17,15 @@ interface MyCard extends Card, MyType {}
 
 type Mixed = MyAnime | MyManga;
 
-export default class MixedController implements MixedControllerRepository {
+export class MixedController implements MixedControllerRepository {
   async getRandom(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new MixedUtils(
-      new AnimeMangaAdapter<Anime>('animes'),
-      new ImageAdapter()
+    const animeUtils = new AnimeMangaUtils(
+      new DatabaseAnimeMangaRepository<Anime>('animes'),
+      new DatabaseImage()
     );
-    const mangaUtils = new MixedUtils(
-      new AnimeMangaAdapter<Manga>('mangas'),
-      new ImageAdapter()
+    const mangaUtils = new AnimeMangaUtils(
+      new DatabaseAnimeMangaRepository<Manga>('mangas'),
+      new DatabaseImage()
     );
     try {
       const { limit } = request.query;
@@ -53,13 +53,13 @@ export default class MixedController implements MixedControllerRepository {
   }
 
   async getRandomCard(request: Request, response: Response): Promise<Response> {
-    const animeUtils = new MixedUtils(
-      new AnimeMangaAdapter<Anime>('animes'),
-      new ImageAdapter()
+    const animeUtils = new AnimeMangaUtils(
+      new DatabaseAnimeMangaRepository<Anime>('animes'),
+      new DatabaseImage()
     );
-    const mangaUtils = new MixedUtils(
-      new AnimeMangaAdapter<Manga>('mangas'),
-      new ImageAdapter()
+    const mangaUtils = new AnimeMangaUtils(
+      new DatabaseAnimeMangaRepository<Manga>('mangas'),
+      new DatabaseImage()
     );
     try {
       const { limit } = request.query;

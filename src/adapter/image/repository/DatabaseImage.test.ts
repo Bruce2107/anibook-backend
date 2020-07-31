@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
-import DatabaseImage from './DatabaseImage';
-import Image from '../../../domain/image';
+import { DatabaseImage } from './DatabaseImage';
+import { Image } from '../../../domain/image';
+
 describe('Database Image', () => {
   let databaseImage: DatabaseImage;
   beforeEach(() => {

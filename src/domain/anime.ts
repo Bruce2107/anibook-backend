@@ -11,7 +11,7 @@ import { Link, AnimeInfo, Anime as IAnime } from 'anibook';
  * @property `Array` whereWatch
  * @property `Array` musics
  */
-export default class Anime implements IAnime {
+export class Anime implements IAnime {
   folder?: string;
   name: string;
   photo: string;

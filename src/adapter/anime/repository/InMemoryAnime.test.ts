@@ -1,10 +1,10 @@
 import { isAnime } from 'anibook';
-import InMemoryAnime from './InMemoryAnime';
-import Anime from '../../../domain/anime';
+import { InMemoryAnimeRepository } from './InMemoryAnime';
+import { Anime } from '../../../domain/anime';
 
 describe('InMemoryAnime', () => {
   let animes: Anime[] = [];
-  let inMemoryAnime: InMemoryAnime;
+  let inMemoryAnime: InMemoryAnimeRepository;
   beforeEach(() => {
     animes = [];
     animes.push(
@@ -45,7 +45,7 @@ describe('InMemoryAnime', () => {
         whereWatch: [{ language: 'sda', name: 'name', url: 'url' }],
       }
     );
-    inMemoryAnime = new InMemoryAnime(animes);
+    inMemoryAnime = new InMemoryAnimeRepository(animes);
   });
   test('should delete an anime', async () => {
     const result = await inMemoryAnime._delete('anime2');

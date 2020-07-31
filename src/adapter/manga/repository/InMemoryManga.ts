@@ -1,8 +1,8 @@
-import MangaRepository from '@usecase/port/AnimeMangaRepository';
-import Manga from '@domain/manga';
-import SortArray from '@utils/SortArray';
+import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
+import { Manga } from '@domain/manga';
+import { SortArray } from '@utils/SortArray';
 
-export default class InMemoryMangaRepository implements MangaRepository<Manga> {
+export class InMemoryMangaRepository implements AnimeMangaRepository<Manga> {
   mangas: Manga[] = [];
   constructor(mangas: Manga[]) {
     this.mangas = mangas;

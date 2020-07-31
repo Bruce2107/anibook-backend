@@ -1,14 +1,14 @@
 import dotenv from 'dotenv';
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { User } from 'anibook';
-import TokenAdapter from '@adapter/token/repository/DatabaseToken';
+import { DatabaseToken } from '@adapter/token/repository/DatabaseToken';
 
 dotenv.config({
   path: process.env.NODE_ENV === 'qa' ? '.env.qa' : '.env',
 });
 
 const token = process.env.TOKEN;
-const tokenAdapter = new TokenAdapter();
+const tokenAdapter = new DatabaseToken();
 const options: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: token,

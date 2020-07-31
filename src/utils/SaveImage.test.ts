@@ -1,12 +1,12 @@
-import saveImage from './SaveImage';
-import ImageAdapter from '../adapter/image/repository/InMemoryImage';
+import { saveImage } from './SaveImage';
+import { InMemoryImageRepository } from '../adapter/image/repository/InMemoryImage';
 import { TypeImage } from 'anibook';
 import { readFileSync } from 'fs';
 import { Readable } from 'stream';
 
 describe('Save Image', () => {
   let images: TypeImage[];
-  let imageAdapter: ImageAdapter;
+  let imageAdapter: InMemoryImageRepository;
   beforeEach(() => {
     images = [];
     images.push(
@@ -38,7 +38,7 @@ describe('Save Image', () => {
         name: 'ToshinoKyokoTomato.webp',
       }
     );
-    imageAdapter = new ImageAdapter(images);
+    imageAdapter = new InMemoryImageRepository(images);
   });
 
   test('should save one image', async () => {

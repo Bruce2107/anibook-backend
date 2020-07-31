@@ -1,11 +1,11 @@
-import DatabaseAnime from './DatabaseAnimeManga';
-import Anime from '../../../domain/anime';
+import { DatabaseAnimeMangaRepository } from './DatabaseAnimeManga';
+import { Anime } from '../../../domain/anime';
 import { CardFields } from '../../../constants/Card';
 
 describe('Database Anime', () => {
-  let databaseAnime: DatabaseAnime<Anime>;
+  let databaseAnime: DatabaseAnimeMangaRepository<Anime>;
   beforeEach(() => {
-    databaseAnime = new DatabaseAnime<Anime>('animes');
+    databaseAnime = new DatabaseAnimeMangaRepository<Anime>('animes');
   });
 
   describe('Already exists', () => {

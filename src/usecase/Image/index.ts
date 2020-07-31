@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import saveImage from '@utils/SaveImage';
-import ImageControllerRepository from '@usecase/port/ImageControllerRepository';
-import ImageAdapter from '@adapter/image/repository/DatabaseImage';
+import { saveImage } from '@utils/SaveImage';
+import { ImageControllerRepository } from '@usecase/port/ImageControllerRepository';
+import { DatabaseImage } from '@adapter/image/repository/DatabaseImage';
 
-export default class ImageController implements ImageControllerRepository {
+export class ImageController implements ImageControllerRepository {
   async insertImage(request: Request, response: Response): Promise<Response> {
     try {
       const queryFolder = request.query.folder as string;
@@ -17,7 +17,7 @@ export default class ImageController implements ImageControllerRepository {
 
       return (await saveImage(
         folder,
-        new ImageAdapter(),
+        new DatabaseImage(),
         undefined,
         files['images']
       ))
@@ -29,7 +29,7 @@ export default class ImageController implements ImageControllerRepository {
   }
 
   async deleteImage(request: Request, response: Response): Promise<Response> {
-    const imageAdapter = new ImageAdapter();
+    const imageAdapter = new DatabaseImage();
     try {
       const { folder, name } = request.params;
 
@@ -42,7 +42,7 @@ export default class ImageController implements ImageControllerRepository {
   }
 
   async getBackground(_: Request, response: Response): Promise<Response> {
-    const imageAdapter = new ImageAdapter();
+    const imageAdapter = new DatabaseImage();
     try {
       const randomRow = await imageAdapter.getBackground();
       if (!randomRow) return response.sendStatus(404);
@@ -54,7 +54,7 @@ export default class ImageController implements ImageControllerRepository {
   }
 
   async getImage(request: Request, response: Response): Promise<Response> {
-    const imageAdapter = new ImageAdapter();
+    const imageAdapter = new DatabaseImage();
     try {
       const { folder, name } = request.params;
 

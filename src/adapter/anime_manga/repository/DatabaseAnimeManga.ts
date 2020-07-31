@@ -1,8 +1,8 @@
 import { QueryResult } from 'pg';
 import { pool } from '../../../database';
-import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
+import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
 
-export default class DatabaseAnimeMangaRepository<T>
+export class DatabaseAnimeMangaRepository<T>
   implements AnimeMangaRepository<T> {
   type: string;
   constructor(type: string) {

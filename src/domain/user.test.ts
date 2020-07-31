@@ -1,4 +1,5 @@
-import User from './user';
+import { User } from './user';
+
 describe('User', () => {
   test('should create an user', () => {
     const object = {

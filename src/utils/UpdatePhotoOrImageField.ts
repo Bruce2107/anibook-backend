@@ -1,8 +1,8 @@
 import { Data } from 'anibook';
-import saveImages from './SaveImage';
-import ImageRepository from '@usecase/port/ImageRepository';
+import { saveImage } from './SaveImage';
+import { ImageRepository } from '@usecase/port/ImageRepository';
 
-async function updatePhotoOrImageField<T extends Data>(
+export async function updatePhotoOrImageField<T extends Data>(
   files: {
     [fieldname: string]: Express.Multer.File[];
   },
@@ -15,7 +15,7 @@ async function updatePhotoOrImageField<T extends Data>(
   if (Object.keys(files).includes('card')) {
     const card: Express.Multer.File = files['card'][0];
     data.photo = `${card.originalname.split('.')[0]}.webp`;
-    await saveImages(folder, adapter, card, undefined);
+    await saveImage(folder, adapter, card, undefined);
   }
   if (Object.keys(files).includes('images')) {
     const images: Express.Multer.File[] = files['images'];
@@ -27,9 +27,7 @@ async function updatePhotoOrImageField<T extends Data>(
         data.images.push(`${file.originalname.split('.')[0]}.webp`);
       }
     });
-    await saveImages(folder, adapter, undefined, images);
+    await saveImage(folder, adapter, undefined, images);
   }
   return data;
 }
-
-export default updatePhotoOrImageField;
