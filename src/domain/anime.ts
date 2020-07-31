@@ -22,25 +22,7 @@ export class Anime implements IAnime {
   whereWatch: Array<Link>;
   musics?: Array<Link>;
 
-  constructor({
-    comment,
-    name,
-    photo,
-    synopsis,
-    whereWatch,
-    info,
-    folder,
-    images,
-    musics,
-  }: IAnime) {
-    this.comment = comment;
-    this.folder = folder;
-    this.images = images;
-    this.info = info;
-    this.musics = musics;
-    this.name = name;
-    this.photo = photo;
-    this.synopsis = synopsis;
-    this.whereWatch = whereWatch;
+  constructor({ ...props }: Anime) {
+    Object.assign(this, props);
   }
 }

@@ -6,13 +6,11 @@ import { Card as ICard } from 'anibook';
  * @property `string` photo
  */
 export class Card implements ICard {
-  folder: string;
+  folder?: string;
   name: string;
   photo: string;
 
-  constructor({ folder, name, photo }: ICard) {
-    this.folder = folder as string;
-    this.name = name;
-    this.photo = photo;
+  constructor({ ...props }: Card) {
+    Object.assign(this, props);
   }
 }

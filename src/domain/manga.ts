@@ -20,24 +20,8 @@ export class Manga implements IManga {
   synopsis: string;
   whereRead: Array<Link>;
 
-  constructor({
-    comment,
-    info,
-    name,
-    photo,
-    synopsis,
-    folder,
-    images,
-    whereRead,
-  }: IManga) {
-    this.comment = comment;
-    this.folder = folder;
-    this.images = images;
-    this.info = info;
-    this.name = name;
-    this.photo = photo;
-    this.synopsis = synopsis;
-    this.whereRead = whereRead;
+  constructor({ ...props }: Manga) {
+    Object.assign(this, props);
   }
 }
 

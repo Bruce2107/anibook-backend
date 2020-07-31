@@ -12,10 +12,7 @@ export class Image implements TypeImage {
   image: Buffer;
   name: string;
 
-  constructor({ contentType, folder, image, name }: TypeImage) {
-    this.contentType = contentType;
-    this.folder = folder;
-    this.image = image;
-    this.name = name;
+  constructor({ ...props }: Image) {
+    Object.assign(this, props);
   }
 }

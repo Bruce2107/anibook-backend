@@ -8,8 +8,7 @@ export class User implements IUser {
   email: string;
   nickname: string;
 
-  constructor({ email, nickname }: IUser) {
-    this.email = email;
-    this.nickname = nickname;
+  constructor({ ...props }: User) {
+    Object.assign(this, props);
   }
 }
