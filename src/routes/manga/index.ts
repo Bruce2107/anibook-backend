@@ -3,6 +3,7 @@ import authenticate from '@middleware/authenticate';
 import { fileUpload } from '@middleware/upload';
 import { MangaController } from '@usecase/Manga';
 import { getByNameCardMangaController } from '@usecase/Manga/Card/GetByName';
+import { getRandomCardMangaController } from '@usecase/Manga/Card/GetRandom';
 
 const routes = Router();
 const MC = new MangaController();
@@ -10,7 +11,9 @@ const MC = new MangaController();
 routes.get('/mangas', MC.getRandom);
 routes.get('/mangas/sort/:order', MC.getSort);
 routes.get('/mangas/:name', MC.getByName);
-routes.get('/mangas/card/random', MC.getRandomCards);
+routes.get('/mangas/card/random', (req: Request, res: Response) =>
+  getRandomCardMangaController.handle(req, res)
+);
 routes.get('/mangas/card/sort/:order', MC.getSortCard);
 routes.get('/mangas/card/:name', (req: Request, res: Response) =>
   getByNameCardMangaController.handle(req, res)
