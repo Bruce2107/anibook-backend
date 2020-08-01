@@ -196,3 +196,16 @@ export class MangaController implements AnimeMangaControllerRepository {
     }
   }
 }
+
+const databaseMangaRepository = new DatabaseAnimeMangaRepository<Manga>(
+  'mangas'
+);
+
+const databaseImageRepository = new DatabaseImage();
+
+const mangaUtils = new AnimeMangaUtils(
+  databaseMangaRepository,
+  databaseImageRepository
+);
+
+export { mangaUtils, databaseMangaRepository, databaseImageRepository };
