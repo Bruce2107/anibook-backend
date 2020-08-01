@@ -6,6 +6,7 @@ import { getByNameCardMangaController } from '@usecase/Manga/Card/GetByName';
 import { getRandomCardMangaController } from '@usecase/Manga/Card/GetRandom';
 import { getSortCardMangaController } from '@usecase/Manga/Card/GetSort';
 import { createMangaController } from '@usecase/Manga/Create';
+import { deleteMangaController } from '@usecase/Manga/Delete';
 
 const routes = Router();
 const MC = new MangaController();
@@ -36,6 +37,8 @@ routes.patch(
 );
 routes.patch('/mangas/:name', authenticate, MC.updateAnyFieldThatAreNotAFile);
 
-routes.delete('/mangas/:name', authenticate, MC._delete);
+routes.delete('/mangas/:name', authenticate, (req: Request, res: Response) =>
+  deleteMangaController.handle(req, res)
+);
 
 export default routes;
