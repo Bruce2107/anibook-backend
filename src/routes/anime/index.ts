@@ -5,6 +5,7 @@ import { AnimeController } from '@usecase/Anime';
 import { createAnimeController } from '@usecase/Anime/Create';
 import { getRandomAnimeController } from '@usecase/Anime/GetRandom';
 import { getSortAnimeController } from '@usecase/Anime/GetSort';
+import { getByNameAnimeController } from '@usecase/Anime/GetByName';
 
 const routes = Router();
 const AC = new AnimeController();
@@ -15,7 +16,9 @@ routes.get('/animes', (req: Request, res: Response) =>
 routes.get('/animes/sort/:order', (req: Request, res: Response) =>
   getSortAnimeController.handle(req, res)
 );
-routes.get('/animes/:name', AC.getByName);
+routes.get('/animes/:name', (req: Request, res: Response) =>
+  getByNameAnimeController.handle(req, res)
+);
 routes.get('/animes/card/random', AC.getRandomCards);
 routes.get('/animes/card/sort/:order', AC.getSortCard);
 routes.get('/animes/card/:name', AC.getCardByName);
