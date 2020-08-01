@@ -5,6 +5,7 @@ import { MangaController } from '@usecase/Manga';
 import { getByNameCardMangaController } from '@usecase/Manga/Card/GetByName';
 import { getRandomCardMangaController } from '@usecase/Manga/Card/GetRandom';
 import { getSortCardMangaController } from '@usecase/Manga/Card/GetSort';
+import { createMangaController } from '@usecase/Manga/Create';
 
 const routes = Router();
 const MC = new MangaController();
@@ -22,7 +23,11 @@ routes.get('/mangas/card/:name', (req: Request, res: Response) =>
   getByNameCardMangaController.handle(req, res)
 );
 
-routes.post('/mangas', [fileUpload, authenticate], MC.create);
+routes.post(
+  '/mangas',
+  [fileUpload, authenticate],
+  (req: Request, res: Response) => createMangaController.handle(req, res)
+);
 
 routes.patch(
   '/mangas/image/:name',
