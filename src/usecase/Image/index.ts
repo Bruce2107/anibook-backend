@@ -69,3 +69,7 @@ export class ImageController implements ImageControllerRepository {
     }
   }
 }
+
+const databaseImageRepository = new DatabaseImage();
+
+export { databaseImageRepository };
