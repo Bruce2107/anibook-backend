@@ -1,13 +1,13 @@
-import { GetSortCardAnimeUseCase } from './GetSortCardAnimeUseCase';
+import { GetSortCardMangaUseCase } from './GetSortCardMangaUseCase';
 import { Request, Response } from 'express';
 
-export class GetSortCardAnimeController {
-  constructor(private getRandomCardAnimeUseCase: GetSortCardAnimeUseCase) {}
+export class GetSortCardMangaController {
+  constructor(private getSortCardMangaUseCase: GetSortCardMangaUseCase) {}
   async handle(request: Request, response: Response) {
     try {
       const { limit } = request.query;
       const { order } = request.params;
-      const result = await this.getRandomCardAnimeUseCase.execute(
+      const result = await this.getSortCardMangaUseCase.execute(
         limit as string,
         order
       );
