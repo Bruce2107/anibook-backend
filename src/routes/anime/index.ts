@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import authenticate from '@middleware/authenticate';
 import { fileUpload } from '@middleware/upload';
-import { AnimeController } from '@usecase/Anime';
 import { createAnimeController } from '@usecase/Anime/Create';
 import { getRandomAnimeController } from '@usecase/Anime/GetRandom';
 import { getSortAnimeController } from '@usecase/Anime/GetSort';
@@ -11,9 +10,9 @@ import { getSortCardAnimeController } from '@usecase/Anime/Card/GetSort';
 import { getByNameCardAnimeController } from '@usecase/Anime/Card/GetByName';
 import { updateImageAnimeController } from '@usecase/Anime/Update/Image';
 import { updateTextAnimeController } from '@usecase/Anime/Update/Text';
+import { deleteAnimeController } from '@usecase/Anime/Delete';
 
 const routes = Router();
-const AC = new AnimeController();
 
 routes.get('/animes', (req: Request, res: Response) =>
   getRandomAnimeController.handle(req, res)
@@ -49,6 +48,8 @@ routes.patch('/animes/:name', authenticate, (req: Request, res: Response) =>
   updateTextAnimeController.handle(req, res)
 );
 
-routes.delete('/animes/:name', authenticate, AC._delete);
+routes.delete('/animes/:name', authenticate, (req: Request, res: Response) =>
+  deleteAnimeController.handle(req, res)
+);
 
 export default routes;
