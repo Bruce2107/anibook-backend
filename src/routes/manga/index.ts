@@ -7,13 +7,16 @@ import { getRandomCardMangaController } from '@usecase/Manga/Card/GetRandom';
 import { getSortCardMangaController } from '@usecase/Manga/Card/GetSort';
 import { createMangaController } from '@usecase/Manga/Create';
 import { deleteMangaController } from '@usecase/Manga/Delete';
+import { getByNameMangaController } from '@usecase/Manga/GetByName';
 
 const routes = Router();
 const MC = new MangaController();
 
 routes.get('/mangas', MC.getRandom);
 routes.get('/mangas/sort/:order', MC.getSort);
-routes.get('/mangas/:name', MC.getByName);
+routes.get('/mangas/:name', (req: Request, res: Response) =>
+  getByNameMangaController.handle(req, res)
+);
 routes.get('/mangas/card/random', (req: Request, res: Response) =>
   getRandomCardMangaController.handle(req, res)
 );

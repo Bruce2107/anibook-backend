@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { GetByNameAnimeUseCase } from './GetByNameAnimeUseCase';
+import { GetByNameMangaUseCase } from './GetByNameMangaUseCase';
 
-export class GetByNameAnimeController {
-  constructor(private getByNameAnimeUseCase: GetByNameAnimeUseCase) {}
+export class GetByNameMangaController {
+  constructor(private getByNameMangaUseCase: GetByNameMangaUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { name } = request.params;
-      const result = await this.getByNameAnimeUseCase.execute(name);
+      const result = await this.getByNameMangaUseCase.execute(name);
 
       return response
         .status(result.status)
