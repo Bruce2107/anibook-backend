@@ -6,8 +6,10 @@ export class GetRandomCardAnimeController {
   async handle(request: Request, response: Response) {
     try {
       const { limit } = request.query;
+      const { order } = request.params;
       const result = await this.getRandomCardAnimeUseCase.execute(
-        limit as string
+        limit as string,
+        order
       );
 
       return response

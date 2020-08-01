@@ -1,10 +1,10 @@
 import { AnimeMangaUtils } from '@utils/AnimeManga';
 import { Anime } from '@domain/anime';
 
-export class GetRandomCardAnimeUseCase {
+export class GetByNameCardAnimeUseCase {
   constructor(private animeUtils: AnimeMangaUtils<Anime>) {}
-  async execute(limit: string, order: string) {
-    const result = await this.animeUtils.getSortCard(limit, order);
+  async execute(limit: string) {
+    const result = await this.animeUtils.getCard(limit);
     return result;
   }
 }
