@@ -192,3 +192,16 @@ export class AnimeController implements AnimeMangaControllerRepository {
     }
   }
 }
+
+const databaseAnimeRepository = new DatabaseAnimeMangaRepository<Anime>(
+  'animes'
+);
+
+const databaseImageRepository = new DatabaseImage();
+
+const animeUtils = new AnimeMangaUtils(
+  databaseAnimeRepository,
+  databaseImageRepository
+);
+
+export { animeUtils, databaseAnimeRepository, databaseImageRepository };
