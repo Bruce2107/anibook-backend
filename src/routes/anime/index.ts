@@ -10,6 +10,7 @@ import { getRandomCardAnimeController } from '@usecase/Anime/Card/GetRandom';
 import { getSortCardAnimeController } from '@usecase/Anime/Card/GetSort';
 import { getByNameCardAnimeController } from '@usecase/Anime/Card/GetByName';
 import { updateImageAnimeController } from '@usecase/Anime/Update/Image';
+import { updateTextAnimeController } from '@usecase/Anime/Update/Text';
 
 const routes = Router();
 const AC = new AnimeController();
@@ -44,7 +45,9 @@ routes.patch(
   [fileUpload, authenticate],
   (req: Request, res: Response) => updateImageAnimeController.handle(req, res)
 );
-routes.patch('/animes/:name', authenticate, AC.updateAnyFieldThatAreNotAFile);
+routes.patch('/animes/:name', authenticate, (req: Request, res: Response) =>
+  updateTextAnimeController.handle(req, res)
+);
 
 routes.delete('/animes/:name', authenticate, AC._delete);
 
