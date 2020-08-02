@@ -3,10 +3,7 @@ import { Anime } from '@domain/anime';
 import { SortArray } from '@utils/SortArray';
 
 export class InMemoryAnimeRepository implements AnimeMangaRepository<Anime> {
-  animes: Anime[] = [];
-  constructor(animes: Anime[]) {
-    this.animes = animes;
-  }
+  constructor(private animes: Anime[]) {}
 
   async _delete(name: string): Promise<boolean> {
     if (await this.alreadyExists(name)) {

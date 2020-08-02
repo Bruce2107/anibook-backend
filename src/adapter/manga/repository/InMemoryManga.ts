@@ -3,10 +3,7 @@ import { Manga } from '@domain/manga';
 import { SortArray } from '@utils/SortArray';
 
 export class InMemoryMangaRepository implements AnimeMangaRepository<Manga> {
-  mangas: Manga[] = [];
-  constructor(mangas: Manga[]) {
-    this.mangas = mangas;
-  }
+  constructor(private mangas: Manga[]) {}
 
   async _delete(name: string): Promise<boolean> {
     if (await this.alreadyExists(name)) {

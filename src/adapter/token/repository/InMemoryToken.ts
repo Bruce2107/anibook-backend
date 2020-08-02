@@ -1,12 +1,10 @@
-import { TokenRepository } from '@usecase/port/TokenRepository';
+import { UserRepository } from '@usecase/port/UserRepository';
 import { User } from 'anibook';
 import { CreateUser } from '@usecase/Token/createUser';
 
-export class InMemoryTokenRepository implements TokenRepository {
-  users: User[] = [];
-  constructor(users: User[]) {
-    this.users = users;
-  }
+export class InMemoryTokenRepository implements UserRepository {
+  constructor(private users: User[]) {}
+
   async alreadyExists(email: string, nickname: string): Promise<boolean> {
     for (let user of this.users)
       if (user.email === email || user.nickname === nickname) return true;

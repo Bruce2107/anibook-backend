@@ -9,12 +9,11 @@ import { ImageRepository } from '@usecase/port/ImageRepository';
 
 export class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
-  adapter: AnimeMangaRepository<T>;
-  imageAdapter: ImageRepository;
-  constructor(adapter: AnimeMangaRepository<T>, imageAdapter: ImageRepository) {
-    this.adapter = adapter;
-    this.imageAdapter = imageAdapter;
-  }
+  constructor(
+    private adapter: AnimeMangaRepository<T>,
+    private imageAdapter: ImageRepository
+  ) {}
+
   async _delete(name: string): Promise<404 | 204> {
     if (!(await this.adapter.alreadyExists(name))) return 404;
     await this.adapter._delete(name);
