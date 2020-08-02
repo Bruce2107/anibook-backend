@@ -1,11 +1,13 @@
 import { Router } from 'express';
-import TokenController from '@usecase/Token';
+import { createUserController } from '@usecase/Token/Create';
+import { getUserController } from '@usecase/Token/GetUser';
 
 const routes = Router();
-const TC = new TokenController();
 
-routes.get('/token/:nickname', TC.getToken);
+routes.get('/token/:nickname', (req, res) =>
+  getUserController.handle(req, res)
+);
 
-routes.post('/token/user', TC.createUser);
+routes.post('/token/user', (req, res) => createUserController.handle(req, res));
 
 export default routes;

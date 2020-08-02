@@ -1,6 +1,7 @@
 import { TypeImage } from 'anibook';
-import Image from './image';
+import { Image } from './image';
 import fs from 'fs';
+
 describe('Image', () => {
   test('should create an image', () => {
     const object: TypeImage = {

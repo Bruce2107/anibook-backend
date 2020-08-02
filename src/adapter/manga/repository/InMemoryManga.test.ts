@@ -1,10 +1,10 @@
 import { isManga } from 'anibook';
-import InMemoryManga from './InMemoryManga';
-import Manga from '../../../domain/manga';
+import { InMemoryMangaRepository } from './InMemoryManga';
+import { Manga } from '../../../domain/manga';
 
-describe('InMemoryManga', () => {
+describe('InMemoryMangaRepository', () => {
   let mangas: Manga[] = [];
-  let inMemoryManga: InMemoryManga;
+  let inMemoryManga: InMemoryMangaRepository;
   beforeEach(() => {
     mangas = [];
     mangas.push(
@@ -48,13 +48,13 @@ describe('InMemoryManga', () => {
         whereRead: [{ language: 'sda', name: 'name', url: 'url' }],
       }
     );
-    inMemoryManga = new InMemoryManga(mangas);
+    inMemoryManga = new InMemoryMangaRepository(mangas);
   });
   test('should delete an manga', async () => {
     const result = await inMemoryManga._delete('manga2');
     expect(result).toBeTruthy();
   });
-  test('shound not delete an manga', async () => {
+  test('should not delete an manga', async () => {
     const result = await inMemoryManga._delete('manga0');
     expect(result).toBeFalsy();
   });

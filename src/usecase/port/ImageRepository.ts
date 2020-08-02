@@ -1,6 +1,6 @@
-import Image from '../../domain/image';
+import { Image } from '../../domain/image';
 
-export default interface ImageRepository {
+export interface ImageRepository {
   /**
    *
    * @param string `folder` Folder of image

@@ -1,5 +1,5 @@
 import { Data } from 'anibook';
-import SortArray from './SortArray';
+import { SortArray } from './SortArray';
 
 describe('Sort array', () => {
   const data: Data[] = [

@@ -1,13 +1,11 @@
 import { QueryResult } from 'pg';
 import { pool } from '../../../database';
-import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
+import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
 
-export default class DatabaseAnimeMangaRepository<T>
+export class DatabaseAnimeMangaRepository<T>
   implements AnimeMangaRepository<T> {
-  type: string;
-  constructor(type: string) {
-    this.type = type;
-  }
+  constructor(private type: string) {}
+
   async _delete(name: string): Promise<boolean> {
     const deleted: QueryResult = await pool.query(
       `DELETE FROM ${this.type} WHERE dados ->> 'name' = $1`,

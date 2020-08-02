@@ -1,20 +1,19 @@
 import { GetResponse, isAnime, searchObjectInArray, isManga } from 'anibook';
-import AnimeMangaUtilsRepository from '@usecase/port/AnimeMangaUtilsRepository';
-import updatePhotoOrImageField from '@utils/UpdatePhotoOrImageField';
-import Anime from '@domain/anime';
-import Manga from '@domain/manga';
+import { AnimeMangaUtilsRepository } from '@usecase/port/AnimeMangaUtilsRepository';
+import { updatePhotoOrImageField } from '@utils/UpdatePhotoOrImageField';
+import { Anime } from '@domain/anime';
+import { Manga } from '@domain/manga';
 import { CardFields } from '@constants/Card';
-import AnimeMangaRepository from '@usecase/port/AnimeMangaRepository';
-import ImageRepository from '@usecase/port/ImageRepository';
+import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
+import { ImageRepository } from '@usecase/port/ImageRepository';
 
-export default class AnimeMangaUtils<T extends Anime | Manga>
+export class AnimeMangaUtils<T extends Anime | Manga>
   implements AnimeMangaUtilsRepository<T> {
-  adapter: AnimeMangaRepository<T>;
-  imageAdapter: ImageRepository;
-  constructor(adapter: AnimeMangaRepository<T>, imageAdapter: ImageRepository) {
-    this.adapter = adapter;
-    this.imageAdapter = imageAdapter;
-  }
+  constructor(
+    private adapter: AnimeMangaRepository<T>,
+    private imageAdapter: ImageRepository
+  ) {}
+
   async _delete(name: string): Promise<404 | 204> {
     if (!(await this.adapter.alreadyExists(name))) return 404;
     await this.adapter._delete(name);
@@ -47,8 +46,8 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
   }
 
   async getOne(name: string): Promise<GetResponse<T>> {
-    const reuslt = await this.adapter.getOne(name, ['dados']);
-    return reuslt ? { status: 200, data: reuslt } : { status: 404 };
+    const result = await this.adapter.getOne(name, ['dados']);
+    return result ? { status: 200, data: result } : { status: 404 };
   }
 
   async getRandom(limit: string): Promise<GetResponse<Array<T>>> {
@@ -105,7 +104,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     const newData = (await this.adapter.getOne(name, ['dados'])) as T;
     /* istanbul ignore else */
     if (data.name) {
-      //já existe outro registro com esse mesmo nome
+      // já existe outro registro com esse mesmo nome
       if (data.name !== name && (await this.adapter.alreadyExists(data.name)))
         return 409;
       newData.name = data.name;
@@ -121,7 +120,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
     /* istanbul ignore else */
     if (data.info.status) newData.info.status = data.info.status;
 
-    //alterções para anime
+    // alterações para anime
     if (isAnime(newData) && isAnime(data)) {
       /* istanbul ignore else */
       if (data.info.numberEpisodes)
@@ -141,7 +140,7 @@ export default class AnimeMangaUtils<T extends Anime | Manga>
             newData.whereWatch.push(site);
         });
     }
-    //alterções para mangá
+    // alterações para mangá
     if (isManga(newData) && isManga(data)) {
       /* istanbul ignore else */
       if (data.info.numberChapters)

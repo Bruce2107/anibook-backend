@@ -1,9 +1,9 @@
 import { User } from 'anibook';
-import InMemoryToken from './InMemoryToken';
+import { InMemoryTokenRepository } from './InMemoryToken';
 
 describe('InMemoryToken', () => {
   let users: User[] = [];
-  let inMemoryToken: InMemoryToken;
+  let inMemoryToken: InMemoryTokenRepository;
   beforeEach(() => {
     users = [];
     users.push(
@@ -11,7 +11,7 @@ describe('InMemoryToken', () => {
       { email: 'test2@test.test', nickname: 'test2' },
       { email: 'test3@test.test', nickname: 'test3' }
     );
-    inMemoryToken = new InMemoryToken(users);
+    inMemoryToken = new InMemoryTokenRepository(users);
   });
 
   test('should return true when user already exists', async () => {

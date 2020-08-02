@@ -1,8 +1,8 @@
 import { createImageObject, TypeImage } from 'anibook';
 import { x2Webp } from './ConverteImage';
-import sleep from './Sleep';
+import { sleep } from './Sleep';
 
-async function MakeAConvertedImage(
+export async function MakeAConvertedImage(
   folder: string,
   file: Express.Multer.File
 ): Promise<TypeImage> {
@@ -15,5 +15,3 @@ async function MakeAConvertedImage(
     `${file.path.split('.')[0]}.webp`
   );
 }
-
-export default MakeAConvertedImage;
