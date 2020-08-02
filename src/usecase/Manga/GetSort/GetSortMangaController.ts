@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { GetSortAnimeUseCase } from './GetSortAnimeUseCase';
+import { GetSortMangaUseCase } from './GetSortMangaUseCase';
 
-export class GetSortAnimeController {
-  constructor(private getSortAnimeUseCase: GetSortAnimeUseCase) {}
+export class GetSortMangaController {
+  constructor(private getSortMangaUseCase: GetSortMangaUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { limit } = request.query;
       const { order } = request.params;
-      const result = await this.getSortAnimeUseCase.execute(
+      const result = await this.getSortMangaUseCase.execute(
         limit as string,
         order
       );

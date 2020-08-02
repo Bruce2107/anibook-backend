@@ -16,7 +16,9 @@ const MC = new MangaController();
 routes.get('/mangas', (req: Request, res: Response) =>
   getRandomMangaController.handle(req, res)
 );
-routes.get('/mangas/sort/:order', MC.getSort);
+routes.get('/mangas/sort/:order', (req: Request, res: Response) =>
+  getSortCardMangaController.handle(req, res)
+);
 routes.get('/mangas/:name', (req: Request, res: Response) =>
   getByNameMangaController.handle(req, res)
 );
