@@ -1,9 +1,10 @@
 import fs from 'fs';
-import InMemoryImage from './InMemoryImage';
-import Image from '../../../domain/image';
+import { InMemoryImageRepository } from './InMemoryImage';
+import { Image } from '../../../domain/image';
+
 describe('InMemoryImage', () => {
   let images: Image[] = [];
-  let inMemoryImage: InMemoryImage;
+  let inMemoryImage: InMemoryImageRepository;
   beforeEach(() => {
     images = [];
     images.push(
@@ -47,7 +48,7 @@ describe('InMemoryImage', () => {
         name: 'ToshinoKyokoTomato.webp',
       }
     );
-    inMemoryImage = new InMemoryImage(images);
+    inMemoryImage = new InMemoryImageRepository(images);
   });
   test('should return true when already exist an image', async () => {
     const result = await inMemoryImage.alreadyExists(

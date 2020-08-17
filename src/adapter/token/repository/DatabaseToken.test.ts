@@ -1,4 +1,4 @@
-import DatabaseToken from './DatabaseToken';
+import { DatabaseToken } from './DatabaseToken';
 
 describe('Database Token', () => {
   let databaseToken: DatabaseToken;
@@ -57,7 +57,7 @@ describe('Database Token', () => {
       const result = await databaseToken._delete('newUser@newUser.newUser');
       expect(result).toBe(true);
     });
-    it('should retunr false when user not found', async () => {
+    it('should return false when user not found', async () => {
       const result = await databaseToken._delete('newUser@newUser.newUser');
       expect(result).toBe(false);
     });

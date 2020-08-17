@@ -1,6 +1,6 @@
-import User from '@domain/user';
+import { User } from '@domain/user';
 
-export default class CreateUser {
+export class CreateUser {
   createUser(object: any): User {
     return new User(object);
   }

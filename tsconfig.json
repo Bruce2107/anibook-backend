@@ -2,9 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonJS",
-    "lib": [
-      "es6"
-    ],
+    "lib": ["es6"],
     "outDir": "./dist",
     "removeComments": true,
     "noImplicitAny": true,
@@ -21,42 +19,20 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "rootDir": "./src",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@adapter/*": [
-        "./src/adapter/*"
-      ],
-      "@constants/*": [
-        "./src/constants/*"
-      ],
-      "@controller/*": [
-        "./src/controller/*"
-      ],
-      "@usecase/*": [
-        "./src/usecase/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*",
-        "./src/controller/utils/*"
-      ],
-      "@domain/*": [
-        "./src/domain/*"
-      ],
-      "@middleware/*": [
-        "./src/middleware/*"
-      ]
+      "@adapter/*": ["./src/adapter/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@controller/*": ["./src/controller/*"],
+      "@usecase/*": ["./src/usecase/*"],
+      "@utils/*": ["./src/utils/*", "./src/controller/utils/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@repositories/*": ["./src/repositories/*"]
     }
   },
-  "include": [
-    "./src/**/*.ts"
-  ],
-  "exclude": [
-    "./src/**/*.test.ts",
-    "./src/**/*.(webp|gif|png|jpg)"
-  ]
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./src/**/*.test.ts", "./src/**/*.(webp|gif|png|jpg)"]
 }

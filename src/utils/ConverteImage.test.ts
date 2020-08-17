@@ -1,7 +1,7 @@
 import { readFileSync, unlinkSync } from 'fs';
 import { Readable } from 'stream';
 import { x2Webp } from './ConverteImage';
-import sleep from './Sleep';
+import { sleep } from './Sleep';
 
 describe('Convert Image', () => {
   let image: Express.Multer.File;

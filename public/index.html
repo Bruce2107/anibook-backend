@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Anibook">
+  <meta name="author" content="Eduardo Henrique">
   <meta name="description" content="Detalhamento das rotas da API">
   <meta name="theme-color" content="#ff1493">
   <meta property="og:site_name" content="Anibook">
@@ -17,7 +17,6 @@
   <meta property="og:locale" content="pt-BR">
   <meta property="og:description" content="Detalhamento das rotas da API">
 
-  <link >
   <title>Anibook API</title>
   <style>
     body,
@@ -106,12 +105,12 @@
         <li><a href="/animes/sort/name">/animes/sort/:order</a>
           <ul>
             <li><b>Tipo:</b> GET</li>
-            <li><b>Params:</b> order</li>
+            <li><b>Params:</b> order, limit</li>
             <li><b>Auth:</b> <code>false</code></li>
             <li><b>Desc:</b> retorna todos os animes ordenados pelo parâmetro especificado</li>
           </ul>
         </li>
-        <li><a href="/animes/card">/animes/card</a>
+        <li><a href="/animes/card/random">/animes/card/random</a>
           <ul>
             <li><b>Tipo:</b> GET</li>
             <li><b>Params:</b> limit</li>
@@ -139,7 +138,7 @@
         </li>
         <li><a href="#">/animes/image/:name</a>
           <ul>
-            <li><b>Tipo:</b> GET</li>
+            <li><b>Tipo:</b> PATCH</li>
             <li><b>Params:</b> name</li>
             <li><b>Auth:</b> <code>true</code></li>
             <li><b>Desc:</b> atualiza as imagens de um anime</li>
@@ -320,8 +319,8 @@
       <code>
         {
           "name": "Dragon Ball",
-          "synopsis": "Bulma is a girl in search of the mystical dragonballs that when brought together grant any wish. In her search she bumps into the owner of one of these balls, a strange boy named Goku. The two then set off together, Bulma in search of the dragonballs and Goku on a quest to become stronger.",
-          "comment": "Dragon Ball foi um daqueles animes que eu sabia que precisa assistir, mas não queria. Por sorte um amigo meu me recomendou, o que me deu âmino para vê-lo. Dragon Ball Classico se tornou um dos meus animes prefiridos, e isso se da por me passar uma sensação boa. O anime se enquadrado perfeitamente no meu gosto visual, já que AMO o estilo dos anos 80/90 das animações japonesas. A dublagem é essencial para que tenha a experiência completa. Além disso a história que começa despretenciosa prende a atenção conforme Goku vai crescendo.",
+          "synopsis": "Bulma is a girl in search of the mystical dragon balls that when brought together grant any wish. In her search she bumps into the owner of one of these balls, a strange boy named Goku. The two then set off together, Bulma in search of the dragon balls and Goku on a quest to become stronger.",
+          "comment": "Dragon Ball foi um daqueles animes que eu sabia que precisa assistir, mas não queria. Por sorte um amigo meu me recomendou, o que me deu âmino para vê-lo. Dragon Ball Clássico se tornou um dos meus animes preferidos, e isso se da por me passar uma sensação boa. O anime se enquadrado perfeitamente no meu gosto visual, já que AMO o estilo dos anos 80/90 das animações japonesas. A dublagem é essencial para que tenha a experiência completa. Além disso a história que começa despretensiosa prende a atenção conforme Goku vai crescendo.",
           "whereWatch": [
             {
               "language": "português",

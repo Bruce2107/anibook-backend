@@ -1,5 +1,5 @@
 import { Card as ICard } from 'anibook';
-import Card from './card';
+import { Card } from './card';
 
 describe('Card', () => {
   test('should create a card', () => {

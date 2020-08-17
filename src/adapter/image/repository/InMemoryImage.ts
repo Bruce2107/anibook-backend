@@ -1,11 +1,9 @@
-import ImageRepository from '@usecase/port/ImageRepository';
-import Image from '@domain/image';
+import { ImageRepository } from '@usecase/port/ImageRepository';
+import { Image } from '@domain/image';
 
-export default class InMemoryImageRepository implements ImageRepository {
-  images: Image[] = [];
-  constructor(images: Image[]) {
-    this.images = images;
-  }
+export class InMemoryImageRepository implements ImageRepository {
+  constructor(private images: Image[]) {}
+
   async _delete(folder: string, name: string): Promise<boolean> {
     if (await this.alreadyExists(folder, name)) {
       this.images = this.images.filter(

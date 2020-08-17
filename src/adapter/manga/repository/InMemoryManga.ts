@@ -1,12 +1,9 @@
-import MangaRepository from '@usecase/port/AnimeMangaRepository';
-import Manga from '@domain/manga';
-import SortArray from '@utils/SortArray';
+import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
+import { Manga } from '@domain/manga';
+import { SortArray } from '@utils/SortArray';
 
-export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
-  mangas: Manga[] = [];
-  constructor(mangas: Manga[]) {
-    this.mangas = mangas;
-  }
+export class InMemoryMangaRepository implements AnimeMangaRepository<Manga> {
+  constructor(private mangas: Manga[]) {}
 
   async _delete(name: string): Promise<boolean> {
     if (await this.alreadyExists(name)) {
@@ -47,17 +44,17 @@ export default class InMemoryMangaReposiory implements MangaRepository<Manga> {
     }
     const mangas: Manga[] = [];
     const numbers: Array<number> = [];
-    const Nlimit = Number(limit);
+    const NumberLimit = Number(limit);
     let i = 0;
-    while (i < Nlimit) {
-      const number = Math.floor(Math.random() * Nlimit);
+    while (i < NumberLimit) {
+      const number = Math.floor(Math.random() * NumberLimit);
       /* istanbul ignore else */
       if (!numbers.includes(number)) {
         numbers.push(number);
         mangas.push(this.mangas[number]);
         i++;
       }
-      if (i === Nlimit) break;
+      if (i === NumberLimit) break;
     }
     return mangas;
   }

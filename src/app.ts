@@ -15,10 +15,10 @@ class App {
   public constructor() {
     this.express = express();
     this.env();
-    this.middlawares();
+    this.middleWares();
     this.routes();
   }
-  private middlawares() {
+  private middleWares() {
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(express.json());
     this.express.use(cors());
