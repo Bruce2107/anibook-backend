@@ -12,22 +12,22 @@
 Para desenvolvimento:
 
 ```sh
-$ yarn
-$ yarn start:dev
+yarn
+yarn start:dev
 ```
 
 Para produção:
 
 ```sh
-$ yarn
-$ yarn build
-$ yarn start
+yarn
+yarn build
+yarn start
 ```
 
 ### **Testes**
 
 ```sh
-$ yarn test
+yarn test
 ```
 
 ### **Databases**
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS users (ID serial NOT NULL PRIMARY KEY, email text NOT
 
 ### **Environment**
 
-```
+```env
 DB_HOST_POSTGRES=
 DB_USER_POSTGRES=
 DB_PASS_POSTGRES=
@@ -70,6 +70,6 @@ TOKEN=
 
 Para qualquer dúvida entre em contato via [Twitter](https://twitter.com/Bruce2107).
 
-# License
+## License
 
 [MIT](https://github.com/Bruce2107/anibook-backend/blob/development/LICENSE)
