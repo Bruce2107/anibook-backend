@@ -1,6 +1,6 @@
 import { DatabaseToken } from './DatabaseToken';
 
-describe('Database Token', () => {
+xdescribe('Database Token', () => {
   let databaseToken: DatabaseToken;
   beforeEach(() => {
     databaseToken = new DatabaseToken();

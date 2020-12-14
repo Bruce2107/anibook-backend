@@ -2,7 +2,7 @@ import { DatabaseAnimeMangaRepository } from './DatabaseAnimeManga';
 import { Anime } from '../../../domain/anime';
 import { CardFields } from '../../../constants/Card';
 
-describe('Database Anime', () => {
+xdescribe('Database Anime', () => {
   let databaseAnime: DatabaseAnimeMangaRepository<Anime>;
   beforeEach(() => {
     databaseAnime = new DatabaseAnimeMangaRepository<Anime>('animes');

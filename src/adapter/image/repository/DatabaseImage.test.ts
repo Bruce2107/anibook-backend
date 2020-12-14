@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { DatabaseImage } from './DatabaseImage';
 import { Image } from '../../../domain/image';
 
-describe('Database Image', () => {
+xdescribe('Database Image', () => {
   let databaseImage: DatabaseImage;
   beforeEach(() => {
     databaseImage = new DatabaseImage();
