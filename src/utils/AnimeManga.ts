@@ -101,7 +101,7 @@ export class AnimeMangaUtils<T extends Anime | Manga>
     data: T
   ): Promise<404 | 409 | 204> {
     if (!(await this.adapter.alreadyExists(name))) return 404;
-    const newData = (await this.adapter.getOne(name, ['dados'])) as T;
+    const newData = (await this.adapter.getOne(name, ['dados'])) || ({} as T);
     /* istanbul ignore else */
     if (data.name) {
       // já existe outro registro com esse mesmo nome
