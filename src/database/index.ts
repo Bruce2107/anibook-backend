@@ -16,6 +16,7 @@ export const pool = new Pool({
   password: process.env.DB_PASS_POSTGRES as string,
   database: process.env.DB_NAME_POSTGRES as string,
   port: Number(process.env.DB_PORT_POSTGRES),
+  ssl: true
 });
 
 export const promisePool = async () => {
