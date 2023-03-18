@@ -7,3 +7,5 @@ src/uploads/**/*
 coverage
 .vscode
 src/utils/image_test/*.webp
+package-lock.json
+yarn.lock
