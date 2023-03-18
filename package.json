@@ -24,7 +24,7 @@
     "prebuild": "rimraf build",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/index.ts",
     "docker": "docker-compose up -d",
     "start:qa": "NODE_ENV=qa node dist/index.js",
     "test": "NODE_ENV=test jest"
