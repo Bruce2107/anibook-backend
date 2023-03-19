@@ -10,7 +10,7 @@ export class DeleteAnimeController {
       const status = await this.deleteAnimeUseCase.execute(name);
       return response.sendStatus(status);
     } catch (error) {
-      return response.status(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

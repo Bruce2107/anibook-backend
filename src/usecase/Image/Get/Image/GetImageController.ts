@@ -14,7 +14,7 @@ export class GetImageController {
       }
       return response.sendStatus(404);
     } catch (error) {
-      return response.status(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

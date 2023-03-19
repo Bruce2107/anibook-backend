@@ -11,7 +11,7 @@ export class GetBackgroundController {
       response.contentType(randomRow.contentType);
       return response.send(randomRow.image);
     } catch (error) {
-      return response.status(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

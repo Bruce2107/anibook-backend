@@ -17,9 +17,9 @@ export class GetUserController {
         nickname: user.nickname,
       });
 
-      return response.status(200).send({ token });
+      return response.status(200).json({ token });
     } catch (error) {
-      return response.status(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

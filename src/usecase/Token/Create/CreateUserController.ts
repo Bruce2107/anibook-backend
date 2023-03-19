@@ -15,12 +15,12 @@ export class CreateUserController {
 
       if (result) {
         const token = createToken({ email, nickname });
-        return response.status(201).send({ token });
+        return response.status(201).json({ token });
       } else {
         return response.sendStatus(409);
       }
     } catch (error) {
-      return response.status(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

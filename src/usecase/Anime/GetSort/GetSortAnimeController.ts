@@ -16,7 +16,7 @@ export class GetSortAnimeController {
         .status(result.status)
         .json({ data: result.data, rows: result.rows });
     } catch (error) {
-      return response.sendStatus(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

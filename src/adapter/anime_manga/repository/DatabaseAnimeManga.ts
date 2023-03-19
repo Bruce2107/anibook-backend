@@ -3,7 +3,8 @@ import { pool } from '../../../database';
 import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
 
 export class DatabaseAnimeMangaRepository<T>
-  implements AnimeMangaRepository<T> {
+  implements AnimeMangaRepository<T>
+{
   constructor(private type: string) {}
 
   async _delete(name: string): Promise<boolean> {
@@ -45,7 +46,7 @@ export class DatabaseAnimeMangaRepository<T>
 
   async getRandom(limit: string, fields: string[]): Promise<T[]> {
     const fieldsString: string = fields.join();
-    const result: QueryResult<T> = await pool.query(
+    const result: QueryResult = await pool.query(
       `SELECT ${fieldsString} FROM ${this.type} ORDER BY random () LIMIT $1`,
       [limit]
     );

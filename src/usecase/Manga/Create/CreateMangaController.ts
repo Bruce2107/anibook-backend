@@ -17,7 +17,7 @@ export class CreateMangaController {
         await this.createMangaUseCase.execute(data, files, folder)
       );
     } catch (error) {
-      return response.sendStatus(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

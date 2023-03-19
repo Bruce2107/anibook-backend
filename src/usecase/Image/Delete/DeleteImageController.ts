@@ -12,7 +12,7 @@ export class DeleteImageController {
         ? response.sendStatus(204)
         : response.sendStatus(404);
     } catch (error) {
-      return response.status(400).send({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }
