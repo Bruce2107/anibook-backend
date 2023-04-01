@@ -7,7 +7,7 @@ config({
   path:
     process.env.NODE_ENV === 'qa' || process.env.NODE_ENV === 'test'
       ? '.env.qa'
-      : '.env',
+      : '.env.qa',
 });
 
 export const pool = new Pool({
