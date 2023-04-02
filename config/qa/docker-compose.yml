@@ -10,18 +10,18 @@ services:
       - POSTGRES_PASSWORD=anibook_qa
       - MAX_CONNECTIONS=300
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
-      - ./config/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
-      - ./config/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+      - ../database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ../database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
   node:
     build:
       dockerfile: ./config/docker/Dockerfile
       context: .
     image: anibook/node
-    container_name: anibook_node
+    container_name: anibook_node_qa
     ports:
-      - '4000:4000'
+      - '4001:4000'
     environment:
       DB_USER_POSTGRES: anibook_qa
       DB_PASS_POSTGRES: anibook_qa
