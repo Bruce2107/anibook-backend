@@ -32,7 +32,7 @@ export class LanguageRepositoryRelationalImpl implements LanguageRepository {
   }
   async updateLanguage(id: string, language: Language): Promise<boolean> {
     const result = await pool.query(
-      `UPDATE Gallery SET language = $1 WHERE id = $2`,
+      `UPDATE Language SET language = $1 WHERE id = $2`,
       [language.language, id]
     );
 

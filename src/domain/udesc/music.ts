@@ -1,4 +1,4 @@
-export class Studio {
+export class Music {
   name: string;
   link: string;
   idLanguage: number;
