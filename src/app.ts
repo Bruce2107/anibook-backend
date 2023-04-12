@@ -16,6 +16,7 @@ import languageRoute from './routes/udesc/language';
 import musicRoute from './routes/udesc/music';
 import serieRoute from './routes/udesc/serie';
 import serieStreamingRoute from './routes/udesc/serieStreaming';
+import statusRoute from './routes/udesc/status';
 
 class App {
   public express: express.Application;
@@ -48,6 +49,7 @@ class App {
     this.express.use(musicRoute);
     this.express.use(serieRoute);
     this.express.use(serieStreamingRoute);
+    this.express.use(statusRoute);
     this.express.use(animeRoutes);
     this.express.use(imageRoutes);
     this.express.use(mangaRoutes);
