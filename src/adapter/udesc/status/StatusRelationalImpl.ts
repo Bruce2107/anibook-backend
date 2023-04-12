@@ -22,7 +22,7 @@ export class StatusRepositoryRelationalImpl implements StatusRepository {
   async insertOne(status: Status): Promise<boolean> {
     if (!(await this.alreadyExists(status))) {
       const inserted: QueryResult = await pool.query(
-        `INSERT INTO Status (value) VALUES ($1`,
+        `INSERT INTO Status (value) VALUES ($1)`,
         [status.value]
       );
       return !!inserted.rowCount;
