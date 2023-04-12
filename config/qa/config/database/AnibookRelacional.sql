@@ -1,6 +1,3 @@
-create database anibook_relacional;
-use anibook_relacional;
-
 -- STUDIO
   create table if not exists Studio(
     id serial not null,
@@ -59,7 +56,7 @@ use anibook_relacional;
 -- SERIE
   create table if not exists Serie(
     id serial not null,
-    name text not null
+    name text not null,
     synopsis text not null,
     comment text not null,
     numberOfEpisodes integer not null,

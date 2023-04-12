@@ -20,7 +20,7 @@ routes.get('/animes', (req: Request, res: Response) =>
 routes.get('/animes/sort/:order', (req: Request, res: Response) =>
   getSortAnimeController.handle(req, res)
 );
-routes.get('/animes/:name', (req: Request, res: Response) =>
+routes.get('/author/:name', (req: Request, res: Response) =>
   getByNameAnimeController.handle(req, res)
 );
 routes.get('/animes/card/random', (req: Request, res: Response) =>

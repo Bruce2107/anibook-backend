@@ -9,6 +9,7 @@ import mangaRoutes from './routes/manga';
 import tokenRoutes from './routes/token';
 import mixedRoutes from './routes/mixed';
 import defaultRoute from './routes/default';
+import authorRoute from './routes/udesc/author';
 
 class App {
   public express: express.Application;
@@ -34,6 +35,7 @@ class App {
     });
   }
   private routes() {
+    this.express.use(authorRoute);
     this.express.use(animeRoutes);
     this.express.use(imageRoutes);
     this.express.use(mangaRoutes);

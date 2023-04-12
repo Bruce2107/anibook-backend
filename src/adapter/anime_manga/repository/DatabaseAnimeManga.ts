@@ -3,8 +3,7 @@ import { pool } from '../../../database';
 import { AnimeMangaRepository } from '@usecase/port/AnimeMangaRepository';
 
 export class DatabaseAnimeMangaRepository<T>
-  implements AnimeMangaRepository<T>
-{
+  implements AnimeMangaRepository<T> {
   constructor(private type: string) {}
 
   async _delete(name: string): Promise<boolean> {
