@@ -5,10 +5,10 @@ import { AuthorSerieRepository } from './AuthorSerieRepository';
 
 export class AuthorSerieRepositoryRelationalImpl
   implements AuthorSerieRepository {
-  async alreadyExists(idAuthor: string, idSerie: string): Promise<boolean> {
+  async alreadyExists(authorSerie: AuthorSerie): Promise<boolean> {
     const exists = await pool.query(
       `SELECT * FROM AuthorSerie WHERE idSerie = $1 and idAuthor = $2`,
-      [idSerie, idAuthor]
+      [authorSerie.idSerie, authorSerie.idAuthor]
     );
 
     return !!exists.rowCount;
@@ -21,11 +21,11 @@ export class AuthorSerieRepositoryRelationalImpl
 
     return !!deleted.rowCount;
   }
-  async insertOne(idAuthor: string, idSerie: string): Promise<boolean> {
-    if (!(await this.alreadyExists(idAuthor, idSerie))) {
+  async insertOne(authorSerie: AuthorSerie): Promise<boolean> {
+    if (!(await this.alreadyExists(authorSerie))) {
       const inserted: QueryResult = await pool.query(
         `INSERT INTO AuthorSerie (idAuthor, idSerie) VALUES ($1, $2)`,
-        [idAuthor, idSerie]
+        [authorSerie.idAuthor, authorSerie.idSerie]
       );
       return !!inserted.rowCount;
     }

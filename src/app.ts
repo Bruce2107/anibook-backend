@@ -11,6 +11,7 @@ import mixedRoutes from './routes/mixed';
 import defaultRoute from './routes/default';
 import authorRoute from './routes/udesc/author';
 import authorSerieRoute from './routes/udesc/authorSerie';
+import galleryRoute from './routes/udesc/gallery';
 
 class App {
   public express: express.Application;
@@ -38,6 +39,7 @@ class App {
   private routes() {
     this.express.use(authorRoute);
     this.express.use(authorSerieRoute);
+    this.express.use(galleryRoute);
     this.express.use(animeRoutes);
     this.express.use(imageRoutes);
     this.express.use(mangaRoutes);

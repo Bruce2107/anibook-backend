@@ -23,6 +23,8 @@ export class CreateAuthorSerieController {
 export class CreateAuthorSerieUseCase {
   constructor(private authorSerieRepository: AuthorSerieRepository) {}
   async execute(idAuthor: string, idSerie: string) {
-    return await this.authorSerieRepository.insertOne(idAuthor, idSerie);
+    return await this.authorSerieRepository.insertOne(
+      new AuthorSerie({ idAuthor, idSerie })
+    );
   }
 }
