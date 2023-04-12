@@ -3,8 +3,8 @@ export class Serie {
   synopsis: string;
   comment: string;
   numberOfEpisodes: number;
-  createdAt: Date;
-  updateAt: Date;
+  createdAt?: Date;
+  updateAt?: Date;
   idStudio: number;
   cover: number;
   status: number;

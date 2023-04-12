@@ -1,55 +1,31 @@
-import { Router, Request, Response } from 'express';
-import authenticate from '@middleware/authenticate';
-import { fileUpload } from '@middleware/upload';
-import { createAnimeController } from '@usecase/Anime/Create';
-import { getRandomAnimeController } from '@usecase/Anime/GetRandom';
-import { getSortAnimeController } from '@usecase/Anime/GetSort';
-import { getByNameAnimeController } from '@usecase/Anime/GetByName';
-import { getRandomCardAnimeController } from '@usecase/Anime/Card/GetRandom';
-import { getSortCardAnimeController } from '@usecase/Anime/Card/GetSort';
-import { getByNameCardAnimeController } from '@usecase/Anime/Card/GetByName';
-import { updateImageAnimeController } from '@usecase/Anime/Update/Image';
-import { updateTextAnimeController } from '@usecase/Anime/Update/Text';
-import { deleteAnimeController } from '@usecase/Anime/Delete';
+import { CreateSerieUseCase, CreateSerieController } from './CreateSerie';
+import { GetSerieController, GetSerieUseCase } from './GetSerie';
+import { DeleteSerieUseCase, DeleteSerieController } from './DeleteSerie';
+import { UpdateSerieUseCase, UpdateSerieController } from './UpdateSerie';
+import { SerieRepositoryRelationalImpl } from '@adapter/udesc/serie/SerieRelationalImpl';
 
-const routes = Router();
+const databaseSerieRepository = new SerieRepositoryRelationalImpl();
 
-routes.get('/animes', (req: Request, res: Response) =>
-  getRandomAnimeController.handle(req, res)
-);
-routes.get('/animes/sort/:order', (req: Request, res: Response) =>
-  getSortAnimeController.handle(req, res)
-);
-routes.get('/animes/:name', (req: Request, res: Response) =>
-  getByNameAnimeController.handle(req, res)
-);
-routes.get('/animes/card/random', (req: Request, res: Response) =>
-  getRandomCardAnimeController.handle(req, res)
-);
-routes.get('/animes/card/sort/:order', (req: Request, res: Response) =>
-  getSortCardAnimeController.handle(req, res)
-);
-routes.get('/animes/card/:name', (req: Request, res: Response) =>
-  getByNameCardAnimeController.handle(req, res)
-);
+const getSerieUseCase = new GetSerieUseCase(databaseSerieRepository);
+const getSerieController = new GetSerieController(getSerieUseCase);
 
-routes.post(
-  '/animes',
-  [fileUpload, authenticate],
-  (req: Request, res: Response) => createAnimeController.handle(req, res)
-);
+const createSerieUseCase = new CreateSerieUseCase(databaseSerieRepository);
+const createSerieController = new CreateSerieController(createSerieUseCase);
 
-routes.patch(
-  '/animes/image/:name',
-  [fileUpload, authenticate],
-  (req: Request, res: Response) => updateImageAnimeController.handle(req, res)
-);
-routes.patch('/animes/:name', authenticate, (req: Request, res: Response) =>
-  updateTextAnimeController.handle(req, res)
-);
+const deleteSerieUseCase = new DeleteSerieUseCase(databaseSerieRepository);
+const deleteSerieController = new DeleteSerieController(deleteSerieUseCase);
 
-routes.delete('/animes/:name', authenticate, (req: Request, res: Response) =>
-  deleteAnimeController.handle(req, res)
-);
+const updateSerieUseCase = new UpdateSerieUseCase(databaseSerieRepository);
+const updateSerieController = new UpdateSerieController(updateSerieUseCase);
 
-export default routes;
+export {
+  getSerieController,
+  getSerieUseCase,
+  createSerieController,
+  createSerieUseCase,
+  deleteSerieController,
+  deleteSerieUseCase,
+  updateSerieController,
+  updateSerieUseCase,
+  databaseSerieRepository,
+};
