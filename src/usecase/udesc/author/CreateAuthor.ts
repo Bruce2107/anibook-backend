@@ -7,8 +7,6 @@ export class CreateAuthorController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { name } = request.body as Author;
-      console.log(request.body);
-
       if (!name) return response.sendStatus(422);
 
       const result = await this.createAuthorUseCase.execute(name);
