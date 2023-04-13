@@ -7,7 +7,7 @@ export class StreamingLanguageRepositoryRelationalImpl
   implements StreamingLanguageRepository {
   async alreadyExists(streamingLanguage: StreamingLanguage): Promise<boolean> {
     const exists = await pool.query(
-      `SELECT * FROM StreamingLanguage WHERE idLanguage = $1 and idStreaming = $2`,
+      `SELECT * FROM Streaming_Language WHERE idLanguage = $1 and idStreaming = $2`,
       [streamingLanguage.idLanguage, streamingLanguage.idStreaming]
     );
 
@@ -15,7 +15,7 @@ export class StreamingLanguageRepositoryRelationalImpl
   }
   async _delete(id: string): Promise<boolean> {
     const deleted: QueryResult = await pool.query(
-      `DELETE FROM StreamingLanguage where id = $1`,
+      `DELETE FROM Streaming_Language where id = $1`,
       [id]
     );
 
@@ -24,7 +24,7 @@ export class StreamingLanguageRepositoryRelationalImpl
   async insertOne(streamingLanguage: StreamingLanguage): Promise<boolean> {
     if (!(await this.alreadyExists(streamingLanguage))) {
       const inserted: QueryResult = await pool.query(
-        `INSERT INTO StreamingLanguage (idStreaming, idLanguage) VALUES ($1, $2)`,
+        `INSERT INTO Streaming_Language (idStreaming, idLanguage) VALUES ($1, $2)`,
         [streamingLanguage.idStreaming, streamingLanguage.idLanguage]
       );
       return !!inserted.rowCount;
@@ -36,7 +36,7 @@ export class StreamingLanguageRepositoryRelationalImpl
     streamingLanguage: StreamingLanguage
   ): Promise<boolean> {
     const result = await pool.query(
-      `UPDATE StreamingLanguage SET idStreaming = $1, idLanguage = $2 WHERE id = $3`,
+      `UPDATE Streaming_Language SET idStreaming = $1, idLanguage = $2 WHERE id = $3`,
       [streamingLanguage.idStreaming, streamingLanguage.idLanguage, id]
     );
 
@@ -44,7 +44,7 @@ export class StreamingLanguageRepositoryRelationalImpl
   }
   async getStreamingLanguage(id: string): Promise<StreamingLanguage> {
     const result = await pool.query(
-      `SELECT * FROM StreamingLanguage WHERE id = $1`,
+      `SELECT * FROM Streaming_Language WHERE id = $1`,
       [id]
     );
     return result.rows[0];

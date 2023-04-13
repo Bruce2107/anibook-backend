@@ -13,7 +13,7 @@ export class CreateStudioController {
       const result = await this.createStudioUseCase.execute(name);
       return response.sendStatus(result ? 201 : 409);
     } catch (error) {
-      return response.sendStatus(400).json({ error: error.stack });
+      return response.status(400).json({ error: error.stack });
     }
   }
 }

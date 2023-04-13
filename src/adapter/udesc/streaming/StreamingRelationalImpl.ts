@@ -22,7 +22,7 @@ export class StreamingRepositoryRelationalImpl implements StreamingRepository {
   async insertOne(streaming: Streaming): Promise<boolean> {
     if (!(await this.alreadyExists(streaming))) {
       const inserted: QueryResult = await pool.query(
-        `INSERT INTO Streaming (value,link) VALUES ($1,$2)`,
+        `INSERT INTO Streaming (name,link) VALUES ($1,$2)`,
         [streaming.name, streaming.link]
       );
       return !!inserted.rowCount;

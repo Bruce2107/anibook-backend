@@ -22,7 +22,7 @@ export class StudioRepositoryRelationalImpl implements StudioRepository {
   async insertOne(studio: Studio): Promise<boolean> {
     if (!(await this.alreadyExists(studio))) {
       const inserted: QueryResult = await pool.query(
-        `INSERT INTO Studio (name) VALUES ($1,$2)`,
+        `INSERT INTO Studio (name) VALUES ($1)`,
         [studio.name]
       );
       return !!inserted.rowCount;
