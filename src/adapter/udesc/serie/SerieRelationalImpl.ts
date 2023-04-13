@@ -23,17 +23,15 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
   async insertOne(serie: Serie): Promise<boolean> {
     if (!(await this.alreadyExists(serie))) {
       const inserted: QueryResult = await pool.query(
-        `INSERT INTO Serie (comment, cover, createdAt, idStudio,name, numberOfEpisodes, status, synopsis, updateAt) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+        `INSERT INTO Serie (comment, cover, createdAt, idStudio,name, numberOfEpisodes, status, synopsis, updatedAt) VALUES ($1,$2,NOW()::timestamp,$3,$4,$5,$6,$7,NOW()::timestamp)`,
         [
           serie.comment,
           serie.cover,
-          Date.now(),
           serie.idStudio,
           serie.name,
           serie.numberOfEpisodes,
           serie.status,
           serie.synopsis,
-          Date.now(),
         ]
       );
       return !!inserted.rowCount;
@@ -42,17 +40,15 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
   }
   async updateSerie(id: string, serie: Serie): Promise<boolean> {
     const result = await pool.query(
-      `UPDATE Serie SET comment = $1, cover = $2, idStudio = $3, name = $4, numberOfEpisodes = $5, status = $6, synopsis = $7, updatedAt = $8 WHERE id = $8`,
+      `UPDATE Serie SET comment = $1, cover = $2, idStudio = $3, name = $4, numberOfEpisodes = $5, status = $6, synopsis = $7, updatedAt = NOW()::timestamp WHERE id = $8`,
       [
         serie.comment,
         serie.cover,
-        // Date.now(), // createdAt
         serie.idStudio,
         serie.name,
         serie.numberOfEpisodes,
         serie.status,
         serie.synopsis,
-        Date.now(),
         id,
       ]
     );

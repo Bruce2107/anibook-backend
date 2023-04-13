@@ -44,6 +44,6 @@ export class GalleryRepositoryRelationalImpl implements GalleryRepository {
       `select * from image i join gallery g on g.idimage = i.id and g.idserie = $1`,
       [idSerie]
     );
-    return result.rows[0];
+    return result.rows;
   }
 }
