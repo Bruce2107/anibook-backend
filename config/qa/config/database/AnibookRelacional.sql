@@ -28,7 +28,7 @@
   create table if not exists Image(
     id serial not null,
     name text not null,
-    contentType text not null,
+    "contentType" text not null,
     image bytea null,
     folder text not null,
     primary key(id)
@@ -37,7 +37,7 @@
   CREATE OR REPLACE PROCEDURE InsertImage(vName text, vContentType text, vImage bytea, vFolder text)
   LANGUAGE SQL
   AS $$
-    INSERT INTO Image (name, contentType, image, folder) VALUES (vName,vContentType,vImage,vFolder);
+    INSERT INTO Image (name, "contentType", image, folder) VALUES (vName,vContentType,vImage,vFolder);
   $$;
 
 -- STATUS
@@ -72,7 +72,7 @@
   );
 
   CREATE OR REPLACE PROCEDURE InsertSerie(vName text, vSynopsis text, vComment text, vStatus integer,
-  vNumberOfEpisodes integer, vCreatedAt date, vUpdatedAt date, vCover integer, vIdStudio integer)
+  vNumberOfEpisodes integer, vCreatedAt timestamp, vUpdatedAt timestamp, vCover integer, vIdStudio integer)
   LANGUAGE SQL
   AS $$
     INSERT INTO Serie (name, synopsis, comment, status, numberOfEpisodes, createdAt, updatedAt, cover, idStudio) 
@@ -257,43 +257,43 @@
   CALL InsertSerie('Serie1',
     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has'
     ,'the 1500s, when an unknown printer took a galley of type and scrambled it to make a ty'
-    ,1,12,NOW()::timestamp, NOW()::timestamp,1,1); -- 1
+    ,1,12,now()::timestamp, now()::timestamp,1,1); -- 1
   CALL InsertSerie('Serie2',
     'fessor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,',
     'ou are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet te',
-    2,0,NOW()::timestamp, NOW()::timestamp,4,2); -- 2
+    2,0,now()::timestamp, now()::timestamp,4,2); -- 2
   CALL InsertSerie('Serie3',
     'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.',
     'Donec porttitor vitae nisi vel accumsan. Praesent rhoncus erat ut urna egestas, id malesuada urna pretium. Ut cursus, ex quis pretium tincidunt',
-    3,5,NOW()::timestamp, NOW()::timestamp,6,3); -- 3
+    3,5,now()::timestamp, now()::timestamp,6,3); -- 3
   CALL InsertSerie('Serie4',
     'Quisque sit amet ultricies lectus, sed mattis magna. Susp$$isse eros ant',
     'Quisque sit amet ultricies lectus, sed mattis magna. Susp$$isse eros ante, bib$$um eu egestas non, interdum quis urna. Phasellus sed fermentum tellus, vitae dictum diam. Aliquam erat volutpat. Praesent dignissim libero quis purus eleif$$ condimentum. Donec elementum neque tellus, nec tempus purus scelerisque vel. Mauris egestas diam vel tellus sodales, ut tempor neque laoreet. Aenean ut venenatis odio. Curabitur sed ex blandit lorem mollis bib$$um. ',
-    1,36,NOW()::timestamp, NOW()::timestamp,7,4); -- 4
+    1,36,now()::timestamp, now()::timestamp,7,4); -- 4
   CALL InsertSerie('Serie5',
     'Sed pharetra metus in dolor molestie molestie. ',
     'us faucibus venenatis. Integer auctor suscipit turpis, posuere egestas neque congue vitae. Pellentesque a vulputate ex, sit amet semper nisi. Morbi ultrices condimentum consequat. Eti',
-    1,50,NOW()::timestamp, NOW()::timestamp,9,5); -- 5
+    1,50,now()::timestamp, now()::timestamp,9,5); -- 5
   CALL InsertSerie('Serie6',
     'Integer ultrices cursus nisl, ac',
     'nd ipsum eu mollis aliquet. Nullam ac arcu vestibulum, pretium diam eget, vestibulum nisi. Aliquam tristique, elit at tempus tristique, velit diam luctus mauris, ut finibus ligula lacus eu ligula. Cras nisi augue, tincidunt ac orci in, tempus h$$rerit lectus. Morbi tincidunt eleif$$ quam vel viverra. Cras eu so',
-    1,21,NOW()::timestamp, NOW()::timestamp,13,6); -- 6
+    1,21,now()::timestamp, now()::timestamp,13,6); -- 6
   CALL InsertSerie('Serie7',
     'Nullam quis libero iaculis urna malesuada pretium. ',
     'icies eget, pellentesque id metus. Phasellus eleif$$, nisl ut faucibus finibus, leo odio scelerisque mauris, at sodales dui risus et ipsum. Nulla ipsum neque, bibe',
-    3,11,NOW()::timestamp, NOW()::timestamp,15,8); -- 7
+    3,11,now()::timestamp, now()::timestamp,15,8); -- 7
   CALL InsertSerie('Serie8',
     'Etiam eget placerat ante, id porttitor nunc',
     'Phasellus ligula leo, condimentum sed odio egestas, egestas interdum sem.',
-    3,18,NOW()::timestamp, NOW()::timestamp,16,8); -- 8
+    3,18,now()::timestamp, now()::timestamp,16,8); -- 8
   CALL InsertSerie('Serie9',
     'Ut maximus ultrices ornare.',
     'llentesque pretium orci, vitae sollicitudin purus luctus sit amet. Aliquam non risus commodo dui sollicitudin maximus ut vel enim. In lacinia h$$rerit eros, a pretium neque ultricies et. In id nibh a diam dictum tincidunt vel sed ante. Donec et molestie magna. Nulla ultrices dignissim augue vel suscipit.',
-    3,12,NOW()::timestamp, NOW()::timestamp,18,9); -- 9
+    3,12,now()::timestamp, now()::timestamp,18,9); -- 9
   CALL InsertSerie('Serie10',
     'Maecenas justo sem, vulputate nec ipsum at, pellentesque pharetra arcu. ',
     ' libero nec cursus. Etiam accumsan leo quis pretium pellentesque. Donec ultrices mi sed enim eleif$$ ullamcorper. Vivamus posuere purus quis lectus finibus, a ven',
-    2,8,NOW()::timestamp, NOW()::timestamp,20,1); -- 10
+    2,8,now()::timestamp, now()::timestamp,20,1); -- 10
 
 -- INSERT LANGUAGE
   CALL InsertLanguage('Portuguese'); -- 1
@@ -424,12 +424,12 @@
   SELECT se."name" AS "Seriado" FROM serie se 
     JOIN music m ON se.id = m.idserie 
     AND m.idlanguage = 
-    (SELECT id FROM "language" l WHERE l."language" = 'Portuguese')
+    (SELECT id FROM "language" l WHERE l."language" = 'Portuguese');
 
   SELECT se."name" AS "Seriado" FROM serie se 
     JOIN music m ON se.id = m.idserie 
     JOIN "language" l ON l.id = m.idlanguage 
-    AND l."language" = 'Portuguese'
+    AND l."language" = 'Portuguese';
 
   -- TODOS OS STREAMINGSS QUE POSSUEM UMA OBRA COM MAIS DE 1 AUTOR, DEVE RETORNAR O NOME DA OBRA
   SELECT s."name" AS "Streaming",s2."name" AS "Seriado" FROM streaming s 
