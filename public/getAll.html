@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetAll</title>
+</head>
+
+<body>
+  <label for="tables">Choose a table:</label>
+
+  <select name="tables" id="tables">
+    <option value="author">Author</option>
+    <option value="language">Language</option>
+    <option value="music">Music</option>
+    <option value="serie">Serie</option>
+    <option value="status">Status</option>
+    <option value="streaming">Streaming</option>
+    <option value="studio">Studio</option>
+  </select>
+
+  <button id="getAllBtn">GetAll</button>
+  <div id="result"></div>
+  <script>
+    document.querySelector("#getAllBtn").addEventListener("click", async () => {
+      let table = document.querySelector("#tables").value
+      let route = getRoute(table || 'author')
+      try {
+        const response = await fetch(`http://localhost:4001/${route}`, {
+          method: 'GET', mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const result = await response.json()
+        // console.log(result);
+        showResult(result, table)
+      } catch (error) {
+      }
+    });
+
+    function getRoute(table) {
+      const routes = {
+        'author': 'authors',
+        'language': 'languages',
+        'music': 'musics',
+        'serie': 'series',
+        'status': 'status',
+        'streaming': 'streamings',
+        'studio': 'studios',
+      };
+      return routes[table]
+    }
+
+    function showResult(result, table) {
+      document.querySelector("#result").innerHTML = ""
+      const routes = {
+        'author': showAuthors,
+        'language': showLanguages,
+        'music': showMusics,
+        'serie': showSeries,
+        'status': showStatus,
+        'streaming': showStreamings,
+        'studio': showStudios,
+      }[table](result);
+      document.querySelector("#result").appendChild(routes)
+    }
+
+    function showAuthors(result) {
+      return populateTable(null, result.authors.length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].name,
+        })[j]
+        return `${text}`;
+      }, result.authors)
+    }
+
+    function showLanguages(result) {
+      return populateTable(null, result.languages.length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].language,
+        })[j]
+        return `${text}`;
+      }, result.languages)
+    }
+
+    function showMusics(result) {
+      return populateTable(null, result.musics.length, 3, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].name,
+          2: v[i].link,
+        })[j]
+        return `${text}`;
+      }, result.musics)
+    }
+
+    function showSeries(result) {
+      return populateTable(null, result.series.length, 5, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].name,
+          2: v[i].synopsis,
+          3: v[i].comment,
+          4: v[i].numberofepisodes,
+        })[j]
+        return `${text}`;
+      }, result.series)
+    }
+
+    function showStatus(result) {
+      return populateTable(null, result['status'].length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].value,
+        })[j]
+        return `${text}`;
+      }, result['status']);
+    }
+
+    function showStreamings(result) {
+      return populateTable(null, result.streamings.length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].name,
+        })[j]
+        return `${text}`;
+      }, result.streamings);
+    }
+
+    function showStudios(result) {
+      return populateTable(null, result.studios.length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].id,
+          1: v[i].name,
+        })[j]
+        return `${text}`;
+      }, result.studios)
+    }
+
+    function populateTable(table, rows, cells, content, values) {
+      var is_func = (typeof content === 'function');
+      if (!table) table = document.createElement('table');
+      for (var i = 0; i < rows; ++i) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < cells; ++j) {
+          row.appendChild(document.createElement('td'));
+          var text = !is_func ? (content + '') : content(table, i, j, values);
+          row.cells[j].appendChild(document.createTextNode(text));
+        }
+        table.appendChild(row);
+      }
+      return table;
+    }
+
+  </script>
+</body>
+
+</html>
