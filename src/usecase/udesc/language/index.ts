@@ -12,11 +12,22 @@ import {
   UpdateLanguageController,
 } from './UpdateLanguage';
 import { LanguageRepositoryRelationalImpl } from '@adapter/udesc/language/LanguageRelationalImpl';
+import {
+  GetAllLanguagesUseCase,
+  GetAllLanguagesController,
+} from './GetAllLanguages';
 
 const databaseLanguageRepository = new LanguageRepositoryRelationalImpl();
 
 const getLanguageUseCase = new GetLanguageUseCase(databaseLanguageRepository);
 const getLanguageController = new GetLanguageController(getLanguageUseCase);
+
+const getAllLanguagesUseCase = new GetAllLanguagesUseCase(
+  databaseLanguageRepository
+);
+const getAllLanguagesController = new GetAllLanguagesController(
+  getAllLanguagesUseCase
+);
 
 const createLanguageUseCase = new CreateLanguageUseCase(
   databaseLanguageRepository
@@ -49,4 +60,5 @@ export {
   updateLanguageController,
   updateLanguageUseCase,
   databaseLanguageRepository,
+  getAllLanguagesController,
 };

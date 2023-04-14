@@ -4,6 +4,10 @@ import { Serie } from '@domain/udesc/serie';
 import { SerieRepository } from './SerieRepository';
 
 export class SerieRepositoryRelationalImpl implements SerieRepository {
+  async getAllSeries(): Promise<Serie[]> {
+    const result = await pool.query(`SELECT * FROM Serie`, []);
+    return result.rows;
+  }
   async alreadyExists(serie: Serie): Promise<boolean> {
     const exists = await pool.query(
       `SELECT * FROM Serie WHERE name = $1 and idStudio = $2 `,

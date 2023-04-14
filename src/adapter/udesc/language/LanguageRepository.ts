@@ -6,4 +6,5 @@ export interface LanguageRepository {
   updateLanguage(id: string, language: Language): Promise<boolean>;
   getLanguage(id: string): Promise<Language>;
   alreadyExists(language: Language): Promise<boolean>;
+  getAllLanguages(): Promise<Language[]>;
 }

@@ -6,4 +6,5 @@ export interface SerieRepository {
   updateSerie(id: string, serie: Serie): Promise<boolean>;
   getSerie(id: string): Promise<Serie>;
   alreadyExists(serie: Serie): Promise<boolean>;
+  getAllSeries(): Promise<Serie[]>;
 }

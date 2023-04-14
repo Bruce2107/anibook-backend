@@ -6,4 +6,5 @@ export interface MusicRepository {
   updateMusic(id: string, music: Music): Promise<boolean>;
   getMusic(id: string): Promise<Music>;
   alreadyExists(music: Music): Promise<boolean>;
+  getAllMusics(): Promise<Music[]>;
 }

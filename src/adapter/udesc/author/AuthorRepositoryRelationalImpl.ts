@@ -4,6 +4,10 @@ import { QueryResult } from 'pg';
 import { pool } from '../../../database';
 
 export class AuthorRepositoryRelationalImpl implements AuthorRepository {
+  async getAllAuthors(): Promise<Author[]> {
+    const result = await pool.query(`SELECT * FROM Author`, []);
+    return result.rows;
+  }
   async alreadyExists(name: string): Promise<boolean> {
     const exists = await pool.query(`SELECT * FROM Author WHERE name = $1`, [
       name,

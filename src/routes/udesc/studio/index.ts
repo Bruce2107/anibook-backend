@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import {
   createStudioController,
   deleteStudioController,
+  getAllStudiosController,
   getStudioController,
   updateStudioController,
 } from '@usecase/udesc/studio';
@@ -10,6 +11,10 @@ const routes = Router();
 
 routes.get('/studio/:id', (req: Request, res: Response) =>
   getStudioController.handle(req, res)
+);
+
+routes.get('/studios', (req: Request, res: Response) =>
+  getAllStudiosController.handle(req, res)
 );
 
 routes.post('/studio', (req: Request, res: Response) =>

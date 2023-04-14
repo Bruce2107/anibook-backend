@@ -1,6 +1,7 @@
 import {
   createAuthorController,
   deleteAuthorController,
+  getAllAuthorsController,
   getAuthorController,
   updateAuthorController,
 } from '@usecase/udesc/author';
@@ -10,6 +11,10 @@ const routes = Router();
 
 routes.get('/author/:name', (req: Request, res: Response) =>
   getAuthorController.handle(req, res)
+);
+
+routes.get('/authors', (req: Request, res: Response) =>
+  getAllAuthorsController.handle(req, res)
 );
 
 routes.post('/author', (req: Request, res: Response) =>

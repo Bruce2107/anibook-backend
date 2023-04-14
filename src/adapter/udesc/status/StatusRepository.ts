@@ -6,4 +6,5 @@ export interface StatusRepository {
   updateStatus(id: string, status: Status): Promise<boolean>;
   getStatus(id: string): Promise<Status>;
   alreadyExists(status: Status): Promise<boolean>;
+  getAllStatus(): Promise<Status[]>;
 }

@@ -6,4 +6,5 @@ export interface StreamingRepository {
   updateStreaming(id: string, streaming: Streaming): Promise<boolean>;
   getStreaming(id: string): Promise<Streaming>;
   alreadyExists(streaming: Streaming): Promise<boolean>;
+  getAllStreamings(): Promise<Streaming[]>;
 }

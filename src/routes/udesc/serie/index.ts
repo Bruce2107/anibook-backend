@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import {
   createSerieController,
   deleteSerieController,
+  getAllSeriesController,
   getSerieController,
   updateSerieController,
 } from '@usecase/udesc/serie';
@@ -10,6 +11,10 @@ const routes = Router();
 
 routes.get('/serie/:id', (req: Request, res: Response) =>
   getSerieController.handle(req, res)
+);
+
+routes.get('/series', (req: Request, res: Response) =>
+  getAllSeriesController.handle(req, res)
 );
 
 routes.post('/serie', (req: Request, res: Response) =>

@@ -3,11 +3,15 @@ import { GetMusicController, GetMusicUseCase } from './GetMusic';
 import { DeleteMusicUseCase, DeleteMusicController } from './DeleteMusic';
 import { UpdateMusicUseCase, UpdateMusicController } from './UpdateMusic';
 import { MusicRepositoryRelationalImpl } from '@adapter/udesc/music/MusicRelationalImpl';
+import { GetAllMusicsUseCase, GetAllMusicsController } from './GetAllMusics';
 
 const databaseMusicRepository = new MusicRepositoryRelationalImpl();
 
 const getMusicUseCase = new GetMusicUseCase(databaseMusicRepository);
 const getMusicController = new GetMusicController(getMusicUseCase);
+
+const getAllMusicsUseCase = new GetAllMusicsUseCase(databaseMusicRepository);
+const getAllMusicsController = new GetAllMusicsController(getAllMusicsUseCase);
 
 const createMusicUseCase = new CreateMusicUseCase(databaseMusicRepository);
 const createMusicController = new CreateMusicController(createMusicUseCase);
@@ -28,4 +32,5 @@ export {
   updateMusicController,
   updateMusicUseCase,
   databaseMusicRepository,
+  getAllMusicsController,
 };

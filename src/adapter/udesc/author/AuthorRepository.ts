@@ -6,4 +6,5 @@ export interface AuthorRepository {
   updateAuthor(id: string, data: Author): Promise<boolean>;
   getAuthor(name: string): Promise<Author>;
   alreadyExists(name: string): Promise<boolean>;
+  getAllAuthors(): Promise<Author[]>;
 }

@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import {
   createMusicController,
   deleteMusicController,
+  getAllMusicsController,
   getMusicController,
   updateMusicController,
 } from '@usecase/udesc/music';
@@ -10,6 +11,10 @@ const routes = Router();
 
 routes.get('/music/:id', (req: Request, res: Response) =>
   getMusicController.handle(req, res)
+);
+
+routes.get('/musics', (req: Request, res: Response) =>
+  getAllMusicsController.handle(req, res)
 );
 
 routes.post('/music', (req: Request, res: Response) =>

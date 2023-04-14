@@ -4,6 +4,10 @@ import { MusicRepository } from './MusicRepository';
 import { Music } from '@domain/udesc/music';
 
 export class MusicRepositoryRelationalImpl implements MusicRepository {
+  async getAllMusics(): Promise<Music[]> {
+    const result = await pool.query(`SELECT * FROM Music`, []);
+    return result.rows;
+  }
   async alreadyExists(music: Music): Promise<boolean> {
     const exists = await pool.query(
       `SELECT * FROM Music WHERE name = $1 and idLanguage = $2 and idSerie = $3`,

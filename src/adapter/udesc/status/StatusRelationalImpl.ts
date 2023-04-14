@@ -4,6 +4,10 @@ import { StatusRepository } from './StatusRepository';
 import { Status } from '@domain/udesc/status';
 
 export class StatusRepositoryRelationalImpl implements StatusRepository {
+  async getAllStatus(): Promise<Status[]> {
+    const result = await pool.query(`SELECT * FROM Status`, []);
+    return result.rows;
+  }
   async alreadyExists(status: Status): Promise<boolean> {
     const exists = await pool.query(`SELECT * FROM Status WHERE value = $1`, [
       status.value,

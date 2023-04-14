@@ -4,6 +4,10 @@ import { StudioRepository } from './StudioRepository';
 import { Studio } from '@domain/udesc/studio';
 
 export class StudioRepositoryRelationalImpl implements StudioRepository {
+  async getAllStudios(): Promise<Studio[]> {
+    const result = await pool.query(`SELECT * FROM Studio`, []);
+    return result.rows;
+  }
   async alreadyExists(studio: Studio): Promise<boolean> {
     const exists = await pool.query(`SELECT * FROM Studio WHERE name = $1`, [
       studio.name,

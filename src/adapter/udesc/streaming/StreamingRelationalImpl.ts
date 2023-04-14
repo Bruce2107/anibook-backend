@@ -4,6 +4,10 @@ import { StreamingRepository } from './StreamingRepository';
 import { Streaming } from '@domain/udesc/streaming';
 
 export class StreamingRepositoryRelationalImpl implements StreamingRepository {
+  async getAllStreamings(): Promise<Streaming[]> {
+    const result = await pool.query(`SELECT * FROM Streaming`, []);
+    return result.rows;
+  }
   async alreadyExists(streaming: Streaming): Promise<boolean> {
     const exists = await pool.query(`SELECT * FROM Streaming WHERE name = $1`, [
       streaming.name,

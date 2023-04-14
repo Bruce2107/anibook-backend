@@ -12,6 +12,10 @@ import {
   UpdateStreamingController,
 } from './UpdateStreaming';
 import { StreamingRepositoryRelationalImpl } from '@adapter/udesc/streaming/StreamingRelationalImpl';
+import {
+  GetAllStreamingsUseCase,
+  GetAllStreamingsController,
+} from './GetAllStreamings';
 
 const databaseStreamingRepository = new StreamingRepositoryRelationalImpl();
 
@@ -19,6 +23,13 @@ const getStreamingUseCase = new GetStreamingUseCase(
   databaseStreamingRepository
 );
 const getStreamingController = new GetStreamingController(getStreamingUseCase);
+
+const getAllStreamingsUseCase = new GetAllStreamingsUseCase(
+  databaseStreamingRepository
+);
+const getAllStreamingsController = new GetAllStreamingsController(
+  getAllStreamingsUseCase
+);
 
 const createStreamingUseCase = new CreateStreamingUseCase(
   databaseStreamingRepository
@@ -51,4 +62,5 @@ export {
   updateStreamingController,
   updateStreamingUseCase,
   databaseStreamingRepository,
+  getAllStreamingsController,
 };

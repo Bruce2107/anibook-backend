@@ -4,6 +4,10 @@ import { LanguageRepository } from './LanguageRepository';
 import { Language } from '@domain/udesc/language';
 
 export class LanguageRepositoryRelationalImpl implements LanguageRepository {
+  async getAllLanguages(): Promise<Language[]> {
+    const result = await pool.query(`SELECT * FROM Language`);
+    return result.rows;
+  }
   async alreadyExists(language: Language): Promise<boolean> {
     const exists = await pool.query(
       `SELECT * FROM Language WHERE language = $1`,
