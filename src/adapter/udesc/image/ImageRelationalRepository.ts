@@ -4,4 +4,5 @@ import { ImageRepository } from '@usecase/port/ImageRepository';
 export interface ImageRelationalRepository extends ImageRepository {
   getById(id: string): Promise<Image>;
   _delete(id: string): Promise<boolean>;
+  updateImage(id: string, image: Image): Promise<boolean>;
 }

@@ -80,6 +80,8 @@
         <option value="authorserie">AuthorSerie</option>
         <option value="seriestreaming">SerieStreaming</option>
         <option value="streaminglangauge">StreamingLanguage</option>
+        <option value="gallery">Gallery</option>
+        <option value="image">Image</option>
       </select>
     </div>
 
@@ -100,20 +102,23 @@
     document.querySelector('#update').addEventListener("click", async () => {
       let table = document.querySelector("#tables").value
       let route = getRoute(table || 'author')
-      let body = JSON.stringify(getBody(table))
       let id = document.querySelector("#lid").value
+
+      const params = {
+        headers: table !== 'image' ? {
+          "Content-Type": "application/json",
+        } : {},
+        body: table !== 'image' ? JSON.stringify(getBody(table)) : getFormImage()
+      }
       try {
+
         const response = await fetch(`http://localhost:4001/${route}${id}`, {
           method: 'PATCH', mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body
+          ...params
         })
         showResult(response.status)
-        console.log(response)
       } catch (error) {
         document.querySelector("#msg").innerHTML = '<p>Erro</p>'
       }
@@ -131,6 +136,8 @@
         'authorserie': 'author/serie/',
         'seriestreaming': 'serie/streaming/',
         'streaminglangauge': 'streaming/language/',
+        'gallery': 'gallery/',
+        'image': 'udesc/image/',
       };
       return routes[table]
     }
@@ -156,6 +163,8 @@
         'authorserie': showFormAuthorSerie,
         'seriestreaming': showFormSerieStreaming,
         'streaminglangauge': showFormStreamingLanguage,
+        'gallery': showFormGallery,
+        'image': showFormImage,
       }[table]();
       document.querySelector("#update").disabled = false
     }
@@ -172,6 +181,7 @@
         'authorserie': getFormAuthorSerie,
         'seriestreaming': getFormSerieStreaming,
         'streaminglangauge': getFormStreamingLanguage,
+        'gallery': getFormGallery,
       }[table]();
       return routes
     }
@@ -323,6 +333,36 @@
         idStreaming,
         idLanguage
       }
+    }
+
+    function showFormGallery() {
+      document.querySelector("#form").innerHTML = `
+        <label for="limage">image</label>
+        <input type="number" name="limage" id="limage">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+      `    }
+    function getFormGallery() {
+      const idImage = document.querySelector('#limage').value
+      const idSerie = document.querySelector('#lserie').value
+      return {
+        idSerie,
+        idImage
+      }
+    }
+
+    function showFormImage() {
+      document.querySelector("#form").innerHTML = `
+      <form enctype="multipart/form-data" id="fimage">
+        <label for="images">image</label>
+        <input type="file" name="images" id="images" accept="image/*">
+      </form>
+      `    }
+
+    function getFormImage() {
+      const form = document.querySelector('#fimage')
+      const data = new URLSearchParams(new FormData(form));
+      return data
     }
   </script>
 </body>

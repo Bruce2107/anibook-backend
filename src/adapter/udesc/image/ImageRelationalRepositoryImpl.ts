@@ -6,6 +6,14 @@ import { ImageRelationalRepository } from './ImageRelationalRepository';
 
 export class ImageRelationalRepositoryImpl
   implements ImageRelationalRepository {
+  async updateImage(id: string, image: Image): Promise<boolean> {
+    const result = await pool.query(
+      `UPDATE Image SET name = $1 ,folder = $2,"contentType" = $3 ,image = $4 WHERE id = $5`,
+      [image.name, image.folder, image.contentType, image.image, id]
+    );
+
+    return !!result.rowCount;
+  }
   async getById(id: string): Promise<Image> {
     const result: QueryResult<Image> = await pool.query(
       `SELECT * FROM image WHERE id = $1`,

@@ -2,6 +2,7 @@ import {
   createImageController,
   deleteImageController,
   getImageController,
+  updateImageController,
 } from '@usecase/udesc/image';
 import { fileUpload } from '@middleware/upload';
 import { Router, Request, Response } from 'express';
@@ -18,6 +19,10 @@ routes.get('/udesc/image/:id', (req: Request, res: Response) =>
 
 routes.post('/udesc/image', fileUpload, (req: Request, res: Response) =>
   createImageController.handle(req, res)
+);
+
+routes.patch('/udesc/image/:id', fileUpload, (req: Request, res: Response) =>
+  updateImageController.handle(req, res)
 );
 
 routes.delete('/udesc/image/:id', (req: Request, res: Response) =>

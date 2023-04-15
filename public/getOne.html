@@ -277,6 +277,7 @@
     }
 
     function showGallery(result) {
+      console.log(result)
       const value = getArray(result.gallery)
       return populateTable(null, value.length, 4, (t, i, j, v) => {
         const text = ({
@@ -321,7 +322,7 @@
     const getArray = (value) => Array.isArray(value) ? value : [value]
 
     async function showImage(result) {
-      console.log(result)
+      document.querySelector('#result').innerHTML = ""
       var blob = await result.blob()
       var image = document.createElement('img')
       image.src = URL.createObjectURL(blob)
