@@ -19,6 +19,8 @@ export class GetStatusController {
 export class GetStatusUseCase {
   constructor(private statusRepository: StatusRepository) {}
   async execute(id: string) {
-    return this.statusRepository.getStatus(id);
+    return isNaN(Number(id))
+      ? this.statusRepository.getStatus(id)
+      : this.statusRepository.getStatusById(id);
   }
 }

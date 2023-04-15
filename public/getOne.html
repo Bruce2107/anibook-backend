@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GetAll</title>
+  <title>GetOne</title>
   <style>
     * {
       margin: 0;
@@ -47,6 +47,14 @@
       background-color: rgba(255, 0, 0, 0.3);
     }
 
+    #msg {
+      color: red;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     #result {
       width: 100%;
       display: flex;
@@ -76,7 +84,6 @@
 <body>
   <div id="menu">
     <div>
-
       <label for="tables">Choose a table:</label>
       <select name="tables" id="tables">
         <option value="author">Author</option>
@@ -87,18 +94,26 @@
         <option value="streaming">Streaming</option>
         <option value="studio">Studio</option>
       </select>
+
+      <label for="termid">Id</label>
+      <input type="text" name="termid" id="termid">
+      <label for="termname">Name</label>
+      <input type="text" name="termname" id="termname">
     </div>
 
-    <button id="getAllBtn">GetAll</button>
+    <button id="getOneBtn">GetOne</button>
   </div>
-
+  <div id="msg"></div>
   <div id="result"></div>
   <script>
-    document.querySelector("#getAllBtn").addEventListener("click", async () => {
+    document.querySelector("#getOneBtn").addEventListener("click", async () => {
       let table = document.querySelector("#tables").value
       let route = getRoute(table || 'author')
+      let termId = document.querySelector("#termid").value
+      let termName = document.querySelector("#termname").value
+      let term = termId ? termId : termName
       try {
-        const response = await fetch(`http://localhost:4001/${route}`, {
+        const response = await fetch(`http://localhost:4001/${route}${term}`, {
           method: 'GET', mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -109,18 +124,19 @@
         const result = await response.json()
         showResult(result, table)
       } catch (error) {
+        document.querySelector("#msg").innerHTML = '<p>Erro</p>'
       }
     });
 
     function getRoute(table) {
       const routes = {
-        'author': 'authors',
-        'language': 'languages',
-        'music': 'musics',
-        'serie': 'series',
-        'status': 'status',
-        'streaming': 'streamings',
-        'studio': 'studios',
+        'author': 'author/',
+        'language': 'language/',
+        'music': 'music/',
+        'serie': 'serie/',
+        'status': 'status/',
+        'streaming': 'streaming/',
+        'studio': 'studio/',
       };
       return routes[table]
     }
@@ -128,60 +144,64 @@
     function showResult(result, table) {
       document.querySelector("#result").innerHTML = ""
       const routes = {
-        'author': showAuthors,
-        'language': showLanguages,
-        'music': showMusics,
-        'serie': showSeries,
+        'author': showAuthor,
+        'language': showLanguage,
+        'music': showMusic,
+        'serie': showSerie,
         'status': showStatus,
-        'streaming': showStreamings,
-        'studio': showStudios,
+        'streaming': showStreaming,
+        'studio': showStudio,
       }[table](result);
       document.querySelector("#result").appendChild(routes)
     }
 
-    function showAuthors(result) {
-      return populateTable(null, result.authors.length, 2, (t, i, j, v) => {
+    function showAuthor(result) {
+      const value = getArray(result.author)
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
         })[j]
         return `${text}`;
-      }, result.authors, (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Nome',
       })[j])
     }
 
-    function showLanguages(result) {
-      return populateTable(null, result.languages.length, 2, (t, i, j, v) => {
+    function showLanguage(result) {
+      const value = getArray(result.language)
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].language,
         })[j]
         return `${text}`;
-      }, result.languages, (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Idioma',
       })[j])
     }
 
-    function showMusics(result) {
-      return populateTable(null, result.musics.length, 3, (t, i, j, v) => {
+    function showMusic(result) {
+      const value = getArray(result.music)
+      return populateTable(null, value.length, 3, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
           2: v[i].link,
         })[j]
         return `${text}`;
-      }, result.musics, (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Nome',
         2: 'Link'
       })[j])
     }
 
-    function showSeries(result) {
-      return populateTable(null, result.series.length, 5, (t, i, j, v) => {
+    function showSerie(result) {
+      const value = getArray(result.serie)
+      return populateTable(null, value.length, 5, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
@@ -190,7 +210,7 @@
           4: v[i].numberofepisodes,
         })[j]
         return `${text}`;
-      }, result.series, (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Nome',
         2: 'Sinopse',
@@ -200,39 +220,42 @@
     }
 
     function showStatus(result) {
-      return populateTable(null, result['status'].length, 2, (t, i, j, v) => {
+      const value = getArray(result['status'])
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].value,
         })[j]
         return `${text}`;
-      }, result['status'], (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Status',
       })[j]);
     }
 
-    function showStreamings(result) {
-      return populateTable(null, result.streamings.length, 2, (t, i, j, v) => {
+    function showStreaming(result) {
+      const value = getArray(result.streaming)
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
         })[j]
         return `${text}`;
-      }, result.streamings, (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Nome',
       })[j]);
     }
 
-    function showStudios(result) {
-      return populateTable(null, result.studios.length, 2, (t, i, j, v) => {
+    function showStudio(result) {
+      const value = getArray(result.studio)
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
         })[j]
         return `${text}`;
-      }, result.studios, (j) => ({
+      }, value, (j) => ({
         0: 'id',
         1: 'Nome',
       })[j])
@@ -261,6 +284,8 @@
       }
       return table;
     }
+
+    const getArray = (value) => Array.isArray(value) ? value : [value]
 
   </script>
 </body>

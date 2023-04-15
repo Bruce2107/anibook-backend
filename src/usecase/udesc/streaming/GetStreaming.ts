@@ -19,6 +19,8 @@ export class GetStreamingController {
 export class GetStreamingUseCase {
   constructor(private streamingRepository: StreamingRepository) {}
   async execute(id: string) {
-    return this.streamingRepository.getStreaming(id);
+    return isNaN(Number(id))
+      ? this.streamingRepository.getStreaming(id)
+      : this.streamingRepository.getStreamingById(id);
   }
 }

@@ -42,8 +42,15 @@ export class MusicRepositoryRelationalImpl implements MusicRepository {
 
     return !!result.rowCount;
   }
-  async getMusic(id: string): Promise<Music> {
+  async getMusicById(id: string): Promise<Music> {
     const result = await pool.query(`select * from Music WHERE id = $1`, [id]);
     return result.rows[0];
+  }
+  async getMusic(name: string): Promise<Music[]> {
+    const result = await pool.query(
+      `SELECT * FROM Music WHERE name ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
   }
 }

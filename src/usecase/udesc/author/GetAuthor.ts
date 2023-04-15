@@ -19,6 +19,8 @@ export class GetAuthorController {
 export class GetAuthorUseCase {
   constructor(private authorRepository: AuthorRepository) {}
   async execute(name: string) {
-    return this.authorRepository.getAuthor(name);
+    return isNaN(Number(name))
+      ? this.authorRepository.getAuthor(name)
+      : this.authorRepository.getAuthorById(name);
   }
 }

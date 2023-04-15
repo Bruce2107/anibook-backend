@@ -41,8 +41,16 @@ export class StatusRepositoryRelationalImpl implements StatusRepository {
 
     return !!result.rowCount;
   }
-  async getStatus(id: string): Promise<Status> {
+  async getStatusById(id: string): Promise<Status> {
     const result = await pool.query(`select * from Status WHERE id = $1`, [id]);
     return result.rows[0];
+  }
+
+  async getStatus(name: string): Promise<Status[]> {
+    const result = await pool.query(
+      `SELECT * FROM Status WHERE value ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
   }
 }

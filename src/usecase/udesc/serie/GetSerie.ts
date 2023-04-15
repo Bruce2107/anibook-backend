@@ -19,6 +19,8 @@ export class GetSerieController {
 export class GetSerieUseCase {
   constructor(private serieRepository: SerieRepository) {}
   async execute(id: string) {
-    return this.serieRepository.getSerie(id);
+    return isNaN(Number(id))
+      ? this.serieRepository.getSerie(id)
+      : this.serieRepository.getSerieById(id);
   }
 }

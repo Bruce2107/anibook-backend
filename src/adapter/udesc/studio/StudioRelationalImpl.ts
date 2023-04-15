@@ -41,8 +41,15 @@ export class StudioRepositoryRelationalImpl implements StudioRepository {
 
     return !!result.rowCount;
   }
-  async getStudio(id: string): Promise<Studio> {
+  async getStudioById(id: string): Promise<Studio> {
     const result = await pool.query(`select * from Studio WHERE id = $1`, [id]);
     return result.rows[0];
+  }
+  async getStudio(name: string): Promise<Studio[]> {
+    const result = await pool.query(
+      `SELECT * FROM Studio WHERE name ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
   }
 }

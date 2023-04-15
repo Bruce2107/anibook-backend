@@ -19,6 +19,8 @@ export class GetStudioController {
 export class GetStudioUseCase {
   constructor(private studioRepository: StudioRepository) {}
   async execute(id: string) {
-    return this.studioRepository.getStudio(id);
+    return isNaN(Number(id))
+      ? this.studioRepository.getStudio(id)
+      : this.studioRepository.getStudioById(id);
   }
 }

@@ -19,6 +19,8 @@ export class GetLanguageController {
 export class GetLanguageUseCase {
   constructor(private languageRepository: LanguageRepository) {}
   async execute(id: string) {
-    return this.languageRepository.getLanguage(id);
+    return isNaN(Number(id))
+      ? this.languageRepository.getLanguage(id)
+      : this.languageRepository.getLanguageById(id);
   }
 }

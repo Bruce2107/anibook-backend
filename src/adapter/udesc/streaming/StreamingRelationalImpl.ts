@@ -41,10 +41,17 @@ export class StreamingRepositoryRelationalImpl implements StreamingRepository {
 
     return !!result.rowCount;
   }
-  async getStreaming(id: string): Promise<Streaming> {
+  async getStreamingById(id: string): Promise<Streaming> {
     const result = await pool.query(`select * from Streaming WHERE id = $1`, [
       id,
     ]);
     return result.rows[0];
+  }
+  async getStreaming(name: string): Promise<Streaming[]> {
+    const result = await pool.query(
+      `SELECT * FROM Streaming WHERE name ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
   }
 }

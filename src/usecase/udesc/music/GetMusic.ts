@@ -19,6 +19,8 @@ export class GetMusicController {
 export class GetMusicUseCase {
   constructor(private musicRepository: MusicRepository) {}
   async execute(id: string) {
-    return this.musicRepository.getMusic(id);
+    return isNaN(Number(id))
+      ? this.musicRepository.getMusic(id)
+      : this.musicRepository.getMusicById(id);
   }
 }

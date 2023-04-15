@@ -59,8 +59,16 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
 
     return !!result.rowCount;
   }
-  async getSerie(id: string): Promise<Serie> {
+  async getSerieById(id: string): Promise<Serie> {
     const result = await pool.query(`select * from Serie WHERE id = $1`, [id]);
     return result.rows[0];
+  }
+
+  async getSerie(name: string): Promise<Serie[]> {
+    const result = await pool.query(
+      `SELECT * FROM Serie WHERE name ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
   }
 }

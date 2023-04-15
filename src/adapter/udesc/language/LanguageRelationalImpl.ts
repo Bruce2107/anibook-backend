@@ -42,10 +42,18 @@ export class LanguageRepositoryRelationalImpl implements LanguageRepository {
 
     return !!result.rowCount;
   }
-  async getLanguage(id: string): Promise<Language> {
+  async getLanguageById(id: string): Promise<Language> {
     const result = await pool.query(`select * from Language WHERE id = $1`, [
       id,
     ]);
     return result.rows[0];
+  }
+
+  async getLanguage(name: string): Promise<Language[]> {
+    const result = await pool.query(
+      `SELECT * FROM Language WHERE language ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
   }
 }

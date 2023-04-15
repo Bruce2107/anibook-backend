@@ -41,10 +41,16 @@ export class AuthorRepositoryRelationalImpl implements AuthorRepository {
 
     return !!result.rowCount;
   }
-  async getAuthor(name: string): Promise<Author> {
-    const result = await pool.query(`SELECT * FROM Author WHERE name = $1`, [
-      name,
-    ]);
+  async getAuthor(name: string): Promise<Author[]> {
+    const result = await pool.query(
+      `SELECT * FROM Author WHERE name ilike '%' || $1 || '%'`,
+      [name]
+    );
+    return result.rows;
+  }
+
+  async getAuthorById(id: string): Promise<Author> {
+    const result = await pool.query(`SELECT * FROM Author WHERE id = $1`, [id]);
     return result.rows[0];
   }
 }
