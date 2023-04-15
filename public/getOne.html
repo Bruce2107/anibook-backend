@@ -78,6 +78,11 @@
       text-align: center;
       width: auto;
     }
+
+    img {
+      height: 200px;
+      width: auto;
+    }
   </style>
 </head>
 
@@ -93,6 +98,8 @@
         <option value="status">Status</option>
         <option value="streaming">Streaming</option>
         <option value="studio">Studio</option>
+        <option value="image">Image</option>
+        <option value="gallery">Gallery</option>
       </select>
 
       <label for="termid">Id</label>
@@ -121,6 +128,10 @@
             "Content-Type": "application/json",
           },
         });
+        if (table === 'image') {
+          await showImage(response)
+          return
+        }
         const result = await response.json()
         showResult(result, table)
       } catch (error) {
@@ -137,6 +148,8 @@
         'status': 'status/',
         'streaming': 'streaming/',
         'studio': 'studio/',
+        'image': 'udesc/image/',
+        'gallery': 'gallery/'
       };
       return routes[table]
     }
@@ -151,6 +164,8 @@
         'status': showStatus,
         'streaming': showStreaming,
         'studio': showStudio,
+        'image': showImage,
+        'gallery': showGallery,
       }[table](result);
       document.querySelector("#result").appendChild(routes)
     }
@@ -261,6 +276,24 @@
       })[j])
     }
 
+    function showGallery(result) {
+      const value = getArray(result.gallery)
+      return populateTable(null, value.length, 4, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+          1: v[i].folder,
+          2: v[i].idimage,
+          3: v[i].idserie,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome',
+        1: 'Pasta',
+        2: 'Imagem',
+        3: 'Serie'
+      })[j])
+    }
+
     function populateTable(table, rows, cells, content, values, titles) {
       var is_func = (typeof content === 'function');
       if (!table) table = document.createElement('table');
@@ -286,6 +319,14 @@
     }
 
     const getArray = (value) => Array.isArray(value) ? value : [value]
+
+    async function showImage(result) {
+      console.log(result)
+      var blob = await result.blob()
+      var image = document.createElement('img')
+      image.src = URL.createObjectURL(blob)
+      document.querySelector('#result').appendChild(image)
+    }
 
   </script>
 </body>
