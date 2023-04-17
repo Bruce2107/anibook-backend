@@ -1,74 +1,56 @@
-# Anibook Backend
+# Anibook Backend Adaptado
 
-## Backend para a aplicação [Anibook](https://github.com/Bruce2107/anibook-frontend)
+## Backend Anibook adaptado para a criação de um blog de séries
 
 ### **Instalação**
 
 **Para instalar você vai precisar:**
 
-- Yarn
-- Postgres > 9.5
-
-Para desenvolvimento:
-
-```sh
-$ yarn
-$ yarn start:dev
-```
-
-Para produção:
-
-```sh
-$ yarn
-$ yarn build
-$ yarn start
-```
-
-### **Testes**
-
-```sh
-$ yarn test
-```
-
-### **Databases**
-
+- Node
 - Postgres
 
-```sql
-CREATE TABLE IF NOT EXISTS animes (ID serial NOT NULL PRIMARY KEY, dados json NOT NULL);
+### **Bando de dados**
 
-CREATE TABLE IF NOT EXISTS mangas (ID serial NOT NULL PRIMARY KEY, dados json NOT NULL);
-
-CREATE TABLE IF NOT EXISTS images (ID serial NOT NULL PRIMARY KEY, name text NOT NULL, folder text NOT NULL, "contentType" text NOT NULL, image bytea NOT NULL);
-
-CREATE TABLE IF NOT EXISTS users (ID serial NOT NULL PRIMARY KEY, email text NOT NULL, nickname text NOT NULL);
+Criar um banco de dados usando o arquivo [`./config/qa/config/database/AnibookRelacional.sql`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/config/qa/config/database/AnibookRelacional.sql) e usando as seguintes variáveis:
 
 ```
-
-### **Environment**
-
-```
-DB_HOST_POSTGRES=
-DB_USER_POSTGRES=
-DB_PASS_POSTGRES=
-DB_NAME_POSTGRES=
-DB_PORT_POSTGRES=
-TOKEN=
+DB_HOST_POSTGRES=localhost
+DB_USER_POSTGRES=anibook_qa
+DB_PASS_POSTGRES=anibook_qa
+DB_NAME_POSTGRES=anibook_qa
+DB_PORT_POSTGRES=5433
+PORT=4001
+TOKEN=anibook_qa
 ```
 
-### **_Link público_**
+Caso queira criar um banco com valores diferente alterar o arquivo [`./.env.qa`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/.env.qa)
 
-- [anibook-backend](https://anibook-backend.herokuapp.com/)
+### Executar o projeto
 
-### **Notas**
+```sh
+npm install
+npm run dev
+```
 
-- No projeto já existe um arquivo docker-compose.
+### Acessar o aplicativo
 
-- No arquivo [Anibook.postman_collection.json](https://github.com/Bruce2107/anibook-backend/blob/development/Anibook.postman_collection.json) existem todas as rotas e como podem ser usadas, além de possuir em sua descrição um exemplo completo dos dados do tipo `anime` e `manga`
+Com a aplicação executando abrir no navegador os arquivos
 
-#### _Dúvidas_
+- [`./public/getOne.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/getOne.html)
+- [`./public/getAll.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/getAll.html)
+- [`./public/create.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/create.html)
+- [`./public/update.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/update.html)
+- [`./public/delete.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/delete.html)
+- [`./public/reports.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/reports.html)
 
-Para qualquer dúvida entre em contato via [Twitter](https://twitter.com/Bruce2107).
+### Arquivos relacionados
+
+Os arquivos relacionados a este trabalho estão nos seguintes diretórios
+
+- [`./src/adapter/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/adapter/udesc)
+- [`./src/domain/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/domain/udesc)
+- [`./src/routes/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/routes/udesc)
+- [`./src/usecase/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/usecase/udesc)
 
 # License
 

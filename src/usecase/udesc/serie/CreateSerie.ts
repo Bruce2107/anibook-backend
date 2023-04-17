@@ -22,7 +22,7 @@ export class CreateSerieController {
       const result = await this.createSerieUseCase.execute({
         name,
         comment,
-        cover: cover || 0,
+        cover: cover || 1,
         idStudio,
         numberOfEpisodes: numberOfEpisodes || 0,
         status: status || 1,

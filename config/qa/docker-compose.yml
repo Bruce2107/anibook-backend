@@ -12,11 +12,10 @@ services:
     ports:
       - '5433:5432'
     volumes:
-      - ../database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
-      - ../database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+      - ./config/database/AnibookRelacional.sql:/docker-entrypoint-initdb.d/2-data.sql
   node:
     build:
-      dockerfile: ./config/docker/Dockerfile
+      dockerfile: ../../config/docker/Dockerfile
       context: .
     image: anibook/node
     container_name: anibook_node_qa
