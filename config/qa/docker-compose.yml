@@ -13,6 +13,7 @@ services:
       - '5433:5432'
     volumes:
       - ./config/database/AnibookRelacional.sql:/docker-entrypoint-initdb.d/2-data.sql
+      - ./image.webp:/home/image.webp
   # node:
   #   build:
   #     dockerfile: ../../config/docker/Dockerfile

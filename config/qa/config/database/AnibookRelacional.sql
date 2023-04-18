@@ -248,6 +248,10 @@
   CALL InsertImage('image12','image/webp',null,'Serie 10'); -- 19
   CALL InsertImage('capa10','image/webp',null,'Serie 10'); -- 20
 
+-- CHAMADAS OPCIONAIS
+  select lo_import('/home/image.webp');
+  update image set image = lo_get(16594) where id > 0; 
+
 -- INSERT STATUS
   CALL InsertStatus('FINISHED'); -- 1
   CALL InsertStatus('NOT RELEASED YET'); -- 2
