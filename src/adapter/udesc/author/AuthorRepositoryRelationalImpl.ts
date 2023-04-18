@@ -16,6 +16,7 @@ export class AuthorRepositoryRelationalImpl implements AuthorRepository {
     return !!exists.rowCount;
   }
   async _delete(id: string): Promise<boolean> {
+    await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM Author where id = $1`,
       [id]
@@ -52,5 +53,13 @@ export class AuthorRepositoryRelationalImpl implements AuthorRepository {
   async getAuthorById(id: string): Promise<Author> {
     const result = await pool.query(`SELECT * FROM Author WHERE id = $1`, [id]);
     return result.rows[0];
+  }
+
+  async deleteRelations(id: String): Promise<boolean> {
+    const result = await pool.query(
+      `DELETE FROM AuthorSerie WHERE idAuthor = $1`,
+      [id]
+    );
+    return !!result.rowCount;
   }
 }

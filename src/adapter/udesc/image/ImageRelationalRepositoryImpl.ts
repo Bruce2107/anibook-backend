@@ -23,6 +23,7 @@ export class ImageRelationalRepositoryImpl
     return result.rows[0];
   }
   async _delete(id: string): Promise<boolean> {
+    await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM image WHERE id = $1`,
       [id]
@@ -86,5 +87,13 @@ export class ImageRelationalRepositoryImpl
       return !!inserted.rowCount;
     }
     return false;
+  }
+
+  async deleteRelations(id: string): Promise<boolean> {
+    const result = await pool.query(
+      `DELETE FROM gallery where idImage = $1; DELETE FROM serie where idImage = $1`,
+      [id]
+    );
+    return !!result.rowCount;
   }
 }

@@ -13,20 +13,20 @@ services:
       - '5433:5432'
     volumes:
       - ./config/database/AnibookRelacional.sql:/docker-entrypoint-initdb.d/2-data.sql
-  node:
-    build:
-      dockerfile: ../../config/docker/Dockerfile
-      context: .
-    image: anibook/node
-    container_name: anibook_node_qa
-    ports:
-      - '4001:4000'
-    environment:
-      DB_USER_POSTGRES: anibook_qa
-      DB_PASS_POSTGRES: anibook_qa
-      DB_HOST_POSTGRES: postgres_anibook_qa
-      DB_NAME_POSTGRES: anibook_qa
-      DB_PORT_POSTGRES: 5432
-      TOKEN: anibook_qa
-    depends_on:
-      - 'postgresdb'
+  # node:
+  #   build:
+  #     dockerfile: ../../config/docker/Dockerfile
+  #     context: .
+  #   image: anibook/node
+  #   container_name: anibook_node_qa
+  #   ports:
+  #     - '4001:4000'
+  #   environment:
+  #     DB_USER_POSTGRES: anibook_qa
+  #     DB_PASS_POSTGRES: anibook_qa
+  #     DB_HOST_POSTGRES: postgres_anibook_qa
+  #     DB_NAME_POSTGRES: anibook_qa
+  #     DB_PORT_POSTGRES: 5432
+  #     TOKEN: anibook_qa
+  #   depends_on:
+  #     - 'postgresdb'

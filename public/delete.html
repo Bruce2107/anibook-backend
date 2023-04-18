@@ -90,6 +90,8 @@
   <script>
     document.querySelector("#getOneBtn").addEventListener("click", async () => {
       let table = document.querySelector("#tables").value
+      document.querySelector("#result").innerHTML = ''
+      document.querySelector("#msg").innerHTML = ''
       let route = getRoute(table || 'author')
       let term = document.querySelector("#termid").value
       try {

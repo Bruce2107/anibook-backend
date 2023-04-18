@@ -80,6 +80,7 @@
         <option value="authorserie">AuthorSerie</option>
         <option value="seriestreaming">SerieStreaming</option>
         <option value="streaminglangauge">StreamingLanguage</option>
+        <option value="gallery">Gallery</option>
       </select>
     </div>
 
@@ -91,14 +92,20 @@
   <div id="result"></div>
   <script>
     document.querySelector("#getOneBtn").addEventListener("click", async () => {
+      document.querySelector("#msg").innerHTML = ''
+      document.querySelector("#result").innerHTML = ''
       let table = document.querySelector("#tables").value
       showForm(table)
     });
 
     document.querySelector('#create').addEventListener("click", async () => {
+      document.querySelector("#msg").innerHTML = ''
+      document.querySelector("#result").innerHTML = ''
       let table = document.querySelector("#tables").value
       let route = getRoute(table || 'author')
       let body = JSON.stringify(getBody(table))
+      document.querySelector("#form").innerHTML = ''
+      document.querySelector("#create").disabled = true
       try {
         const response = await fetch(`http://localhost:4001/${route}`, {
           method: 'POST', mode: "cors",
@@ -128,6 +135,7 @@
         'authorserie': 'author/serie/',
         'seriestreaming': 'serie/streaming/',
         'streaminglangauge': 'streaming/language/',
+        'gallery': 'gallery/',
       };
       return routes[table]
     }
@@ -135,7 +143,7 @@
     function showResult(status) {
       document.querySelector("#result").innerHTML = ""
       document.querySelector("#msg").innerHTML = ''
-      const text = ({ 201: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados' })[status]
+      const text = ({ 201: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados', 409: 'Conflito' })[status]
       document.querySelector("#result").innerHTML = `<p>${text}</p>`
     }
 
@@ -153,6 +161,7 @@
         'authorserie': showFormAuthorSerie,
         'seriestreaming': showFormSerieStreaming,
         'streaminglangauge': showFormStreamingLanguage,
+        'gallery': showFormGallery,
       }[table]();
       document.querySelector("#create").disabled = false
     }
@@ -169,6 +178,7 @@
         'authorserie': getFormAuthorSerie,
         'seriestreaming': getFormSerieStreaming,
         'streaminglangauge': getFormStreamingLanguage,
+        'gallery': getFormGallery,
       }[table]();
       return routes
     }
@@ -191,7 +201,7 @@
       `    }
 
     function getFormLanguage() {
-      const language = document.querySelector('#language').value
+      const language = document.querySelector('#llanguage').value
       return {
         language
       }
@@ -203,13 +213,21 @@
         <input type="text" name="lname" id="lname">
         <label for="llink">link</label>
         <input type="text" name="llink" id="llink">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+        <label for="llanguage">idioma</label>
+        <input type="number" name="llanguage" id="llanguage">
       `    }
     function getFormMusic() {
       const name = document.querySelector('#lname').value
-      const link = document.querySelector('#link').value
+      const link = document.querySelector('#llink').value
+      const idSerie = document.querySelector('#lserie').value
+      const idLanguage = document.querySelector('#llanguage').value
       return {
         name,
-        link
+        link,
+        idSerie,
+        idLanguage
       }
     }
 
@@ -239,11 +257,15 @@
       document.querySelector("#form").innerHTML = `
         <label for="lname">name</label>
         <input type="text" name="lname" id="lname">
+        <label for="llink">link</label>
+        <input type="text" name="llink" id="llink">
       `    }
     function getFormStreaming() {
       const name = document.querySelector('#lname').value
+      const link = document.querySelector('#llink').value
       return {
-        name
+        name,
+        link
       }
     }
     function showFormSerie() {
@@ -258,6 +280,10 @@
         <input type="number" name="lcover" id="lcover">
         <label for="lstudio">studio</label>
         <input type="number" name="lstudio" id="lstudio">
+        <label for="leps">N eps</label>
+        <input type="number" name="leps" id="leps">
+        <label for="lstatus">Status</label>
+        <input type="number" name="lstatus" id="lstatus">
       `    }
 
     function getFormSerie() {
@@ -266,12 +292,16 @@
       const comment = document.querySelector('#lcomment').value
       const cover = document.querySelector('#lcover').value
       const idStudio = document.querySelector('#lstudio').value
+      const numberOfEpisodes = document.querySelector('#leps').value
+      const status = document.querySelector('#lstatus').value
       return {
         name,
         synopsis,
         comment,
         cover,
-        idStudio
+        idStudio,
+        numberOfEpisodes,
+        status
       }
     }
 
@@ -319,6 +349,22 @@
       return {
         idStreaming,
         idLanguage
+      }
+    }
+
+    function showFormGallery() {
+      document.querySelector("#form").innerHTML = `
+        <label for="limage">imagem</label>
+        <input type="number" name="limage" id="limage">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+      `    }
+    function getFormGallery() {
+      const idImage = document.querySelector('#limage').value
+      const idSerie = document.querySelector('#lserie').value
+      return {
+        idImage,
+        idSerie
       }
     }
   </script>

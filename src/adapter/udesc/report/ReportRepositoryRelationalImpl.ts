@@ -23,7 +23,7 @@ export class ReportRepositoryRelationalImpl implements ReportRepository {
     languageName: string
   ): Promise<Pick<Serie, 'name'>[]> {
     const result: QueryResult<Serie> = await pool.query(
-      `SELECT se."name" AS "name" FROM serie se 
+      `SELECT distinct se."name" AS "name" FROM serie se 
     JOIN music m ON se.id = m.idserie 
     JOIN "language" l ON l.id = m.idlanguage 
     AND l."language" = $1;`,
