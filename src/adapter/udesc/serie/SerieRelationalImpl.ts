@@ -5,7 +5,10 @@ import { SerieRepository } from './SerieRepository';
 
 export class SerieRepositoryRelationalImpl implements SerieRepository {
   async getAllSeries(): Promise<Serie[]> {
-    const result = await pool.query(`SELECT * FROM Serie`, []);
+    const result = await pool.query(
+      `SELECT s.*, i.name as cover, st.value as status, std.name as idstudio from Serie s join image i on i.id = s.cover join status st on st.id = s.status join studio std on std.id = s.idStudio`,
+      []
+    );
     return result.rows;
   }
   async alreadyExists(serie: Serie): Promise<boolean> {
@@ -60,13 +63,16 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
     return !!result.rowCount;
   }
   async getSerieById(id: string): Promise<Serie> {
-    const result = await pool.query(`select * from Serie WHERE id = $1`, [id]);
+    const result = await pool.query(
+      `select s.*, i.name as cover, st.value as status, std.name as idstudio from Serie s join image i on i.id = s.cover join status st on st.id = s.status join studio std on std.id = s.idStudio WHERE s.id = $1`,
+      [id]
+    );
     return result.rows[0];
   }
 
   async getSerie(name: string): Promise<Serie[]> {
     const result = await pool.query(
-      `SELECT * FROM Serie WHERE name ilike '%' || $1 || '%'`,
+      `SELECT s.*, i.name as cover, st.value as status, std.name as idstudio from Serie s join image i on i.id = s.cover join status st on st.id = s.status join studio std on std.id = s.idStudio WHERE s.name ilike '%' || $1 || '%'`,
       [name]
     );
     return result.rows;

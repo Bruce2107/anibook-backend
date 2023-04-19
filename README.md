@@ -23,7 +23,7 @@ docker-compose -d up
 
 ### _SEM DOCKER_
 
-Caso queira criar a partir usando o arquivo [`./config/qa/config/database/AnibookRelacional.sql`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/config/qa/config/database/AnibookRelacional.sql) comentar 252 e 253:
+Caso queira criar usando o arquivo de _bump_ [`./config/qa/config/database/AnibookRelacional.sql`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/config/qa/config/database/AnibookRelacional.sql) **comentar 252 e 253**:
 
 ### _Variáveis para a criação do banco_
 

@@ -5,7 +5,10 @@ import { Music } from '@domain/udesc/music';
 
 export class MusicRepositoryRelationalImpl implements MusicRepository {
   async getAllMusics(): Promise<Music[]> {
-    const result = await pool.query(`SELECT * FROM Music`, []);
+    const result = await pool.query(
+      `SELECT m.*, s.name as idserie, l.language as idlanguage FROM Music m join Serie s on s.id = m.idserie join Language l on l.id = m.idlanguage`,
+      []
+    );
     return result.rows;
   }
   async alreadyExists(music: Music): Promise<boolean> {
@@ -43,12 +46,15 @@ export class MusicRepositoryRelationalImpl implements MusicRepository {
     return !!result.rowCount;
   }
   async getMusicById(id: string): Promise<Music> {
-    const result = await pool.query(`select * from Music WHERE id = $1`, [id]);
+    const result = await pool.query(
+      `select  m.*, s.name as idserie, l.language as idlanguage FROM Music m join Serie s on s.id = m.idserie join Language l on l.id = m.idlanguage WHERE m.id = $1`,
+      [id]
+    );
     return result.rows[0];
   }
   async getMusic(name: string): Promise<Music[]> {
     const result = await pool.query(
-      `SELECT * FROM Music WHERE name ilike '%' || $1 || '%'`,
+      `SELECT  m.*, s.name as idserie, l.language as idlanguage FROM Music m join Serie s on s.id = m.idserie join Language l on l.id = m.idlanguage WHERE m.name ilike '%' || $1 || '%'`,
       [name]
     );
     return result.rows;

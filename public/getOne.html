@@ -200,29 +200,36 @@
 
     function showMusic(result) {
       const value = getArray(result.music)
-      return populateTable(null, value.length, 3, (t, i, j, v) => {
+      return populateTable(null, value.length, 5, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
           2: v[i].link,
+          3: v[i].idlanguage,
+          4: v[i].idserie,
         })[j]
         return `${text}`;
       }, value, (j) => ({
         0: 'id',
         1: 'Nome',
-        2: 'Link'
+        2: 'Link',
+        3: 'Idioma',
+        4: 'Serie',
       })[j])
     }
 
     function showSerie(result) {
       const value = getArray(result.serie)
-      return populateTable(null, value.length, 5, (t, i, j, v) => {
+      return populateTable(null, value.length, 8, (t, i, j, v) => {
         const text = ({
           0: v[i].id,
           1: v[i].name,
           2: v[i].synopsis,
           3: v[i].comment,
           4: v[i].numberofepisodes,
+          5: v[i].cover,
+          6: v[i].status,
+          7: v[i].idstudio,
         })[j]
         return `${text}`;
       }, value, (j) => ({
@@ -231,6 +238,9 @@
         2: 'Sinopse',
         3: 'Comentario',
         4: 'Numero de eps',
+        5: 'Capa',
+        6: 'Status',
+        7: 'Estudio',
       })[j])
     }
 
@@ -277,21 +287,18 @@
     }
 
     function showGallery(result) {
-      console.log(result)
       const value = getArray(result.gallery)
-      return populateTable(null, value.length, 4, (t, i, j, v) => {
+      return populateTable(null, value.length, 3, (t, i, j, v) => {
         const text = ({
           0: v[i].name,
           1: v[i].folder,
-          2: v[i].idimage,
-          3: v[i].idserie,
+          2: v[i].idserie,
         })[j]
         return `${text}`;
       }, value, (j) => ({
-        0: 'Nome',
+        0: 'Nome imagem',
         1: 'Pasta',
-        2: 'Imagem',
-        3: 'Serie'
+        2: 'Serie'
       })[j])
     }
 

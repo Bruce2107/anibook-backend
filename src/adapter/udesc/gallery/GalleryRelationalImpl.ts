@@ -7,7 +7,7 @@ import { GalleryRepository } from './GalleryRepository';
 export class GalleryRepositoryRelationalImpl implements GalleryRepository {
   async alreadyExists(gallery: Gallery): Promise<boolean> {
     const exists = await pool.query(
-      `SELECT * FROM Gallery WHERE idSerie = $1 and idImage = $2`,
+      `SELECT g.*, i.name as idimage, s.name as idserie FROM Gallery g join Image i on g.idimage = i.id join Serie s s.id = g.idserie WHERE g.idSerie = $1 and g.idImage = $2`,
       [gallery.idSerie, gallery.idImage]
     );
 
@@ -41,7 +41,7 @@ export class GalleryRepositoryRelationalImpl implements GalleryRepository {
   }
   async getGallery(idSerie: string): Promise<Image[]> {
     const result = await pool.query(
-      `select * from image i join gallery g on g.idimage = i.id and g.idserie = $1`,
+      `select i.*, s.name as idserie from image i join gallery g on g.idimage = i.id join Serie s on s.id = g.idserie and g.idserie = $1`,
       [idSerie]
     );
     return result.rows;
