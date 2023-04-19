@@ -17,6 +17,7 @@ export class LanguageRepositoryRelationalImpl implements LanguageRepository {
     return !!exists.rowCount;
   }
   async _delete(id: string): Promise<boolean> {
+    await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM Language where id = $1`,
       [id]
@@ -55,5 +56,12 @@ export class LanguageRepositoryRelationalImpl implements LanguageRepository {
       [name]
     );
     return result.rows;
+  }
+  async deleteRelations(id: String): Promise<boolean> {
+    await pool.query(`DELETE FROM Music WHERE idLanguage = $1`, [id]);
+    await pool.query(`DELETE FROM Streaming_Language WHERE idLanguage = $1`, [
+      id,
+    ]);
+    return true;
   }
 }

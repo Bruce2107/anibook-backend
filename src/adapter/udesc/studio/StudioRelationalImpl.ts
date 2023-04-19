@@ -16,6 +16,7 @@ export class StudioRepositoryRelationalImpl implements StudioRepository {
     return !!exists.rowCount;
   }
   async _delete(id: string): Promise<boolean> {
+    await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM Studio where id = $1`,
       [id]
@@ -51,5 +52,12 @@ export class StudioRepositoryRelationalImpl implements StudioRepository {
       [name]
     );
     return result.rows;
+  }
+
+  async deleteRelations(id: String): Promise<boolean> {
+    await pool.query(`DELETE FROM Serie where idStudio = $1`, [id]);
+    await pool.query(`DELETE FROM Music where idStudio = $1`, [id]);
+    await pool.query(`DELETE FROM Music where idStudio = $1`, [id]);
+    return true;
   }
 }

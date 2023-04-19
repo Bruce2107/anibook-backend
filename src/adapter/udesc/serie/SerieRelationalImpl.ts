@@ -20,6 +20,7 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
     return !!exists.rowCount;
   }
   async _delete(id: string): Promise<boolean> {
+    await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM Serie where id = $1`,
       [id]
@@ -76,5 +77,12 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
       [name]
     );
     return result.rows;
+  }
+
+  async deleteRelations(id: String): Promise<boolean> {
+    await pool.query(`DELETE FROM Author_Serie WHERE idSerie = $1`, [id]);
+    await pool.query(`DELETE FROM Gallery WHERE idSerie = $1`, [id]);
+    await pool.query(`DELETE FROM Serie_Streaming WHERE idSerie = $1`, [id]);
+    return true;
   }
 }

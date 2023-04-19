@@ -57,7 +57,7 @@ export class AuthorRepositoryRelationalImpl implements AuthorRepository {
 
   async deleteRelations(id: String): Promise<boolean> {
     const result = await pool.query(
-      `DELETE FROM AuthorSerie WHERE idAuthor = $1`,
+      `DELETE FROM Author_Serie WHERE idAuthor = $1`,
       [id]
     );
     return !!result.rowCount;

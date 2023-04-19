@@ -143,7 +143,7 @@
     function showResult(status) {
       document.querySelector("#result").innerHTML = ""
       document.querySelector("#msg").innerHTML = ''
-      const text = ({ 201: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados', 409: 'Conflito' })[status]
+      const text = ({ 201: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados', 409: 'Conflito', 400: 'Erro' })[status]
       document.querySelector("#result").innerHTML = `<p>${text}</p>`
     }
 

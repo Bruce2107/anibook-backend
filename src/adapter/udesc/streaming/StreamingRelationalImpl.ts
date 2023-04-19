@@ -16,6 +16,7 @@ export class StreamingRepositoryRelationalImpl implements StreamingRepository {
     return !!exists.rowCount;
   }
   async _delete(id: string): Promise<boolean> {
+    await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM Streaming where id = $1`,
       [id]
@@ -53,5 +54,15 @@ export class StreamingRepositoryRelationalImpl implements StreamingRepository {
       [name]
     );
     return result.rows;
+  }
+
+  async deleteRelations(id: String): Promise<boolean> {
+    await pool.query(`DELETE FROM Serie_Streaming WHERE idStreaming = $1`, [
+      id,
+    ]);
+    await pool.query(`DELETE FROM Streaming_Language WHERE idStreaming = $1`, [
+      id,
+    ]);
+    return true;
   }
 }
