@@ -81,6 +81,7 @@
         <option value="seriestreaming">SerieStreaming</option>
         <option value="streaminglangauge">StreamingLanguage</option>
         <option value="gallery">Gallery</option>
+        <option value="image">Image</option>
       </select>
     </div>
 
@@ -103,7 +104,12 @@
       document.querySelector("#result").innerHTML = ''
       let table = document.querySelector("#tables").value
       let route = getRoute(table || 'author')
-      let body = JSON.stringify(getBody(table))
+      const params = {
+        headers: table !== 'image' ? {
+          "Content-Type": "application/json",
+        } : {},
+        body: table !== 'image' ? JSON.stringify(getBody(table)) : getFormImage()
+      }
       document.querySelector("#form").innerHTML = ''
       document.querySelector("#create").disabled = true
       try {
@@ -111,13 +117,10 @@
           method: 'POST', mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body
+          ...params
         })
         showResult(response.status)
-        console.log(response)
+
       } catch (error) {
         document.querySelector("#msg").innerHTML = '<p>Erro</p>'
       }
@@ -136,6 +139,7 @@
         'seriestreaming': 'serie/streaming/',
         'streaminglangauge': 'streaming/language/',
         'gallery': 'gallery/',
+        'image': 'udesc/image/',
       };
       return routes[table]
     }
@@ -162,6 +166,7 @@
         'seriestreaming': showFormSerieStreaming,
         'streaminglangauge': showFormStreamingLanguage,
         'gallery': showFormGallery,
+        'image': showFormImage,
       }[table]();
       document.querySelector("#create").disabled = false
     }
@@ -366,6 +371,22 @@
         idImage,
         idSerie
       }
+    }
+
+    function showFormImage() {
+      document.querySelector("#form").innerHTML = `
+      <form enctype="multipart/form-data" id="fimage">
+        <label for="images">image</label>
+        <input type="file" name="images" id="images" accept="image/*" multiple>
+      </form>
+      `
+    }
+
+    function getFormImage() {
+      const input = document.querySelector('#images')
+      const formData = new FormData()
+      formData.append('images', input.files[0])
+      return formData
     }
   </script>
 </body>
