@@ -124,8 +124,10 @@
           credentials: "same-origin",
           ...params
         })
+        console.log(response)
         showResult(response.status)
       } catch (error) {
+        console.log(error)
         document.querySelector("#msg").innerHTML = '<p>Erro</p>'
       }
     });
@@ -151,7 +153,7 @@
     function showResult(status) {
       document.querySelector("#result").innerHTML = ""
       document.querySelector("#msg").innerHTML = ''
-      const text = ({ 204: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados' })[status]
+      const text = ({ 204: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados' })[status] || 'Sucesso'
       document.querySelector("#result").innerHTML = `<p>${text}</p>`
     }
 
@@ -383,12 +385,14 @@
         <label for="images">image</label>
         <input type="file" name="images" id="images" accept="image/*" multiple>
       </form>
-      `    }
+      `
+    }
 
     function getFormImage() {
-      const form = document.querySelector('#fimage')
-      const data = new URLSearchParams(new FormData(form));
-      return data
+      const input = document.querySelector('#images')
+      const formData = new FormData()
+      formData.append('images', input.files[0])
+      return formData
     }
   </script>
 </body>
