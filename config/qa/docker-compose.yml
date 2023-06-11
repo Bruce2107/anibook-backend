@@ -14,6 +14,19 @@ services:
     volumes:
       - ./config/database/AnibookRelacional.sql:/docker-entrypoint-initdb.d/2-data.sql
       - ./image.webp:/home/image.webp
+  neo4jdb:
+    container_name: neo4j_anibook
+    image: neo4j:latest
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+      - '7473:7473'
+    environment:
+      - NEO4J_AUTH=neo4j/anibook_qa
+      - NEO4J_HOME=/var/lib/neo4j
+    volumes:
+      - ./config/csv:/var/lib/neo4j/import
+    # command: cypher-shell --file $NEO4J_HOME/import/data.cypher -u neo4j -p anibook_qa
   # node:
   #   build:
   #     dockerfile: ../../config/docker/Dockerfile
