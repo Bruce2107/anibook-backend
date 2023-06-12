@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import pgPromise from 'pg-promise';
 import { config } from 'dotenv';
-import { driver } from 'neo4j-driver';
+import { auth, driver } from 'neo4j-driver';
 /* istanbul ignore next */
 config({
   path:
@@ -29,4 +29,7 @@ export const promisePool = async () => {
   );
 };
 
-export const neo4j = driver(`neo4j://localhost:${process.env.DB_PORT_NEO4J}`);
+export const neo4j_driver = driver(
+  `neo4j://localhost:${process.env.DB_PORT_NEO4J}`,
+  auth.basic('neo4j', 'anibook_qa')
+);

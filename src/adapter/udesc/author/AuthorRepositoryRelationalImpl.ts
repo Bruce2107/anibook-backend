@@ -2,6 +2,7 @@ import { Author } from '@domain/udesc/author';
 import { AuthorRepository } from './AuthorRepository';
 import { QueryResult } from 'pg';
 import { pool } from '../../../database';
+import { AuthorRepositoryGraphImpl } from './AuthorRepositoryGraphImpl';
 
 export class AuthorRepositoryRelationalImpl implements AuthorRepository {
   async getAllAuthors(): Promise<Author[]> {
@@ -43,6 +44,8 @@ export class AuthorRepositoryRelationalImpl implements AuthorRepository {
     return !!result.rowCount;
   }
   async getAuthor(name: string): Promise<Author[]> {
+    const ARG = new AuthorRepositoryGraphImpl();
+    await ARG.getAuthor(name);
     const result = await pool.query(
       `SELECT * FROM Author WHERE name ilike '%' || $1 || '%'`,
       [name]
