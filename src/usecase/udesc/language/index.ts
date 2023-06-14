@@ -16,6 +16,7 @@ import {
   GetAllLanguagesUseCase,
   GetAllLanguagesController,
 } from './GetAllLanguages';
+import { LanguageRepositoryGraphImpl } from '@adapter/udesc/language/LanguageRepositoryGraphImpl';
 
 const databaseLanguageRepository = new LanguageRepositoryRelationalImpl();
 
@@ -50,6 +51,43 @@ const updateLanguageController = new UpdateLanguageController(
   updateLanguageUseCase
 );
 
+const databaseLanguageGraphRepository = new LanguageRepositoryGraphImpl();
+
+const getLanguageGraphUseCase = new GetLanguageUseCase(
+  databaseLanguageGraphRepository
+);
+const getLanguageGraphController = new GetLanguageController(
+  getLanguageGraphUseCase
+);
+
+const getAllLanguagesGraphUseCase = new GetAllLanguagesUseCase(
+  databaseLanguageGraphRepository
+);
+const getAllLanguagesGraphController = new GetAllLanguagesController(
+  getAllLanguagesGraphUseCase
+);
+
+const createLanguageGraphUseCase = new CreateLanguageUseCase(
+  databaseLanguageGraphRepository
+);
+const createLanguageGraphController = new CreateLanguageController(
+  createLanguageGraphUseCase
+);
+
+const deleteLanguageGraphUseCase = new DeleteLanguageUseCase(
+  databaseLanguageGraphRepository
+);
+const deleteLanguageGraphController = new DeleteLanguageController(
+  deleteLanguageGraphUseCase
+);
+
+const updateLanguageGraphUseCase = new UpdateLanguageUseCase(
+  databaseLanguageGraphRepository
+);
+const updateLanguageGraphController = new UpdateLanguageController(
+  updateLanguageGraphUseCase
+);
+
 export {
   getLanguageController,
   getLanguageUseCase,
@@ -61,4 +99,15 @@ export {
   updateLanguageUseCase,
   databaseLanguageRepository,
   getAllLanguagesController,
+  getAllLanguagesUseCase,
+  getAllLanguagesGraphController,
+  getAllLanguagesGraphUseCase,
+  createLanguageGraphController,
+  createLanguageGraphUseCase,
+  deleteLanguageGraphController,
+  deleteLanguageGraphUseCase,
+  updateLanguageGraphController,
+  updateLanguageGraphUseCase,
+  getLanguageGraphController,
+  getLanguageGraphUseCase,
 };
