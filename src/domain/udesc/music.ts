@@ -1,8 +1,8 @@
 export class Music {
   name: string;
   link: string;
-  idLanguage: number;
-  idSerie: number;
+  idLanguage: number | string;
+  idSerie: number | string;
 
   constructor({ ...props }) {
     Object.assign(this, props);

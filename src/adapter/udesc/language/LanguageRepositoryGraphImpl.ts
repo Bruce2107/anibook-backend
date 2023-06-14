@@ -8,7 +8,7 @@ export class LanguageRepositoryGraphImpl implements LanguageRepository {
     const session = neo4j_driver.session();
     try {
       const result = await session.run(
-        `MATCH (l:Language {language: $id}) DELETE l`,
+        `MATCH (l:Language {language: $id}) DETACH DELETE l`,
         { id: language }
       );
       return !!result.summary.counters.updates().nodesDeleted;
