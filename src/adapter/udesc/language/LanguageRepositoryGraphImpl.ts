@@ -26,7 +26,7 @@ export class LanguageRepositoryGraphImpl implements LanguageRepository {
         `CREATE (l:Language {language: $name}) RETURN l`,
         { name: language.language }
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().nodesCreated;
     } finally {
       session.close();
     }
@@ -38,7 +38,7 @@ export class LanguageRepositoryGraphImpl implements LanguageRepository {
         `MATCH (l:Language {language: $id}) SET l.language = $name RETURN l`,
         { id, name: language.language }
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().propertiesSet;
     } finally {
       session.close();
     }

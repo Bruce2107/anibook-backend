@@ -25,7 +25,7 @@ export class StatusRepositoryGraphImpl implements StatusRepository {
       const result = await session.run(
         `CREATE (s:Status {value: '${status.value}'}) RETURN s`
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().nodesCreated;
     } finally {
       session.close();
     }
@@ -42,7 +42,7 @@ export class StatusRepositoryGraphImpl implements StatusRepository {
           value: status.value,
         }
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().propertiesSet;
     } finally {
       session.close();
     }

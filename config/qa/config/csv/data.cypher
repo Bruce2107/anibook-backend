@@ -59,7 +59,7 @@ CREATE (sr)-[:AVAILABLE_ON]->(st);
 
 LOAD CSV WITH HEADERS FROM 'file:///streaminglanguage.csv' AS streaminglanguage
 MATCH (st: Streaming), (l: Language)
-WHERE st.language = l.languageId
+WHERE st.streamingId = streaminglanguage.idstreaming AND l.languageId = streaminglanguage.idlanguage
 CREATE (st)-[:HAS_LANGUAGE]->(l);
 
 MATCH (at: Author)

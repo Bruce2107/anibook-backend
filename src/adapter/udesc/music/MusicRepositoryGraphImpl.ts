@@ -29,7 +29,7 @@ export class MusicRepositoryGraphImpl implements MusicRepository {
       (s)-[:HAS_MUSIC]->(m)
       RETURN m`
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().nodesCreated;
     } finally {
       session.close();
     }
@@ -53,7 +53,7 @@ export class MusicRepositoryGraphImpl implements MusicRepository {
           serie: music.idSerie,
         }
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().propertiesSet;
     } finally {
       session.close();
     }
