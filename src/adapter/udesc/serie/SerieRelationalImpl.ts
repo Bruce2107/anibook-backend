@@ -2,6 +2,7 @@ import { QueryResult } from 'pg';
 import { pool } from '../../../database';
 import { Serie } from '@domain/udesc/serie';
 import { SerieRepository } from './SerieRepository';
+import { SerieRepositoryGraphImpl } from './SerieRepositoryGraphImpl';
 
 export class SerieRepositoryRelationalImpl implements SerieRepository {
   async getAllSeries(): Promise<Serie[]> {
@@ -47,21 +48,23 @@ export class SerieRepositoryRelationalImpl implements SerieRepository {
     return false;
   }
   async updateSerie(id: string, serie: Serie): Promise<boolean> {
-    const result = await pool.query(
-      `UPDATE Serie SET comment = $1, cover = $2, idStudio = $3, name = $4, numberOfEpisodes = $5, status = $6, synopsis = $7, updatedAt = NOW()::timestamp WHERE id = $8`,
-      [
-        serie.comment,
-        serie.cover,
-        serie.idStudio,
-        serie.name,
-        serie.numberOfEpisodes,
-        serie.status,
-        serie.synopsis,
-        id,
-      ]
-    );
+    const graph = new SerieRepositoryGraphImpl();
+    return await graph.updateSerie(id, serie);
+    // const result = await pool.query(
+    //   `UPDATE Serie SET comment = $1, cover = $2, idStudio = $3, name = $4, numberOfEpisodes = $5, status = $6, synopsis = $7, updatedAt = NOW()::timestamp WHERE id = $8`,
+    //   [
+    //     serie.comment,
+    //     serie.cover,
+    //     serie.idStudio,
+    //     serie.name,
+    //     serie.numberOfEpisodes,
+    //     serie.status,
+    //     serie.synopsis,
+    //     id,
+    //   ]
+    // );
 
-    return !!result.rowCount;
+    // return !!result.rowCount;
   }
   async getSerieById(id: string): Promise<Serie> {
     const result = await pool.query(

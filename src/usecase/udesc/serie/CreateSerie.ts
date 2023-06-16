@@ -14,6 +14,9 @@ export class CreateSerieController {
         numberOfEpisodes,
         status,
         synopsis,
+        authors,
+        gallery,
+        streaming,
       } = request.body as Serie;
 
       if (!name || !comment || !idStudio || !synopsis)
@@ -27,6 +30,9 @@ export class CreateSerieController {
         numberOfEpisodes: numberOfEpisodes || 0,
         status: status || 1,
         synopsis,
+        authors: authors || [],
+        gallery: gallery || [],
+        streaming: streaming || [],
       });
       return response.sendStatus(result ? 201 : 409);
     } catch (error) {

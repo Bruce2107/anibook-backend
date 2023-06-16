@@ -5,9 +5,12 @@ export class Serie {
   numberOfEpisodes: number;
   createdAt?: Date;
   updateAt?: Date;
-  idStudio: number;
-  cover: number;
-  status: number;
+  idStudio: number | string;
+  cover: number | string;
+  status: number | string;
+  authors?: string[];
+  streaming?: string[];
+  gallery?: string[];
 
   constructor({ ...props }) {
     Object.assign(this, props);

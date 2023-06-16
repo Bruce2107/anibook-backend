@@ -4,6 +4,7 @@ import { DeleteSerieUseCase, DeleteSerieController } from './DeleteSerie';
 import { UpdateSerieUseCase, UpdateSerieController } from './UpdateSerie';
 import { SerieRepositoryRelationalImpl } from '@adapter/udesc/serie/SerieRelationalImpl';
 import { GetAllSeriesUseCase, GetAllSeriesController } from './GetAllSeries';
+import { SerieRepositoryGraphImpl } from '@adapter/udesc/serie/SerieRepositoryGraphImpl';
 
 const databaseSerieRepository = new SerieRepositoryRelationalImpl();
 
@@ -22,6 +23,39 @@ const deleteSerieController = new DeleteSerieController(deleteSerieUseCase);
 const updateSerieUseCase = new UpdateSerieUseCase(databaseSerieRepository);
 const updateSerieController = new UpdateSerieController(updateSerieUseCase);
 
+const databaseSerieGraphRepository = new SerieRepositoryGraphImpl();
+
+const getSerieGraphUseCase = new GetSerieUseCase(databaseSerieGraphRepository);
+const getSerieGraphController = new GetSerieController(getSerieGraphUseCase);
+
+const getAllSeriesGraphUseCase = new GetAllSeriesUseCase(
+  databaseSerieGraphRepository
+);
+const getAllSeriesGraphController = new GetAllSeriesController(
+  getAllSeriesGraphUseCase
+);
+
+const createSerieGraphUseCase = new CreateSerieUseCase(
+  databaseSerieGraphRepository
+);
+const createSerieGraphController = new CreateSerieController(
+  createSerieGraphUseCase
+);
+
+const deleteSerieGraphUseCase = new DeleteSerieUseCase(
+  databaseSerieGraphRepository
+);
+const deleteSerieGraphController = new DeleteSerieController(
+  deleteSerieGraphUseCase
+);
+
+const updateSerieGraphUseCase = new UpdateSerieUseCase(
+  databaseSerieGraphRepository
+);
+const updateSerieGraphController = new UpdateSerieController(
+  updateSerieGraphUseCase
+);
+
 export {
   getSerieController,
   getSerieUseCase,
@@ -33,4 +67,9 @@ export {
   updateSerieUseCase,
   databaseSerieRepository,
   getAllSeriesController,
+  getSerieGraphController,
+  getAllSeriesGraphController,
+  createSerieGraphController,
+  deleteSerieGraphController,
+  updateSerieGraphController,
 };
