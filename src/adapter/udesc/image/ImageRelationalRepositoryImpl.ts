@@ -22,7 +22,7 @@ export class ImageRelationalRepositoryImpl
 
     return result.rows[0];
   }
-  async _delete(id: string): Promise<boolean> {
+  async __delete(id: string): Promise<boolean> {
     await this.deleteRelations(id);
     const deleted: QueryResult = await pool.query(
       `DELETE FROM image WHERE id = $1`,
@@ -30,6 +30,10 @@ export class ImageRelationalRepositoryImpl
     );
 
     return !!deleted.rowCount;
+  }
+
+  _delete(_: string, __: string): Promise<boolean> {
+    throw new Error('Method not implemented.');
   }
 
   async alreadyExists(folder: string, name: string): Promise<boolean> {

@@ -9,8 +9,11 @@ export class GetImageController {
       const { folder, name, id } = request.params;
       const result = await this.getImageUseCase.execute(folder, name, id);
       if (result) {
-        response.contentType(result.contentType);
-        return response.send(result.image);
+        if (result.contentType && result.image.toString() !== 'null') {
+          response.contentType(result.contentType);
+          return response.send(result.image);
+        }
+        return response.status(200).json(result);
       }
       return response.sendStatus(404);
     } catch (error) {

@@ -11,6 +11,7 @@ export class Image implements TypeImage {
   folder: string;
   image: Buffer;
   name: string;
+  link?: string;
 
   constructor({ ...props }: Image) {
     Object.assign(this, props);
