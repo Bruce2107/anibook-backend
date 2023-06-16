@@ -8,6 +8,7 @@ import {
   GetSerieStreamingController,
   GetSerieStreamingUseCase,
 } from './GetSerieStreaming';
+import { ReportRepositoryGraphImpl } from '@adapter/udesc/report/ReportRepositoryGraphImpl';
 
 const databaseReportRepository = new ReportRepositoryRelationalImpl();
 
@@ -30,6 +31,29 @@ const getSerieStreamingController = new GetSerieStreamingController(
   getSerieStreamingUseCase
 );
 
+const databaseReportGraphRepository = new ReportRepositoryGraphImpl();
+
+const getSerieStudioGraphUseCase = new GetSerieStudioUseCase(
+  databaseReportRepository
+);
+const getSerieStudioGraphController = new GetSerieStudioController(
+  getSerieStudioGraphUseCase
+);
+
+const getSerieMusicGraphUseCase = new GetSerieMusicUseCase(
+  databaseReportGraphRepository
+);
+const getSerieMusicGraphController = new GetSerieMusicController(
+  getSerieMusicGraphUseCase
+);
+
+const getSerieStreamingGraphUseCase = new GetSerieStreamingUseCase(
+  databaseReportGraphRepository
+);
+const getSerieStreamingGraphController = new GetSerieStreamingController(
+  getSerieStreamingGraphUseCase
+);
+
 export {
   getSerieStudioUseCase,
   getSerieStudioController,
@@ -38,4 +62,10 @@ export {
   getSerieMusicUseCase,
   getSerieStreamingController,
   getSerieStreamingUseCase,
+  getSerieStudioGraphController,
+  getSerieStudioGraphUseCase,
+  getSerieMusicGraphController,
+  getSerieMusicGraphUseCase,
+  getSerieStreamingGraphController,
+  getSerieStreamingGraphUseCase,
 };
