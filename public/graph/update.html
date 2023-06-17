@@ -87,7 +87,7 @@
 
     <button id="getOneBtn">Get Form</button>
     <label for="lid">id</label>
-    <input type="number" name="lid" id="lid" required>
+    <input type="text" name="lid" id="lid" required>
   </div>
   <div id="msg"></div>
   <div id="form"></div>
@@ -117,14 +117,12 @@
       document.querySelector("#form").innerHTML = ''
       document.querySelector("#update").disabled = true
       try {
-
-        const response = await fetch(`http://localhost:4001/${route}${id}`, {
+        const response = await fetch(`http://localhost:4001/graph/${route}${id}`, {
           method: 'PATCH', mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
           ...params
         })
-        console.log(response)
         showResult(response.status)
       } catch (error) {
         console.log(error)
@@ -225,9 +223,9 @@
         <label for="llink">link</label>
         <input type="text" name="llink" id="llink">
         <label for="lserie">serie</label>
-        <input type="number" name="lserie" id="lserie">
+        <input type="text" name="lserie" id="lserie">
         <label for="llanguage">idioma</label>
-        <input type="number" name="llanguage" id="llanguage">
+        <input type="text" name="llanguage" id="llanguage">
       `    }
     function getFormMusic() {
       const name = document.querySelector('#lname').value
@@ -282,19 +280,25 @@
     function showFormSerie() {
       document.querySelector("#form").innerHTML = `
         <label for="lname">name</label>
-        <input type="text" name="lname" id="lname">
+        <input type="text" name="lname" id="lname"><br/>
         <label for="lsynopis">synopsis</label>
-        <input type="text" name="lsynopis" id="lsynopis">
+        <input type="text" name="lsynopis" id="lsynopis"><br/>
         <label for="lcomment">comment</label>
-        <input type="text" name="lcomment" id="lcomment">
-        <label for="lcover">cover</label>
-        <input type="number" name="lcover" id="lcover">
-        <label for="lstudio">studio</label>
-        <input type="number" name="lstudio" id="lstudio">
+        <input type="text" name="lcomment" id="lcomment"><br/>
         <label for="leps">N eps</label>
-        <input type="number" name="leps" id="leps">
+        <input type="number" name="leps" id="leps"><br/>
+        <label for="lcover">cover</label>
+        <input type="text" name="lcover" id="lcover" required><br/>
+        <label for="lstudio">studio</label>
+        <input type="text" name="lstudio" id="lstudio" required><br/>
         <label for="lstatus">Status</label>
-        <input type="number" name="lstatus" id="lstatus">
+        <input type="text" name="lstatus" id="lstatus" required><br/>
+        <label for="lauthors">Autores (separe por ,)</label>
+        <input type="text" name="lauthors" id="lauthors"><br/>
+        <label for="lstreaming">Streaming (separe por ,)</label>
+        <input type="text" name="lstreaming" id="lstreaming"><br/>
+        <label for="lgallery">Galeria (separe por ,)</label>
+        <input type="text" name="lgallery" id="lgallery">
       `    }
 
     function getFormSerie() {
@@ -305,6 +309,9 @@
       const idStudio = document.querySelector('#lstudio').value
       const numberOfEpisodes = document.querySelector('#leps').value
       const status = document.querySelector('#lstatus').value
+      const authors = document.querySelector('#lauthors').value.split(',')
+      const streaming = document.querySelector('#lstreaming').value.split(',')
+      const gallery = document.querySelector('#lgallery').value.split(',')
       return {
         name,
         synopsis,
@@ -312,7 +319,10 @@
         cover,
         idStudio,
         numberOfEpisodes,
-        status
+        status,
+        authors,
+        streaming,
+        gallery
       }
     }
 

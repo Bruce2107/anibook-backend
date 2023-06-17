@@ -9,6 +9,8 @@ export class UpdateSerieController {
       const { id } = request.params;
       const data = new Serie(request.body);
 
+      console.log(data);
+
       const status = await this.updateSerieUseCase.execute(id, data);
 
       return response.sendStatus(status ? 204 : 404);

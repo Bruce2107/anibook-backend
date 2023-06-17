@@ -28,8 +28,8 @@ export class CreateMusicUseCase {
   async execute(
     name: string,
     link: string,
-    idLanguage: number,
-    idSerie: number
+    idLanguage: number | string,
+    idSerie: number | string
   ) {
     return await this.musicRepository.insertOne(
       new Music({ name, link, idLanguage, idSerie })

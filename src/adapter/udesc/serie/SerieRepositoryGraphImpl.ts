@@ -2,6 +2,7 @@ import { Serie, SerieNeo4j } from '@domain/udesc/serie';
 import { SerieRepository } from './SerieRepository';
 import { neo4j_driver } from 'src/database';
 import { Integer, Node, QueryResult } from 'neo4j-driver';
+import { ArrayUtils } from '@utils/ArrayUtils';
 
 export class SerieRepositoryGraphImpl implements SerieRepository {
   async _delete(id: string): Promise<boolean> {
@@ -41,15 +42,15 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
             WITH s
             UNWIND $authors AS authors
             MATCH (a:Author {name: authors})
-            CREATE (s)-[:HAS_AUTHOR]->(a)
+            MERGE (s)-[:HAS_AUTHOR]->(a)
             WITH s
             UNWIND $streaming as streamings
             MATCH (st:Streaming {name: streamings})
-            CREATE (s)-[:AVAILABLE_ON]->(st)
+            MERGE (s)-[:AVAILABLE_ON]->(st)
             WITH s
             UNWIND $gallery as images
             MATCH (g:Image {name: images})
-            CREATE (s)-[:HAS_GALLERY]->(g)
+            MERGE (s)-[:HAS_GALLERY]->(g)
           RETURN s;`,
         {
           name: serie.name,
@@ -80,33 +81,37 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
       }
       ${serie.name ? ', s.name = $name' : ''}
     `;
-    const authors = serie.authors
-      ? `
+    const authors =
+      ArrayUtils.removeEmpty(serie.authors).length > 0
+        ? `
       WITH s
       UNWIND $authors AS authors
       MATCH (a:Author {name: authors})
       WHERE NOT (s)-[:HAS_AUTHOR]->(a)
-        CREATE (s)-[ra:HAS_AUTHOR]->(a)
+        MERGE (s)-[ra:HAS_AUTHOR]->(a)
     `
-      : '';
-    const streaming = serie.streaming
-      ? `
+        : '';
+    const streaming =
+      ArrayUtils.removeEmpty(serie.streaming).length > 0
+        ? `
       WITH s
       UNWIND $streaming as streamings
       MATCH (st:Streaming {name: streamings})
       WHERE NOT (s)-[:AVAILABLE_ON]->(st)
-        CREATE (s)-[rst:AVAILABLE_ON]->(st)
+        MERGE (s)-[rst:AVAILABLE_ON]->(st)
     `
-      : '';
-    const gallery = serie.gallery
-      ? `
+        : '';
+    const gallery =
+      ArrayUtils.removeEmpty(serie.gallery).length > 0
+        ? `
       WITH s
       UNWIND $gallery as images
       MATCH (g:Image {name: images})
       WHERE NOT (s)-[:HAS_GALLERY]->(g)
-        CREATE (s)-[rg:HAS_GALLERY]->(g)
+        MERGE (s)-[rg:HAS_GALLERY]->(g)
     `
-      : '';
+        : '';
+
     const QUERY = `MATCH (s:Serie {name: $id})-[r:PRODUCED_BY]->(:Studio),
       (s)-[r2:HAS_STATUS]->(:Status),
       (s)-[r3:HAS_COVER]->(:Image),
@@ -127,7 +132,15 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
       const result = await session.run(QUERY, {
         id,
         studio: serie.idStudio,
-        ...serie,
+        cover: serie.cover,
+        status: serie.status,
+        synopsis: serie.synopsis,
+        comment: serie.comment,
+        numberOfEpisodes: serie.numberOfEpisodes,
+        name: serie.name,
+        authors: serie.authors,
+        streaming: serie.streaming,
+        gallery: serie.gallery,
       });
       return !!result.summary.counters.updates().propertiesSet;
     } finally {
@@ -140,18 +153,17 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
       const res = await session.executeRead((tx) =>
         tx.run<SerieNeo4j>(
           `MATCH (s:Serie)
-            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music),
-            (s)-[:HAS_STATUS]->(st:Status),
-            (s)-[:PRODUCED_BY]->(std:Studio),
-            (s)-[:HAS_AUTHOR]->(a:Author),
-            (s)-[:AVAILABLE_ON]->(str:Streaming),
-            (s)-[:HAS_COVER]->(i:Image)
+            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music)
+            OPTIONAL MATCH (s)-[:HAS_STATUS]->(st:Status)
+            OPTIONAL MATCH (s)-[:PRODUCED_BY]->(std:Studio)
+            OPTIONAL MATCH (s)-[:HAS_AUTHOR]->(a:Author)
+            OPTIONAL MATCH (s)-[:AVAILABLE_ON]->(str:Streaming)
+            OPTIONAL MATCH (s)-[:HAS_COVER]->(i:Image)
           WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i
           WHERE s.name =~ '(?i).*${name}.*'
           RETURN s,m,st,std,a,str,i ORDER BY s.name`
         )
       );
-
       return this._getResponse(res);
     } finally {
       session.close();
@@ -179,12 +191,12 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
       const res = await session.executeRead((tx) =>
         tx.run<SerieNeo4j>(
           `MATCH (s:Serie)
-            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music),
-            (s)-[:HAS_STATUS]->(st:Status),
-            (s)-[:PRODUCED_BY]->(std:Studio),
-            (s)-[:HAS_AUTHOR]->(a:Author),
-            (s)-[:AVAILABLE_ON]->(str:Streaming),
-            (s)-[:HAS_COVER]->(i:Image)
+            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music)
+            OPTIONAL MATCH (s)-[:HAS_STATUS]->(st:Status)
+            OPTIONAL MATCH (s)-[:PRODUCED_BY]->(std:Studio)
+            OPTIONAL MATCH (s)-[:HAS_AUTHOR]->(a:Author)
+            OPTIONAL MATCH (s)-[:AVAILABLE_ON]->(str:Streaming)
+            OPTIONAL MATCH (s)-[:HAS_COVER]->(i:Image)
           WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i
           RETURN s,m,st,std,a,str,i ORDER BY s.name`
         )

@@ -20,7 +20,7 @@ LOAD CSV WITH HEADERS FROM 'file:///music.csv' AS music
 MERGE (m: Music {musicId: music.id, name: music.name, link: music.link, idserie: music.idserie, idlanguage: music.idlanguage});
 
 LOAD CSV WITH HEADERS FROM 'file:///serie.csv' AS serie
-MERGE (sr: Serie {serieId: serie.id, name: serie.name, synopsis: serie.synopsis, comment: serie.comment, numberofepisodes: serie.numberofepisodes, status: serie.status, cover: serie.cover, idstudio: serie.idstudio});
+MERGE (sr: Serie {serieId: serie.id, name: serie.name, synopsis: serie.synopsis, comment: serie.comment, numberOfEpisodes: serie.numberofepisodes, status: serie.status, cover: serie.cover, idstudio: serie.idstudio});
 
 MATCH (sr: Serie), (std: Studio)
 WHERE sr.idstudio = std.studioId

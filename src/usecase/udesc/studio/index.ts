@@ -54,7 +54,7 @@ const deleteStudioGraphController = new DeleteStudioController(
 );
 
 const updateStudioGraphUseCase = new UpdateStudioUseCase(
-  databaseStudioRepository
+  databaseStudioGraphRepository
 );
 const updateStudioGraphController = new UpdateStudioController(
   updateStudioGraphUseCase

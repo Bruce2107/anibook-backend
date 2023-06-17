@@ -98,12 +98,12 @@
         <option value="status">Status</option>
         <option value="streaming">Streaming</option>
         <option value="studio">Studio</option>
-        <!-- <option value="image">Image</option> -->
+        <option value="image">Image</option>
         <!-- <option value="gallery">Gallery</option> -->
       </select>
 
       <label for="termid">Id</label>
-      <input type="text" name="termid" id="termid" disabled>
+      <input type="text" name="termid" id="termid">
       <label for="termname">Name</label>
       <input type="text" name="termname" id="termname">
     </div>
@@ -118,9 +118,10 @@
       let route = getRoute(table || 'author')
       let termId = document.querySelector("#termid").value
       let termName = document.querySelector("#termname").value
-      let term = termId ? termId : termName
+      let term = (termId && table !== 'image') ? termId : `${termId}/${termName}`
+
       try {
-        const response = await fetch(`http://localhost:4001/graph/${route}${term}`, {
+        const response = await fetch(`http://localhost:4001/${route}${term}`, {
           method: 'GET', mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -141,14 +142,14 @@
 
     function getRoute(table) {
       const routes = {
-        'author': 'author/',
-        'language': 'language/',
-        'music': 'music/',
-        'serie': 'serie/',
-        'status': 'status/',
-        'streaming': 'streaming/',
-        'studio': 'studio/',
-        'image': 'udesc/image/',
+        'author': 'graph/author/',
+        'language': 'graph/language/',
+        'music': 'graph/music/',
+        'serie': 'graph/serie/',
+        'status': 'graph/status/',
+        'streaming': 'graph/streaming/',
+        'studio': 'graph/studio/',
+        'image': 'udesc/graph/image/',
         'gallery': 'gallery/'
       };
       return routes[table]
@@ -214,17 +215,18 @@
 
     function showSerie(result) {
       const value = getArray(result.serie)
-      return populateTable(null, value.length, 9, (t, i, j, v) => {
+      return populateTable(null, value.length, 10, (t, i, j, v) => {
         const text = ({
           0: v[i].name,
           1: v[i].synopsis,
           2: v[i].comment,
-          3: v[i].numberofepisodes,
+          3: v[i].numberOfEpisodes,
           4: v[i].cover,
           5: v[i].status,
           6: v[i].idStudio,
           7: v[i].authors.join(', '),
           8: v[i].streaming.join(', '),
+          9: v[i].musics.join(', '),
         })[j]
         return `${text}`;
       }, value, (j) => ({
@@ -237,6 +239,7 @@
         6: 'Estudio',
         7: 'Autores',
         8: 'Streaming',
+        9: 'Musicas',
       })[j])
     }
 
@@ -319,10 +322,10 @@
     const getArray = (value) => Array.isArray(value) ? value : [value]
 
     async function showImage(result) {
+      const r = await result.json()
       document.querySelector('#result').innerHTML = ""
-      var blob = await result.blob()
       var image = document.createElement('img')
-      image.src = URL.createObjectURL(blob)
+      image.src = r.link
       document.querySelector('#result').appendChild(image)
     }
 

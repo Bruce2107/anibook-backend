@@ -35,7 +35,7 @@ export class StreamingRepositoryGraphImpl implements StreamingRepository {
           languages: streaming.language,
         }
       );
-      return !!result.records.length;
+      return !!result.summary.counters.updates().nodesCreated;
     } finally {
       session.close();
     }

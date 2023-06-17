@@ -77,10 +77,10 @@
         <option value="status">Status</option>
         <option value="streaming">Streaming</option>
         <option value="studio">Studio</option>
-        <option value="authorserie">AuthorSerie</option>
-        <option value="seriestreaming">SerieStreaming</option>
-        <option value="streaminglangauge">StreamingLanguage</option>
-        <option value="gallery">Gallery</option>
+        <!-- <option value="authorserie">AuthorSerie</option> -->
+        <!-- <option value="seriestreaming">SerieStreaming</option> -->
+        <!-- <option value="streaminglangauge">StreamingLanguage</option> -->
+        <!-- <option value="gallery">Gallery</option> -->
         <option value="image">Image</option>
       </select>
     </div>
@@ -103,12 +103,12 @@
       document.querySelector("#msg").innerHTML = ''
       document.querySelector("#result").innerHTML = ''
       let table = document.querySelector("#tables").value
-      let route = getRoute(table || 'author')
+      let route = table !== 'image' ? getRoute(table || 'author') : getImageRoute()
       const params = {
-        headers: table !== 'image' ? {
+        headers: {
           "Content-Type": "application/json",
-        } : {},
-        body: table !== 'image' ? JSON.stringify(getBody(table)) : getFormImage()
+        },
+        body: JSON.stringify(getBody(table))
       }
       document.querySelector("#form").innerHTML = ''
       document.querySelector("#create").disabled = true
@@ -128,18 +128,17 @@
 
     function getRoute(table) {
       const routes = {
-        'author': 'author/',
-        'language': 'language/',
-        'music': 'music/',
-        'serie': 'serie/',
-        'status': 'status/',
-        'streaming': 'streaming/',
-        'studio': 'studio/',
+        'author': 'graph/author/',
+        'language': 'graph/language/',
+        'music': 'graph/music/',
+        'serie': 'graph/serie/',
+        'status': 'graph/status/',
+        'streaming': 'graph/streaming/',
+        'studio': 'graph/studio/',
         'authorserie': 'author/serie/',
         'seriestreaming': 'serie/streaming/',
         'streaminglangauge': 'streaming/language/',
         'gallery': 'gallery/',
-        'image': 'udesc/image/',
       };
       return routes[table]
     }
@@ -184,6 +183,7 @@
         'seriestreaming': getFormSerieStreaming,
         'streaminglangauge': getFormStreamingLanguage,
         'gallery': getFormGallery,
+        'image': getFormImage,
       }[table]();
       return routes
     }
@@ -219,9 +219,9 @@
         <label for="llink">link</label>
         <input type="text" name="llink" id="llink">
         <label for="lserie">serie</label>
-        <input type="number" name="lserie" id="lserie">
+        <input type="text" name="lserie" id="lserie">
         <label for="llanguage">idioma</label>
-        <input type="number" name="llanguage" id="llanguage">
+        <input type="text" name="llanguage" id="llanguage">
       `    }
     function getFormMusic() {
       const name = document.querySelector('#lname').value
@@ -247,6 +247,7 @@
         value
       }
     }
+
     function showFormStudio() {
       document.querySelector("#form").innerHTML = `
         <label for="lname">name</label>
@@ -258,6 +259,7 @@
         name
       }
     }
+
     function showFormStreaming() {
       document.querySelector("#form").innerHTML = `
         <label for="lname">name</label>
@@ -273,22 +275,29 @@
         link
       }
     }
+
     function showFormSerie() {
       document.querySelector("#form").innerHTML = `
         <label for="lname">name</label>
-        <input type="text" name="lname" id="lname">
+        <input type="text" name="lname" id="lname"><br/>
         <label for="lsynopis">synopsis</label>
-        <input type="text" name="lsynopis" id="lsynopis">
+        <input type="text" name="lsynopis" id="lsynopis"><br/>
         <label for="lcomment">comment</label>
-        <input type="text" name="lcomment" id="lcomment">
-        <label for="lcover">cover</label>
-        <input type="number" name="lcover" id="lcover">
-        <label for="lstudio">studio</label>
-        <input type="number" name="lstudio" id="lstudio">
+        <input type="text" name="lcomment" id="lcomment"><br/>
         <label for="leps">N eps</label>
-        <input type="number" name="leps" id="leps">
+        <input type="number" name="leps" id="leps"><br/>
+        <label for="lcover">cover</label>
+        <input type="text" name="lcover" id="lcover"><br/>
+        <label for="lstudio">studio</label>
+        <input type="text" name="lstudio" id="lstudio"><br/>
         <label for="lstatus">Status</label>
-        <input type="number" name="lstatus" id="lstatus">
+        <input type="text" name="lstatus" id="lstatus"><br/>
+        <label for="lauthors">Autores (separe por ,)</label>
+        <input type="text" name="lauthors" id="lauthors"><br/>
+        <label for="lstreaming">Streaming (separe por ,)</label>
+        <input type="text" name="lstreaming" id="lstreaming"><br/>
+        <label for="lgallery">Galeria (separe por ,)</label>
+        <input type="text" name="lgallery" id="lgallery">
       `    }
 
     function getFormSerie() {
@@ -299,6 +308,9 @@
       const idStudio = document.querySelector('#lstudio').value
       const numberOfEpisodes = document.querySelector('#leps').value
       const status = document.querySelector('#lstatus').value
+      const authors = document.querySelector('#lauthors').value.split(',')
+      const streaming = document.querySelector('#lstreaming').value.split(',')
+      const gallery = document.querySelector('#lgallery').value.split(',')
       return {
         name,
         synopsis,
@@ -306,7 +318,10 @@
         cover,
         idStudio,
         numberOfEpisodes,
-        status
+        status,
+        authors,
+        streaming,
+        gallery
       }
     }
 
@@ -375,18 +390,29 @@
 
     function showFormImage() {
       document.querySelector("#form").innerHTML = `
-      <form enctype="multipart/form-data" id="fimage">
-        <label for="images">image</label>
-        <input type="file" name="images" id="images" accept="image/*" multiple>
-      </form>
+        <label for="lname">name</label>
+        <input type="text" name="lname" id="lname"><br/>
+        <label for="llink">link</label>
+        <input type="text" name="llink" id="llink"><br/>
+        <label for="lfolder">folder</label>
+        <input type="text" name="lfolder" id="lfolder"><br/>
       `
     }
 
     function getFormImage() {
-      const input = document.querySelector('#images')
-      const formData = new FormData()
-      formData.append('images', input.files[0])
-      return formData
+      const name = document.querySelector('#lname').value
+      const link = document.querySelector('#llink').value
+      const folder = document.querySelector('#lfolder').value
+      return {
+        name,
+        link,
+        folder
+      }
+    }
+
+    function getImageRoute() {
+      const folder = document.querySelector('#lfolder').value || 'background'
+      return 'udesc/graph/image?folder=' + folder
     }
   </script>
 </body>

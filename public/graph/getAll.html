@@ -140,7 +140,6 @@
     }
 
     function showAuthors(result) {
-      console.log(result.authors)
       return populateTable(null, result.authors.length, 1, (t, i, j, v) => {
         const text = ({
           0: v[i].name,
@@ -180,12 +179,13 @@
     }
 
     function showSeries(result) {
+      console.log(result.series)
       return populateTable(null, result.series.length, 10, (t, i, j, v) => {
         const text = ({
           0: v[i].name,
           1: v[i].synopsis,
           2: v[i].comment,
-          3: v[i].numberofepisodes,
+          3: v[i].numberOfEpisodes,
           4: v[i].cover,
           5: v[i].status,
           6: v[i].idStudio,
