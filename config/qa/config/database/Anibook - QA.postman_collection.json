@@ -1,0 +1,4625 @@
+{
+	"info": {
+		"_postman_id": "fde657a0-210a-43e1-8ea7-263d3e6e4686",
+		"name": "Anibook - QA",
+		"description": "# Dados\n```js\n\"dados\": {\n  \"name\": \"nome\",\n  \"synopsis\": \"sinopse\",\n  \"comment\": \"comentario\",\n  \"photo\": \"nome do arquivo de capa\",\n  \"fodler\": \"nome da pasta com as imagens\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberEpisodes\": 12, //apenas animes\n    \"numberChapters\": 12, //apenas mangas\n    \"numberVolumes\": 1 //apenas mangas\n  },\n  \"images\": [\n    \"nome do arquivo\",\n    \"nome do arquivo\"\n  ],\n  \"whereWatch\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"whereRead\": [ //apenas mangas\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ],\n  \"musics\": [ //apenas animes\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    },\n  ]\n}\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6291837"
+	},
+	"item": [
+		{
+			"name": "Anime",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetAll",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 200', function (){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes?limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								},
+								"description": "This request should return a list with n elements.\r\nA limit can be specified"
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 200', function () {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste2"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "abc"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetRandomCards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/card/random?limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"card",
+										"random"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								},
+								"description": "Return a list with cards.\r\nA limit can be specified"
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName-NotFound",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mob 2"
+										}
+									]
+								},
+								"description": "This request should return a single result.\r\nThe 'name' are case sensitive and includes space.\r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "GetSort",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/sort?order=name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"sort"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSortCard",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/card/sort?order=name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"card",
+										"sort"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "CreateAnAnimeWithImages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"type": "text"
+										},
+										{
+											"key": "card",
+											"type": "file",
+											"src": "oono.jpg"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"HSGirlThumb-696x392.jpg",
+												"maxresdefault.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes?folder=highscoregirl",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "highscoregirl"
+										}
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAnAnimeWithoutImages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"name\": \"Teste\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAnAnime-AlreadyExists",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status 409', function () {\r",
+											"    pm.response.to.have.status(409)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAnAnime-Unauthorized",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status 401', function () {\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n        \"name\": \"High Score Girl\",\n        \"synopsis\": \"um garoto que gosta de lutar\",\n        \"comment\": \"mt bom\",\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"goyabu\",\n                \"name\":\"Goyabu\"\n            }\n        ],\n        \"info\": {\n            \"author\": \"toriama\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": \"131\"\n        },\n        \"musicas\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"romantic ageru yo\",\n                \"name\":\"Romantic\"\n            }\n        ]\n    }",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH",
+					"item": [
+						{
+							"name": "UpdateAnyFieldThatAreNotFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 204', function () {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"nome teste12\",\n        \"synopsis\": \"sinopse teste\",\n        \"comment\": \"comentario teste\",\n        \"folder\": \"pasta teste\",\n        \"info\": {\n            \"author\": \"autor teste\",\n            \"status\": \"finalizado\",\n            \"numberEpisodes\": 1233\n        },\n        \"musics\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste\",\n                \"name\": \"teste\"\n            },\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste21\",\n                \"name\": \"teste2\"\n            }\n        ],\n        \"whereWatch\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/animes/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste12"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-MissingFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 422', function () {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/animes/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "Hi_Score_Girl_vol_1_cover.png"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": "haruo.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste21"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": "hiscoregirl.jpg"
+										},
+										{
+											"key": "card",
+											"type": "file",
+											"src": "haruo.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste12"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png",
+												"oono.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/animes/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeleteAnime",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste212"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAnime-NotFound",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Dragon Ball Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAnime-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/animes/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"animes",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Dragon Ball Z"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetImage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/:folder/:anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										":folder",
+										":anime"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "teste"
+										},
+										{
+											"key": "anime",
+											"value": "haruo.webp"
+										}
+									]
+								},
+								"description": "Get an image"
+							},
+							"response": []
+						},
+						{
+							"name": "GetBackgroundImage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/background",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										"background"
+									]
+								},
+								"description": "Get an image"
+							},
+							"response": []
+						},
+						{
+							"name": "GetImage-NotFound",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/:folder/:anime",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										":folder",
+										":anime"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "hi"
+										},
+										{
+											"key": "anime",
+											"value": "foto.webp"
+										}
+									]
+								},
+								"description": "Get an image"
+							},
+							"response": []
+						},
+						{
+							"name": "te",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "InsertImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"/C:/Users/Zupper/Downloads/back/background/AkariAkaza.webp",
+												"/C:/Users/Zupper/Downloads/back/background/AkariAkazaManga.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Akko.webp",
+												"/C:/Users/Zupper/Downloads/back/background/AkkoAndLotte.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Albedo.webp",
+												"/C:/Users/Zupper/Downloads/back/background/AnastasiaHoshin.webp",
+												"/C:/Users/Zupper/Downloads/back/background/AnnieLeonhart.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Aqua.png",
+												"/C:/Users/Zupper/Downloads/back/background/AquaNormal.png",
+												"/C:/Users/Zupper/Downloads/back/background/Beatrice.webp",
+												"/C:/Users/Zupper/Downloads/back/background/BeatriceCake.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Chariot.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Chinatsu.webp",
+												"/C:/Users/Zupper/Downloads/back/background/CuteGirlHappy.webp",
+												"/C:/Users/Zupper/Downloads/back/background/CuteGirlLaughing.webp",
+												"/C:/Users/Zupper/Downloads/back/background/CuteGirlScared.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Dekomori.webp",
+												"/C:/Users/Zupper/Downloads/back/background/DekomoriSpy.webp",
+												"/C:/Users/Zupper/Downloads/back/background/DianaMad.webp",
+												"/C:/Users/Zupper/Downloads/back/background/DianaTea.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Emilia.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Erwin.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Gohan.webp",
+												"/C:/Users/Zupper/Downloads/back/background/GohanSSJ2.webp",
+												"/C:/Users/Zupper/Downloads/back/background/GokuFlying.webp",
+												"/C:/Users/Zupper/Downloads/back/background/GokuJumping.webp",
+												"/C:/Users/Zupper/Downloads/back/background/GokuSleeping.webp",
+												"/C:/Users/Zupper/Downloads/back/background/GokuTired.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Historia.webp",
+												"/C:/Users/Zupper/Downloads/back/background/KarenKujou.gif",
+												"/C:/Users/Zupper/Downloads/back/background/KonataIzumi.webp",
+												"/C:/Users/Zupper/Downloads/back/background/KuririnSuspicious.webp",
+												"/C:/Users/Zupper/Downloads/back/background/LupusreginaBeta.webp",
+												"/C:/Users/Zupper/Downloads/back/background/MeguminHappy.webp",
+												"/C:/Users/Zupper/Downloads/back/background/MeguminTired.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Mikasa.webp",
+												"/C:/Users/Zupper/Downloads/back/background/NarberalGamma.webp",
+												"/C:/Users/Zupper/Downloads/back/background/NarberalGammaRabbit.webp",
+												"/C:/Users/Zupper/Downloads/back/background/NekoHearth.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Ram.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Rem.webp",
+												"/C:/Users/Zupper/Downloads/back/background/RemBattle.webp",
+												"/C:/Users/Zupper/Downloads/back/background/RinTohsaka.webp",
+												"/C:/Users/Zupper/Downloads/back/background/RinTohsakaCrying.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SaitamaBad.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SaitamaLauhing.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SaitamaOK.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SashaBraus.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SashaBrausBread.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SashaBrausThinking.webp",
+												"/C:/Users/Zupper/Downloads/back/background/SatouKazuma.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Shenlong.webp",
+												"/C:/Users/Zupper/Downloads/back/background/Sucy.webp",
+												"/C:/Users/Zupper/Downloads/back/background/TakanashiRikka.webp",
+												"/C:/Users/Zupper/Downloads/back/background/TakanashiRikkaChuuni.webp",
+												"/C:/Users/Zupper/Downloads/back/background/TakanashiRikkaNormal.webp",
+												"/C:/Users/Zupper/Downloads/back/background/ToshinoKyoko.webp",
+												"/C:/Users/Zupper/Downloads/back/background/ToshinoKyokoTomato.gif",
+												"/C:/Users/Zupper/Downloads/back/background/ToshinoKyokoTomato.png",
+												"/C:/Users/Zupper/Downloads/back/background/ToshinoKyokoTomatoPraying.png",
+												"/C:/Users/Zupper/Downloads/back/background/UmaruDoma.png",
+												"/C:/Users/Zupper/Downloads/back/background/Yato.webp",
+												"/C:/Users/Zupper/Downloads/back/background/YatoKing.webp",
+												"/C:/Users/Zupper/Downloads/back/background/YatoScared.webp",
+												"/C:/Users/Zupper/Downloads/back/background/YuiFunami.webp"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/image",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "highscoregirl",
+											"disabled": true
+										}
+									]
+								},
+								"description": "If the param folder are null, the image are a background"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeteleImage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/image/:folder/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"image",
+										":folder",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "background"
+										},
+										{
+											"key": "name",
+											"value": "KuririnSuspicious.webp"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"a@a.bc\",\n\t\"nickname\": \"ab\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/token/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/token/:nickname",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token",
+								":nickname"
+							],
+							"variable": [
+								{
+									"key": "nickname",
+									"value": "qa"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manga",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas?limit=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "High Score Girl"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByName-NotFound",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "High Score Girl1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCardByName-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/card/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"card",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetRandomCards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/card/random?limit=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"card",
+										"random"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSort",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/sort?limit=1&order=name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"sort"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "order",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSortCard",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/card/sort?limit=1&order=name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"card",
+										"sort"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "order",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "CreateAMangaWithImages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"Naruto2\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										},
+										{
+											"key": "card",
+											"type": "file",
+											"src": "oono.jpg"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"hiscoregirl.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas?folder=naruto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "naruto"
+										}
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAMangaWithoutImages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"Grand Blue\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas"
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAManga-AlreadyExists",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status 409', function () {\r",
+											"    pm.response.to.have.status(409)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"NarutoS\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas"
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateAManga-Unauthorized",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status 401', function () {\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dados",
+											"value": "{\n  \"name\": \"NarutoS\",\n  \"synopsis\": \"sinopse quauqer\",\n  \"comment\": \"comentario\",\n  \"info\": {\n    \"author\": \"autor\",\n    \"status\": \"situacao da obra\",\n    \"numberChapters\": 12,\n    \"numberVolumes\": 1\n  },\n  \"whereRead\": [\n    {\n      \"language\": \"idioma\",\n      \"url\": \"link do site\",\n      \"name\": \"nome do site\"\n    }\n  ]\n}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas"
+									]
+								},
+								"description": "Field accepts: folder, name, photo, synopsis, comment, images(an array of string), info(an object -> numberEpisodes), whereWatch and musics.\r\nwhereWatch and musics type: an object with language, url and name.\r\nFiles can be upload, in this case should be passed a query param for folder. The folder are used to create a file, when a file are send without a folder param, a undefined folder are created in server"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH ",
+					"item": [
+						{
+							"name": "UpdateAnyFieldThatAreNotFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 204', function () {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dados\": {\n        \"name\": \"Naruto\",\n        \"synopsis\": \"sinopse teste 1\",\n        \"comment\": \"comentario teste 1\",\n        \"folder\": \"pasta teste1 \",\n        \"info\": {\n            \"author\": \"autor test 1e\",\n            \"status\": \"finalizado 1\",\n            \"numberChapters\": 12,\n            \"numberVolumes\": 12\n        },\n        \"whereRead\": [\n            {\n                \"language\": \"portugues\",\n                \"url\": \"teste2\",\n                \"name\": \"teste\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/mangas/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-MissingFile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 422', function () {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/mangas/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Teste"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status should be 404', function () {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card",
+											"type": "file",
+											"src": "hiscoregirl.jpg"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NotFound"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'.\r\nThe 'name' are case sensitive and includes space. \r\nEx: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": "HSGirlThumb-696x392.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas/image/:name?folder=naruto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "naruto"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Naruto"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"haruo.png",
+												"Hi_Score_Girl_vol_1_cover.png",
+												"oono.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/mangas/image/:name?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										"image",
+										":name"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "nome teste2"
+										}
+									]
+								},
+								"description": "Should have the query param 'folder'. The 'name' are case sensitive and includes space. Ex: Mob, Mob 2, mob, mob2 this values going to return diffent results"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeleteManga",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteManga-NotFound",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteManga-Unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/mangas/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"mangas",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "NarutoS"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Mixed",
+			"item": [
+				{
+					"name": "GetCards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/mixed/card/random?limit=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mixed",
+								"card",
+								"random"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRandom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/mixed/random?limit=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"mixed",
+								"random"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Udesc",
+			"item": [
+				{
+					"name": "Author",
+					"item": [
+						{
+							"name": "CreateAuthor",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"Alfred Hitchcock\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/author",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateAuthor",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Eduardo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/author/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Alfred Hitchcock"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/authors",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAuthor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/author/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Alfred"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAuthor",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/author/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Alfred Hitchcock"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AuthorGraph",
+					"item": [
+						{
+							"name": "CreateAuthor",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/author",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"author"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateAuthor",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mano Garrafa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/author/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"author",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "ManoGarrafa"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/authors",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAuthor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/author/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"author",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mano"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAuthor",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/author/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"author",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Mano Garrafa"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AuthorSerie",
+					"item": [
+						{
+							"name": "CreateAuthorSerie",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idAuthor\": \"1\",\r\n    \"idSerie\": \"10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/author/serie",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										"serie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateAuthorSerie",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idAuthor\": \"1\",\r\n    \"idSerie\": \"9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/author/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "14"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAuthorSerie",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/author/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "14"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAuthorSerie",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/author/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"author",
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "14"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Gallery",
+					"item": [
+						{
+							"name": "CreateGallery",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idImage\": \"1\",\r\n    \"idSerie\": \"10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/gallery",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"gallery"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateGallery",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idImage\": \"1\",\r\n    \"idSerie\": \"9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/gallery/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"gallery",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetGallery",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/gallery/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"gallery",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteGallery",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/gallery/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"gallery",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "21"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Language",
+					"item": [
+						{
+							"name": "CreateLanguage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"language\": \"ManoGarrafa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/language",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"language"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateLanguage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"language\": \"Eduardo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetLanguage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/languages",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"languages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteLanguage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "LanguageGraph",
+					"item": [
+						{
+							"name": "CreateLanguage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"language\": \"Teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/language",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"language"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateLanguage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"language\": \"Eduardo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Teste"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetLanguage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Port"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/languages",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"languages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteLanguage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Teste"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Music",
+					"item": [
+						{
+							"name": "CreateMusic",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafaas\",\r\n    \"link\": \"dsfdsf\",\r\n    \"idSerie\": \"Serie2\",\r\n    \"idLanguage\": \"Spanish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/music",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"music"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateMusic",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"TesteFinal2\",\r\n    \"link\": \"a\",\r\n    \"idSerie\": \"Serie6\",\r\n    \"idLanguage\": \"Polish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/music/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"music",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "TesteFinal"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetMusic",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/music/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"music",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/musics",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"musics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteMusic",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/music/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"music",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MusicGraph",
+					"item": [
+						{
+							"name": "CreateMusic",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafaas\",\r\n    \"link\": \"dsfdsf\",\r\n    \"idSerie\": \"Serie2\",\r\n    \"idLanguage\": \"Spanish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/music",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"music"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateMusic",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafa\",\r\n    \"link\": \"a\",\r\n    \"idSerie\": 1,\r\n    \"idLanguage\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/music/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"music",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetMusic",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/music/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"music",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/musics",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"musics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteMusic",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/music/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"music",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Serie",
+					"item": [
+						{
+							"name": "CreateSerie",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"cover\": \"capa\",\r\n    \"idStudio\": \"606 Films\",\r\n    \"name\":\"SerieTeste2\",\r\n    \"synopsis\": \"sdfudsf\",\r\n    \"comment\": \"dasf\",\r\n    \"status\": \"FINISHED\",\r\n    \"authors\": [\"Vincente Minnelli\"],\r\n    \"gallery\": [\"capa10\"],\r\n    \"streaming\": [\"netflix\",\"hbomax\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/serie",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateSerie",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"cover\": \"capa9\",\r\n    \"idStudio\": \"606 Films\",\r\n    \"numberOfEpisodes\": 1,\r\n    \"status\": \"FINISHED\",\r\n    \"comment\": \"novo comentario\",\r\n    \"streaming\": [\"netflix\",\"youtube\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "SerieGarrafa"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSerie",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "serie"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/series",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"series"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteSerie",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SerieGraph",
+					"item": [
+						{
+							"name": "CreateSerie",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"cover\": \"capa\",\r\n    \"idStudio\": \"606 Films\",\r\n    \"name\":\"SerieTeste2\",\r\n    \"synopsis\": \"sdfudsf\",\r\n    \"comment\": \"dasf\",\r\n    \"status\": \"FINISHED\",\r\n    \"authors\": [\"Vincente Minnelli\"],\r\n    \"gallery\": [\"capa10\"],\r\n    \"streaming\": [\"netflix\",\"hbomax\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/serie",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"serie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateSerie",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"cover\": \"capa\",\r\n    \"idStudio\": \"606 Films\",\r\n    \"status\": \"FINISHED\",\r\n    \"streaming\": [\"youtube\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Serie9"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSerie",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Garra"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/series",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"series"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteSerie",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/serie/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"serie",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "SerieGarrafa"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SerieStreaming",
+					"item": [
+						{
+							"name": "CreateSerieStreaming",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idSerie\": 1,\r\n    \"idStreaming\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/serie/streaming",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										"streaming"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateSerieStreaming",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idSerie\": 1,\r\n    \"idStreaming\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/serie/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSerieStreaming",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/serie/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteSerieStreaming",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/serie/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serie",
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Status",
+					"item": [
+						{
+							"name": "CreateStatus",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"value\": \"ManoGarrafa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStatus",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": \"Eduardo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/status/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"status",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStatus",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/status/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"status",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStatus",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/status/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"status",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StatusGraph",
+					"item": [
+						{
+							"name": "CreateStatus",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"value\": \"ManoGarrafa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStatus",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": \"Eduardo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/status/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"status",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "ManoGarrafa"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStatus",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/status/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"status",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Edu"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStatus",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/status/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"status",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Eduardo"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Streaming",
+					"item": [
+						{
+							"name": "CreateStreaming",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafa\",\r\n    \"link\": \"link\",\r\n    \"language\": [\"Polish\",\"Portuguese\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/streaming",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStreaming",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"netflix\",\r\n    \"link\": \"https://netflix.com\",\r\n    \"language\": [\"Portuguese\",\"French\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "netflix"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStreaming",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/streamings",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streamings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStreaming",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StreamingGraph",
+					"item": [
+						{
+							"name": "CreateStreaming",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafa\",\r\n    \"link\": \"link\",\r\n    \"language\": [\"Polish\",\"Portuguese\",\"French\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/streaming",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"streaming"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStreaming",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"ManoGarrafa3\",\r\n    \"link\": \"link2\",\r\n    \"language\": [\"English\",\"Polish\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "ManoGarrafa3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStreaming",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "ManoGarrafa"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/streamings",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"streamings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStreaming",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/streaming/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"streaming",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Teste3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StreamingLanguage",
+					"item": [
+						{
+							"name": "CreateStreamingLanguage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idStreaming\": 1,\r\n    \"idLanguage\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/streaming/language",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										"language"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStreamingLanguage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"idStreaming\": 1,\r\n    \"idLanguage\": 6\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/streaming/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStreamingLanguage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/streaming/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStreamingLanguage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/streaming/language/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"streaming",
+										"language",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Studio",
+					"item": [
+						{
+							"name": "CreateStudio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"Aleph Producciones\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/studio",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"studio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStudio",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Aleph\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/studio/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"studio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Aleph Producciones"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/studios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"studios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStudio",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/studio/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"studio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Aleq"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStudio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/studio/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"studio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StudioGraph",
+					"item": [
+						{
+							"name": "CreateStudio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"Aleph Producciones\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/studio",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"studio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStudio",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Aleph\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/graph/studio/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"studio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Aleph Producciones"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/studios",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"studios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStudio",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/studio/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"studio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "Aleq"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStudio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/graph/studio/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"graph",
+										"studio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Image",
+					"item": [
+						{
+							"name": "CreateImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": [
+												"/C:/Users/eduar/OneDrive/Imagens/Imagens da Câmera/WIN_20230411_15_34_09_Pro.jpg",
+												"/C:/Users/eduar/OneDrive/Imagens/Imagens da Câmera/WIN_20230411_17_18_18_Pro.jpg"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/udesc/image?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"image"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": "/C:/Users/eduar/OneDrive/Documentos/GitHub/anibook-backend/src/utils/image_test/KarenKujouCopy.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/udesc/image/:id?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"image",
+										":id"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetImageByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/udesc/image/:folder/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"image",
+										":folder",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "teste"
+										},
+										{
+											"key": "name",
+											"value": "WIN_20230411_15_34_09_Pro.webp"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetImageById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/udesc/image/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"image",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteImage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/udesc/image/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"image",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "21"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ImageGraph",
+					"item": [
+						{
+							"name": "CreateImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"imagegraph\",\r\n    \"link\": \"linkmagico\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/udesc/graph/image?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"graph",
+										"image"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateImage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": "/C:/Users/eduar/OneDrive/Documentos/GitHub/anibook-backend/src/utils/image_test/KarenKujouCopy.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/udesc/image/:id?folder=teste",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"image",
+										":id"
+									],
+									"query": [
+										{
+											"key": "folder",
+											"value": "teste"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetImageByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/udesc/graph/image/:folder/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"graph",
+										"image",
+										":folder",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "teste"
+										},
+										{
+											"key": "name",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetImageById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/udesc/graph/image/background",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"graph",
+										"image",
+										"background"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteImage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/udesc/graph/image/:folder/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"udesc",
+										"graph",
+										"image",
+										":folder",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "folder",
+											"value": "teste"
+										},
+										{
+											"key": "name",
+											"value": "imagegraph"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Report",
+					"item": [
+						{
+							"name": "GetStudioWithAtLeastOneSerieInThreeStreaming",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/report/serie/studio",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"report",
+										"serie",
+										"studio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSeriesWithLanguageMusics",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/report/serie/music?language=Spanish",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"report",
+										"serie",
+										"music"
+									],
+									"query": [
+										{
+											"key": "language",
+											"value": "Spanish"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetStreamingsWithSeriesThatAtLeastTwoAuthor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/report/serie/streaming",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"report",
+										"serie",
+										"streaming"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6InFhIiwiZW1haWwiOiJxYSIsImlhdCI6MTU5MzAwNjAzNX0.xvJZwr-ze367CB-ef-nmaXvYgiGHA-Qxgvc1l7Nf-U0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:4001"
+		}
+	]
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #menu {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 32px;
+    }
+
+    #menu div {
+      width: 33vw;
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    #menu button {
+      height: 48px;
+      width: auto;
+      padding: 4px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 1px solid red;
+    }
+
+    #menu button:hover {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    #msg {
+      color: red;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #result {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #result table {
+      background-color: aqua;
+      width: 33vw;
+    }
+
+    table,
+    th,
+    td {
+      border-collapse: collapse;
+      border: 1px solid;
+    }
+
+    td {
+      text-align: center;
+      width: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="menu">
+    <button id="getReport1">Estudios que possuem uma serie em pelo menos 3 streamings</button>
+    <label for="termname">Idioma</label>
+    <input type="text" name="termname" id="termname">
+    <button id="getReport2">Series que possuem musica no idioma informado ou portugues</button>
+    <button id="getReport3">Streamings que possuem obras com mais de um autor</button>
+  </div>
+  <div id="msg"></div>
+  <div id="result"></div>
+  <script>
+    document.querySelector("#getReport1").addEventListener("click", async () => {
+      const result = await _fetch('graph/report/serie/studio')
+      showResult(result.data, 'seriestudio')
+    });
+
+    document.querySelector("#getReport2").addEventListener("click", async () => {
+      const language = document.querySelector('#termname').value
+      const result = await _fetch(`graph/report/serie/music?language=${language}`)
+      showResult(result.data, 'seriemusic')
+    });
+
+    document.querySelector("#getReport3").addEventListener("click", async () => {
+      const result = await _fetch('graph/report/serie/streaming')
+      showResult(result.data, 'seriestreaming')
+    });
+
+
+    const _fetch = async (route) => {
+      try {
+        const response = await fetch(`http://localhost:4001/${route}`, {
+          method: 'GET', mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const result = await response.json()
+        return result
+      } catch (error) {
+        document.querySelector("#msg").innerHTML = '<p>Erro</p>'
+      }
+    }
+
+    function showResult(result, table) {
+      document.querySelector("#result").innerHTML = ""
+      const routes = {
+        'seriestudio': showSerieStudio,
+        'seriemusic': showSerieMusic,
+        'seriestreaming': showSerieStreaming,
+      }[table](result);
+      document.querySelector("#result").appendChild(routes)
+    }
+
+    function showSerieStudio(result) {
+      const value = getArray(result)
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].studio,
+          1: v[i].serie,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Estudio',
+        1: 'Serie',
+      })[j])
+    }
+
+    function showSerieMusic(result) {
+      const value = getArray(result)
+      return populateTable(null, value.length, 1, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Serie',
+      })[j])
+    }
+
+    function showSerieStreaming(result) {
+      const value = getArray(result)
+      return populateTable(null, value.length, 2, (t, i, j, v) => {
+        const text = ({
+          0: v[i].streaming,
+          1: v[i].serie,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Streaming',
+        1: 'Serie',
+      })[j])
+    }
+
+    function populateTable(table, rows, cells, content, values, titles) {
+      var is_func = (typeof content === 'function');
+      if (!table) table = document.createElement('table');
+      for (var i = 0; i < rows; ++i) {
+        if (i === 0) {
+          var row = document.createElement('tr')
+          for (var j = 0; j < cells; ++j) {
+            row.appendChild(document.createElement('th'));
+            var text = !is_func ? (content + '') : titles(j);
+            row.cells[j].appendChild(document.createTextNode(text));
+          }
+          table.appendChild(row);
+        }
+        var row = document.createElement('tr');
+        for (var j = 0; j < cells; ++j) {
+          row.appendChild(document.createElement('td'));
+          var text = !is_func ? (content + '') : content(table, i, j, values);
+          row.cells[j].appendChild(document.createTextNode(text));
+        }
+        table.appendChild(row);
+      }
+      return table;
+    }
+
+    const getArray = (value) => Array.isArray(value) ? value : [value]
+
+  </script>
+</body>
+
+</html>

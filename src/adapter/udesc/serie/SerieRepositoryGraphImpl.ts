@@ -1,7 +1,7 @@
-import { Serie } from '@domain/udesc/serie';
+import { Serie, SerieNeo4j } from '@domain/udesc/serie';
 import { SerieRepository } from './SerieRepository';
 import { neo4j_driver } from 'src/database';
-import { Integer, Node } from 'neo4j-driver';
+import { Integer, Node, QueryResult } from 'neo4j-driver';
 
 export class SerieRepositoryGraphImpl implements SerieRepository {
   async _delete(id: string): Promise<boolean> {
@@ -138,12 +138,21 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
     const session = neo4j_driver.session();
     try {
       const res = await session.executeRead((tx) =>
-        tx.run<{ s: Node<Integer, Serie> }>(
-          `MATCH (s:Serie) WHERE s.name =~ '(?i).*${name}.*' RETURN s`
+        tx.run<SerieNeo4j>(
+          `MATCH (s:Serie)
+            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music),
+            (s)-[:HAS_STATUS]->(st:Status),
+            (s)-[:PRODUCED_BY]->(std:Studio),
+            (s)-[:HAS_AUTHOR]->(a:Author),
+            (s)-[:AVAILABLE_ON]->(str:Streaming),
+            (s)-[:HAS_COVER]->(i:Image)
+          WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i
+          WHERE s.name =~ '(?i).*${name}.*'
+          RETURN s,m,st,std,a,str,i ORDER BY s.name`
         )
       );
 
-      return res.records.map((record) => record.get('s').properties);
+      return this._getResponse(res);
     } finally {
       session.close();
     }
@@ -168,13 +177,41 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
     const session = neo4j_driver.session();
     try {
       const res = await session.executeRead((tx) =>
-        tx.run<{ s: Node<Integer, Serie> }>(
-          `MATCH (s:Serie) RETURN s ORDER BY s.name`
+        tx.run<SerieNeo4j>(
+          `MATCH (s:Serie)
+            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music),
+            (s)-[:HAS_STATUS]->(st:Status),
+            (s)-[:PRODUCED_BY]->(std:Studio),
+            (s)-[:HAS_AUTHOR]->(a:Author),
+            (s)-[:AVAILABLE_ON]->(str:Streaming),
+            (s)-[:HAS_COVER]->(i:Image)
+          WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i
+          RETURN s,m,st,std,a,str,i ORDER BY s.name`
         )
       );
-      return res.records.map((record) => record.get('s').properties);
+      return this._getResponse(res);
     } finally {
       session.close();
     }
+  }
+
+  _getResponse(data: QueryResult<SerieNeo4j>) {
+    return data.records.map((record) => ({
+      ...record.get('s').properties,
+      musics: [
+        ...new Set(record.get('m')?.map((music) => music.properties.name)),
+      ],
+      cover: record.get('i')?.properties?.name,
+      status: record.get('st')?.properties?.value,
+      idStudio: record.get('std')?.properties?.name,
+      authors: [
+        ...new Set(record.get('a')?.map((author) => author.properties.name)),
+      ],
+      streaming: [
+        ...new Set(
+          record.get('str')?.map((streaming) => streaming.properties.name)
+        ),
+      ],
+    }));
   }
 }

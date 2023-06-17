@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetOne</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #menu {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 32px;
+    }
+
+    #menu div {
+      width: 33vw;
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    #menu #getOneBtn {
+      height: 48px;
+      width: 120px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 1px solid red;
+    }
+
+    #menu #getOneBtn:hover {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    #msg {
+      color: red;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #result {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #result table {
+      background-color: aqua;
+      width: 33vw;
+    }
+
+    table,
+    th,
+    td {
+      border-collapse: collapse;
+      border: 1px solid;
+    }
+
+    td {
+      text-align: center;
+      width: auto;
+    }
+
+    img {
+      height: 200px;
+      width: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="menu">
+    <div>
+      <label for="tables">Choose a table:</label>
+      <select name="tables" id="tables">
+        <option value="author">Author</option>
+        <option value="language">Language</option>
+        <option value="music">Music</option>
+        <option value="serie">Serie</option>
+        <option value="status">Status</option>
+        <option value="streaming">Streaming</option>
+        <option value="studio">Studio</option>
+        <!-- <option value="image">Image</option> -->
+        <!-- <option value="gallery">Gallery</option> -->
+      </select>
+
+      <label for="termid">Id</label>
+      <input type="text" name="termid" id="termid" disabled>
+      <label for="termname">Name</label>
+      <input type="text" name="termname" id="termname">
+    </div>
+
+    <button id="getOneBtn">GetOne</button>
+  </div>
+  <div id="msg"></div>
+  <div id="result"></div>
+  <script>
+    document.querySelector("#getOneBtn").addEventListener("click", async () => {
+      let table = document.querySelector("#tables").value
+      let route = getRoute(table || 'author')
+      let termId = document.querySelector("#termid").value
+      let termName = document.querySelector("#termname").value
+      let term = termId ? termId : termName
+      try {
+        const response = await fetch(`http://localhost:4001/graph/${route}${term}`, {
+          method: 'GET', mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (table === 'image') {
+          await showImage(response)
+          return
+        }
+        const result = await response.json()
+        showResult(result, table)
+      } catch (error) {
+        document.querySelector("#msg").innerHTML = '<p>Erro</p>'
+      }
+    });
+
+    function getRoute(table) {
+      const routes = {
+        'author': 'author/',
+        'language': 'language/',
+        'music': 'music/',
+        'serie': 'serie/',
+        'status': 'status/',
+        'streaming': 'streaming/',
+        'studio': 'studio/',
+        'image': 'udesc/image/',
+        'gallery': 'gallery/'
+      };
+      return routes[table]
+    }
+
+    function showResult(result, table) {
+      document.querySelector("#result").innerHTML = ""
+      const routes = {
+        'author': showAuthor,
+        'language': showLanguage,
+        'music': showMusic,
+        'serie': showSerie,
+        'status': showStatus,
+        'streaming': showStreaming,
+        'studio': showStudio,
+        'image': showImage,
+        'gallery': showGallery,
+      }[table](result);
+      document.querySelector("#result").appendChild(routes)
+    }
+
+    function showAuthor(result) {
+      const value = getArray(result.author)
+      return populateTable(null, value.length, 1, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome',
+      })[j])
+    }
+
+    function showLanguage(result) {
+      const value = getArray(result.language)
+      return populateTable(null, value.length, 1, (t, i, j, v) => {
+        const text = ({
+          0: v[i].language,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Idioma',
+      })[j])
+    }
+
+    function showMusic(result) {
+      const value = getArray(result.music)
+      return populateTable(null, value.length, 4, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+          1: v[i].link,
+          2: v[i].idLanguage,
+          3: v[i].idSerie,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome',
+        1: 'Link',
+        2: 'Idioma',
+        3: 'Serie',
+      })[j])
+    }
+
+    function showSerie(result) {
+      const value = getArray(result.serie)
+      return populateTable(null, value.length, 9, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+          1: v[i].synopsis,
+          2: v[i].comment,
+          3: v[i].numberofepisodes,
+          4: v[i].cover,
+          5: v[i].status,
+          6: v[i].idStudio,
+          7: v[i].authors.join(', '),
+          8: v[i].streaming.join(', '),
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome',
+        1: 'Sinopse',
+        2: 'Comentario',
+        3: 'Numero de eps',
+        4: 'Capa',
+        5: 'Status',
+        6: 'Estudio',
+        7: 'Autores',
+        8: 'Streaming',
+      })[j])
+    }
+
+    function showStatus(result) {
+      const value = getArray(result['status'])
+      return populateTable(null, value.length, 1, (t, i, j, v) => {
+        const text = ({
+          0: v[i].value,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Status',
+      })[j]);
+    }
+
+    function showStreaming(result) {
+      const value = getArray(result.streaming)
+      return populateTable(null, value.length, 1, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome',
+      })[j]);
+    }
+
+    function showStudio(result) {
+      const value = getArray(result.studio)
+      return populateTable(null, value.length, 1, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome',
+      })[j])
+    }
+
+    function showGallery(result) {
+      const value = getArray(result.gallery)
+      return populateTable(null, value.length, 3, (t, i, j, v) => {
+        const text = ({
+          0: v[i].name,
+          1: v[i].folder,
+          2: v[i].idserie,
+        })[j]
+        return `${text}`;
+      }, value, (j) => ({
+        0: 'Nome imagem',
+        1: 'Pasta',
+        2: 'Serie'
+      })[j])
+    }
+
+    function populateTable(table, rows, cells, content, values, titles) {
+      var is_func = (typeof content === 'function');
+      if (!table) table = document.createElement('table');
+      for (var i = 0; i < rows; ++i) {
+        if (i === 0) {
+          var row = document.createElement('tr')
+          for (var j = 0; j < cells; ++j) {
+            row.appendChild(document.createElement('th'));
+            var text = !is_func ? (content + '') : titles(j);
+            row.cells[j].appendChild(document.createTextNode(text));
+          }
+          table.appendChild(row);
+        }
+        var row = document.createElement('tr');
+        for (var j = 0; j < cells; ++j) {
+          row.appendChild(document.createElement('td'));
+          var text = !is_func ? (content + '') : content(table, i, j, values);
+          row.cells[j].appendChild(document.createTextNode(text));
+        }
+        table.appendChild(row);
+      }
+      return table;
+    }
+
+    const getArray = (value) => Array.isArray(value) ? value : [value]
+
+    async function showImage(result) {
+      document.querySelector('#result').innerHTML = ""
+      var blob = await result.blob()
+      var image = document.createElement('img')
+      image.src = URL.createObjectURL(blob)
+      document.querySelector('#result').appendChild(image)
+    }
+
+  </script>
+</body>
+
+</html>

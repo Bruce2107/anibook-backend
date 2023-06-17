@@ -2,6 +2,8 @@ import { Music } from '@domain/udesc/music';
 import { MusicRepository } from './MusicRepository';
 import { neo4j_driver } from 'src/database';
 import { Integer, Node } from 'neo4j-driver';
+import { Language } from '@domain/udesc/language';
+import { Serie } from '@domain/udesc/serie';
 
 export class MusicRepositoryGraphImpl implements MusicRepository {
   async _delete(id: string): Promise<boolean> {
@@ -61,10 +63,19 @@ export class MusicRepositoryGraphImpl implements MusicRepository {
   async getMusic(name: string): Promise<Music[]> {
     const session = neo4j_driver.session();
     try {
-      const result = await session.run<{ m: Node<Integer, Music> }>(
-        `MATCH (m:Music) WHERE m.name =~ '(?i).*${name}.*' RETURN m`
+      const result = await session.run<{
+        m: Node<Integer, Music>;
+        l: Node<Integer, Language>;
+        s: Node<Integer, Serie>;
+      }>(
+        `MATCH (m:Music)-[:HAS_LANGUAGE]->(l:Language),
+        (s:Serie)-[:HAS_MUSIC]->(m) WHERE m.name =~ '(?i).*${name}.*' RETURN m,l,s ORDER BY m.name`
       );
-      return result.records.map((record) => record.get('m').properties);
+      return result.records.map((record) => ({
+        ...record.get('m').properties,
+        idLanguage: record.get('l').properties.language,
+        idSerie: record.get('s').properties.name,
+      }));
     } finally {
       session.close();
     }
@@ -89,10 +100,21 @@ export class MusicRepositoryGraphImpl implements MusicRepository {
   async getAllMusics(): Promise<Music[]> {
     const session = neo4j_driver.session();
     try {
-      const result = await session.run<{ m: Node<Integer, Music> }>(
-        `MATCH (m:Music) RETURN m ORDER BY m.name`
+      const result = await session.run<{
+        m: Node<Integer, Music>;
+        l: Node<Integer, Language>;
+        s: Node<Integer, Serie>;
+      }>(
+        `MATCH (m:Music)-[:HAS_LANGUAGE]->(l:Language),
+        (s:Serie)-[:HAS_MUSIC]->(m) RETURN m,l,s ORDER BY m.name`
       );
-      return result.records.map((record) => record.get('m').properties);
+      return result.records.map((record) => {
+        return {
+          ...record.get('m').properties,
+          idLanguage: record.get('l').properties.language,
+          idSerie: record.get('s').properties.name,
+        };
+      });
     } finally {
       session.close();
     }

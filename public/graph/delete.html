@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #menu {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 32px;
+    }
+
+    #menu div {
+      width: 33vw;
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    #menu #getOneBtn {
+      height: 48px;
+      width: 120px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 1px solid red;
+    }
+
+    #menu #getOneBtn:hover {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    #msg {
+      color: red;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #result {
+      color: green;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="menu">
+    <div>
+      <label for="tables">Choose a table:</label>
+      <select name="tables" id="tables">
+        <option value="author">Author</option>
+        <option value="language">Language</option>
+        <option value="music">Music</option>
+        <option value="serie">Serie</option>
+        <option value="status">Status</option>
+        <option value="streaming">Streaming</option>
+        <option value="studio">Studio</option>
+      </select>
+
+      <label for="termid">Id</label>
+      <input type="text" name="termid" id="termid">
+    </div>
+
+    <button id="getOneBtn">Delete</button>
+  </div>
+  <div id="msg"></div>
+  <div id="result"></div>
+  <script>
+    document.querySelector("#getOneBtn").addEventListener("click", async () => {
+      let table = document.querySelector("#tables").value
+      document.querySelector("#result").innerHTML = ''
+      document.querySelector("#msg").innerHTML = ''
+      let route = getRoute(table || 'author')
+      let term = document.querySelector("#termid").value
+      try {
+        const response = await fetch(`http://localhost:4001/graph/${route}${term}`, {
+          method: 'DELETE', mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        showResult(response.status)
+      } catch (error) {
+        document.querySelector("#msg").innerHTML = '<p>Erro</p>'
+      }
+    });
+
+    function getRoute(table) {
+      const routes = {
+        'author': 'author/',
+        'language': 'language/',
+        'music': 'music/',
+        'serie': 'serie/',
+        'status': 'status/',
+        'streaming': 'streaming/',
+        'studio': 'studio/',
+      };
+      return routes[table]
+    }
+
+    function showResult(status) {
+      document.querySelector("#result").innerHTML = ""
+      document.querySelector("#msg").innerHTML = ''
+      const text = ({ 204: 'Sucesso', 404: 'Não encontrado' })[status]
+      document.querySelector("#result").innerHTML = `<p>${text}</p>`
+    }
+  </script>
+</body>
+
+</html>

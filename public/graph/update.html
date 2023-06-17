@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #menu {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 32px;
+    }
+
+    #menu div {
+      width: 33vw;
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    #menu #getOneBtn {
+      height: 48px;
+      width: 120px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 1px solid red;
+    }
+
+    #menu #getOneBtn:hover {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    #msg {
+      color: red;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #result {
+      color: green;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="menu">
+    <div>
+      <label for="tables">Choose a table:</label>
+      <select name="tables" id="tables">
+        <option value="author">Author</option>
+        <option value="language">Language</option>
+        <option value="music">Music</option>
+        <option value="serie">Serie</option>
+        <option value="status">Status</option>
+        <option value="streaming">Streaming</option>
+        <option value="studio">Studio</option>
+        <option value="authorserie">AuthorSerie</option>
+        <option value="seriestreaming">SerieStreaming</option>
+        <option value="streaminglangauge">StreamingLanguage</option>
+        <option value="gallery">Gallery</option>
+        <option value="image">Image</option>
+      </select>
+    </div>
+
+    <button id="getOneBtn">Get Form</button>
+    <label for="lid">id</label>
+    <input type="number" name="lid" id="lid" required>
+  </div>
+  <div id="msg"></div>
+  <div id="form"></div>
+  <button id="update" disabled>Update</button>
+  <div id="result"></div>
+  <script>
+    document.querySelector("#getOneBtn").addEventListener("click", async () => {
+      document.querySelector("#msg").innerHTML = ''
+      document.querySelector("#result").innerHTML = ''
+      let table = document.querySelector("#tables").value
+      showForm(table)
+    });
+
+    document.querySelector('#update').addEventListener("click", async () => {
+      document.querySelector("#msg").innerHTML = ''
+      document.querySelector("#result").innerHTML = ''
+      let table = document.querySelector("#tables").value
+      let route = getRoute(table || 'author')
+      let id = document.querySelector("#lid").value
+
+      const params = {
+        headers: table !== 'image' ? {
+          "Content-Type": "application/json",
+        } : {},
+        body: table !== 'image' ? JSON.stringify(getBody(table)) : getFormImage()
+      }
+      document.querySelector("#form").innerHTML = ''
+      document.querySelector("#update").disabled = true
+      try {
+
+        const response = await fetch(`http://localhost:4001/${route}${id}`, {
+          method: 'PATCH', mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          ...params
+        })
+        console.log(response)
+        showResult(response.status)
+      } catch (error) {
+        console.log(error)
+        document.querySelector("#msg").innerHTML = '<p>Erro</p>'
+      }
+    });
+
+    function getRoute(table) {
+      const routes = {
+        'author': 'author/',
+        'language': 'language/',
+        'music': 'music/',
+        'serie': 'serie/',
+        'status': 'status/',
+        'streaming': 'streaming/',
+        'studio': 'studio/',
+        'authorserie': 'author/serie/',
+        'seriestreaming': 'serie/streaming/',
+        'streaminglangauge': 'streaming/language/',
+        'gallery': 'gallery/',
+        'image': 'udesc/image/',
+      };
+      return routes[table]
+    }
+
+    function showResult(status) {
+      document.querySelector("#result").innerHTML = ""
+      document.querySelector("#msg").innerHTML = ''
+      const text = ({ 204: 'Sucesso', 404: 'Não encontrado', 422: 'Faltam dados' })[status] || 'Sucesso'
+      document.querySelector("#result").innerHTML = `<p>${text}</p>`
+    }
+
+    function showForm(table) {
+      document.querySelector("#form").innerHTML = ''
+      document.querySelector("#update").disabled = true
+      const routes = {
+        'author': showFormAuthor,
+        'language': showFormLanguage,
+        'music': showFormMusic,
+        'serie': showFormSerie,
+        'status': showFormStatus,
+        'streaming': showFormStreaming,
+        'studio': showFormStudio,
+        'authorserie': showFormAuthorSerie,
+        'seriestreaming': showFormSerieStreaming,
+        'streaminglangauge': showFormStreamingLanguage,
+        'gallery': showFormGallery,
+        'image': showFormImage,
+      }[table]();
+      document.querySelector("#update").disabled = false
+    }
+
+    function getBody(table) {
+      const routes = {
+        'author': getFormAuthor,
+        'language': getFormLanguage,
+        'music': getFormMusic,
+        'serie': getFormSerie,
+        'status': getFormStatus,
+        'streaming': getFormStreaming,
+        'studio': getFormStudio,
+        'authorserie': getFormAuthorSerie,
+        'seriestreaming': getFormSerieStreaming,
+        'streaminglangauge': getFormStreamingLanguage,
+        'gallery': getFormGallery,
+      }[table]();
+      return routes
+    }
+
+    function showFormAuthor() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lname">name</label>
+        <input type="text" name="lname" id="lname">
+      `    }
+    function getFormAuthor() {
+      const name = document.querySelector('#lname').value
+      return {
+        name
+      }
+    }
+    function showFormLanguage() {
+      document.querySelector("#form").innerHTML = `
+        <label for="llanguage">language</label>
+        <input type="text" name="llanguage" id="llanguage">
+      `    }
+
+    function getFormLanguage() {
+      const language = document.querySelector('#llanguage').value
+      return {
+        language
+      }
+    }
+
+    function showFormMusic() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lname">name</label>
+        <input type="text" name="lname" id="lname">
+        <label for="llink">link</label>
+        <input type="text" name="llink" id="llink">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+        <label for="llanguage">idioma</label>
+        <input type="number" name="llanguage" id="llanguage">
+      `    }
+    function getFormMusic() {
+      const name = document.querySelector('#lname').value
+      const link = document.querySelector('#llink').value
+      const idSerie = document.querySelector('#lserie').value
+      const idLanguage = document.querySelector('#llanguage').value
+      return {
+        name,
+        link,
+        idSerie,
+        idLanguage
+      }
+    }
+
+    function showFormStatus() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lvalue">value</label>
+        <input type="text" name="lvalue" id="lvalue">
+      `    }
+    function getFormStatus() {
+      const value = document.querySelector('#lvalue').value
+      return {
+        value
+      }
+    }
+    function showFormStudio() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lname">name</label>
+        <input type="text" name="lname" id="lname">
+      `    }
+    function getFormStudio() {
+      const name = document.querySelector('#lname').value
+      return {
+        name
+      }
+    }
+    function showFormStreaming() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lname">name</label>
+        <input type="text" name="lname" id="lname">
+        <label for="llink">link</label>
+        <input type="text" name="llink" id="llink">
+      `    }
+    function getFormStreaming() {
+      const name = document.querySelector('#lname').value
+      const link = document.querySelector('#llink').value
+      return {
+        name,
+        link
+      }
+    }
+    function showFormSerie() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lname">name</label>
+        <input type="text" name="lname" id="lname">
+        <label for="lsynopis">synopsis</label>
+        <input type="text" name="lsynopis" id="lsynopis">
+        <label for="lcomment">comment</label>
+        <input type="text" name="lcomment" id="lcomment">
+        <label for="lcover">cover</label>
+        <input type="number" name="lcover" id="lcover">
+        <label for="lstudio">studio</label>
+        <input type="number" name="lstudio" id="lstudio">
+        <label for="leps">N eps</label>
+        <input type="number" name="leps" id="leps">
+        <label for="lstatus">Status</label>
+        <input type="number" name="lstatus" id="lstatus">
+      `    }
+
+    function getFormSerie() {
+      const name = document.querySelector('#lname').value
+      const synopsis = document.querySelector('#lsynopis').value
+      const comment = document.querySelector('#lcomment').value
+      const cover = document.querySelector('#lcover').value
+      const idStudio = document.querySelector('#lstudio').value
+      const numberOfEpisodes = document.querySelector('#leps').value
+      const status = document.querySelector('#lstatus').value
+      return {
+        name,
+        synopsis,
+        comment,
+        cover,
+        idStudio,
+        numberOfEpisodes,
+        status
+      }
+    }
+
+    function showFormAuthorSerie() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lauthor">author</label>
+        <input type="number" name="lauthor" id="lauthor">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+      `    }
+    function getFormAuthorSerie() {
+      const idAuthor = document.querySelector('#lauthor').value
+      const idSerie = document.querySelector('#lserie').value
+      return {
+        idAuthor,
+        idSerie
+      }
+    }
+
+    function showFormSerieStreaming() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lstreaming">streaming</label>
+        <input type="number" name="lstreaming" id="lstreaming">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+      `    }
+    function getFormSerieStreaming() {
+      const idStreaming = document.querySelector('#lstreaming').value
+      const idSerie = document.querySelector('#lserie').value
+      return {
+        idSerie,
+        idStreaming
+      }
+    }
+    function showFormStreamingLanguage() {
+      document.querySelector("#form").innerHTML = `
+        <label for="lstreaming">streaming</label>
+        <input type="number" name="lstreaming" id="lstreaming">
+        <label for="llanguage">language</label>
+        <input type="number" name="llanguage" id="llanguage">
+      `    }
+    function getFormStreamingLanguage() {
+      const idStreaming = document.querySelector('#lstreaming').value
+      const idLanguage = document.querySelector('#llanguage').value
+      return {
+        idStreaming,
+        idLanguage
+      }
+    }
+
+    function showFormGallery() {
+      document.querySelector("#form").innerHTML = `
+        <label for="limage">image</label>
+        <input type="number" name="limage" id="limage">
+        <label for="lserie">serie</label>
+        <input type="number" name="lserie" id="lserie">
+      `    }
+    function getFormGallery() {
+      const idImage = document.querySelector('#limage').value
+      const idSerie = document.querySelector('#lserie').value
+      return {
+        idSerie,
+        idImage
+      }
+    }
+
+    function showFormImage() {
+      document.querySelector("#form").innerHTML = `
+      <form enctype="multipart/form-data" id="fimage">
+        <label for="images">image</label>
+        <input type="file" name="images" id="images" accept="image/*" multiple>
+      </form>
+      `
+    }
+
+    function getFormImage() {
+      const input = document.querySelector('#images')
+      const formData = new FormData()
+      formData.append('images', input.files[0])
+      return formData
+    }
+  </script>
+</body>
+
+</html>
