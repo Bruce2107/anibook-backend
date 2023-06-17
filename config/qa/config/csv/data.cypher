@@ -14,7 +14,7 @@ LOAD CSV WITH HEADERS FROM 'file:///studio.csv' AS studio
 MERGE (std: Studio {studioId: studio.id, name: studio.name});
 
 LOAD CSV WITH HEADERS FROM 'file:///image.csv' AS image
-MERGE (img: Image {imageId: image.id, name: image.name, contentType: image.contentType, image: image.image, folder: image.folder});
+MERGE (img: Image {imageId: image.id, name: image.name, contentType: image.contentType, link: image.link, folder: image.folder});
 
 LOAD CSV WITH HEADERS FROM 'file:///music.csv' AS music
 MERGE (m: Music {musicId: music.id, name: music.name, link: music.link, idserie: music.idserie, idlanguage: music.idlanguage});

@@ -5,7 +5,7 @@
 **Para instalar você vai precisar:**
 
 - Node
-- Postgres
+- Neo4J
 - Docker (Opcional)
 
 ## **Bando de dados**
@@ -21,20 +21,27 @@ Caso possa utilizar o docker este projeto possui um [docker-compose](https://git
 docker-compose -d up
 ```
 
+- Acesso o terminal docker da imagem do Neo4J e execute o comando para importar os dados
+
+```sh
+  cypher-shell --file $NEO4J_HOME/import/data.cypher -u neo4j -p anibook_qa
+```
+
 ### _SEM DOCKER_
 
-Caso queira criar usando o arquivo de _bump_ [`./config/qa/config/database/AnibookRelacional.sql`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/config/qa/config/database/AnibookRelacional.sql) **comentar 252 e 253**:
+Caso queira criar usando o arquivo de _bump_ [`./config/qa/config/csv/data.cypher`](https://github.com/Bruce2107/anibook-backend/blob/udesc_neo4j/config/qa/config/csv/data.cypher) importe a pasta deste arquivo para o diretório `/var/lib/neo4j/import` da sua instalação Neo4J e execute o comando
+
+```sh
+  cypher-shell --file $NEO4J_HOME/import/data.cypher -u neo4j -p anibook_qa
+```
 
 ### _Variáveis para a criação do banco_
 
 ```
-DB_HOST_POSTGRES=localhost
-DB_USER_POSTGRES=anibook_qa
-DB_PASS_POSTGRES=anibook_qa
-DB_NAME_POSTGRES=anibook_qa
-DB_PORT_POSTGRES=5433
+DB_PORT_NEO4J=7687
+DB_USER_NEO4J=neo4j
+DB_PASS_NEO4J=anibook_qa
 PORT=4001
-TOKEN=anibook_qa
 ```
 
 Caso queira criar um banco com valores diferente alterar o arquivo [`./.env.qa`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/.env.qa)
@@ -48,23 +55,18 @@ npm run dev
 
 ## Acessar o aplicativo
 
-Com a aplicação executando abrir no navegador os arquivos
+Com a aplicação executando abrir no navegador o arquivo
 
-- [`./public/getOne.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/getOne.html)
-- [`./public/getAll.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/getAll.html)
-- [`./public/create.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/create.html)
-- [`./public/update.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/update.html)
-- [`./public/delete.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/delete.html)
-- [`./public/reports.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_bd_relacional/public/reports.html)
+- [`./public/graph/index.html`](https://github.com/Bruce2107/anibook-backend/blob/udesc_neo4j/public/graph/index.html)
 
 ## Arquivos
 
 Os arquivos relacionados a este trabalho estão nos seguintes diretórios
 
-- [`./src/adapter/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/adapter/udesc)
-- [`./src/domain/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/domain/udesc)
-- [`./src/routes/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/routes/udesc)
-- [`./src/usecase/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_bd_relacional/src/usecase/udesc)
+- [`./src/adapter/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_neo4j/src/adapter/udesc)
+- [`./src/domain/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_neo4j/src/domain/udesc)
+- [`./src/routes/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_neo4j/src/routes/udesc)
+- [`./src/usecase/udesc`](https://github.com/Bruce2107/anibook-backend/tree/udesc_neo4j/src/usecase/udesc)
 
 # License
 

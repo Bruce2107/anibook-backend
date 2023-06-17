@@ -31,5 +31,8 @@ export const promisePool = async () => {
 
 export const neo4j_driver = driver(
   `neo4j://localhost:${process.env.DB_PORT_NEO4J}`,
-  auth.basic('neo4j', 'anibook_qa')
+  auth.basic(
+    process.env.DB_USER_NEO4J as string,
+    process.env.DB_PASS_NEO4J as string
+  )
 );
