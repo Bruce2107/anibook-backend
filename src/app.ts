@@ -22,6 +22,7 @@ import streamingLanguageRoute from './routes/udesc/streamingLanguage';
 import studioRoute from './routes/udesc/studio';
 import udescImageRoute from './routes/udesc/image';
 import reportRoute from './routes/udesc/report';
+import userRoute from './routes/udesc/user';
 
 class App {
   public express: express.Application;
@@ -60,6 +61,7 @@ class App {
     this.express.use(studioRoute);
     this.express.use(udescImageRoute);
     this.express.use(reportRoute);
+    this.express.use(userRoute);
 
     this.express.use(animeRoutes);
     this.express.use(imageRoutes);
