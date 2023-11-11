@@ -23,7 +23,7 @@ LOAD CSV WITH HEADERS FROM 'file:///serie.csv' AS serie
 MERGE (sr: Serie {serieId: serie.id, name: serie.name, synopsis: serie.synopsis, comment: serie.comment, numberOfEpisodes: serie.numberofepisodes, status: serie.status, cover: serie.cover, idstudio: serie.idstudio});
 
 LOAD CSV WITH HEADERS FROM 'file:///user.csv' as user
-MERGE (u: User {userId: user.id, name: user.name, password: user.password});
+MERGE (u: User {userId: user.id, name: user.name, email: user.email, password: user.password});
 
 MATCH (sr: Serie), (std: Studio)
 WHERE sr.idstudio = std.studioId

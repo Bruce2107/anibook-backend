@@ -5,6 +5,28 @@ import { Integer, Node, QueryResult } from 'neo4j-driver';
 import { ArrayUtils } from '@utils/ArrayUtils';
 
 export class SerieRepositoryGraphImpl implements SerieRepository {
+  async getAllSeriesByUser(userName: string): Promise<Serie[]> {
+    const session = neo4j_driver.session();
+    try {
+      const res = await session.executeRead((tx) =>
+        tx.run<SerieNeo4j>(
+          `MATCH (s:Serie)
+            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music)
+            OPTIONAL MATCH (s)-[:HAS_STATUS]->(st:Status)
+            OPTIONAL MATCH (s)-[:PRODUCED_BY]->(std:Studio)
+            OPTIONAL MATCH (s)-[:HAS_AUTHOR]->(a:Author)
+            OPTIONAL MATCH (s)-[:AVAILABLE_ON]->(str:Streaming)
+            OPTIONAL MATCH (s)-[:HAS_COVER]->(i:Image)
+            MATCH (u:User {name: '${userName}'})-[r:USER_STATUS]->(s)
+          WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i,collect(r) as us
+          RETURN s,m,st,std,a,str,i,us ORDER BY s.name`
+        )
+      );
+      return this._getResponse(res);
+    } finally {
+      session.close();
+    }
+  }
   async _delete(id: string): Promise<boolean> {
     const session = neo4j_driver.session();
     try {
@@ -224,6 +246,7 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
           record.get('str')?.map((streaming) => streaming.properties.name)
         ),
       ],
+      userStatus: record.get('us')?.[0].properties.type,
     }));
   }
 }

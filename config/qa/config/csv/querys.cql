@@ -120,3 +120,5 @@ RETURN d.properties;
 MATCH (sr: Serie), (m: Music)
 WHERE sr.serieId = m.idserie
 CREATE (sr)-[:HAS_MUSIC]->(m);
+
+CREATE (u:User {name: 'r2d2'})-[:USER_STATUS {type: 'plan_to_watch'}]->(sr:Serie{name:'Serie9'});

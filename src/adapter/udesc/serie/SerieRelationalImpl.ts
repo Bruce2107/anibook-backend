@@ -4,6 +4,9 @@ import { Serie } from '@domain/udesc/serie';
 import { SerieRepository } from './SerieRepository';
 
 export class SerieRepositoryRelationalImpl implements SerieRepository {
+  getAllSeriesByUser(_: string): Promise<Serie[]> {
+    throw new Error('Method not implemented.');
+  }
   async getAllSeries(): Promise<Serie[]> {
     const result = await pool.query(
       `SELECT s.*, i.name as cover, st.value as status, std.name as idstudio from Serie s join image i on i.id = s.cover join status st on st.id = s.status join studio std on std.id = s.idStudio`,

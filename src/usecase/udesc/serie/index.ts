@@ -5,6 +5,10 @@ import { UpdateSerieUseCase, UpdateSerieController } from './UpdateSerie';
 import { SerieRepositoryRelationalImpl } from '@adapter/udesc/serie/SerieRelationalImpl';
 import { GetAllSeriesUseCase, GetAllSeriesController } from './GetAllSeries';
 import { SerieRepositoryGraphImpl } from '@adapter/udesc/serie/SerieRepositoryGraphImpl';
+import {
+  GetAllSeriesByUserController,
+  GetAllSeriesByUserUseCase,
+} from './GetAllSeriesByUser';
 
 const databaseSerieRepository = new SerieRepositoryRelationalImpl();
 
@@ -33,6 +37,13 @@ const getAllSeriesGraphUseCase = new GetAllSeriesUseCase(
 );
 const getAllSeriesGraphController = new GetAllSeriesController(
   getAllSeriesGraphUseCase
+);
+
+const getAllSeriesByUserGraphUseCase = new GetAllSeriesByUserUseCase(
+  databaseSerieGraphRepository
+);
+const getAllSeriesByUserGraphController = new GetAllSeriesByUserController(
+  getAllSeriesByUserGraphUseCase
 );
 
 const createSerieGraphUseCase = new CreateSerieUseCase(
@@ -72,4 +83,5 @@ export {
   createSerieGraphController,
   deleteSerieGraphController,
   updateSerieGraphController,
+  getAllSeriesByUserGraphController,
 };

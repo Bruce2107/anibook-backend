@@ -5,6 +5,7 @@ import { Status } from './status';
 import { Streaming } from './streaming';
 import { Studio } from './studio';
 import { Image } from '@domain/image';
+import { UserStatus } from './relationships';
 
 export class Serie {
   name: string;
@@ -33,4 +34,5 @@ export type SerieNeo4j = {
   std: Node<Integer, Studio>;
   a: Node<Integer, Author>[];
   str: Node<Integer, Streaming>[];
+  us?: Node<Integer, UserStatus>[];
 };
