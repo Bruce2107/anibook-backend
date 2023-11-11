@@ -105,3 +105,18 @@ MATCH (s:Serie)
   (s)-[:AVAILABLE_ON]->(str:Streaming) 
 WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str
 RETURN s,m,st,std,a,str ORDER BY s.name
+
+
+MATCH (u:User), (sr: Serie)
+WHERE sr.name = 'Serie8'
+CREATE (u)-[:USER_STATUS {type: 'watched'}]->(sr);
+
+
+MATCH (u:User)-[r:USER_STATUS]->(sr:Serie)
+WHERE sr.name = 'Serie8'
+WITH collect(r) as d
+RETURN d.properties;
+
+MATCH (sr: Serie), (m: Music)
+WHERE sr.serieId = m.idserie
+CREATE (sr)-[:HAS_MUSIC]->(m);

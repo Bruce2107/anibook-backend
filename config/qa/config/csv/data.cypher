@@ -22,6 +22,9 @@ MERGE (m: Music {musicId: music.id, name: music.name, link: music.link, idserie:
 LOAD CSV WITH HEADERS FROM 'file:///serie.csv' AS serie
 MERGE (sr: Serie {serieId: serie.id, name: serie.name, synopsis: serie.synopsis, comment: serie.comment, numberOfEpisodes: serie.numberofepisodes, status: serie.status, cover: serie.cover, idstudio: serie.idstudio});
 
+LOAD CSV WITH HEADERS FROM 'file:///user.csv' as user
+MERGE (u: User {userId: user.id, name: user.name, password: user.password});
+
 MATCH (sr: Serie), (std: Studio)
 WHERE sr.idstudio = std.studioId
 CREATE (sr)-[:PRODUCED_BY]->(std);
@@ -62,6 +65,11 @@ MATCH (st: Streaming), (l: Language)
 WHERE st.streamingId = streaminglanguage.idstreaming AND l.languageId = streaminglanguage.idlanguage
 CREATE (st)-[:HAS_LANGUAGE]->(l);
 
+LOAD CSV WITH HEADERS FROM 'file:///userserie.csv' AS userserie
+MATCH (u: User), (sr: Serie)
+WHERE u.userId = userserie.iduser AND sr.serieId = userserie.idserie
+CREATE (u)-[:USER_STATUS {type: userserie.type}]->(sr);
+
 MATCH (at: Author)
 REMOVE at.authorId;
 
@@ -85,3 +93,6 @@ REMOVE st.streamingId;
 
 MATCH (std: Studio)
 REMOVE std.studioId;
+
+MATCH (u: User)
+REMOVE u.userId
