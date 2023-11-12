@@ -122,3 +122,7 @@ WHERE sr.serieId = m.idserie
 CREATE (sr)-[:HAS_MUSIC]->(m);
 
 CREATE (u:User {name: 'r2d2'})-[:USER_STATUS {type: 'plan_to_watch'}]->(sr:Serie{name:'Serie9'});
+
+MATCH (f:Author)-[]-(s:Serie)
+WHERE f.name =~ '(?i).*Al.*'
+RETURN s;

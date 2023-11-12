@@ -1,13 +1,14 @@
 import { SerieRepository } from '@adapter/udesc/serie/SerieRepository';
 import { Request, Response } from 'express';
 
-export class GetAllSeriesByUserController {
-  constructor(private getSerieUseCase: GetAllSeriesByUserUseCase) {}
+export class GetAllSeriesByAnyController {
+  constructor(private getSerieUseCase: GetAllSeriesByAnyUseCase) {}
   async handle(request: Request, response: Response) {
     try {
       const { id } = request.params;
+      const { filter } = request.query;
 
-      const series = await this.getSerieUseCase.execute(id);
+      const series = await this.getSerieUseCase.execute(filter?.toString(), id);
 
       return response.status(200).json({ series });
     } catch (error) {
@@ -15,9 +16,9 @@ export class GetAllSeriesByUserController {
     }
   }
 }
-export class GetAllSeriesByUserUseCase {
+export class GetAllSeriesByAnyUseCase {
   constructor(private serieRepository: SerieRepository) {}
-  async execute(id: string) {
-    return this.serieRepository.getAllSeriesByUser(id);
+  async execute(filter: string, id: string) {
+    return this.serieRepository.getAllSeriesByAny(filter, id);
   }
 }

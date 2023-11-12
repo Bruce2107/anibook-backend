@@ -5,6 +5,40 @@ import { Integer, Node, QueryResult } from 'neo4j-driver';
 import { ArrayUtils } from '@utils/ArrayUtils';
 
 export class SerieRepositoryGraphImpl implements SerieRepository {
+  async getAllSeriesByAny(filter: string, value: string): Promise<Serie[]> {
+    if (filter === 'user') {
+      return await this.getAllSeriesByUser(value);
+    }
+    if (filter === 'serie') {
+      return await this.getSerie(value);
+    }
+    const session = neo4j_driver.session();
+    const typeAbbr = {
+      studio: ['std', 'MATCH (s)-[:PRODUCED_BY]->(std:Studio)'],
+      author: ['a', 'MATCH (s)-[:HAS_AUTHOR]->(a:Author)'],
+      streaming: ['str', 'MATCH (s)-[:AVAILABLE_ON]->(str:Streaming)'],
+    }[filter] || ['s', ''];
+    try {
+      const res = await session.executeRead((tx) =>
+        tx.run<SerieNeo4j>(
+          `MATCH (s:Serie)
+            OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music)
+            OPTIONAL MATCH (s)-[:HAS_STATUS]->(st:Status)
+            OPTIONAL MATCH (s)-[:PRODUCED_BY]->(std:Studio)
+            OPTIONAL MATCH (s)-[:HAS_AUTHOR]->(a:Author)
+            OPTIONAL MATCH (s)-[:AVAILABLE_ON]->(str:Streaming)
+            OPTIONAL MATCH (s)-[:HAS_COVER]->(i:Image)
+            ${typeAbbr[1]}
+            WHERE ${typeAbbr[0]}.name =~ '(?i).*${value}.*'
+          WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i
+          RETURN s,m,st,std,a,str,i ORDER BY s.name`
+        )
+      );
+      return this._getResponse(res);
+    } finally {
+      session.close();
+    }
+  }
   async getAllSeriesByUser(userName: string): Promise<Serie[]> {
     const session = neo4j_driver.session();
     try {
@@ -17,12 +51,13 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
             OPTIONAL MATCH (s)-[:HAS_AUTHOR]->(a:Author)
             OPTIONAL MATCH (s)-[:AVAILABLE_ON]->(str:Streaming)
             OPTIONAL MATCH (s)-[:HAS_COVER]->(i:Image)
-            MATCH (u:User {name: '${userName}'})-[r:USER_STATUS]->(s)
+            MATCH (u:User)-[r:USER_STATUS]->(s)
+            WHERE u.name =~ '(?i).*${userName}.*'
           WITH s, collect(m) as m, st,std,collect(a) as a, collect(str) as str,i,collect(r) as us
           RETURN s,m,st,std,a,str,i,us ORDER BY s.name`
         )
       );
-      return this._getResponse(res);
+      return this._getResponse(res, true);
     } finally {
       session.close();
     }
@@ -229,7 +264,7 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
     }
   }
 
-  _getResponse(data: QueryResult<SerieNeo4j>) {
+  _getResponse(data: QueryResult<SerieNeo4j>, withUser: boolean = false) {
     return data.records.map((record) => ({
       ...record.get('s').properties,
       musics: [
@@ -246,7 +281,7 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
           record.get('str')?.map((streaming) => streaming.properties.name)
         ),
       ],
-      userStatus: record.get('us')?.[0].properties.type,
+      userStatus: withUser ? record.get('us')?.[0].properties.type : '',
     }));
   }
 }

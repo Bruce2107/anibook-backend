@@ -6,9 +6,9 @@ import { SerieRepositoryRelationalImpl } from '@adapter/udesc/serie/SerieRelatio
 import { GetAllSeriesUseCase, GetAllSeriesController } from './GetAllSeries';
 import { SerieRepositoryGraphImpl } from '@adapter/udesc/serie/SerieRepositoryGraphImpl';
 import {
-  GetAllSeriesByUserController,
-  GetAllSeriesByUserUseCase,
-} from './GetAllSeriesByUser';
+  GetAllSeriesByAnyController,
+  GetAllSeriesByAnyUseCase,
+} from './GetAllSeriesByAny';
 
 const databaseSerieRepository = new SerieRepositoryRelationalImpl();
 
@@ -39,11 +39,11 @@ const getAllSeriesGraphController = new GetAllSeriesController(
   getAllSeriesGraphUseCase
 );
 
-const getAllSeriesByUserGraphUseCase = new GetAllSeriesByUserUseCase(
+const getAllSeriesByAnyGraphUseCase = new GetAllSeriesByAnyUseCase(
   databaseSerieGraphRepository
 );
-const getAllSeriesByUserGraphController = new GetAllSeriesByUserController(
-  getAllSeriesByUserGraphUseCase
+const getAllSeriesByAnyGraphController = new GetAllSeriesByAnyController(
+  getAllSeriesByAnyGraphUseCase
 );
 
 const createSerieGraphUseCase = new CreateSerieUseCase(
@@ -83,5 +83,5 @@ export {
   createSerieGraphController,
   deleteSerieGraphController,
   updateSerieGraphController,
-  getAllSeriesByUserGraphController,
+  getAllSeriesByAnyGraphController,
 };

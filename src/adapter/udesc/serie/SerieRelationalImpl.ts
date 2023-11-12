@@ -4,6 +4,9 @@ import { Serie } from '@domain/udesc/serie';
 import { SerieRepository } from './SerieRepository';
 
 export class SerieRepositoryRelationalImpl implements SerieRepository {
+  getAllSeriesByAny(_: string, __: string): Promise<Serie[]> {
+    throw new Error('Method not implemented.');
+  }
   getAllSeriesByUser(_: string): Promise<Serie[]> {
     throw new Error('Method not implemented.');
   }

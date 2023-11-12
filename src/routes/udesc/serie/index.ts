@@ -4,7 +4,7 @@ import {
   createSerieGraphController,
   deleteSerieController,
   deleteSerieGraphController,
-  getAllSeriesByUserGraphController,
+  getAllSeriesByAnyGraphController,
   getAllSeriesController,
   getAllSeriesGraphController,
   getSerieController,
@@ -44,7 +44,7 @@ routes.get('/graph/series', (req: Request, res: Response) =>
 );
 
 routes.get('/graph/series/:id', (req: Request, res: Response) =>
-  getAllSeriesByUserGraphController.handle(req, res)
+  getAllSeriesByAnyGraphController.handle(req, res)
 );
 
 routes.post('/graph/serie', (req: Request, res: Response) =>

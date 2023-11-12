@@ -9,4 +9,5 @@ export interface SerieRepository {
   alreadyExists(serie: Serie): Promise<boolean>;
   getAllSeries(): Promise<Serie[]>;
   getAllSeriesByUser(userName: string): Promise<Serie[]>;
+  getAllSeriesByAny(filter: string, value: string): Promise<Serie[]>;
 }
