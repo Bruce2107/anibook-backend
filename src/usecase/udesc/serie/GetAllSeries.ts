@@ -6,7 +6,7 @@ export class GetAllSeriesController {
   async handle(_: Request, response: Response) {
     try {
       const series = await this.getAllSeriesUseCase.execute();
-      return response.status(200).json({ series });
+      return response.status(200).json({ series, rows: series.length });
     } catch (error) {
       return response.status(400).json({ error: error.stack });
     }
