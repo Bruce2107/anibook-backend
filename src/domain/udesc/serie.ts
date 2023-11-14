@@ -36,3 +36,7 @@ export type SerieNeo4j = {
   str: Node<Integer, Streaming>[];
   us?: Node<Integer, UserStatus>[];
 };
+
+export type SerieDetailsNeo4j = {
+  dc: Node<Integer, UserStatus>[];
+};

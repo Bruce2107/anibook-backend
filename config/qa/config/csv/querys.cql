@@ -130,3 +130,8 @@ RETURN s;
 MATCH (:User)-[r]-(s:Serie)
 RETURN s, count(r) as t
 ORDER BY t DESC;
+
+MATCH (s:Serie {name: 'Serie1'})
+MATCH (:User)-[r:USER_STATUS]->(s)
+WITH s,collect(r) as us
+RETURN s,us ORDER BY s.name

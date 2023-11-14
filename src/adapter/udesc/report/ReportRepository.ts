@@ -8,4 +8,5 @@ export interface ReportRepository {
   ): Promise<Pick<Serie, 'name'>[]>;
   getStreamingsWithSeriesThatAtLeastTwoAuthor(): Promise<StreamingSerie[]>;
   getHome(): Promise<Serie[]>;
+  getDetails(name: string, user?: string): Promise<Serie[]>;
 }
