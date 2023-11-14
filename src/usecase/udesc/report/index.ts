@@ -9,6 +9,7 @@ import {
   GetSerieStreamingUseCase,
 } from './GetSerieStreaming';
 import { ReportRepositoryGraphImpl } from '@adapter/udesc/report/ReportRepositoryGraphImpl';
+import { GetHomeController, GetHomeUseCase } from './GetHome';
 
 const databaseReportRepository = new ReportRepositoryRelationalImpl();
 
@@ -53,6 +54,8 @@ const getSerieStreamingGraphUseCase = new GetSerieStreamingUseCase(
 const getSerieStreamingGraphController = new GetSerieStreamingController(
   getSerieStreamingGraphUseCase
 );
+const getHomeGraphUseCase = new GetHomeUseCase(databaseReportGraphRepository);
+const getHomeGraphController = new GetHomeController(getHomeGraphUseCase);
 
 export {
   getSerieStudioUseCase,
@@ -68,4 +71,5 @@ export {
   getSerieMusicGraphUseCase,
   getSerieStreamingGraphController,
   getSerieStreamingGraphUseCase,
+  getHomeGraphController,
 };

@@ -5,6 +5,9 @@ import { StreamingSerie, StudioSerie } from '@domain/udesc/report';
 import { Serie } from '@domain/udesc/serie';
 
 export class ReportRepositoryRelationalImpl implements ReportRepository {
+  getHome(): Promise<Serie[]> {
+    throw new Error('Method not implemented.');
+  }
   async getStreamingsWithSeriesThatAtLeastTwoAuthor(): Promise<
     StreamingSerie[]
   > {

@@ -1,4 +1,5 @@
 import {
+  getHomeGraphController,
   getSerieMusicController,
   getSerieMusicGraphController,
   getSerieStreamingController,
@@ -32,6 +33,10 @@ routes.get('/graph/report/serie/music', (req: Request, res: Response) =>
 
 routes.get('/graph/report/serie/streaming', (req: Request, res: Response) =>
   getSerieStreamingGraphController.handle(req, res)
+);
+
+routes.get('/graph/report/home', (req: Request, res: Response) =>
+  getHomeGraphController.handle(req, res)
 );
 
 export default routes;

@@ -7,4 +7,5 @@ export interface ReportRepository {
     languageName: string
   ): Promise<Pick<Serie, 'name'>[]>;
   getStreamingsWithSeriesThatAtLeastTwoAuthor(): Promise<StreamingSerie[]>;
+  getHome(): Promise<Serie[]>;
 }

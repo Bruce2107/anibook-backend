@@ -126,3 +126,7 @@ CREATE (u:User {name: 'r2d2'})-[:USER_STATUS {type: 'plan_to_watch'}]->(sr:Serie
 MATCH (f:Author)-[]-(s:Serie)
 WHERE f.name =~ '(?i).*Al.*'
 RETURN s;
+
+MATCH (:User)-[r]-(s:Serie)
+RETURN s, count(r) as t
+ORDER BY t DESC;

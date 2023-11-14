@@ -1,11 +1,31 @@
 import { StudioSerie, StreamingSerie } from '@domain/udesc/report';
 import { Serie } from '@domain/udesc/serie';
+import { Image } from '@domain/image';
 import { ReportRepository } from './ReportRepository';
 import { neo4j_driver } from 'src/database';
 import { Integer, Node } from 'neo4j-driver';
 import { Studio } from '@domain/udesc/studio';
 
 export class ReportRepositoryGraphImpl implements ReportRepository {
+  async getHome(): Promise<Serie[]> {
+    const session = neo4j_driver.session();
+    try {
+      const res = await session.executeRead((tx) =>
+        tx.run<{ s: Node<Integer, Serie>; i: Node<Integer, Image> }>(
+          `MATCH (:User)-[r]-(s:Serie)
+            OPTIONAL MATCH (s)-[:HAS_COVER]->(i:Image)
+          RETURN s,i, count(r) as t
+          ORDER BY t DESC;`
+        )
+      );
+      return res.records.map((record) => ({
+        ...record.get('s').properties,
+        cover: record.get('i')?.properties?.name,
+      }));
+    } finally {
+      session.close();
+    }
+  }
   async getStudioWithAtLeastOneSerieInThreeStreaming(): Promise<StudioSerie[]> {
     const session = neo4j_driver.session();
     try {
