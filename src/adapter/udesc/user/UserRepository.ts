@@ -8,4 +8,5 @@ export interface UserRepository {
   getUserById(id: string): Promise<User>;
   alreadyExists(name: string): Promise<boolean>;
   getAllUsers(): Promise<User[]>;
+  changeStatus(name: string, serie: string, value: string): Promise<boolean>;
 }

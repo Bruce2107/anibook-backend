@@ -5,6 +5,10 @@ import { UpdateUserUseCase, UpdateUserController } from './UpdateUser';
 // import { UserRepositoryRelationalImpl } from '@adapter/udesc/studio/UserRelationalImpl';
 import { GetAllUsersUseCase, GetAllUsersController } from './GetAllUsers';
 import { UserRepositoryGraphImpl } from '@adapter/udesc/user/UserRepositoryGraphImpl';
+import {
+  UpdateUserStatusUseCase,
+  UpdateUserStatusController,
+} from './UpdateUserStatus';
 
 // const databaseUserRepository = new UserRepositoryRelationalImpl();
 
@@ -58,6 +62,13 @@ const updateUserGraphController = new UpdateUserController(
   updateUserGraphUseCase
 );
 
+const updateUserStatusGraphUseCase = new UpdateUserStatusUseCase(
+  databaseUserGraphRepository
+);
+const updateUserStatusGraphController = new UpdateUserStatusController(
+  updateUserStatusGraphUseCase
+);
+
 export {
   // getUserController,
   // getUserUseCase,
@@ -79,4 +90,5 @@ export {
   deleteUserGraphUseCase,
   updateUserGraphController,
   updateUserGraphUseCase,
+  updateUserStatusGraphController,
 };

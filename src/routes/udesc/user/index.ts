@@ -10,6 +10,7 @@ import {
   getUserGraphController,
   // updateUserController,
   updateUserGraphController,
+  updateUserStatusGraphController,
 } from '@usecase/udesc/user';
 
 const routes = Router();
@@ -48,6 +49,10 @@ routes.post('/graph/user', (req: Request, res: Response) =>
 
 routes.patch('/graph/user/:id', (req: Request, res: Response) =>
   updateUserGraphController.handle(req, res)
+);
+
+routes.patch('/graph/user/status/patch', (req: Request, res: Response) =>
+  updateUserStatusGraphController.handle(req, res)
 );
 
 routes.delete('/graph/user/:id', (req: Request, res: Response) =>
