@@ -14,9 +14,11 @@ export class UserRepositoryGraphImpl implements UserRepository {
       if (!(await this.alreadyExists(name))) {
         return false;
       }
-      const query = `MATCH (u:User {name: '${name}'})-[r:USER_STATUS]->(s:Serie {name: '${serie}'})
-          SET r.type = '${value}'
-          RETURN r;`;
+      const query = `Match (u:User{name:"${name}"})
+      OPTIONAL MATCH (s:Serie{name:"${serie}"})
+        Merge (u)-[r:USER_STATUS]->(s)
+        SET r.type = '${value}'
+        return r`;
 
       const res = await session.executeWrite((tx) => tx.run(query));
       return !!res.summary.counters.updates().propertiesSet;
