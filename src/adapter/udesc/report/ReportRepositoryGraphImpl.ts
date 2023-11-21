@@ -8,8 +8,23 @@ import { Studio } from '@domain/udesc/studio';
 import { RemoveObjectProperties } from '@utils/RemoveObjectProperties';
 import { AvailableStatus, UserStatus } from '@domain/udesc/relationships';
 import { Counter } from '@utils/Counter';
+import { User } from '@domain/udesc/user';
 
 export class ReportRepositoryGraphImpl implements ReportRepository {
+  async userLogin(user: User): Promise<boolean> {
+    const session = neo4j_driver.session();
+    try {
+      const res = await session.executeRead((tx) =>
+        tx.run<{ u: Node<Integer, User> }>(
+          `MATCH (u:User {name: '${user.name}'}) RETURN u`
+        )
+      );
+      if (res.records.length === 0) return false;
+      return res.records[0].get('u').properties.password === user.password;
+    } finally {
+      session.close();
+    }
+  }
   async getDetails(name: string, user?: string): Promise<Serie[]> {
     const session = neo4j_driver.session();
     const withUser = user

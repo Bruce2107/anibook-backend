@@ -3,8 +3,12 @@ import { pool } from '../../../database';
 import { ReportRepository } from './ReportRepository';
 import { StreamingSerie, StudioSerie } from '@domain/udesc/report';
 import { Serie } from '@domain/udesc/serie';
+import { User } from '@domain/udesc/user';
 
 export class ReportRepositoryRelationalImpl implements ReportRepository {
+  userLogin(_: User): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
   getDetails(_: string, __?: string): Promise<Serie[]> {
     throw new Error('Method not implemented.');
   }

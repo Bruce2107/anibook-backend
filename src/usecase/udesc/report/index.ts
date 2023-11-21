@@ -11,6 +11,7 @@ import {
 import { ReportRepositoryGraphImpl } from '@adapter/udesc/report/ReportRepositoryGraphImpl';
 import { GetHomeController, GetHomeUseCase } from './GetHome';
 import { GetDetailsUseCase, GetDetailsController } from './GetDetails';
+import { UserLoginController, UserLoginUseCase } from './UserLogin';
 
 const databaseReportRepository = new ReportRepositoryRelationalImpl();
 
@@ -65,6 +66,11 @@ const getDetailsGraphController = new GetDetailsController(
   getDetailsGraphUseCase
 );
 
+const userLoginGraphUseCase = new UserLoginUseCase(
+  databaseReportGraphRepository
+);
+const userLoginGraphController = new UserLoginController(userLoginGraphUseCase);
+
 export {
   getSerieStudioUseCase,
   getSerieStudioController,
@@ -81,4 +87,5 @@ export {
   getSerieStreamingGraphUseCase,
   getHomeGraphController,
   getDetailsGraphController,
+  userLoginGraphController,
 };
