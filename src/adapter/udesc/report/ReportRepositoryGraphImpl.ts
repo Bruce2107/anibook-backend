@@ -29,7 +29,7 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
     const session = neo4j_driver.session();
     const withUser = user
       ? [
-          `MATCH (u:User)-[r:USER_STATUS]->(s)
+          `OPTIONAL MATCH (u:User)-[r:USER_STATUS]->(s)
             WHERE u.name =~ '(?i).*${user}.*'`,
           ',collect(r) as us',
           ',us',
@@ -166,6 +166,7 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
     counter: { [key in AvailableStatus]: number },
     withUser: boolean = false
   ) {
+    console.log(data.records, counter, withUser);
     return data.records.map((record) => ({
       ...record.get('s').properties,
       musics: [
@@ -182,7 +183,7 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
           record.get('str')?.map((streaming) => streaming.properties.name)
         ),
       ],
-      userStatus: withUser ? record.get('us')?.[0].properties.type : '',
+      userStatus: withUser ? record.get('us')?.[0]?.properties.type : 'null',
       detailsCounter: counter,
     }));
   }
