@@ -166,7 +166,6 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
     counter: { [key in AvailableStatus]: number },
     withUser: boolean = false
   ) {
-    console.log(data.records, counter, withUser);
     return data.records.map((record) => ({
       ...record.get('s').properties,
       musics: [
