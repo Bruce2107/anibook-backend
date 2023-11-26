@@ -270,7 +270,8 @@ export class SerieRepositoryGraphImpl implements SerieRepository {
       musics: [
         ...new Set(record.get('m')?.map((music) => music.properties.name)),
       ],
-      cover: record.get('i')?.properties?.name,
+      cover:
+        record.get('i')?.properties?.link || record.get('i')?.properties?.name,
       status: record.get('st')?.properties?.value,
       idStudio: record.get('std')?.properties?.name,
       authors: [

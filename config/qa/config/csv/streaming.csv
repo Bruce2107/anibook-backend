@@ -1,8 +1,11 @@
-"id","name","link"
-1,netflix,https://netflix.com
-2,hbomax,https://hbomax.com
-3,amazon prime,https://primevideo.com
-4,youtube,https://youtube.com
-5,crunchyroll,https://crunchyroll.com
-6,disney+,https://disneyplus.com
-7,anime onegai,https://animeonegai.com
+id,name,link
+1,Amazon Prime Video,EMPTY
+2,Disney+,EMPTY
+3,HBO Max,EMPTY
+4,Paramount+,EMPTY
+5,Netflix,EMPTY
+6,Star+,EMPTY
+7,Apple TV,EMPTY
+8,Youtube,EMPTY
+9,Telecine,EMPTY
+10,GloboPlay,EMPTY

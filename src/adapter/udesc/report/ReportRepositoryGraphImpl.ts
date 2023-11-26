@@ -27,10 +27,11 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
   }
   async getDetails(name: string, user?: string): Promise<Serie[]> {
     const session = neo4j_driver.session();
+    const quoteCase = name.replace('<>', "'");
     const withUser = user
       ? [
           `OPTIONAL MATCH (u:User)-[r:USER_STATUS]->(s)
-            WHERE u.name =~ '(?i).*${user}.*'`,
+            WHERE u.name =~ "(?i).*${user}.*"`,
           ',collect(r) as us',
           ',us',
         ]
@@ -38,7 +39,7 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
     try {
       const serie = await session.executeRead((tx) =>
         tx.run<SerieNeo4j>(
-          `MATCH (s:Serie {name: '${name}'})
+          `MATCH (s:Serie {name: "${quoteCase}"})
             OPTIONAL MATCH (s)-[:HAS_MUSIC]->(m:Music)
             OPTIONAL MATCH (s)-[:HAS_STATUS]->(st:Status)
             OPTIONAL MATCH (s)-[:PRODUCED_BY]->(std:Studio)
@@ -53,7 +54,7 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
 
       const res = await session.executeRead((tx) =>
         tx.run<{ dc: UserStatus[] }>(
-          `MATCH (s:Serie {name: '${name}'})
+          `MATCH (s:Serie {name: "${quoteCase}"})
             MATCH (:User)-[r:USER_STATUS]->(s)
             WITH collect(r) as dc
           RETURN dc`
@@ -91,7 +92,9 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
       );
       return res.records.map((record) => ({
         ...record.get('s').properties,
-        cover: record.get('i')?.properties?.name,
+        cover:
+          record.get('i')?.properties?.link ||
+          record.get('i')?.properties?.name,
       }));
     } finally {
       session.close();
@@ -171,7 +174,8 @@ export class ReportRepositoryGraphImpl implements ReportRepository {
       musics: [
         ...new Set(record.get('m')?.map((music) => music.properties.name)),
       ],
-      cover: record.get('i')?.properties?.name,
+      cover:
+        record.get('i')?.properties?.link || record.get('i')?.properties?.name,
       status: record.get('st')?.properties?.value,
       idStudio: record.get('std')?.properties?.name,
       authors: [

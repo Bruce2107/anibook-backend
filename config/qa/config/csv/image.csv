@@ -1,21 +1,41 @@
-"id","name","contentType","link","folder"
-1,capa,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 1
-2,image1,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 1
-3,image2,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 1
-4,capa2,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 2
-5,image2,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 2
-6,capa3,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 3
-7,capa4,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 4
-8,image1,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 5
-9,capa5,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 5
-10,image3,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 50
-11,image4,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 51
-12,image1,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 62
-13,capa6,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 63
-14,image1,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 74
-15,capa7,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 75
-16,capa8,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 86
-17,image10,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 87
-18,capa9,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 98
-19,image12,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 109
-20,capa10,image/webp,https://i.pinimg.com/originals/f9/0e/15/f90e154d9ac8bba3c3810b499616cfff.jpg,Serie 100
+id,name,contentType,link,folder
+1,Invencible,webp,https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/4zfCur3CG6CZ7ciRj9lneD/4e14b40b58ee280b828e13a37b842391/Invincible_GuardingtheGlobe.png,cover
+2,Rambo - Programado para matar,webp,https://images-na.ssl-images-amazon.com/images/S/pv-target-images/1a7e3d5a2edea99acfd2225a087392a31e8c3e6af67bb8c52e843659aee2d22d._RI_TTW_.jpg,cover
+3,Exterminador do futuro,webp,https://ntvb.tmsimg.com/assets/p7764_v_h8_am.jpg?w=1280&h=720,cover
+4,Os Vingadores,webp,https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/A2732E229AE499CD6FF47E8FB22CB577485DBA73AE8B9A4C8A095DF34C56022D/scale?width=1200&aspectRatio=1.78&format=jpeg,cover
+5,The Batman,webp,https://sm.ign.com/ign_br/screenshot/default/the-batman-2021-official-logo-featured-01_3z62.jpg,cover
+6,Homem aranha: no aranhaverso,webp,https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5298bac0-b8bf-4c80-af67-725c1272dbb0/dfylpne-d32e5569-bcbd-4c32-bcd4-bf4f3e2cf9a6.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzUyOThiYWMwLWI4YmYtNGM4MC1hZjY3LTcyNWMxMjcyZGJiMFwvZGZ5bHBuZS1kMzJlNTU2OS1iY2JkLTRjMzItYmNkNC1iZjRmM2UyY2Y5YTYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.DIJRacdh0jEHndKqjIKWLjI1hELwqOKJvCwC4nQzqP0,cover
+7,Reacher,webp,https://cinepop.com.br/wp-content/uploads/2022/07/reacher-cinepop.jpg,cover
+8,Star Trek Discovery,webp,https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2023/03/star-trek-discovery-fara-ultima-viagem-em-2024-confirma-paramount.jpg,cover
+9,Loki,webp,https://assets.papelpop.com/wp-content/uploads/2021/07/loki-soundtrack.jpg,cover
+10,Scooby-doo! Mistério S/A,webp,https://i0.wp.com/anmtv.com.br/wp-content/uploads/2022/10/scooby-doo-misterio-s-a-1.jpg?resize=800%2C400&ssl=1,cover
+11,Shrek,webp,https://kanto.legiaodosherois.com.br/w760-h398-cfill/wp-content/uploads/2018/11/legiao_6GdTW7CbmzcyqXoORVpshwEUAMLe32Kk85x0fSFjut.jpg.webp,cover
+12,Questão de tempo,webp,https://i0.wp.com/edwardschmitz.com/wp-content/uploads/2016/01/about-time.jpg?fit=1600%2C1213&ssl=1,cover
+13,About fate,webp,https://m.media-amazon.com/images/S/pv-target-images/5ce5e3e3378121745ccefbe629aa5424511c7ed0d110ef382e1d4ade9e0a9f26.jpg,cover
+14,DC Lendas do Amanhã,webp,https://m.media-amazon.com/images/M/MV5BNjg5MDRhM2ItZTJmMC00NWQ4LWI3MzktYWY0ZTA5YmNiNTZhXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_.jpg,cover
+15,Arcane,webp,https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt8739d07baed7d77d/5ed9b1c197379739c07664d9/Arcane_Announcement_Banner.jpg,cover
+16,Apenas um show,webp,https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8273235_b_h10_aa.jpg,cover
+17,Hora de aventura,webp,https://i.ytimg.com/vi/A7Jvk6__23I/maxresdefault.jpg,cover
+18,Game Of Thrones,webp,https://t.ctcdn.com.br/4Yb77C53RRmRT0AGryu8JJFVb-U=/1920x1080/smart/i441940.jpeg,cover
+19,Senhor dos Anéis A Sociedade do Anel,webp,https://d1nslcd7m2225b.cloudfront.net/Pictures/1024x536/4/7/7/1252477_fellowship.jpg,cover
+20,Senhor dos Anéis As Duas Torres,webp,"https://m.media-amazon.com/images/S/pv-target-images/9b0539ebcd639601b897eb3695003a6b96c60b07d33d0420021482f6110469f2._UR1920,1080_SX1080_FMjpg_.jpg",cover
+21,Senhor dos Anéis O Retorno do Rei,webp,https://m.media-amazon.com/images/S/pv-target-images/5512407f08ec366090998fc9434afb8124bef7a8a68c9a78738c7ff50dbad835.jpg,cover
+22,Senhor dos Anéis Os Aneis de Poder,webp,https://ntvb.tmsimg.com/assets/p20450286_b_h8_bf.jpg?w=1280&h=720,cover
+23,Irmão do Jorel,webp,https://uploads.metropoles.com/wp-content/uploads/2019/04/03174425/irm%C3%A3o-do-jorel_01.jpg,cover
+24,O Lobo de Wall Street,webp,https://facts.net/wp-content/uploads/2023/06/41-facts-about-the-movie-the-wolf-of-wall-street-1687443469.jpg,cover
+25,Tudo em todo lugar ao mesmo tempo,webp,https://i0.wp.com/cinematologia.com.br/cine/wp-content/uploads/2022/07/1229936-scaled.jpg?fit=2560%2C1440&ssl=1,cover
+26,the office,webp,https://s2-techtudo.glbimg.com/HN_-e-9-cLd-FQkH084_u6IJ7Y8=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/Z/4/bJjjEUTauj106HhkHwig/the-office-1.jpg,cover
+27,Tropa de elite,webp,https://images.jota.info/wp-content/uploads/2018/01/tropa-de-elite-main-1024x507.jpg,cover
+28,Gen V,webp,https://s2-techtudo.glbimg.com/RjmCLv7smm_2GZgtByfPzeQgXvw=/0x0:1600x887/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/z/7/yotwBLSPWDUgEzKwvc5g/gen-v-official-key-art-1.jpg,cover
+29,The Boys,webp,https://t2.tudocdn.net/628463,cover
+30,Doutor Estranho,webp,https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/052CC4F9AECB74103CB42D96AF82C1B551C02AF607D408D60CCAA792C840B171/scale?width=1200&aspectRatio=1.78&format=jpeg,cover
+31,Agent Carter,webp,https://ovicio.com.br/wp-content/uploads/Agent-Carter-2.jpg,cover
+32,Monstros S/A,webp,https://radiomixfm.com.br/wp-content/uploads/2021/01/Monstros-SA-vai-ganhar-serie-animada.png,cover
+33,Carros,webp,https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/CF7717723DFF51C0471EEA584195656F78ED5DF3B6523E4D3323ABACEE105B9F/scale?width=1200&aspectRatio=1.78&format=jpeg,cover
+34,Up Altas Aventuras,webp,https://cdn.correiodoestado.com.br/upload/dn_arquivo/NoticiaMidia/361819/1580742571433.jpg,cover
+35,Toy Story,webp,https://internacionaldaamazoniacom.files.wordpress.com/2021/07/toy-story.jpg,cover
+36,Prision Break,webp,https://uploads.jovemnerd.com.br/wp-content/uploads/2020/11/prison-break-sexta-temporada-nao-vai-acontecer.jpg,cover
+37,Grey's Anatomy,webp,https://www.ofuxico.com.br/img/upload/noticias/2018/08/14/greys_anatomy_divulgacao_327168_36.jpg,cover
+38,modern family,webp,https://s2-techtudo.glbimg.com/-1eDwwAXbHdVztTrwAbQqHxN-S8=/0x0:1600x900/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/i/q/ZWfXG4Qp6la64NpdeTtg/1600x900-q90-cae29355a2f177539897e6db1d9b0861.jpg,cover
+39,how i met your mother,webp,https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/2970945770FC137FF7D5D3408D5D40836FD4C715DE6A1744F6F5AF21B2386827/scale?width=1200&aspectRatio=1.78&format=jpeg,cover
+40,O Diabo Veste Prada,webp,https://static.wikia.nocookie.net/dublagempedia/images/2/26/Logo-o-diabo-veste-prada.jpg/revision/latest?cb=20200721012941&path-prefix=pt-br,cover
